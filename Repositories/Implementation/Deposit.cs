@@ -6,6 +6,6 @@ using System.Threading.Tasks;
 
 namespace Repositories.Implementation;
 
-public class Deposit
+public class Deposit:Interfaces.IDeposit
 {
 }
