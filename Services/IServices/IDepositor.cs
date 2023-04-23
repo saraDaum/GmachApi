@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace Services.IServices;
 
-public interface ILoanDetail
+public interface IDepositor
 {
-    public int AddLoan(Models.LoansDetail loan);
 }
