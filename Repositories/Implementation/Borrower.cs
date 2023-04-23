@@ -6,6 +6,6 @@ using System.Threading.Tasks;
 
 namespace Repositories.Implementation;
 
-public class Borrower
+public class Borrowe: Interfaces.IBorrower
 {
 }
