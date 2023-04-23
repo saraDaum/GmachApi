@@ -9,5 +9,6 @@ namespace Services.IServices
     internal interface ILoanDetail
     {
         public int AddLoan(Models.LoansDetail loan);
+      
     }
 }

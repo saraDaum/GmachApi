@@ -4,8 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Repositories.Implementation;
-
-public class LoanDetail:Interfaces.ILoanDetail
+namespace Services.Implemantation;
+public class LoanDetail :IServices.ILoanDetail
 {
+    public int AddLoan(Models.LoansDetail loan)
+    {
+        throw new NotImplementedException();
+    }
 }

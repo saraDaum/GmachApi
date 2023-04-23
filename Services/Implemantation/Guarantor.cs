@@ -4,8 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Repositories.Implementation;
+namespace Services.Implemantation;
 
-public class Guarantor:Interfaces.IGuarantor
+public class Guarantor:IServices.IGuarantor
 {
 }
