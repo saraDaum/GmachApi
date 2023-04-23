@@ -3,13 +3,16 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32825.248
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GmachApi", "GmachApi\GmachApi.csproj", "{7F7AE49F-7D18-48DF-ADEA-942DB9DCEF86}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GmachApi", "GmachApi\GmachApi.csproj", "{7F7AE49F-7D18-48DF-ADEA-942DB9DCEF86}"
+	ProjectSection(ProjectDependencies) = postProject
+		{D305ABCA-F324-4A7D-8C83-25854E859FB9} = {D305ABCA-F324-4A7D-8C83-25854E859FB9}
+	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services", "Services\Services.csproj", "{24F94CF5-ADC7-4E0B-959A-D2546F6381DB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Services", "Services\Services.csproj", "{24F94CF5-ADC7-4E0B-959A-D2546F6381DB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repositories", "Repositories\Repositories.csproj", "{328F9B00-C56A-4A50-A502-8854D1346C4B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Repositories", "Repositories\Repositories.csproj", "{328F9B00-C56A-4A50-A502-8854D1346C4B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DTO", "DTO\DTO.csproj", "{D305ABCA-F324-4A7D-8C83-25854E859FB9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DTO", "DTO\DTO.csproj", "{D305ABCA-F324-4A7D-8C83-25854E859FB9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
