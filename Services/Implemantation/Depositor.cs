@@ -4,9 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Services.IServices;
+namespace Services.Implemantation;
 
-public interface IGuarantor
-    {
-    }
+public class Depositor:IServices.IDepositor
+{
 }
