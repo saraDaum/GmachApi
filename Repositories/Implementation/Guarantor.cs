@@ -6,6 +6,6 @@ using System.Threading.Tasks;
 
 namespace Repositories.Implementation;
 
-public class Guarantor
+public class Guarantor:Interfaces.IGuarantor
 {
 }

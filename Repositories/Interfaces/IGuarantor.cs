@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Repositories.Interfaces
 {
-    public interface Interface1
+    public interface IGuarantor
     {
     }
 }

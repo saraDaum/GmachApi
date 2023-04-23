@@ -6,6 +6,6 @@ using System.Threading.Tasks;
 
 namespace Repositories.Implementation;
 
-public class LoanDetail
+public class LoanDetail:Interfaces.ILoanDetail
 {
 }
