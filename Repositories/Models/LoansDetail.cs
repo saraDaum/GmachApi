@@ -20,4 +20,9 @@ public partial class LoansDetail
     public virtual ICollection<Acount> AcountsNumbers { get; set; } = new List<Acount>();
 
     public virtual ICollection<Borrower> Borrowers { get; set; } = new List<Borrower>();
+
+    public static implicit operator LoansDetail(global::DTO.Models.LoansDetail v)
+    {
+        throw new NotImplementedException();
+    }
 }

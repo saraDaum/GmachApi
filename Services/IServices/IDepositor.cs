@@ -9,4 +9,4 @@ namespace Services.IServices;
 public interface IDepositor
     {
     }
-}
+

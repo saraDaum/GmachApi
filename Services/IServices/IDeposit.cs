@@ -9,4 +9,3 @@ namespace Services.IServices;
 public interface IDeposit
     {
     }
-}

@@ -8,5 +8,5 @@ namespace Services.IServices;
 
 public interface ILoanDetail
 {
-    public int AddLoan(Models.LoansDetail loan);
+    public int AddLoan(DTO.Models.LoansDetail loan);
 }
