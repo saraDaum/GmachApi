@@ -11,8 +11,12 @@ namespace Services
     {
         public static void AddBLServices(this IServiceCollection collection)
         {
-            collection.AddScoped(typeof(Repositories.Interfaces.ILoanDetail), typeof(Repositories.UserRepository));
-            collection.AddDbContext<Repositories.Models.FullStackMoreshetdbContext>();
+            collection.AddScoped(typeof(Repositories.Interfaces.ILoanDetail), typeof(Repositories.Implementation.LoanDetail));
+            collection.AddScoped(typeof(Repositories.Interfaces.IGuarantor), typeof(Repositories.Implementation.Guarantor));
+            collection.AddScoped(typeof(Repositories.Interfaces.IDepositor), typeof(Repositories.Implementation.Depositor));
+            collection.AddScoped(typeof(Repositories.Interfaces.IDeposit), typeof(Repositories.Implementation.Deposit));
+
+            collection.AddDbContext<Repositories.Models.GmachimSaraAndShaniContext>();
         }
     }
 }
