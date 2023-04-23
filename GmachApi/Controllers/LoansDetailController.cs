@@ -24,7 +24,7 @@ namespace GmachApi.Controllers
 
         // POST api/<LoansDetailController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public int Post([FromBody] LoansDetailDTO value)
         {
         }
 
