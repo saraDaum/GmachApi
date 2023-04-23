@@ -4,10 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Repositories.Interfaces
-{
-    public interface ILoanDetail
-    {
+namespace Repositories.Implementation;
 
-    }
+public class Depositor
+{
 }

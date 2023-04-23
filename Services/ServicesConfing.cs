@@ -11,7 +11,7 @@ namespace Services
     {
         public static void AddBLServices(this IServiceCollection collection)
         {
-            collection.AddScoped(typeof(Repositories.Interfaces.IUserRepository), typeof(Repositories.UserRepository));
+            collection.AddScoped(typeof(Repositories.Interfaces.ILoanDetail), typeof(Repositories.UserRepository));
             collection.AddDbContext<Repositories.Models.FullStackMoreshetdbContext>();
         }
     }

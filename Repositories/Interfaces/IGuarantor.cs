@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 
 namespace Repositories.Interfaces
 {
-    public interface ILoanDetail
+    public interface Interface1
     {
-
     }
 }
