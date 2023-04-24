@@ -8,5 +8,5 @@ namespace Repositories.Interfaces;
 
 public interface ILoanDetail
 {
-
+    public int AddLoan(Models.LoansDetail loansDetail);
 }
