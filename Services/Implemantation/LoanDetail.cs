@@ -17,6 +17,7 @@ public class LoanDetail :IServices.ILoanDetail
         //if yes send the loan detail to the data base
         IMapper mapper = AutoMapper.LoanDetailConfiguration.CreateMapper();
         Repositories.Models.LoansDetail DALLoanDetail = mapper.Map<DTO.Models.LoansDetail, Repositories.Models.LoansDetail>(loan);
+        //Enter to DB
         return loanDetail.AddLoan(DALLoanDetail);
         throw new NotImplementedException();
     }

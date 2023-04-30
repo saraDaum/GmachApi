@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace DTO.Models;
 
-public partial class Guarantor
+public partial class Guarantor 
 {
-    public int GuarantorNumber { get; set; }
+    public int GuarantorNumber { get; set; }//ID
 
     public string GuarantorName { get; set; } = null!;
 
@@ -17,9 +17,9 @@ public partial class Guarantor
 
     public string GuarantorEmail { get; set; } = null!;
 
-    public int SumOfGuarantee { get; set; }
+   // public int SumOfGuarantee { get; set; }
 
-    public int LoanId { get; set; }
+   // public int LoanId { get; set; }
 
-    public virtual LoansDetail Loan { get; set; } = null!;
+   // public virtual LoansDetail Loan { get; set; } = null!;
 }
