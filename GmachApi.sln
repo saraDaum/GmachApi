@@ -5,6 +5,7 @@ VisualStudioVersion = 17.3.32825.248
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GmachApi", "GmachApi\GmachApi.csproj", "{7F7AE49F-7D18-48DF-ADEA-942DB9DCEF86}"
 	ProjectSection(ProjectDependencies) = postProject
+		{24F94CF5-ADC7-4E0B-959A-D2546F6381DB} = {24F94CF5-ADC7-4E0B-959A-D2546F6381DB}
 		{D305ABCA-F324-4A7D-8C83-25854E859FB9} = {D305ABCA-F324-4A7D-8C83-25854E859FB9}
 	EndProjectSection
 EndProject

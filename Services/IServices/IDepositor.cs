@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Services.IServices
-{
-    internal interface IDepositor
+namespace Services.IServices;
+
+public interface IDepositor
     {
     }
-}
+

@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Services.IServices
-{
-    internal interface IBorrower
+namespace Services.IServices;
+
+public interface IBorrower
     {
     }
-}
+

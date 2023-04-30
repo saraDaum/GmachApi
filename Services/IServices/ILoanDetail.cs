@@ -4,11 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Services.IServices
+namespace Services.IServices;
+
+public interface ILoanDetail
 {
-    internal interface ILoanDetail
-    {
-        public int AddLoan(Models.LoansDetail loan);
-      
-    }
+    public int AddLoan(DTO.Models.LoansDetail loan);
 }
