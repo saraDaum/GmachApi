@@ -19,6 +19,6 @@ public class LoanDetail :IServices.ILoanDetail
         Repositories.Models.LoansDetail DALLoanDetail = mapper.Map<DTO.Models.LoansDetail, Repositories.Models.LoansDetail>(loan);
         //Enter to DB
         return loanDetail.AddLoan(DALLoanDetail);
-        throw new NotImplementedException();
+        //throw new NotImplementedException();
     }
 }
