@@ -4,40 +4,43 @@
 
 namespace GmachApi.Controllers
 {
-    
     [Route("api/[controller]")]
     [ApiController]
-    public class LoansDetailController : ControllerBase
+    public class UserController : ControllerBase
     {
-        internal Services.IServices.ILoanDetail loanDetail = new Services.Implemantation.LoanDetail();
-        // GET: api/<LoansDetailController>
-        [HttpGet]
-        public IEnumerable<string> Get()
+        // GET: api/<UserController>
+        [HttpGet("GetUserDetail")]
+        public IEnumerable<string> GetUserDetail()
         {
             return new string[] { "value1", "value2" };
         }
 
-        // GET api/<LoansDetailController>/5
+        // GET api/<UserController>/5
         [HttpGet("{id}")]
         public string Get(int id)
         {
             return "value";
         }
 
-        // POST api/<LoansDetailController>
-        [HttpPost]
-        public int Post([FromBody] DTO.Models.LoansDetail loan)
+        // POST api/<sign in>
+        [HttpPost("SignIn")]
+        public void SignIn([FromBody] string value)
         {
-            return loanDetail.AddLoan(loan);
         }
 
-        // PUT api/<LoansDetailController>/5
+        // POST api/<log in>
+        [HttpPost("LogIn")]
+        public void LogIn([FromBody] string value)
+        {
+        }
+
+        // PUT api/<UserController>/5
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] string value)
         {
         }
 
-        // DELETE api/<LoansDetailController>/5
+        // DELETE api/<UserController>/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
