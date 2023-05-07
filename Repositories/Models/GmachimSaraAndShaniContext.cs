@@ -16,6 +16,7 @@ public partial class GmachimSaraAndShaniContext : DbContext
     }
 
     public virtual DbSet<Acount> Acounts { get; set; }
+    public virtual DbSet<Acount> User { get; set; }
 
     public virtual DbSet<Borrower> Borrowers { get; set; }
 
@@ -89,14 +90,14 @@ public partial class GmachimSaraAndShaniContext : DbContext
 
         modelBuilder.Entity<Guarantor>(entity =>
         {
-            entity.HasKey(e => e.GuarantorNumber);
+            entity.HasKey(e => e.UserNumber);
 
-            entity.Property(e => e.GuarantorAddress).HasMaxLength(40);
-            entity.Property(e => e.GuarantorEmail)
+            entity.Property(e => e.UserAddress).HasMaxLength(40);
+            entity.Property(e => e.UserEmail)
                 .HasMaxLength(40)
                 .IsFixedLength();
-            entity.Property(e => e.GuarantorId).HasColumnName("guarantorID");
-            entity.Property(e => e.GuarantorName)
+            entity.Property(e => e.UserId).HasColumnName("guarantorID");
+            entity.Property(e => e.UserName)
                 .HasMaxLength(30)
                 .HasColumnName("guarantorName");
             entity.Property(e => e.LoanId).HasColumnName("LoanID");

@@ -11,7 +11,7 @@ public class LoanDetail :IServices.ILoanDetail
     {
         //check if the loan is possible
         //if yes send the loan detail to the data base
-        Repositories.Models.LoansDetail DALLoanDetail = (Repositories.Models.LoansDetail)loan;
+        Repositories.Models.LoansDetail DALLoanDetail = 
         return Repositories.Interfaces.ILoanDetail.AddLoan(DALLoanDetail);
         throw new NotImplementedException();
     }
