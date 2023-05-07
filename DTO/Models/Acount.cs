@@ -13,7 +13,7 @@ public partial class Acount
 
     public int Branch { get; set; }
 
-    public string ConfirmAcountFile { get; set; } = null!;
+    public string ConfirmAcountFile { get; set; } = null!;//File
 
     public int AccontId { get; set; }
 

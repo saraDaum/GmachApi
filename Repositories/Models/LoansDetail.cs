@@ -21,5 +21,5 @@ public partial class LoansDetail
 
     public virtual ICollection<Borrower> Borrowers { get; set; } = new List<Borrower>();
 
-    
+
 }
