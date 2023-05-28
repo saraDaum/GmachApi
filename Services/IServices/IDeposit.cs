@@ -7,5 +7,5 @@ using System.Threading.Tasks;
 namespace Services.IServices;
 
 public interface IDeposit
-    {
-    }
+{
+}

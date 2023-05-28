@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Repositories.Models;
 
-public partial class GmachimSaraAndShaniContext : DbContext
+public partial class GmachimSaraAndShaniContext : DbContext ,IDbContext
 {
     public GmachimSaraAndShaniContext()
     {
@@ -16,7 +16,7 @@ public partial class GmachimSaraAndShaniContext : DbContext
     }
 
     public virtual DbSet<Acount> Acounts { get; set; }
-    public virtual DbSet<Acount> User { get; set; }
+    public virtual DbSet<User> User { get; set; }
 
     public virtual DbSet<Borrower> Borrowers { get; set; }
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DTO.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,10 +13,7 @@ public interface IUser
     /// Login function
     /// Check if user Exist
     /// </summary>
-    /// <param name="name">user name</param>
-    /// <param name="password">user name</param>
-    /// <returns>String with two params:
-    /// 1. True/ False- If the user exist
-    /// 2. The user important details - If the user exist</returns>
-    public string[] Login(string name, string password);
+    /// <param name="loginUser">user name, password</param>
+    /// <returns>UserInfo or null if no user exist</returns>
+    public UserInfo? Login(LoginUser loginUser);
 }

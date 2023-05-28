@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using DTO.Models;
+using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -8,7 +9,8 @@ namespace GmachApi.Controllers;
 [ApiController]
 public class UserController : ControllerBase
 {
-    internal Services.IServices.IUser user = new Services.Implemantation.User();
+    
+    //Services.IServices.IUser user = new Services.Implemantation.User();
     // GET: api/<UserController>
     [HttpGet("GetUserDetail")]
     public IEnumerable<string> GetUserDetail()
@@ -31,12 +33,12 @@ public class UserController : ControllerBase
 
     // POST api/<log in>
     [HttpPost("LogIn")]
-    public void LogIn([FromBody] string value)
+    public ActionResult < DTO.Models.LoginUser > LogIn([FromBody] LoginUser loginUser)
     {
-        //split the value to name and password
-        string name;
-        string password;
-        user.Login(name, password);
+        return new LoginUser();
+        return NotFound ();
+        
+        
     }
 
     // PUT api/<UserController>/5
