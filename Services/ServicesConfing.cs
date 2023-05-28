@@ -17,6 +17,7 @@ namespace Services
             collection.AddScoped(typeof(Repositories.Interfaces.IGuarantor), typeof(Repositories.Implementation.Guarantor));
             collection.AddScoped(typeof(Repositories.Interfaces.IDepositor), typeof(Repositories.Implementation.Depositor));
             collection.AddScoped(typeof(Repositories.Interfaces.IDeposit), typeof(Repositories.Implementation.Deposit));
+            collection.AddScoped(typeof(Repositories.Interfaces.IUser), typeof(Repositories.Implementation.User));
 
             collection.AddDbContext<Repositories.Models.GmachimSaraAndShaniContext>();
         }

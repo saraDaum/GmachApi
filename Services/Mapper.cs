@@ -33,4 +33,8 @@ public class Mapper
     public MapperConfiguration LoanDetailConfiguration = new MapperConfiguration(cnf =>
     cnf.CreateMap<DTO.Models.LoansDetail, Repositories.Models.LoansDetail>()
     .ReverseMap());
+
+    public MapperConfiguration UserInfoConfiguration = new MapperConfiguration(cnf =>
+    cnf.CreateMap<Repositories.Models.User, DTO.Models.UserInfo>()
+    );
 }
