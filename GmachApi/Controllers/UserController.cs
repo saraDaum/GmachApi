@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Azure;
+using Microsoft.AspNetCore.Mvc;
+using System;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -22,16 +24,24 @@ namespace GmachApi.Controllers
             return "value";
         }
 
+      /* 
+       * axios.get('https://api.example.com/data')
+       * .then(response => console.log(response.data))
+       * .catch(error => console.error(error));
+      */
+
         // POST api/<sign in>
         [HttpPost("SignIn")]
-        public void SignIn([FromBody] string value)
+        public void SignIn([FromBody] DTO.Models.User newUser)
         {
         }
+        
 
         // POST api/<log in>
         [HttpPost("LogIn")]
-        public void LogIn([FromBody] string value)
+        public void LogIn([FromBody] DTO.Models.User  loginUser)
         {
+            
         }
 
         // PUT api/<UserController>/5
