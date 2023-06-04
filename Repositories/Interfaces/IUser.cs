@@ -1,4 +1,5 @@
-﻿using Repositories.Implementation;
+﻿using Azure.Identity;
+using Repositories.Implementation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,4 +11,9 @@ namespace Repositories.Interfaces;
 public interface IUser
 {
     public Models.User? Login(string userName, string Password);
+    public int SignIn(Models.User? user);
+    public Models.User GetUser(Models.User? user);
+
+    
+
 }

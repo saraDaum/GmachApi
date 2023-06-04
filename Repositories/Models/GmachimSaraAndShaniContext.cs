@@ -51,7 +51,7 @@ public partial class GmachimSaraAndShaniContext : DbContext ,IDbContext
 
         modelBuilder.Entity<Borrower>(entity =>
         {
-            entity.HasKey(e => e.UserNumber);
+            entity.HasKey(e => e.UserIdentityNumber);
 
             entity.Property(e => e.CopyId)
                 .HasMaxLength(150)
@@ -77,7 +77,7 @@ public partial class GmachimSaraAndShaniContext : DbContext ,IDbContext
 
         modelBuilder.Entity<Depositor>(entity =>
         {
-            entity.HasKey(e => e.UserNumber);
+            entity.HasKey(e => e.UserIdentityNumber);
 
             entity.Property(e => e.UserAddress).HasMaxLength(40);
             entity.Property(e => e.UserEmail)
@@ -90,7 +90,7 @@ public partial class GmachimSaraAndShaniContext : DbContext ,IDbContext
 
         modelBuilder.Entity<Guarantor>(entity =>
         {
-            entity.HasKey(e => e.UserNumber);
+            entity.HasKey(e => e.UserIdentityNumber);
 
             entity.Property(e => e.UserAddress).HasMaxLength(40);
             entity.Property(e => e.UserEmail)

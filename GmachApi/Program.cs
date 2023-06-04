@@ -1,4 +1,7 @@
+using AutoMapper;
+using Repositories;
 using Repositories.Models;
+using Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,8 +12,19 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddSingleton(typeof(Repositories.IDbContext), typeof(Repositories.Models.GmachimSaraAndShaniContext));
+builder.Services.AddTransient<IDbContext, GmachimSaraAndShaniContext>();
+
+//builder.Services.AddSingleton(typeof(Repositories.IDbContext), typeof( GmachimSaraAndShaniContext));
+
 builder.Services.AddDbContext<GmachimSaraAndShaniContext>();
+
+var mapperConfig = new MapperConfiguration(mc =>
+{
+    mc.AddProfile(new MapperConfig());
+});
+
+
+builder.Services.AddSingleton(mapperConfig);
 
 var app = builder.Build();
 

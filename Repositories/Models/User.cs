@@ -8,8 +8,8 @@ namespace Repositories.Models;
 
 public partial class User
 {
-    public int UserNumber { get; set; }
-
+    public int UserIdentityNumber { get; set; }
+   
     public string UserName { get; set; } = null!;
 
     public int UserId { get; set; }//todo: check what the difference between this and the iser number

@@ -11,7 +11,6 @@ public partial class User
 
     public string UserName { get; set; } = null!;
 
-
     public string UserAddress { get; set; } = null!;
 
     public int UserPhone { get; set; }

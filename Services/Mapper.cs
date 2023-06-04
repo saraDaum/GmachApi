@@ -36,5 +36,8 @@ public class Mapper
 
     public MapperConfiguration UserInfoConfiguration = new MapperConfiguration(cnf =>
     cnf.CreateMap<Repositories.Models.User, DTO.Models.UserInfo>()
+    ); 
+    public MapperConfiguration UserSighInConfiguration = new MapperConfiguration(cnf =>
+    cnf.CreateMap<Repositories.Models.User, Repositories.Models.User>()
     );
 }
