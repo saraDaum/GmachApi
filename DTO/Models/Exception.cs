@@ -8,5 +8,6 @@ namespace DTO.Models
 {
     internal class Exception
     {
+
     }
 }

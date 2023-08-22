@@ -7,7 +7,9 @@ public partial class LoansDetail
 {
     public int LoanId { get; set; }
 
-    public DateTime DateToGetBack { get; set; }
+    public DateOnly DateToGetBack { get; set; }  // I change it to be DateOnly type instead of 'DataTime'. Sara.
+
+    public DateOnly dateOfTakeLoan { get; set; } // I add this field. Sara.
 
     public int Sum { get; set; }
 

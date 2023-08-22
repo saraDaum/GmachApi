@@ -13,6 +13,15 @@ public class User : Interfaces.IUser
     {
         dbContext = ctx;
     }
+
+
+    /// <summary>
+    /// This function gets userName and password and valid that this user already exists in system.
+    /// Else, returns NULL.
+    /// </summary>
+    /// <param name="userName"></param>
+    /// <param name="Password"></param>
+    /// <returns></returns>
     public Models.User? Login(string userName, string Password)
     {
         
@@ -20,10 +29,13 @@ public class User : Interfaces.IUser
  
     }
 
+
     public Models.User? GetUser(Models.User? user)
     {
-        return dbContext.User.FirstOrDefault(u=>user.UserId==u.UserId && user.UserPassword==u.UserPassword&&user.UserName==u.UserName);
+        return dbContext.User.FirstOrDefault(u => user.UserId == u.UserId && user.UserPassword == u.UserPassword&&user.UserName==u.UserName);
     }
+
+
     public int SignIn(Models.User user)
     {
         try
@@ -31,7 +43,7 @@ public class User : Interfaces.IUser
             dbContext.User.Add(user);
             dbContext.SaveChanges();
             return user.UserId;
-            //todo: check if method returns correct new userid
+            //TODO: check if method returns correct new userid
         }
         catch
         {
