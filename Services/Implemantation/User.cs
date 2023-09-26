@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 
+
 namespace Services.Implemantation;
 
 public class User: IServices.IUser
@@ -19,13 +20,13 @@ public class User: IServices.IUser
     {
         userRepository = _userRepo;
     }
-  //Mapper userInfo = new Mapper();
-    Mapper myMapper = new Mapper();
+    //Mapper userInfo = new Mapper();
+    MapperConfig myMapper = MapperConfig.Instance;
 
 
     public UserInfo? Login(LoginUser loginUser)
     {
-        IMapper mapper = myMapper.UserInfoConfiguration.CreateMapper();
+        IMapper mapper = myMapper.UserMapper.CreateMapper();
         //TODO: send to the reposetories to function that check if the user exist
         Repositories.Models.User? u = userRepository.Login(loginUser.UserName, loginUser.Password);
         try 
@@ -47,9 +48,9 @@ public class User: IServices.IUser
     {
         try
         {
-           
 
 
+            IMapper mapper = myMapper.UserMapper.CreateMapper();
             Repositories.Models.User userExist = mapper.Map<DTO.Models.User, Repositories.Models.User>(newUser);
             Repositories.Models.User isExist = userRepository.GetUser(userExist);
             DTO.Models.User user = mapper.Map< Repositories.Models.User,DTO.Models.User>(isExist);

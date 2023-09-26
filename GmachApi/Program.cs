@@ -20,7 +20,7 @@ builder.Services.AddDbContext<GmachimSaraAndShaniContext>();
 
 var mapperConfig = new MapperConfiguration(mc =>
 {
-    mc.AddProfile(new MapperConfig());
+    mc.AddProfile(MapperConfig.Instance);
 });
 
 

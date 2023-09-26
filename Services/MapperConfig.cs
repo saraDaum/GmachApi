@@ -13,13 +13,20 @@ namespace Services;
 
 public class MapperConfig : Profile
 {
-    public MapperConfig()
-    {
-        // Add as many of these lines as you need to map your objects
-        CreateMap<Repositories.Models.User, DTO.Models.User>()
-        .ReverseMap();
+    //Singelton Instance
+    private MapperConfig() { }
+    public static MapperConfig Instance { get; } = new MapperConfig();
 
-       
+    
+    //Mapping configurations
 
-    }
+    public MapperConfiguration LoanDetailsMapper = new MapperConfiguration(cnf =>
+        cnf.CreateMap<Repositories.Models.LoansDetail, DTO.Models.LoansDetail>()
+        .ReverseMap()
+    );
+    public MapperConfiguration UserMapper = new MapperConfiguration(cnf =>
+        cnf.CreateMap<Repositories.Models.User, DTO.Models.User>()
+        .ReverseMap()
+    );
+
 }
