@@ -7,15 +7,14 @@ public partial class LoansDetail
 {
     public int LoanId { get; set; }
 
+    public DateOnly dateOfTakeLoan { get; set; } 
+
     public DateOnly DateToGetBack { get; set; }  // I change it to be DateOnly type instead of 'DataTime'. Sara.
-
-    public DateOnly dateOfTakeLoan { get; set; } // I add this field. Sara.
-
     public int Sum { get; set; }
 
     public int BorrowerNumber { get; set; }
 
-    public string LoanFile { get; set; } = null!;
+    public string LoanFile { get; set; } = null!;//?
 
     public virtual ICollection<Guarantor> Guarantors { get; set; } = new List<Guarantor>();
 

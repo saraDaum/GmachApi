@@ -5,11 +5,12 @@ namespace DTO.Models;
 
 public partial class Guarantor 
 {
-    public int GuarantorNumber { get; set; }// תעודת זהות
+    //Don't inherit from User becuase Guarantor have less feilds than User.
+    public int GuarantorIdentityNumber { get; set; }// תעודת זהות
 
     public string GuarantorName { get; set; } = null!;
 
-    public int GuarantorId { get; set; } // מספר מזהה לקוח
+    public int GuarantorId { get; set; } // מספר מזהה ערב
 
     public string GuarantorAddress { get; set; } = null!;
 

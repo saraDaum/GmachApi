@@ -23,7 +23,11 @@ public class User: IServices.IUser
     //Mapper userInfo = new Mapper();
     MapperConfig myMapper = MapperConfig.Instance;
 
-
+    /// <summary>
+    /// This function gets an user's details and registered it to database.
+    /// </summary>
+    /// <param name="loginUser"></param>
+    /// <returns></returns>
     public UserInfo? Login(LoginUser loginUser)
     {
         IMapper mapper = myMapper.UserMapper.CreateMapper();
