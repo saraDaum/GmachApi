@@ -18,7 +18,7 @@ public class LoginUser
     public string Password { get; set; }
 
 
-    private UsernamePasswordCredential
+    //private UsernamePasswordCredential;
 }
 
 

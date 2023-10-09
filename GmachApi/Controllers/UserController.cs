@@ -46,6 +46,7 @@ public class UserController : ControllerBase
     [HttpPost("LogIn")]
     public ActionResult < DTO.Models.LoginUser > LogIn([FromBody] LoginUser loginUser)
     {
+        //return "Connected!!";
         return new LoginUser();
         return NotFound ();
         
