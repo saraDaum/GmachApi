@@ -20,5 +20,5 @@ public interface IUser
 
     public int SignIn(User newUser);
 
-    bool IsUserExists(User newUser);
+    bool IsUserExists(LoginUser newUser);
 }

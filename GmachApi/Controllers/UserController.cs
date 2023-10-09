@@ -1,4 +1,5 @@
-﻿using DTO.Models;
+﻿using Azure.Identity;
+using DTO.Models;
 using Microsoft.AspNetCore.Mvc;
 using Repositories.Interfaces;
 using System;
@@ -33,11 +34,17 @@ public class UserController : ControllerBase
     }
 
     // POST api/<sign in>
+    /// <summary>
+    ///This function gets a new user and check if a user with these details
+    /// already exist in database before register him.
+    /// </summary>
+    /// <param name="newUser"></param>
+    /// <returns></returns>
     [HttpPost("SignIn")]
     public int SignIn([FromBody] User newUser)
     {
-        
-        if (!userService.IsUserExists(newUser))
+        LoginUser checkUser = new LoginUser { UserName = newUser.UserPassword, Password = newUser.UserPassword };
+        if (!userService.IsUserExists(checkUser))
             return userService.SignIn(newUser);
         else
             return -1;
@@ -47,7 +54,7 @@ public class UserController : ControllerBase
     [HttpPost("LogIn")]
     public ActionResult < DTO.Models.LoginUser > LogIn([FromBody] LoginUser loginUser)
     {
-        //return "Connected!!";
+        return new LoginUser{ UserName = "Connected", Password = "00" }; //To get this message.Sara.
         return new LoginUser();
         return NotFound ();
         

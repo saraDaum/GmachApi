@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Azure.Identity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -29,12 +30,18 @@ public class User : Interfaces.IUser
  
     }
 
-    
-    public Models.User? GetUser(Models.User? user)
+    /// <summary>
+    ///This function accepts a user object and returns the first element found.
+    /// If there is no matching element, returns the default value.
+    /// </summary>
+    /// <param name="user"></param>
+    /// <returns></returns>
+    public Models.User? GetUser(string UserName, string UserPassword)
     {
-        return dbContext.User.FirstOrDefault(u => user.UserId == u.UserId && user.UserPassword == u.UserPassword&&user.UserName == u.UserName);
+        return dbContext.User.FirstOrDefault(u => UserPassword == u.UserPassword&& UserName == u.UserName);
     }
 
+   
 
     public int SignIn(Models.User user)
     {
@@ -50,5 +57,10 @@ public class User : Interfaces.IUser
             return -1;
         }
 
+    }
+
+    public Models.User GetUser(Models.User? user)
+    {
+        return dbContext.User.Where(u => u.UserName == userName && u.UserPassword == Password).FirstOrDefault();
     }
 }
