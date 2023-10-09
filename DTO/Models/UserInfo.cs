@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 namespace DTO.Models;
 
 /// <summary>
-/// This entity use to be send fron API to back.
-/// Is it?? Sara.
-/// Or this entity is for using it in the application??
+/// This entity use to be send fron API to back. 
+/// This entity has the minimal details.
+/// Mabey, this entity is for using it in the application??
 /// </summary>
 public class UserInfo
 {

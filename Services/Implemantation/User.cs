@@ -52,11 +52,9 @@ public class User: IServices.IUser
     {
         try
         {
-
-
             IMapper mapper = myMapper.UserMapper.CreateMapper();
-            Repositories.Models.User userExist = mapper.Map<DTO.Models.User, Repositories.Models.User>(newUser);
-            Repositories.Models.User isExist = userRepository.GetUser(userExist);
+            Repositories.Models.User isUserExist = mapper.Map<DTO.Models.User, Repositories.Models.User>(newUser);
+            Repositories.Models.User isExist = userRepository.GetUser(isUserExist);
             DTO.Models.User user = mapper.Map< Repositories.Models.User,DTO.Models.User>(isExist);
             ;
             if (user!=null)
