@@ -17,6 +17,8 @@ public interface IUser
     /// <param name="loginUser">user name, password</param>
     /// <returns>UserInfo or null if no user exist</returns>
     public UserInfo? Login(LoginUser loginUser);
+
     public int SignIn(User newUser);
+
     bool IsUserExists(User newUser);
 }

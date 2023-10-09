@@ -32,7 +32,7 @@ public class User : Interfaces.IUser
     
     public Models.User? GetUser(Models.User? user)
     {
-        return dbContext.User.FirstOrDefault(u => user.UserId == u.UserId && user.UserPassword == u.UserPassword&&user.UserName==u.UserName);
+        return dbContext.User.FirstOrDefault(u => user.UserId == u.UserId && user.UserPassword == u.UserPassword&&user.UserName == u.UserName);
     }
 
 

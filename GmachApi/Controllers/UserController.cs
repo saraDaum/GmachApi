@@ -1,6 +1,7 @@
 ﻿using DTO.Models;
 using Microsoft.AspNetCore.Mvc;
-using Repositories.Interfaces;using System;
+using Repositories.Interfaces;
+using System;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
