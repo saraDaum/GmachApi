@@ -13,7 +13,7 @@ namespace Services
         {
             collection.AddScoped(typeof(Repositories.Interfaces.IAcount), typeof(Repositories.Implementation.Account));
             collection.AddScoped(typeof(Repositories.Interfaces.IBorrower), typeof(Repositories.Implementation.Borrowe));
-            collection.AddScoped(typeof(Repositories.Interfaces.ILoanDetail), typeof(Repositories.Implementation.LoanDetail));
+            collection.AddScoped(typeof(Repositories.Interfaces.ILoanDetails), typeof(Repositories.Implementation.LoanDetails));
             collection.AddScoped(typeof(Repositories.Interfaces.IGuarantor), typeof(Repositories.Implementation.Guarantor));
             collection.AddScoped(typeof(Repositories.Interfaces.IDepositor), typeof(Repositories.Implementation.Depositor));
             collection.AddScoped(typeof(Repositories.Interfaces.IDeposit), typeof(Repositories.Implementation.Deposit));

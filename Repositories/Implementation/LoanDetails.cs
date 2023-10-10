@@ -7,30 +7,30 @@ using System.Threading.Tasks;
 
 namespace Repositories.Implementation;
 
-public class LoanDetail : Interfaces.ILoanDetail
+public class LoanDetails : Interfaces.ILoanDetails
 {
-    public LoanDetail()
+    public LoanDetails()
     {
-        LoanId = 0;
-        Sum = 0;
+        //LoanId = 0;
+        //Sum = 0;
 
     }
 
     private readonly IDbContext dbContext;
-    public LoanDetail(IDbContext ctx)
+    public LoanDetails(IDbContext ctx)
     {
         dbContext = ctx;
     }
 
-    public int AddLoan(LoansDetail loansDetail)
+    public int AddLoan(Models.LoanDetails loansDetail)
     {
         //todo: add to the data base the loan object
 
         return 133;
     }
-    public LoansDetail GetLoansDetail(int userId)
+    public Models.LoanDetails GetLoanDetails(int userId)
     {
-        return (LoansDetail)dbContext.LoansDetails.Where(loan => loan.BorrowerNumber == userId);
-        return new LoansDetail();
+        return (Models.LoanDetails)dbContext.LoanDetails.Where(loan => loan.BorrowerNumber == userId);
+        return new Models.LoanDetails();
     }
 }

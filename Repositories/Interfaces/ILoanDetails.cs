@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace Repositories.Interfaces;
 
-public interface ILoanDetail
+public interface ILoanDetails
 {
-    public int AddLoan(Models.LoansDetail loansDetail);
-    public Models.LoansDetail GetLoansDetail(int userId);
+    public int AddLoan(Models.LoanDetails loanDetails);
+    public Models.LoanDetails GetLoanDetails(int userId);
 }

@@ -20,11 +20,14 @@ builder.Services.AddTransient<IDbContext, GmachimSaraAndShaniContext>();
 // Configure CORS
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowSpecificOrigin",
-        builder => builder.WithOrigins("http://localhost:3000") // הוסף כאן את המקור שאליו תרצה לאפשר גישה
-        .AllowAnyMethod()
-        .AllowAnyHeader());
+    options.AddDefaultPolicy(builder =>
+    {
+        builder.WithOrigins("http://localhost:3000")
+               .AllowAnyMethod()
+               .AllowAnyHeader();
+    });
 });
+
 
 builder.Services.AddDbContext<GmachimSaraAndShaniContext>();
 
@@ -40,13 +43,20 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwagger(c =>
+    {
+        c.RouteTemplate = "docs/{documentName}/swagger.json";
+    });
+
+    app.UseSwaggerUI(c =>
+    {
+        c.SwaggerEndpoint("/docs/v1/swagger.json", "My API V1");
+    });
 }
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 
-app.UseAuthorization();
+//app.UseAuthorization();
 
 app.UseCors("AllowSpecificOrigin"); // השתמש ב-CORS Policy שיצרנו
 

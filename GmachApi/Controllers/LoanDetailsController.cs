@@ -9,7 +9,7 @@ namespace GmachApi.Controllers
     [ApiController]
     public class LoanDetailsController : ControllerBase
     {
-        internal Services.IServices.ILoanDetail loanDetail = new Services.Implemantation.LoanDetails();
+        internal Services.IServices.ILoanDetails loanDetail = new Services.Implemantation.LoanDetails();
         // GET: api/<LoansDetailController>
         [HttpGet]
         public IEnumerable<string> Get()

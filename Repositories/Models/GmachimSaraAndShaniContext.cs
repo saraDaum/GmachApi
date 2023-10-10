@@ -26,7 +26,7 @@ public partial class GmachimSaraAndShaniContext : DbContext ,IDbContext
 
     public virtual DbSet<Guarantor> Guarantors { get; set; }
 
-    public virtual DbSet<LoansDetail> LoansDetails { get; set; }
+    public virtual DbSet<LoanDetails> LoanDetails { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
@@ -108,7 +108,7 @@ public partial class GmachimSaraAndShaniContext : DbContext ,IDbContext
                 .HasConstraintName("FK_Guarantors_LoansDetails");
         });
 
-        modelBuilder.Entity<LoansDetail>(entity =>
+        modelBuilder.Entity<Models.LoanDetails>(entity =>
         {
             entity.HasKey(e => e.LoanId);
 
@@ -122,7 +122,7 @@ public partial class GmachimSaraAndShaniContext : DbContext ,IDbContext
                         .HasForeignKey("AcountsNumber")
                         .OnDelete(DeleteBehavior.ClientSetNull)
                         .HasConstraintName("FK_AcountsForLoans_Acounts"),
-                    l => l.HasOne<LoansDetail>().WithMany()
+                    l => l.HasOne<LoanDetails>().WithMany()
                         .HasForeignKey("LoanId")
                         .OnDelete(DeleteBehavior.ClientSetNull)
                         .HasConstraintName("FK_AcountsForLoans_LoansDetails"),
@@ -140,7 +140,7 @@ public partial class GmachimSaraAndShaniContext : DbContext ,IDbContext
                         .HasForeignKey("BorrowerId")
                         .OnDelete(DeleteBehavior.ClientSetNull)
                         .HasConstraintName("FK_LoansGuarantors _Borrowers"),
-                    l => l.HasOne<LoansDetail>().WithMany()
+                    l => l.HasOne<LoanDetails>().WithMany()
                         .HasForeignKey("LoanId")
                         .OnDelete(DeleteBehavior.ClientSetNull)
                         .HasConstraintName("FK_LoansGuarantors _LoansDetails"),
