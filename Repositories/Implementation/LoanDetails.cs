@@ -11,8 +11,6 @@ public class LoanDetail : Interfaces.ILoanDetail
 {
     public LoanDetail()
     {
-        LoanId = 0;
-        Sum = 0;
 
     }
 

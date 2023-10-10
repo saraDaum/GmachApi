@@ -7,7 +7,7 @@ using AutoMapper;
 using DTO.Models;
 
 namespace Services.Implemantation;
-public class LoanDetails : IServices.ILoanDetail
+public class LoanDetails : IServices.ILoanDetails
 {
     MapperConfig LoanAutoMapper = MapperConfig.Instance;
     Repositories.Interfaces.ILoanDetails loanDetail = new Repositories.Implementation.LoanDetails();
