@@ -7,5 +7,5 @@ public partial class Guarantor: User
 {
     public int LoanId { get; set; }
 
-    public virtual LoansDetail Loan { get; set; } = null!;
+    public virtual LoanDetails Loan { get; set; } = null!;
 }

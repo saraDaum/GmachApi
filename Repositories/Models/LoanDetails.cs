@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Repositories.Models;
 
-public partial class LoansDetail
+public partial class LoanDetails
 {
     public int LoanId { get; set; }
 

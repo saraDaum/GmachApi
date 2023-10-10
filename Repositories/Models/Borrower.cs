@@ -9,5 +9,5 @@ public partial class Borrower : User
 
     public virtual ICollection<Acount> Acounts { get; set; } = new List<Acount>();
 
-    public virtual ICollection<LoansDetail> Loans { get; set; } = new List<LoansDetail>();
+    public virtual ICollection<Models.LoanDetails> Loans { get; set; } = new List<Models.LoanDetails>();
 }
