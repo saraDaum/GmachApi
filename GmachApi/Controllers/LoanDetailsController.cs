@@ -7,9 +7,9 @@ namespace GmachApi.Controllers
     
     [Route("api/[controller]")]
     [ApiController]
-    public class LoansDetailController : ControllerBase
+    public class LoanDetailsController : ControllerBase
     {
-        internal Services.IServices.ILoanDetail loanDetail = new Services.Implemantation.LoanDetail();
+        internal Services.IServices.ILoanDetail loanDetail = new Services.Implemantation.LoanDetails();
         // GET: api/<LoansDetailController>
         [HttpGet]
         public IEnumerable<string> Get()
@@ -26,7 +26,7 @@ namespace GmachApi.Controllers
 
         // POST api/<LoansDetailController>
         [HttpPost]
-        public int Post([FromBody] DTO.Models.LoansDetail loan)
+        public int Post([FromBody] DTO.Models.LoanDetails loan)
         {
             return loanDetail.AddLoan(loan);
         }

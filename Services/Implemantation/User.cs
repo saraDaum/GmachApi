@@ -52,16 +52,13 @@ public class User: IServices.IUser
     {
         try
         {
+            //TODO: GetUser function gets an user instance, but if I want to send a LoginUser, what should I do??
             IMapper mapper = myMapper.UserMapper.CreateMapper();
             Repositories.Models.User isUserExist = mapper.Map<DTO.Models.User, Repositories.Models.User>(newUser);
-            Repositories.Models.User isExist = userRepository.GetUser(isUserExist);
-            DTO.Models.User user = mapper.Map< Repositories.Models.User,DTO.Models.User>(isExist);
-            ;
-            if (user!=null)
-                return true;
-            return false;
-        }
-        catch 
+            Repositories.Models.User isExist = userRepository.GetUser(isUserExist.UserName, isUserExist.UserPassword);
+            if (isExist.UserName == null) { return false; }
+            else return true; }
+        catch
         {
 
         }

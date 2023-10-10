@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore.Internal;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,4 +10,5 @@ namespace Repositories.Interfaces;
 public interface ILoanDetail
 {
     public int AddLoan(Models.LoansDetail loansDetail);
+    public Models.LoansDetail GetLoansDetail(int userId);
 }
