@@ -56,7 +56,7 @@ if (app.Environment.IsDevelopment())
 
 //app.UseHttpsRedirection();
 
-//app.UseAuthorization();
+app.UseAuthorization();
 
 app.UseCors("AllowSpecificOrigin"); // השתמש ב-CORS Policy שיצרנו
 
