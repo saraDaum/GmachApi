@@ -43,8 +43,9 @@ public class UserController : ControllerBase
     [HttpPost("SignIn")]
     public int SignIn([FromBody] User newUser)
     {
+        
         LoginUser checkUser = new LoginUser { UserName = newUser.UserPassword, Password = newUser.UserPassword };
-        if (!userService.IsUserExists(checkUser))
+        if (!userService.IsUserExists(newUser))
             return userService.SignIn(newUser);
         else
             return -1;

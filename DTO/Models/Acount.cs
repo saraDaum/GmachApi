@@ -19,5 +19,5 @@ public partial class Acount
 
     public virtual Borrower Borrower { get; set; } = null!;
 
-    public virtual ICollection<LoansDetail> Loans { get; set; } = new List<LoansDetail>();
+    public virtual ICollection<LoanDetails> Loans { get; set; } = new List<LoanDetails>();
 }

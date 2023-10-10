@@ -61,6 +61,6 @@ public class User : Interfaces.IUser
 
     public Models.User GetUser(Models.User? user)
     {
-        return dbContext.User.Where(u => u.UserName == userName && u.UserPassword == Password).FirstOrDefault();
+        return dbContext.User.Where(u => u.UserName == user.UserName && u.UserPassword == user.UserPassword).FirstOrDefault();
     }
 }
