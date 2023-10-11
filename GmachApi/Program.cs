@@ -58,7 +58,18 @@ if (app.Environment.IsDevelopment())
 
 app.UseAuthorization();
 
-app.UseCors("AllowSpecificOrigin"); // השתמש ב-CORS Policy שיצרנו
+app.UseRouting();
+
+//app.UseCors("AllowSpecificOrigin"); // השתמש ב-CORS Policy שיצרנו
+
+// global cors policy
+app.UseCors(x => x
+     .AllowAnyMethod()
+     .AllowAnyHeader()
+     .SetIsOriginAllowed(origin => true) // allow any origin 
+     .AllowCredentials());
+
+app.UseStaticFiles();
 
 app.MapControllers();
 

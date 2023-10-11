@@ -3,11 +3,19 @@ using DTO.Models;
 using Microsoft.AspNetCore.Mvc;
 using Repositories.Interfaces;
 using System;
+using System.Net.Http;
+using System.Web.Http;
+using System.Web.Http.Cors;
+using FromBodyAttribute = Microsoft.AspNetCore.Mvc.FromBodyAttribute;
+using HttpGetAttribute = Microsoft.AspNetCore.Mvc.HttpGetAttribute;
+using HttpPostAttribute = Microsoft.AspNetCore.Mvc.HttpPostAttribute;
+using RouteAttribute = Microsoft.AspNetCore.Mvc.RouteAttribute;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace GmachApi.Controllers;
 
+[EnableCors("*", "*", "*")]
 [Route("api/[controller]")]
 [ApiController]
 public class UserController : ControllerBase
@@ -55,6 +63,7 @@ public class UserController : ControllerBase
     [HttpPost("LogIn")]
     public ActionResult < DTO.Models.LoginUser > LogIn([FromBody] LoginUser loginUser)
     {
+        
         return new LoginUser{ UserName = "Connected", Password = "00" }; //To get this message.Sara.
         return new LoginUser();
         return NotFound ();
@@ -62,15 +71,15 @@ public class UserController : ControllerBase
         
     }
 
-    // PUT api/<UserController>/5
-    [HttpPut("{id}")]
-    public void Put(int id, [FromBody] string value)
-    {
-    }
+    //// PUT api/<UserController>/5
+    //[HttpPut("{id}")]
+    //public void Put(int id, [FromBody] string value)
+    //{
+    //}
 
-    // DELETE api/<UserController>/5
-    [HttpDelete("{id}")]
-    public void Delete(int id)
-    {
-    }
+    //// DELETE api/<UserController>/5
+    //[HttpDelete("{id}")]
+    //public void Delete(int id)
+    //{
+    //}
 }
