@@ -15,8 +15,8 @@ using RouteAttribute = Microsoft.AspNetCore.Mvc.RouteAttribute;
 
 namespace GmachApi.Controllers;
 
-[EnableCors("*", "*", "*")]
-[Route("api/[controller]")]
+//[EnableCors("*", "*", "*")]//Hila added.
+//[Route("api/[controller]")]
 [ApiController]
 public class UserController : ControllerBase
 {
@@ -48,10 +48,10 @@ public class UserController : ControllerBase
     /// </summary>
     /// <param name="newUser"></param>
     /// <returns></returns>
-    [HttpPost("SignIn")]
+    [Route("api/User/SignIn"),HttpPost]
     public int SignIn([FromBody] User newUser)
     {
-        
+
         LoginUser checkUser = new LoginUser { UserName = newUser.UserPassword, Password = newUser.UserPassword };
         if (!userService.IsUserExists(newUser))
             return userService.SignIn(newUser);
@@ -61,27 +61,27 @@ public class UserController : ControllerBase
 
     // POST api/<log in>
     [HttpPost("LogIn")]
-    public ActionResult < DTO.Models.LoginUser > LogIn([FromBody] LoginUser loginUser)
+    public ActionResult<DTO.Models.LoginUser> LogIn([FromBody] LoginUser loginUser)
     {
-        
-        return new LoginUser{ UserName = "Connected", Password = "00" }; //To get this message.Sara.
+
+        return new LoginUser { UserName = "Connected", Password = "00" }; //To get this message.Sara.
         return new LoginUser();
-        return NotFound ();
-        
-        
+        return NotFound();
+
+
     }
 
     // PUT api/<UserController>/5
-    [HttpPut("{id}")]
-    public void Put(int id, [FromBody] string value)
-    {
-        //What this function does?? Sara.
-    }
+    //[HttpPut("{id}")]
+    //public void Put(int id, [FromBody] string value)
+    //{
+    //    //What this function does?? Sara.
+    //}
 
     // DELETE api/<UserController>/5
-    [HttpDelete("{id}")]
-    public void Delete(int id)
-    {
+    //[HttpDelete("{id}")]
+    //public void Delete(int id)
+    //{
 
-    }
+    //}
 }

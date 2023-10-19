@@ -14,7 +14,7 @@ public partial class LoanDetails
 
     public int BorrowerNumber { get; set; }
 
-    public string LoanFile { get; set; } = null!;//?
+    public string LoanFile { get; set; } = null!;//? Mabey it could be a link to a file in drive. Sara.
 
     public virtual ICollection<Guarantor> Guarantors { get; set; } = new List<Guarantor>();
 
