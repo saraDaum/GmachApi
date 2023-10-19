@@ -71,15 +71,17 @@ public class UserController : ControllerBase
         
     }
 
-    //// PUT api/<UserController>/5
-    //[HttpPut("{id}")]
-    //public void Put(int id, [FromBody] string value)
-    //{
-    //}
+    // PUT api/<UserController>/5
+    [HttpPut("{id}")]
+    public void Put(int id, [FromBody] string value)
+    {
+        //What this function does?? Sara.
+    }
 
-    //// DELETE api/<UserController>/5
-    //[HttpDelete("{id}")]
-    //public void Delete(int id)
-    //{
-    //}
+    // DELETE api/<UserController>/5
+    [HttpDelete("{id}")]
+    public void Delete(int id)
+    {
+
+    }
 }
