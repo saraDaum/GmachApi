@@ -16,7 +16,7 @@ using RouteAttribute = Microsoft.AspNetCore.Mvc.RouteAttribute;
 namespace GmachApi.Controllers;
 
 //[EnableCors("*", "*", "*")]//Hila added.
-//[Route("api/[controller]")]
+[Route("api/[controller]")]
 [ApiController]
 public class UserController : ControllerBase
 {
