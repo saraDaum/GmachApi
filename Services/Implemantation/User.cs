@@ -20,6 +20,11 @@ public class User: IServices.IUser
     {
         userRepository = _userRepo;
     }
+
+    public User()
+    {
+    }
+
     //Mapper userInfo = new Mapper();
     MapperConfig myMapper = MapperConfig.Instance;
 
