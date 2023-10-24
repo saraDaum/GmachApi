@@ -26,6 +26,8 @@ namespace GmachApi.Controllers
         [HttpPost]
         public void Post([FromBody] string value)
         {
+
+
         }
 
         // PUT api/<DepositorController>/5

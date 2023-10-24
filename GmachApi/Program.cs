@@ -22,7 +22,7 @@ builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(builder =>
     {
-        builder.WithOrigins("http://localhost:3000")
+        builder.AllowAnyOrigin()
                .AllowAnyMethod()
                .AllowAnyHeader();
     });
@@ -63,11 +63,11 @@ app.UseRouting();
 //app.UseCors("AllowSpecificOrigin"); // השתמש ב-CORS Policy שיצרנו
 
 // global cors policy
-app.UseCors(x => x
-     .AllowAnyMethod()
-     .AllowAnyHeader()
-     .SetIsOriginAllowed(origin => true) // allow any origin 
-     .AllowCredentials());
+app.UseCors();//x => x
+     //.AllowAnyMethod()
+     //.AllowAnyHeader()
+     //.SetIsOriginAllowed(origin => true) // allow any origin 
+     //.AllowCredentials());
 
 app.UseStaticFiles();
 
