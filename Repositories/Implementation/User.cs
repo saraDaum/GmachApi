@@ -30,25 +30,19 @@ public class User : Interfaces.IUser
  
     }
 
-    public int LogInUser(string userName, string Password)
+    /*public int LogInUser(string userName, string Password)
     {
         try
         {
-            object user = dbContext.User.Where(a => a.UserName == userName && a.UserPassword == Password).FirstOrDefault();
+            var user = dbContext.User.Where(a => a.UserName == userName && a.UserPassword == Password).FirstOrDefault();
             if (user != null)
-            {
                 return 1;
-            }
-            else
-            {
-                return -1;
-            }
-        }
-        catch
-        {
             return -1;
         }
-    }
+        catch {
+            return -1;
+        }
+    }*/
 
 
 
@@ -62,6 +56,7 @@ public class User : Interfaces.IUser
     {
         return dbContext.User.FirstOrDefault(u => UserPassword == u.UserPassword&& UserName == u.UserName);
     }
+
 
    
 

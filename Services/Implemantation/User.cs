@@ -70,6 +70,7 @@ public class User: IServices.IUser
         return false;
     }
 
+
     public int SignIn(DTO.Models.User newUser)
     {
         IMapper mapper = myMapper.UserMapper.CreateMapper();

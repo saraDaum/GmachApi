@@ -48,7 +48,7 @@ namespace GmachApi.Controllers
             //return 100;
             //Console.WriteLine(newUser.UserName);
             LoginUser checkUser = new LoginUser { UserName = newUser.UserName, Password = newUser.UserPassword };
-            if (!userService.IsUserExists(newUser))
+            if (!userService.IsUserExists(checkUser)) //Returns true if user already exist
               return userService.SignIn(newUser);
             else
                 return -1;
@@ -59,6 +59,7 @@ namespace GmachApi.Controllers
         public ActionResult<DTO.Models.LoginUser> LogIn([FromBody] LoginUser loginUser)
         {
             Console.WriteLine(loginUser);
+
             return new LoginUser { UserName = "Connected", Password = "00" }; //To get this message.Sara.
             return new LoginUser();
             return NotFound();

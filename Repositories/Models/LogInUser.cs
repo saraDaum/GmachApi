@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace Repositories.Models
 {
-    internal class LogInUser
+    public class LogInUser
     {
+        public string UserName { get; set; }
+        public string Password { get; set; }
     }
 }
