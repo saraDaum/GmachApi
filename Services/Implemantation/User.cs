@@ -72,7 +72,10 @@ public class User: IServices.IUser
 
     public int SignIn(DTO.Models.User newUser)
     {
-        throw new NotImplementedException();
+        IMapper mapper = myMapper.UserMapper.CreateMapper();
+        Repositories.Models.User user = mapper.Map<DTO.Models.User, Repositories.Models.User>(newUser);
+        return userRepository.SignIn(user);
+     
     }
 
     /*int IServices.IUser.SignIn(DTO.Models.User newUser)

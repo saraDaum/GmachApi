@@ -45,14 +45,13 @@ namespace GmachApi.Controllers
         public int SignIn([FromBody] User newUser)
 
         {
-            return 100;
+            //return 100;
             //Console.WriteLine(newUser.UserName);
-            //LoginUser checkUser = new LoginUser { UserName = newUser.UserPassword, Password = newUser.UserPassword };
-
-            //if (!userService.IsUserExists(newUser))
-            //    return userService.SignIn(newUser);
-            //else
-            //    return -1;
+            LoginUser checkUser = new LoginUser { UserName = newUser.UserName, Password = newUser.UserPassword };
+            if (!userService.IsUserExists(newUser))
+              return userService.SignIn(newUser);
+            else
+                return -1;
         }
 
         // POST api/<log in>

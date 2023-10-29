@@ -30,6 +30,28 @@ public class User : Interfaces.IUser
  
     }
 
+    public int LogInUser(string userName, string Password)
+    {
+        try
+        {
+            object user = dbContext.User.Where(a => a.UserName == userName && a.UserPassword == Password).FirstOrDefault();
+            if (user != null)
+            {
+                return 1;
+            }
+            else
+            {
+                return -1;
+            }
+        }
+        catch
+        {
+            return -1;
+        }
+    }
+
+
+
     /// <summary>
     ///This function accepts a user object and returns the first element found.
     /// If there is no matching element, returns the default value.
