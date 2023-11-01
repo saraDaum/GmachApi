@@ -36,12 +36,12 @@ public class User: IServices.IUser
     /// <returns></returns>
     public UserInfo? Login(LoginUser loginUser)
     {
-        if (loginUser.UserName != null && loginUser.UserPassword != null)
+        if (loginUser.UserName != null && loginUser.Password != null)
         {
             IMapper mapper = myMapper.UserMapper.CreateMapper();
             //TODO: send to the reposetories to function that check if the user exist
             string name = loginUser.UserName;
-            string password = loginUser.UserPassword;
+            string password = loginUser.Password;
             Repositories.Models.User? u = userRepository.Login(name, password);
             try
             {

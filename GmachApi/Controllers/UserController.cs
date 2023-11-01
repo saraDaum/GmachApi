@@ -50,7 +50,7 @@ namespace GmachApi.Controllers
 
             //return 100;
 
-            LoginUser checkUser = new LoginUser { UserName = newUser.UserPassword, UserPassword = newUser.UserPassword };
+            LoginUser checkUser = new LoginUser { UserName = newUser.UserPassword, Password = newUser.UserPassword };
             if (!user.IsUserExists(checkUser))
             {
                 int ans = user.SignIn(newUser);
