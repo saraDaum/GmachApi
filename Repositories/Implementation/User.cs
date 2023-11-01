@@ -76,8 +76,13 @@ public class User : Interfaces.IUser
 
     }
 
-    public Models.User GetUser(Models.User? user)
+    public Models.User? GetUser(Models.User? user)
     {
         return dbContext.User.Where(u => u.UserName == user.UserName && u.UserPassword == user.UserPassword).FirstOrDefault();
+    }
+
+    public int LogInUser(string userName, string Password)
+    {
+        throw new NotImplementedException();
     }
 }
