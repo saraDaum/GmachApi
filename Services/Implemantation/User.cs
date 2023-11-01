@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using DTO.Models;
+using Microsoft.Extensions.Configuration;
 using Repositories.Interfaces;
 using Repositories.Models;
 using System;
@@ -60,26 +61,41 @@ public class User: IServices.IUser
 
    
 
-    public bool IsUserExists(DTO.Models.User newUser)
+    public bool IsUserExists(DTO.Models.LoginUser newUser)
     {
         try
         {
-            //TODO: GetUser function gets an user instance, but if I want to send a LoginUser, what should I do??
             IMapper mapper = myMapper.UserMapper.CreateMapper();
-            Repositories.Models.User isUserExist = mapper.Map<DTO.Models.User, Repositories.Models.User>(newUser);
-            Repositories.Models.User isExist = userRepository.GetUser(isUserExist.UserName, isUserExist.UserPassword);
+            Repositories.Models.LogInUser isUserExist = mapper.Map<DTO.Models.LoginUser, Repositories.Models.LogInUser>(newUser);
+            Repositories.Models.User isExist = userRepository.GetUser(isUserExist.UserName, isUserExist.Password);
             if (isExist.UserName == null) { return false; }
             else return true; }
         catch
         {
-
+            return false;
         }
         return false;
     }
 
+
     public int SignIn(DTO.Models.User newUser)
     {
-        throw new NotImplementedException();
+        try
+        {
+            if (newUser == null) { return -1; }
+            else
+            {
+                IMapper mapper = myMapper.UserMapper.CreateMapper();
+                Repositories.Models.User user = mapper.Map<DTO.Models.User, Repositories.Models.User>(newUser);
+                return userRepository.SignIn(user);
+            }
+        }
+        catch (Exception e)
+        {
+            return -1;
+        }
+       
+     
     }
 
     public bool IsUserExists(LoginUser user)

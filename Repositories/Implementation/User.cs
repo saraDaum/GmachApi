@@ -32,6 +32,22 @@ public class User : Interfaces.IUser
  
     }
 
+    /*public int LogInUser(string userName, string Password)
+    {
+        try
+        {
+            var user = dbContext.User.Where(a => a.UserName == userName && a.UserPassword == Password).FirstOrDefault();
+            if (user != null)
+                return 1;
+            return -1;
+        }
+        catch {
+            return -1;
+        }
+    }*/
+
+
+
     /// <summary>
     ///This function accepts a user object and returns the first element found.
     /// If there is no matching element, returns the default value.
@@ -42,6 +58,7 @@ public class User : Interfaces.IUser
     {
         return dbContext.User.FirstOrDefault(u => UserPassword == u.UserPassword&& UserName == u.UserName);
     }
+
 
    
 
@@ -61,9 +78,13 @@ public class User : Interfaces.IUser
 
     }
 
-    public Models.User GetUser(Models.User? user)
+    public Models.User? GetUser(Models.User? user)
     {
         return dbContext.User.Where(u => u.UserName == user.UserName && u.UserPassword == user.UserPassword).FirstOrDefault();
     }
 
+    public int LogInUser(string userName, string Password)
+    {
+        throw new NotImplementedException();
+    }
 }

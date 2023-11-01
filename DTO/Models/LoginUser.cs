@@ -1,6 +1,7 @@
 ﻿using Azure.Identity;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,9 +14,12 @@ namespace DTO.Models;
 /// </summary>
 public class LoginUser
 {
+    [Required]
     public string UserName { get; set; }
 
+    [Required]
     public string Password { get; set; }
+   
 
 
     //private UsernamePasswordCredential
