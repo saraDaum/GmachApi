@@ -44,17 +44,22 @@ namespace GmachApi.Controllers
         [HttpPost("SignIn")]
         public ActionResult<DTO.Models.UserInfo> SignIn([FromBody] User newUser)
         {
-            Console.WriteLine(newUser.UserName);
-            return new UserInfo { UserName = newUser.UserName };
+            //Console.WriteLine(newUser.UserName);
+            //return new UserInfo { UserName = newUser.UserName };
 
 
             //return 100;
 
-            //LoginUser checkUser = new LoginUser { UserName = newUser.UserPassword, Password = newUser.UserPassword };
-            //if (!userService.IsUserExists(newUser))
-            //    return userService.SignIn(newUser);
-            //else
-            //    return -1;
+            LoginUser checkUser = new LoginUser { UserName = newUser.UserPassword, Password = newUser.UserPassword };
+            if (!user.IsUserExists(checkUser))
+            {
+                int ans = user.SignIn(newUser);
+                return new UserInfo {UserNumber = ans ,UserName = newUser.UserName, UserEmail= newUser.UserEmail, 
+                UserAddress=newUser.UserAddress, UserPhone=newUser.UserPhone};
+            }
+
+            else
+                return NotFound();
         }
 
         // POST api/<log in>
