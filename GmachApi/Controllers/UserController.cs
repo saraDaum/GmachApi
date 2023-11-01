@@ -48,7 +48,6 @@ namespace GmachApi.Controllers
             //return 100;
             //Console.WriteLine(newUser.UserName);
             LoginUser checkUser = new LoginUser { UserName = newUser.UserName, Password = newUser.UserPassword };
-            //Remember!! I change it from userServices to be User!!
             if (!user.IsUserExists(checkUser)) //Returns true if user already exist
                  return user.SignIn(newUser);
             return 0;
