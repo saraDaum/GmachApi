@@ -14,7 +14,7 @@ public interface IUser
     public int LogInUser(string userName, string Password);
     public int SignIn(Models.User? user);
     public Models.User GetUser(Models.User? user);
-    public Models.User GetUser(string UserName, string UserPassword);
+    public Models.User GetUser(Models.LogInUser user);
 
   
     

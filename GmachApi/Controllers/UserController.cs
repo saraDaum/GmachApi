@@ -69,10 +69,11 @@ namespace GmachApi.Controllers
             DTO.Models.UserInfo? userInfo = user.Login(loginUser);
             if (userInfo != null) { return NotFound(); }
             Console.WriteLine(loginUser);
+            return userInfo;
 
-            return new LoginUser { UserName = "Connected", UserPassword = "00" }; //To get this message.Sara.
-            return new LoginUser();
-            return NotFound();
+            //return new LoginUser { UserName = "Connected", Password = "00" }; //To get this message.Sara.
+            //return new LoginUser();
+            //return NotFound();
 
 
         }

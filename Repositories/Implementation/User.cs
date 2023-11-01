@@ -1,4 +1,5 @@
 ﻿using Azure.Identity;
+using Repositories.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -54,9 +55,9 @@ public class User : Interfaces.IUser
     /// </summary>
     /// <param name="user"></param>
     /// <returns></returns>
-    public Models.User? GetUser(string UserName, string UserPassword)
+    public Models.User? GetUser(LogInUser user)
     {
-        return dbContext.User.FirstOrDefault(u => UserPassword == u.UserPassword&& UserName == u.UserName);
+        return dbContext.User.FirstOrDefault(u => user.Password == u.UserPassword&& user.UserName == u.UserName);
     }
 
 
@@ -87,4 +88,6 @@ public class User : Interfaces.IUser
     {
         throw new NotImplementedException();
     }
+
+
 }

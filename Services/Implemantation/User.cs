@@ -71,6 +71,7 @@ public class User: IServices.IUser
         {
             ArgumentNullException.ThrowIfNull(newUser);// continue just if newUser is not null
             LogInUser isUserExist = mapper.Map<LoginUser, LogInUser>(newUser);
+            ArgumentNullException.ThrowIfNull(isUserExist);// continue just if newUser is not null
             Repositories.Models.User isExist = userRepository.GetUser(isUserExist.UserName, isUserExist.Password);
             if (isExist.UserName == null) { return false; }
             else return true; }

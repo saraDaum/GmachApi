@@ -14,11 +14,11 @@ namespace DTO.Models;
 /// </summary>
 public class LoginUser
 {
-    [Required]
-    public string UserName { get; set; } = string.Empty!;
 
-    [Required]
-    public string UserPassword { get; set; } = string.Empty!;   
+    public string UserName { get; set; }
+
+
+    public string Password { get; set; }
    
 
 

@@ -32,10 +32,10 @@ public class MapperConfig : Profile
      );*/
 
     public MapperConfiguration UserMapper => new MapperConfiguration(cfg => {
-        CreateMap<LoginUser, LogInUser>()
+        cfg.CreateMap<LoginUser, LogInUser>()
          .ReverseMap();
  
-        CreateMap<Repositories.Models.User, DTO.Models.User>()
+        cfg.CreateMap<Repositories.Models.User, DTO.Models.User>()
          .ReverseMap(); }
         
         //CreateMap<Repositories.Models.User, DTO.Models.User>();
