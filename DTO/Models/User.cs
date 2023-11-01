@@ -19,7 +19,7 @@ public partial class User
     
     public string UserAddress { get; set; } = null!;
 
-    public int UserPhone { get; set; }
+    public string UserPhone { get; set; } = null;
 
 
 }

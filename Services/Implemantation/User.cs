@@ -27,7 +27,6 @@ public class User: IServices.IUser
         //userRepository = new Repositories.Implementation.User();
     }
 
-    //Mapper userInfo = new Mapper();
     MapperConfig myMapper = MapperConfig.Instance;
 
     /// <summary>
@@ -60,14 +59,19 @@ public class User: IServices.IUser
     }
 
    
-
+    /// <summary>
+    /// Helping function that check if the user already exist
+    /// </summary>
+    /// <param name="newUser">User</param>
+    /// <returns>If the user exist</returns>
     public bool IsUserExists(DTO.Models.LoginUser newUser)
     {
+        IMapper mapper = myMapper.UserMapper.CreateMapper();
         try
         {
-            IMapper mapper = myMapper.UserMapper.CreateMapper();
-            Repositories.Models.LogInUser isUserExist = mapper.Map<DTO.Models.LoginUser, Repositories.Models.LogInUser>(newUser);
-            Repositories.Models.User isExist = userRepository.GetUser(isUserExist.UserName, isUserExist.UserPassword);
+            ArgumentNullException.ThrowIfNull(newUser);// continue just if newUser is not null
+            LogInUser isUserExist = mapper.Map<LoginUser, LogInUser>(newUser);
+            Repositories.Models.User isExist = userRepository.GetUser(isUserExist.UserName, isUserExist.Password);
             if (isExist.UserName == null) { return false; }
             else return true; }
         catch
@@ -99,13 +103,5 @@ public class User: IServices.IUser
      
     }
 
-   /* public bool IsUserExists(LoginUser user)
-    {
-        throw new NotImplementedException();
-    }
-   */
-    /*int IServices.IUser.SignIn(DTO.Models.User newUser)
-    {
-        throw new NotImplementedException();
-    */
+
 }

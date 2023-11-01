@@ -25,24 +25,22 @@ public class MapperConfig : Profile
         .ReverseMap()
     );
 
-   /* public MapperConfiguration UserMapper = new MapperConfiguration(cnf =>
-        cnf.CreateMap<Repositories.Models.User, DTO.Models.User>()
-        .ReverseMap()
+    /* public MapperConfiguration UserMapper = new MapperConfiguration(cnf =>
+         cnf.CreateMap<Repositories.Models.User, DTO.Models.User>()
+         .ReverseMap()
 
-    );*/
+     );*/
 
-   public MapperConfiguration UserMapper => new MapperConfiguration(cfg =>
-    {
-
-        CreateMap<DTO.Models.LoginUser, Repositories.Models.LogInUser>()
+    public MapperConfiguration UserMapper => new MapperConfiguration(cfg => {
+        CreateMap<LoginUser, LogInUser>()
          .ReverseMap();
-       CreateMap<Repositories.Models.User, DTO.Models.User>()
-        .ReverseMap();
+ 
+        CreateMap<Repositories.Models.User, DTO.Models.User>()
+         .ReverseMap(); }
+        
         //CreateMap<Repositories.Models.User, DTO.Models.User>();
         //.ReverseMap()
-
-
-    });
+    );
    
         //cfg.AddProfile<UserProfile>(); Was
         }
