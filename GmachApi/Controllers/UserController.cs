@@ -10,7 +10,7 @@ namespace GmachApi.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        Services.IServices.IUser userService;
+        //Services.IServices.IUser userService;
         internal Services.IServices.IUser user = new Services.Implemantation.User();
 
         //public UserController(Services.IServices.IUser _userService)
@@ -42,9 +42,12 @@ namespace GmachApi.Controllers
         /// <returns></returns>
         //[Route("api/User/SignIn"), HttpPost]
         [HttpPost("SignIn")]
-        public int SignIn([FromBody] User newUser)
-
+        public ActionResult<DTO.Models.UserInfo> SignIn([FromBody] User newUser)
         {
+            Console.WriteLine(newUser.UserName);
+            return new UserInfo { UserName = newUser.UserName };
+
+
             //return 100;
             //Console.WriteLine(newUser.UserName);
             LoginUser checkUser = new LoginUser { UserName = newUser.UserName, UserPassword = newUser.UserPassword };
@@ -56,8 +59,10 @@ namespace GmachApi.Controllers
 
         // POST api/<log in>
         [HttpPost("LogIn")]
-        public ActionResult<DTO.Models.LoginUser> LogIn([FromBody] LoginUser loginUser)
+        public ActionResult<DTO.Models.UserInfo> LogIn([FromBody] LoginUser loginUser)
         {
+            DTO.Models.UserInfo? userInfo = user.Login(loginUser);
+            if (userInfo != null) { return NotFound(); }
             Console.WriteLine(loginUser);
 
             return new LoginUser { UserName = "Connected", UserPassword = "00" }; //To get this message.Sara.

@@ -9,11 +9,13 @@ namespace Repositories.Implementation;
 
 public class User : Interfaces.IUser
 {
+
     private readonly IDbContext dbContext;
     public User(IDbContext ctx)
     {
         dbContext = ctx;
     }
+
 
 
     /// <summary>
@@ -25,7 +27,7 @@ public class User : Interfaces.IUser
     /// <returns></returns>
     public Models.User? Login(string userName, string Password)
     {
-        
+        Console.WriteLine(userName+ " " + Password);   
         return dbContext.User.Where(a => a.UserName == userName && a.UserPassword == Password).FirstOrDefault();
  
     }

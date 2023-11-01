@@ -15,7 +15,7 @@ namespace Services.Implemantation;
 
 public class User: IServices.IUser
 {
-  private readonly IUser userRepository;// = new Repositories.Implementation.User(new GmachimSaraAndShaniContext());//todo: check the problem here!
+    private readonly IUser userRepository;
 
     public User(IUser _userRepo)
     {
@@ -24,6 +24,7 @@ public class User: IServices.IUser
 
     public User()
     {
+        //userRepository = new Repositories.Implementation.User();
     }
 
     //Mapper userInfo = new Mapper();
@@ -36,20 +37,26 @@ public class User: IServices.IUser
     /// <returns></returns>
     public UserInfo? Login(LoginUser loginUser)
     {
-        IMapper mapper = myMapper.UserMapper.CreateMapper();
-        //TODO: send to the reposetories to function that check if the user exist
-        Repositories.Models.User? u = userRepository.Login(loginUser.UserName, loginUser.UserPassword);
-        try 
+        if (loginUser.UserName != null && loginUser.Password != null)
         {
-            ArgumentNullException.ThrowIfNull(u);// continue just if u is not null
-            UserInfo uInfo = mapper.Map<Repositories.Models.User, UserInfo>(u);
-            return uInfo;
+            IMapper mapper = myMapper.UserMapper.CreateMapper();
+            //TODO: send to the reposetories to function that check if the user exist
+            string name = loginUser.UserName;
+            string password = loginUser.Password;
+            Repositories.Models.User? u = userRepository.Login(name, password);
+            try
+            {
+                ArgumentNullException.ThrowIfNull(u);// continue just if u is not null
+                UserInfo uInfo = mapper.Map<Repositories.Models.User, UserInfo>(u);
+                return uInfo;
 
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
         }
-        catch (Exception e)
-        {
-            return null;
-        }
+        else { return null; }
     }
 
    
@@ -90,6 +97,11 @@ public class User: IServices.IUser
         }
        
      
+    }
+
+    public bool IsUserExists(LoginUser user)
+    {
+        throw new NotImplementedException();
     }
 
     /*int IServices.IUser.SignIn(DTO.Models.User newUser)
