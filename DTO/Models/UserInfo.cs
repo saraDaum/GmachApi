@@ -22,4 +22,12 @@ public class UserInfo
     public string UserPhone { get; set; } = null!;
 
     public string UserAddress { get; set; } = null!;
+
+    public UserInfo() { 
+        UserNumber = -1;
+        UserName = "";
+        UserEmail = ""; 
+        UserPhone = "";
+        UserAddress = "";
+    }
 }

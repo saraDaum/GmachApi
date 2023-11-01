@@ -42,7 +42,7 @@ namespace GmachApi.Controllers
         /// <returns></returns>
         //[Route("api/User/SignIn"), HttpPost]
         [HttpPost("SignIn")]
-        public int SignIn([FromBody] User newUser)
+        public UserInfo SignIn([FromBody] User newUser)
         {
             //Console.WriteLine(newUser.UserName);
             //return new UserInfo { UserName = newUser.UserName };
@@ -50,16 +50,22 @@ namespace GmachApi.Controllers
 
             //return 100;
 
-            LoginUser checkUser = new LoginUser { UserName = newUser.UserPassword, Password = newUser.UserPassword };
+            LoginUser checkUser = new LoginUser { UserName = newUser.UserPassword, UserPassword = newUser.UserPassword };
             if (!user.IsUserExists(checkUser))
             {
                 int ans = user.SignIn(newUser);
-                return new UserInfo {UserNumber = ans ,UserName = newUser.UserName, UserEmail= newUser.UserEmail, 
-                UserAddress=newUser.UserAddress, UserPhone=newUser.UserPhone};
+                return new UserInfo
+                {
+                    UserNumber = ans,
+                    UserName = newUser.UserName,
+                    UserEmail = newUser.UserEmail,
+                    UserAddress = newUser.UserAddress,
+                    UserPhone = newUser.UserPhone
+                };
             }
 
             else
-                return NotFound();
+                return new UserInfo();
         }
 
         // POST api/<log in>
