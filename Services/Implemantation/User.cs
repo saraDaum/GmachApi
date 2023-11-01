@@ -37,12 +37,12 @@ public class User: IServices.IUser
     /// <returns></returns>
     public UserInfo? Login(LoginUser loginUser)
     {
-        if (loginUser.UserName != null && loginUser.Password != null)
+        if (loginUser.UserName != null && loginUser.UserPassword != null)
         {
             IMapper mapper = myMapper.UserMapper.CreateMapper();
             //TODO: send to the reposetories to function that check if the user exist
             string name = loginUser.UserName;
-            string password = loginUser.Password;
+            string password = loginUser.UserPassword;
             Repositories.Models.User? u = userRepository.Login(name, password);
             try
             {
@@ -99,11 +99,11 @@ public class User: IServices.IUser
      
     }
 
-    public bool IsUserExists(LoginUser user)
+   /* public bool IsUserExists(LoginUser user)
     {
         throw new NotImplementedException();
     }
-
+   */
     /*int IServices.IUser.SignIn(DTO.Models.User newUser)
     {
         throw new NotImplementedException();
