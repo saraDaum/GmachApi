@@ -17,12 +17,12 @@ public class User: IServices.IUser
 {
     private readonly IUser userRepository;
 
-    public User(IUser _userRepo)
+    public User(IUser userRepo)
     {
-        userRepository = _userRepo;
+        userRepository = userRepo;
     }
 
-    public User()
+      public User() 
     {
         //userRepository = new Repositories.Implementation.User();
     }
@@ -36,12 +36,12 @@ public class User: IServices.IUser
     /// <returns></returns>
     public UserInfo? Login(LoginUser loginUser)
     {
-        if (loginUser.UserName != null && loginUser.UserPassword != null)
+        if (loginUser.UserName != null && loginUser.Password != null)
         {
             IMapper mapper = myMapper.UserMapper.CreateMapper();
             //TODO: send to the reposetories to function that check if the user exist
             string name = loginUser.UserName;
-            string password = loginUser.UserPassword;
+            string password = loginUser.Password;
             Repositories.Models.User? u = userRepository.Login(name, password);
             try
             {
@@ -64,25 +64,6 @@ public class User: IServices.IUser
     /// </summary>
     /// <param name="newUser">User</param>
     /// <returns>If the user exist</returns>
-    public bool IsUserExists(DTO.Models.LoginUser newUser)
-    {
-        IMapper mapper = myMapper.UserMapper.CreateMapper();
-        try
-        {
-            ArgumentNullException.ThrowIfNull(newUser);// continue just if newUser is not null
-            LogInUser isUserExist = mapper.Map<LoginUser, LogInUser>(newUser);
-            ArgumentNullException.ThrowIfNull(isUserExist);// continue just if newUser is not null
-            Repositories.Models.User isExist = userRepository.GetUser(isUserExist);
-            if (isExist.UserName == null) { return false; }
-            else return true; }
-        catch
-        {
-            return false;
-        }
-        return false;
-    }
-
-
     public int SignIn(DTO.Models.User newUser)
     {
         try
@@ -104,5 +85,8 @@ public class User: IServices.IUser
      
     }
 
-
+    public bool IsUserExists(LoginUser newUser)
+    {
+        throw new NotImplementedException();
+    }
 }
