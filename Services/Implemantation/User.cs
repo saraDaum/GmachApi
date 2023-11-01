@@ -91,6 +91,7 @@ public class User: IServices.IUser
             {
                 IMapper mapper = myMapper.UserMapper.CreateMapper();
                 Repositories.Models.User user = mapper.Map<DTO.Models.User, Repositories.Models.User>(newUser);
+                //Repositories.Models.User user = mapper.Map<DTO.Models.User, Repositories.Models.User>(newUser);
                 return userRepository.SignIn(user);
             }
         }
