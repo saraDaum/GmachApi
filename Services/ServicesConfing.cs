@@ -5,22 +5,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Services
-{
-    public static class ServicesConfig
-    {
-        public static void AddBLServices(this IServiceCollection collection)
-        {
-            collection.AddScoped(typeof(Repositories.Interfaces.IAcount), typeof(Repositories.Implementation.Account));
-            collection.AddScoped(typeof(Repositories.Interfaces.IBorrower), typeof(Repositories.Implementation.Borrowe));
-            collection.AddScoped(typeof(Repositories.Interfaces.ILoanDetails), typeof(Repositories.Implementation.LoanDetails));
-            collection.AddScoped(typeof(Repositories.Interfaces.IGuarantor), typeof(Repositories.Implementation.Guarantor));
-            collection.AddScoped(typeof(Repositories.Interfaces.IDepositor), typeof(Repositories.Implementation.Depositor));
-            collection.AddScoped(typeof(Repositories.Interfaces.IDeposit), typeof(Repositories.Implementation.Deposit));
-            collection.AddScoped(typeof(Repositories.Interfaces.IUser), typeof(Repositories.Implementation.User));
+namespace Services;
 
-            collection.AddDbContext<Repositories.Models.GmachimSaraAndShaniContext>();
-        }
+public static class ServicesConfig
+{
+    public static void AddBLServices(this IServiceCollection collection)
+    {
+        collection.AddScoped(typeof(Repositories.Interfaces.IAcount), typeof(Repositories.Implementation.Account));
+        collection.AddScoped(typeof(Repositories.Interfaces.IBorrower), typeof(Repositories.Implementation.Borrower));
+        collection.AddScoped(typeof(Repositories.Interfaces.ILoanDetails), typeof(Repositories.Implementation.LoanDetails));
+        collection.AddScoped(typeof(Repositories.Interfaces.IGuarantor), typeof(Repositories.Implementation.Guarantor));
+        collection.AddScoped(typeof(Repositories.Interfaces.IDepositor), typeof(Repositories.Implementation.Depositor));
+        collection.AddScoped(typeof(Repositories.Interfaces.IDeposit), typeof(Repositories.Implementation.Deposit));
+        collection.AddScoped(typeof(Repositories.Interfaces.IUser), typeof(Repositories.Implementation.User));
+
+        collection.AddDbContext<Repositories.Models.GmachimSaraAndShaniContext>();
     }
 }
 
