@@ -47,7 +47,7 @@ namespace GmachApi.Controllers
         {
             //return 100;
             //Console.WriteLine(newUser.UserName);
-            LoginUser checkUser = new LoginUser { UserName = newUser.UserName, Password = newUser.UserPassword };
+            LoginUser checkUser = new LoginUser { UserName = newUser.UserName, UserPassword = newUser.UserPassword };
             if (!user.IsUserExists(checkUser)) //Returns true if user already exist
                  return user.SignIn(newUser);
             return 0;
@@ -60,7 +60,7 @@ namespace GmachApi.Controllers
         {
             Console.WriteLine(loginUser);
 
-            return new LoginUser { UserName = "Connected", Password = "00" }; //To get this message.Sara.
+            return new LoginUser { UserName = "Connected", UserPassword = "00" }; //To get this message.Sara.
             return new LoginUser();
             return NotFound();
 

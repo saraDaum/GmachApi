@@ -38,7 +38,7 @@ public class User: IServices.IUser
     {
         IMapper mapper = myMapper.UserMapper.CreateMapper();
         //TODO: send to the reposetories to function that check if the user exist
-        Repositories.Models.User? u = userRepository.Login(loginUser.UserName, loginUser.Password);
+        Repositories.Models.User? u = userRepository.Login(loginUser.UserName, loginUser.UserPassword);
         try 
         {
             ArgumentNullException.ThrowIfNull(u);// continue just if u is not null
@@ -59,8 +59,8 @@ public class User: IServices.IUser
         try
         {
             IMapper mapper = myMapper.UserMapper.CreateMapper();
-            Repositories.Models.LogInUser isUserExist = mapper.Map<DTO.Models.LoginUser, Repositories.Models.LogInUser>(newUser);
-            Repositories.Models.User isExist = userRepository.GetUser(isUserExist.UserName, isUserExist.Password);
+            Repositories.Models.LogInUser isUserExist = mapper.Map<Repositories.Models.LogInUser>(newUser);
+            Repositories.Models.User isExist = userRepository.GetUser(isUserExist.UserName, isUserExist.UserPassword);
             if (isExist.UserName == null) { return false; }
             else return true; }
         catch
@@ -80,6 +80,7 @@ public class User: IServices.IUser
             {
                 IMapper mapper = myMapper.UserMapper.CreateMapper();
                 Repositories.Models.User user = mapper.Map<DTO.Models.User, Repositories.Models.User>(newUser);
+                //Repositories.Models.User user = mapper.Map<DTO.Models.User, Repositories.Models.User>(newUser);
                 return userRepository.SignIn(user);
             }
         }
