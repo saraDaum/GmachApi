@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace Services.Implemantation;
 
-public class User: IServices.IUser
+public class User : IServices.IUser
 {
     private readonly IUser userRepository;
 
@@ -22,11 +22,15 @@ public class User: IServices.IUser
         userRepository = userRepo;
     }
 
-      public User() 
+    public User()
     {
         //userRepository = new Repositories.Implementation.User();
     }
 
+
+   // internal Services.IServices.IUser user = new Services.Implemantation.User();
+    //I am tring to add this field, I think it will be help us. Please don't delete it. Sara.
+    internal Repositories.Interfaces.IUser RepoUser  = new Repositories.Implementation.User();
     MapperConfig myMapper = MapperConfig.Instance;
 
     /// <summary>
@@ -58,7 +62,7 @@ public class User: IServices.IUser
         else { return null; }
     }
 
-   
+
     /// <summary>
     /// Helping function that check if the user already exist
     /// </summary>
@@ -73,20 +77,34 @@ public class User: IServices.IUser
             {
                 IMapper mapper = myMapper.UserMapper.CreateMapper();
                 Repositories.Models.User user = mapper.Map<DTO.Models.User, Repositories.Models.User>(newUser);
-                //Repositories.Models.User user = mapper.Map<DTO.Models.User, Repositories.Models.User>(newUser);
-                return userRepository.SignIn(user);
+                return RepoUser.SignIn(user);
             }
         }
         catch (Exception e)
         {
             return -1;
         }
-       
-     
+
+
     }
 
     public bool IsUserExists(LoginUser newUser)
     {
-        throw new NotImplementedException();
+        try
+        {
+            IMapper mapper = myMapper.UserMapper.CreateMapper();
+            LogInUser isUserExist = mapper.Map<LoginUser, LogInUser>(newUser);
+            ArgumentNullException.ThrowIfNull(newUser);// Continue just if newUser is not null
+            Repositories.Models.User isExist = RepoUser.GetUser(isUserExist);
+            if (isExist.UserName == null) { return false; }
+            else return true;
+        }
+        catch
+        {
+            return false;
+        }
+        return false;
+
     }
 }
+

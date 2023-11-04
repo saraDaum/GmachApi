@@ -17,7 +17,9 @@ public class User : Interfaces.IUser
         dbContext = ctx;
     }
 
-
+    public User() {
+        
+    }
 
     /// <summary>
     /// This function gets userName and password and valid that this user already exists in system.
@@ -58,10 +60,11 @@ public class User : Interfaces.IUser
     public Models.User? GetUser(LogInUser user)
     {
         return dbContext.User.FirstOrDefault(u => user.Password == u.UserPassword&& user.UserName == u.UserName);
+
     }
 
 
-   
+
 
     public int SignIn(Models.User user)
     {
@@ -79,15 +82,23 @@ public class User : Interfaces.IUser
 
     }
 
-    public Models.User? GetUser(Models.User? user)
-    {
-        return dbContext.User.Where(u => u.UserName == user.UserName && u.UserPassword == user.UserPassword).FirstOrDefault();
-    }
-
+  
     public int LogInUser(string userName, string Password)
     {
         throw new NotImplementedException();
     }
 
+    public Models.User GetUser(Models.User? user)
+    {
+        throw new NotImplementedException();
+    }
+
+
+
+    /* public Models.User? GetUser(Models.LogInUser? user)
+   {
+       return dbContext.User.Where(u => u.UserName == user.UserName && u.UserPassword == user.UserPassword).FirstOrDefault();
+   }*/
 
 }
+

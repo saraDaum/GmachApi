@@ -46,22 +46,32 @@ namespace GmachApi.Controllers
         {
 
             LoginUser checkUser = new LoginUser { UserName = newUser.UserPassword, Password = newUser.UserPassword };
-            if (!user.IsUserExists(checkUser))
+            try
             {
-                int ans = user.SignIn(newUser);
-                return new UserInfo
+                if (!user.IsUserExists(checkUser))
                 {
-                    UserNumber = ans,
-                    UserName = newUser.UserName,
-                    UserEmail = newUser.UserEmail,
-                    UserAddress = newUser.UserAddress,
-                    UserPhone = newUser.UserPhone
-                };
-            }
+                    //UserId will be returned. If something will run bad- ans will be equal to -1.
+                    int ans = user.SignIn(newUser);
+                    return new UserInfo
+                    {
+                        UserNumber = ans,
+                        UserName = newUser.UserName,
+                        UserEmail = newUser.UserEmail,
+                        UserAddress = newUser.UserAddress,
+                        UserPhone = newUser.UserPhone
+                    };
+                }
 
-            else
-                return new UserInfo();
+                else
+                    return new UserInfo();
+            }
+            catch
+            {
+                return new UserInfo();  
+            }
         }
+        //TOTO: Remember to check UserNumber of userInfo who returned...
+
 
         // POST api/<log in>
         [HttpPost("LogIn")]
