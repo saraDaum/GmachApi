@@ -15,7 +15,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddTransient<IDbContext, GmachimSaraAndShaniContext>(); //shani- to check what the problem is....
+builder.Services.AddTransient<IDbContext, GmachimSaraAndShaniContext>(); 
+
 
 // Configure CORS
 builder.Services.AddCors(options =>
