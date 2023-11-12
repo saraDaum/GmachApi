@@ -18,6 +18,8 @@ public interface IDbContext
     DbSet<Guarantor> Guarantors { get; set; }
 
     DbSet<LoanDetails> LoanDetails { get; set; }
+
+    
     int SaveChanges();
     Task<int> SaveChangesAsync(CancellationToken cancellationToken = default(CancellationToken));
 }

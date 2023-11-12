@@ -1,15 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Repositories.Models;
 
-public class Borrower : User
+public partial class Borrower
 {
-    public string Copy { get; set; }
+    public int UserNumber { get; set; }
+
+    public string CopyId { get; set; } = null!;
+
+    public string UserName { get; set; } = null!;
+
+    public int UserId { get; set; }
+
+    public string UserAddress { get; set; } = null!;
+
+    public int UserPhone { get; set; }
+
+    public string UserEmail { get; set; } = null!;
+
+    public string UserPassword { get; set; } = null!;
+
     public virtual ICollection<Acount> Acounts { get; set; } = new List<Acount>();
-    public virtual ICollection<LoanDetails> Loans { get; set; } = new List<LoanDetails>();
 
+    public virtual ICollection<LoansDetail> Loans { get; set; } = new List<LoansDetail>();
 }
-

@@ -15,7 +15,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddTransient<IDbContext, GmachimSaraAndShaniContext>();
+builder.Services.AddTransient<IDbContext, GmachimSaraAndShaniContext>(); //shani- to check what the problem is....
 
 // Configure CORS
 builder.Services.AddCors(options =>
@@ -60,14 +60,10 @@ app.UseAuthorization();
 
 app.UseRouting();
 
-//app.UseCors("AllowSpecificOrigin"); // השתמש ב-CORS Policy שיצרנו
 
 // global cors policy
-app.UseCors();//x => x
-     //.AllowAnyMethod()
-     //.AllowAnyHeader()
-     //.SetIsOriginAllowed(origin => true) // allow any origin 
-     //.AllowCredentials());
+app.UseCors();
+     
 
 app.UseStaticFiles();
 
