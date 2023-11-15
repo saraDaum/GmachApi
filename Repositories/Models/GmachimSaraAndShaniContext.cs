@@ -14,7 +14,8 @@ public partial class GmachimSaraAndShaniContext : DbContext ,IDbContext
         : base(options)
     {
     }
-    public virtual DbSet<Acount> Acounts { get; set; }
+    public virtual DbSet<Account> Acounts { get; set; }
+
     public virtual DbSet<User> User { get; set; }
 
     public virtual DbSet<Borrower> Borrowers { get; set; }
@@ -29,7 +30,7 @@ public partial class GmachimSaraAndShaniContext : DbContext ,IDbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Server=fsqln\\fsqln;Database=Gmachim_Sara_and_Shani;Trusted_Connection=True;Trust Server Certificate=true;");
+        => optionsBuilder.UseSqlServer("Data Source=(localdb)\\mssqllocaldb;Initial Catalog=GmachimSaraAndShani;Integrated Security=True;");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -47,7 +48,7 @@ public partial class GmachimSaraAndShaniContext : DbContext ,IDbContext
         modelBuilder.Entity<LoanDetails>()
             .HasKey(ld => ld.LoanId);
 
-        modelBuilder.Entity<Acount>()
+        modelBuilder.Entity<Account>()
             .HasKey(a => a.AccontId);
 
         modelBuilder.Entity<LoanDetails>()
@@ -55,7 +56,7 @@ public partial class GmachimSaraAndShaniContext : DbContext ,IDbContext
             .WithMany(a => a.Loans)
             .UsingEntity<Dictionary<string, object>>(
                 "AcountsForLoan",
-                r => r.HasOne<Acount>().WithMany()
+                r => r.HasOne<Account>().WithMany()
                     .HasForeignKey("AcountsNumber")
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_AcountsForLoans_Acounts"),

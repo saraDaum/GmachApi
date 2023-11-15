@@ -5,7 +5,7 @@ namespace Repositories;
 
 public interface IDbContext
 {
-    DbSet<Acount> Acounts { get; set; }
+    DbSet<Account> Acounts { get; set; }
     
     DbSet<User> User { get; set; }
 
@@ -19,5 +19,6 @@ public interface IDbContext
 
     DbSet<LoanDetails> LoanDetails { get; set; }
     int SaveChanges();
-    Task<int> SaveChangesAsync(CancellationToken cancellationToken = default(CancellationToken));
+    Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
+    //Task<int> SaveChangesAsync(CancellationToken cancellationToken = default(CancellationToken));
 }
