@@ -21,7 +21,7 @@ public partial class Borrower
 
     public string UserPassword { get; set; } = null!;
 
-    public virtual ICollection<Acount> Acounts { get; set; } = new List<Acount>();
+    public virtual ICollection<Account> Acounts { get; set; } = new List<Account>();
 
     public virtual ICollection<LoansDetail> Loans { get; set; } = new List<LoansDetail>();
 }

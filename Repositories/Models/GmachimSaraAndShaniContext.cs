@@ -15,9 +15,7 @@ public partial class GmachimSaraAndShaniContext : DbContext, IDbContext
     {
     }
 
-    public virtual DbSet<Acount> Acounts { get; set; }
     public virtual DbSet<Account> Acounts { get; set; }
-
 
     public virtual DbSet<Borrower> Borrowers { get; set; }
 
@@ -34,10 +32,12 @@ public partial class GmachimSaraAndShaniContext : DbContext, IDbContext
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
         => optionsBuilder.UseSqlServer("Data Source=(localdb)\\mssqllocaldb;Initial Catalog=GmachimSaraAndShani;Integrated Security=True;");
+    //Shani code:       => optionsBuilder.UseSqlServer("Data Source=(localdb)\\mssqllocaldb;Initial Catalog=GmachimSaraAndShani;Integrated Security=True;Pooling=False;");
+
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<Acount>(entity =>
+        modelBuilder.Entity<Account>(entity =>
         {
             entity.HasKey(e => e.AccontId).HasName("PK_Acounts_1");
 
@@ -143,7 +143,7 @@ public partial class GmachimSaraAndShaniContext : DbContext, IDbContext
                     j.ToTable("AcountsForLoans");
                     j.IndexerProperty<int>("LoanId").HasColumnName("LoanID");
                 });
-    }
+   
 
             entity.HasMany(d => d.Borrowers).WithMany(p => p.Loans)
                 .UsingEntity<Dictionary<string, object>>(
