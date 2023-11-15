@@ -8,6 +8,7 @@
       "resourceId": null,
       "type": "mssql.onprem",
       "connectionId": "GmachimSaraAndShani"
+  //    "connectionId": "Server=localhost::MSSQLSERVER01;Database=GmachimSaraAndShani;Trusted_Connection=True;"
     }
   }
 }

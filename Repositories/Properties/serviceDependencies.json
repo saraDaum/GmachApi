@@ -1,11 +1,1 @@
-{
-  "dependencies": {
-    "secrets1": {
-      "type": "secrets"
-    },
-    "mssql1": {
-      "type": "mssql",
-      "connectionId": "GmachimSaraAndShani"
-    }
-  }
-}
+//connectionId": "Server=localhost::MSSQLSERVER01;Database=GmachimSaraAndShani;Trusted_Connection=True;"

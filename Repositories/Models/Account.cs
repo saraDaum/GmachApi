@@ -5,6 +5,8 @@ namespace Repositories.Models;
 
 public partial class Account
 {
+    public int AccontId { get; set; }
+
     public int BorrowerId { get; set; }
 
     public int AcountsNumber { get; set; }
@@ -15,9 +17,7 @@ public partial class Account
 
     public string ConfirmAcountFile { get; set; } = null!;
 
-    public int AccontId { get; set; }
-
     public virtual Borrower Borrower { get; set; } = null!;
 
-    public virtual ICollection<Models.LoanDetails> Loans { get; set; } = new List<Models.LoanDetails>();
+    public virtual ICollection<LoansDetail> Loans { get; set; } = new List<LoansDetail>();
 }

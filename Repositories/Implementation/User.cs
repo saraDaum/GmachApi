@@ -88,9 +88,10 @@ public class User : Interfaces.IUser
         throw new NotImplementedException();
     }
 
-    public Models.User GetUser(Models.User? user)
+    public Models.User? GetUser(Models.User? user)
     {
-        throw new NotImplementedException();
+
+        return dbContext.User.FirstOrDefault(u => user.UserId == u.UserId && user.UserName == u.UserName);
     }
 
 

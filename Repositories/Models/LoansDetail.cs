@@ -1,14 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 
 namespace Repositories.Models;
 
-public partial class LoanDetails
+public partial class LoansDetail
 {
-    [Key]
     public int LoanId { get; set; }
-
 
     public DateTime DateToGetBack { get; set; }
 
@@ -20,9 +17,7 @@ public partial class LoanDetails
 
     public virtual ICollection<Guarantor> Guarantors { get; set; } = new List<Guarantor>();
 
-    public virtual ICollection<Account> AcountsNumbers { get; set; } = new List<Account>();
+    public virtual ICollection<Acount> AcountsNumbers { get; set; } = new List<Acount>();
 
     public virtual ICollection<Borrower> Borrowers { get; set; } = new List<Borrower>();
-
-
 }
