@@ -83,6 +83,7 @@ public class User : IServices.IUser
         }
         catch (Exception e)
         {
+            Console.WriteLine(e);
             return -1;
         }
 
