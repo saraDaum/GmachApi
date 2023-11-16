@@ -11,7 +11,7 @@ public partial class Account
     public int AccontId { get; set; }
 
     public int UserId { get; set; }
-    
+
     
     public string AccountsNumber { get; set; }
 
@@ -21,5 +21,7 @@ public partial class Account
 
     public string ConfirmAcountFile { get; set; } = null!;
 
+    public virtual Borrower Borrower { get; set; } = null!;
 
+    public virtual ICollection<LoansDetail> Loans { get; set; } = new List<LoansDetail>();
 }

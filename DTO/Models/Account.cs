@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace DTO.Models;
 
-public partial class Acount
+public partial class Account
 {
     public int BorrowerId { get; set; }
 
