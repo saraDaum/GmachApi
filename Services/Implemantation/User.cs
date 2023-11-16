@@ -32,6 +32,7 @@ public class User : IServices.IUser
    // internal Services.IServices.IUser user = new Services.Implemantation.User();
     //I am tring to add this field, I think it will be help us. Please don't delete it. Sara.
     internal Repositories.Interfaces.IUser RepoUser  = new Repositories.Implementation.User();
+
     MapperConfig myMapper = MapperConfig.Instance;
 
     /// <summary>
@@ -101,8 +102,9 @@ public class User : IServices.IUser
             if (isExist.UserName == null) { return false; }
             else return true;
         }
-        catch
+        catch(Exception e) 
         {
+            Console.WriteLine(e);
             return false;
         }
         return false;
