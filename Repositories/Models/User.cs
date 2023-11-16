@@ -13,7 +13,7 @@ public partial class User
     [Key]
     public int UserId { get; set; }
 
-    public int UserIdentityNumber { get; set; }
+    public string UserIdentityNumber { get; set; }
     public string UserName { get; set; }
     public string UserPassword { get; set; }
     public string UserEmail { get; set; }
@@ -23,7 +23,7 @@ public partial class User
     public User()
     {
         UserId = 0;
-        UserIdentityNumber = 0;
+        UserIdentityNumber = null!;
         UserName = null!;
         UserPassword = null!;
         UserEmail= null!;

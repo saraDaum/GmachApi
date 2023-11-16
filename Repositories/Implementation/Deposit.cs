@@ -6,6 +6,12 @@ using System.Threading.Tasks;
 
 namespace Repositories.Implementation;
 
-public class Deposit:Interfaces.IDeposit
+public class Deposit : Interfaces.IDeposit
 {
+    private IDbContext dbContext;
+
+    public Deposit(IDbContext dbContext)
+    {
+        this.dbContext = dbContext;
+    }
 }

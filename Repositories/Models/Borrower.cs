@@ -3,25 +3,11 @@ using System.Collections.Generic;
 
 namespace Repositories.Models;
 
-public partial class Borrower
+public partial class Borrower: User
 {
-    public int UserNumber { get; set; }
+    public virtual ICollection<Account> Acounts { get; set; } = new List<Account>();
 
-    public string CopyId { get; set; } = null!;
+    public virtual ICollection<LoanDetails> Loans { get; set; } = new List<LoanDetails>();
 
-    public string UserName { get; set; } = null!;
-
-    public int UserId { get; set; }
-
-    public string UserAddress { get; set; } = null!;
-
-    public int UserPhone { get; set; }
-
-    public string UserEmail { get; set; } = null!;
-
-    public string UserPassword { get; set; } = null!;
-
-    public virtual ICollection<Acount> Acounts { get; set; } = new List<Acount>();
-
-    public virtual ICollection<LoansDetail> Loans { get; set; } = new List<LoansDetail>();
+    // we can add here some file savers, but this is the basic version
 }
