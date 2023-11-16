@@ -30,7 +30,7 @@ public class LoanDetails : Interfaces.ILoanDetails
     }
     public Models.LoanDetails GetLoanDetails(int userId)
     {
-        return (Models.LoanDetails)dbContext.LoanDetails.Where(loan => loan.BorrowerNumber == userId);
+        return (Models.LoanDetails)dbContext.LoanDetails.Where(loan => loan.UserId == userId);
         return new Models.LoanDetails();
     }
 }

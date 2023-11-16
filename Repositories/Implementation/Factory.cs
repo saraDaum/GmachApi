@@ -6,16 +6,26 @@ using System.Threading.Tasks;
 
 namespace Repositories.Implementation;
 
-public class Factory
+public static class RepoFactory
 {
-    //IDbContext dbContext = Models.GmachimSaraAndShaniContext;
-    static Account account { get; } = null!;
-    static Borrower borrower { get; } = null!;
-    static Deposit deposit { get; } = null!;
-    static Depositor depositor { get; } = null!;
-    static LoanDetails loanDetails { get; } = null!;
-    static User user { get; }
+    public static IDbContext dbContext;
+    public static Account account { get; }
+    public static Borrower borrower { get; }
+    public static Deposit deposit { get; }
+    public static Depositor depositor { get; }
+    public static LoanDetails loanDetails { get; }
+    public static User User { get; }
 
+    static RepoFactory()
+    {
+        dbContext = new Models.GmachimSaraAndShaniContext();
+        account = new Account(dbContext);
+        borrower = new Borrower(dbContext);
+        deposit = new Deposit(dbContext);
+        depositor = new Depositor(dbContext);
+        loanDetails = new LoanDetails(dbContext);
+        User = new User(dbContext);
 
+    }
 
 }

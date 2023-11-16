@@ -1,4 +1,5 @@
 ﻿using Azure.Identity;
+using Microsoft.EntityFrameworkCore;
 using Repositories.Models;
 using System;
 using System.Collections.Generic;
@@ -18,7 +19,7 @@ public class User : Interfaces.IUser
     }
 
     public User() {
-        
+        dbContext = new GmachimSaraAndShaniContext();
     }
 
     /// <summary>

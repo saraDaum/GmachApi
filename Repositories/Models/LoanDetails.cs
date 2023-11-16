@@ -14,15 +14,12 @@ public partial class LoanDetails
 
     public int Sum { get; set; }
 
-    public int BorrowerNumber { get; set; }
+    public int UserId { get; set; }
 
     public string LoanFile { get; set; } = null!;
 
     public virtual ICollection<Guarantor> Guarantors { get; set; } = new List<Guarantor>();
 
-    public virtual ICollection<Account> AcountsNumbers { get; set; } = new List<Account>();
-
-    public virtual ICollection<Borrower> Borrowers { get; set; } = new List<Borrower>();
 
 
 }

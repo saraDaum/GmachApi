@@ -1,5 +1,7 @@
 ﻿using DTO.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System.Data.Common;
 
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -10,9 +12,11 @@ namespace GmachApi.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
+        readonly DbContext db;
+
         //Services.IServices.IUser userService;
         internal Services.IServices.IUser user = new Services.Implemantation.User();
-
+        
         //public UserController(Services.IServices.IUser _userService)
         //{
         //    userService = _userService;

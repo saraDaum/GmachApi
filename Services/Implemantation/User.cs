@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using DTO.Models;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Repositories.Interfaces;
 using Repositories.Models;
@@ -24,7 +25,7 @@ public class User : IServices.IUser
 
     public User()
     {
-        //userRepository = new Repositories.Implementation.User();
+        userRepository = new Repositories.Implementation.User();
     }
 
 

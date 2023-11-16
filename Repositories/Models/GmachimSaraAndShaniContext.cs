@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using Microsoft.EntityFrameworkCore;
 
 namespace Repositories.Models;
 
 public partial class GmachimSaraAndShaniContext : DbContext, IDbContext
 {
+    
     public GmachimSaraAndShaniContext()
     {
     }
@@ -25,7 +27,7 @@ public partial class GmachimSaraAndShaniContext : DbContext, IDbContext
 
     public virtual DbSet<Guarantor> Guarantors { get; set; }
 
-    public virtual DbSet<LoansDetail> LoansDetails { get; set; }
+    public virtual DbSet<LoanDetails> LoansDetails { get; set; }
     public DbSet<User> User {get; set;}
     public DbSet<LoanDetails> LoanDetails {get; set;}
 
@@ -37,136 +39,113 @@ public partial class GmachimSaraAndShaniContext : DbContext, IDbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        // Configure Account
         modelBuilder.Entity<Account>(entity =>
         {
-            entity.HasKey(e => e.AccontId).HasName("PK_Acounts_1");
+            entity.HasKey(e => e.AccontId);
 
-            entity.ToTable("Acount");
+            // Set other configurations if needed
+            entity.Property(e => e.AccountsNumber).IsRequired();
+            entity.Property(e => e.BankNumber).IsRequired();
+            entity.Property(e => e.Branch).IsRequired();
+            entity.Property(e => e.ConfirmAcountFile).IsRequired().HasMaxLength(255);
 
-            entity.HasIndex(e => new { e.BorrowerId, e.AcountsNumber, e.BankNumber }, "IX_Acounts").IsUnique();
+            // Example: Relationships
+            //entity.HasOne(a => a.Borrower)
+            //    .WithMany(b => b.Acounts)
+            //    .HasForeignKey(a => a.UserId);
+        });
+    
+        // Configure User
+        modelBuilder.Entity<User>(entity =>
+        {
+            entity.HasKey(e => e.UserId);
 
-            entity.Property(e => e.BorrowerId).HasColumnName("BorrowerID");
-            entity.Property(e => e.ConfirmAcountFile).HasMaxLength(150);
+            // Set other configurations if needed
+            entity.Property(e => e.UserName).IsRequired().HasMaxLength(255);
+            entity.Property(e => e.UserPassword).IsRequired().HasMaxLength(255);
+            entity.Property(e => e.UserEmail).IsRequired().HasMaxLength(255);
+            entity.Property(e => e.UserAddress).IsRequired().HasMaxLength(255);
+            entity.Property(e => e.UserPhone).IsRequired();
 
-            entity.HasOne(d => d.Borrower).WithMany(p => p.Acounts)
-                .HasForeignKey(d => d.BorrowerId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_Acounts_Borrowers");
+            // Example: Add a unique constraint on UserEmail
+            entity.HasIndex(e => e.UserIdentityNumber).IsUnique();
         });
 
+        // Configure Borrower
         modelBuilder.Entity<Borrower>(entity =>
         {
-            entity.HasKey(e => e.UserNumber);
+            // Inherit properties from User
+            entity.HasBaseType<User>();
 
-            entity.Property(e => e.CopyId)
-                .HasMaxLength(150)
-                .HasColumnName("CopyID");
-            entity.Property(e => e.UserAddress).HasMaxLength(40);
-            entity.Property(e => e.UserEmail)
-                .HasMaxLength(30)
-                .IsFixedLength();
-            entity.Property(e => e.UserId).HasColumnName("UserID");
-            entity.Property(e => e.UserName).HasMaxLength(30);
+            // Add specific configurations for Borrower
+            // Example: Relationships
+            //entity.HasMany(b => b.Acounts)
+            //    .WithOne(a => a.Borrower)
+            //    .HasForeignKey(a => a.BorrowerID);
+
+            //entity.HasMany(b => b.Loans)
+            //    .WithOne(ld => ld.)
+            //    .HasForeignKey(ld => ld.BorrowerNumber);
         });
 
-        modelBuilder.Entity<Deposit>(entity =>
-        {
-            entity.HasIndex(e => e.DepositorsId, "IX_Deposits_DepositorsID");
-
-            entity.Property(e => e.DepositId).HasColumnName("DepositID");
-            entity.Property(e => e.DepositorsId).HasColumnName("DepositorsID");
-
-            entity.HasOne(d => d.Depositors).WithMany(p => p.Deposits)
-                .HasForeignKey(d => d.DepositorsId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_Deposits_Depositors");
-        });
-
+        // Configure Depositor
         modelBuilder.Entity<Depositor>(entity =>
         {
-            entity.HasKey(e => e.UserNumber);
+            // Inherit properties from User
+            entity.HasBaseType<User>();
 
-            entity.Property(e => e.UserAddress).HasMaxLength(40);
-            entity.Property(e => e.UserEmail)
-                .HasMaxLength(30)
-                .IsFixedLength()
-                .HasColumnName("userEmail");
-            entity.Property(e => e.UserId).HasColumnName("UserID");
-            entity.Property(e => e.UserName).HasMaxLength(30);
+            // Add specific configurations for Depositor
+            // Example: Relationships
+            //entity.HasMany(d => d.Deposits)
+            //    .WithOne(de => de.Depositor)
+            //    .HasForeignKey(de => de.DepositorID);
         });
 
+        // Configure Guarantor
         modelBuilder.Entity<Guarantor>(entity =>
         {
-            entity.HasKey(e => e.UserNumber);
+            // Inherit properties from User
+            entity.HasBaseType<User>();
 
-            entity.HasIndex(e => e.LoanId, "IX_Guarantors_LoanID");
-
-            entity.Property(e => e.GuarantorId).HasColumnName("guarantorID");
-            entity.Property(e => e.GuarantorName)
-                .HasMaxLength(30)
-                .HasColumnName("guarantorName");
-            entity.Property(e => e.LoanId).HasColumnName("LoanID");
-            entity.Property(e => e.UserAddress).HasMaxLength(40);
-            entity.Property(e => e.UserEmail)
-                .HasMaxLength(40)
-                .IsFixedLength();
-
-            entity.HasOne(d => d.Loan).WithMany(p => p.Guarantors)
-                .HasForeignKey(d => d.LoanId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_Guarantors_LoansDetails");
+            entity.HasOne(g => g.Account)
+            .WithOne()
+            .HasForeignKey<Account>(a => a.UserId)
+            .IsRequired();
         });
 
-        modelBuilder.Entity<LoansDetail>(entity =>
+        // Configure Deposit
+        modelBuilder.Entity<Deposit>(entity =>
+        {
+            entity.HasKey(e => e.DepositId);
+
+            // Set other configurations if needed
+            entity.Property(e => e.Sum).IsRequired();
+            entity.Property(e => e.DateToPull).IsRequired();
+
+            // Example: Relationships
+            //entity.HasOne(d => d.Depositor)
+            //    .WithMany(de => de.Deposits)
+            //    .HasForeignKey(d => d.UserId);
+        });
+
+        // Configure LoanDetails
+        modelBuilder.Entity<LoanDetails>(entity =>
         {
             entity.HasKey(e => e.LoanId);
 
-        modelBuilder.Entity<Account>()
-            .HasKey(a => a.AccontId);
+            // Set other configurations if needed
+            entity.Property(e => e.DateToGetBack).IsRequired();
+            entity.Property(e => e.Sum).IsRequired();
+            entity.Property(e => e.LoanFile).IsRequired().HasMaxLength(255);
 
-        modelBuilder.Entity<LoanDetails>()
-            .HasMany(ld => ld.AcountsNumbers)
-            .WithMany(a => a.Loans)
-            .UsingEntity<Dictionary<string, object>>(
-                "AcountsForLoan",
-                r => r.HasOne<Account>().WithMany()
-                    .HasForeignKey("AcountsNumber")
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_AcountsForLoans_Acounts"),
-                l => l.HasOne<LoanDetails>().WithMany()
-                    .HasForeignKey("LoanId")
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_AcountsForLoans_LoansDetails"),
-                j =>
-                {
-                    j.HasKey("LoanId", "AcountsNumber");
-                    j.ToTable("AcountsForLoans");
-                    j.IndexerProperty<int>("LoanId").HasColumnName("LoanID");
-                });
-   
-
-            entity.HasMany(d => d.Borrowers).WithMany(p => p.Loans)
-                .UsingEntity<Dictionary<string, object>>(
-                    "LoansGuarantor",
-                    r => r.HasOne<Borrower>().WithMany()
-                        .HasForeignKey("BorrowerId")
-                        .OnDelete(DeleteBehavior.ClientSetNull)
-                        .HasConstraintName("FK_LoansGuarantors _Borrowers"),
-                    l => l.HasOne<LoansDetail>().WithMany()
-                        .HasForeignKey("LoanId")
-                        .OnDelete(DeleteBehavior.ClientSetNull)
-                        .HasConstraintName("FK_LoansGuarantors _LoansDetails"),
-                    j =>
-                    {
-                        j.HasKey("LoanId", "BorrowerId").HasName("PK_LoansConectoin");
-                        j.ToTable("LoansGuarantors ");
-                        j.HasIndex(new[] { "BorrowerId" }, "IX_LoansGuarantors _BorrowerID");
-                        j.IndexerProperty<int>("LoanId").HasColumnName("LoanID");
-                        j.IndexerProperty<int>("BorrowerId").HasColumnName("BorrowerID");
-                    });
+            entity.HasOne<User>()  // Assuming there is a DbSet<User> in your context
+            .WithMany()
+            .HasForeignKey(ld => ld.UserId)  // This sets up the foreign key relationship
+            .IsRequired();
         });
 
-        OnModelCreatingPartial(modelBuilder);
+            OnModelCreatingPartial(modelBuilder);
     }
 
     partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
