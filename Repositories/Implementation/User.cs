@@ -29,10 +29,10 @@ public class User : Interfaces.IUser
     /// <param name="userName"></param>
     /// <param name="Password"></param>
     /// <returns></returns>
-    public Models.User? Login(string userName, string Password)
+    public Models.Users? Login(string userName, string Password)
     {
         Console.WriteLine(userName+ " " + Password);   
-        return dbContext.User.Where(a => a.UserName == userName && a.UserPassword == Password).FirstOrDefault();
+        return dbContext.Users.Where(a => a.UserName == userName && a.UserPassword == Password).FirstOrDefault();
  
     }
 
@@ -58,20 +58,20 @@ public class User : Interfaces.IUser
     /// </summary>
     /// <param name="user"></param>
     /// <returns></returns>
-    public Models.User? GetUser(LogInUser user)
+    public Models.Users? GetUser(LogInUser user)
     {
-        return dbContext.User.FirstOrDefault(u => user.Password == u.UserPassword&& user.UserName == u.UserName);
+        return dbContext.Users.FirstOrDefault(u => user.Password == u.UserPassword&& user.UserName == u.UserName);
 
     }
 
 
 
 
-    public int SignIn(Models.User user)
+    public int SignIn(Models.Users user)
     {
         try
         {
-            dbContext.User.Add(user);
+            dbContext.Users.Add(user);
             dbContext.SaveChanges();
             return user.UserId;
             //TODO: check if method returns correct new userid
@@ -89,10 +89,10 @@ public class User : Interfaces.IUser
         throw new NotImplementedException();
     }
 
-    public Models.User? GetUser(Models.User? user)
+    public Models.Users? GetUser(Models.Users? user)
     {
 
-        return dbContext.User.FirstOrDefault(u => user.UserId == u.UserId && user.UserName == u.UserName);
+        return dbContext.Users.FirstOrDefault(u => user.UserId == u.UserId && user.UserName == u.UserName);
     }
 
 

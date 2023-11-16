@@ -10,11 +10,11 @@ namespace Repositories.Interfaces;
 
 public interface IUser
 {
-    public Models.User? Login(string userName, string Password);
+    public Models.Users? Login(string userName, string Password);
     public int LogInUser(string userName, string Password);
-    public int SignIn(Models.User? user);
-    public Models.User GetUser(Models.User? user);
-    public Models.User? GetUser(Models.LogInUser? user);
+    public int SignIn(Models.Users? user);
+    public Models.Users GetUser(Models.Users? user);
+    public Models.Users? GetUser(Models.LogInUser? user);
 
   
     

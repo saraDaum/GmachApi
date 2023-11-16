@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Repositories.Models;
 
-public partial class Borrower: User
+public partial class Borrower: Users
 {
     public virtual ICollection<Account> Acounts { get; set; } = new List<Account>();
 

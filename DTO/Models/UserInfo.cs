@@ -15,19 +15,13 @@ public class UserInfo
 {
     public int UserNumber { get; set; }
 
-    public string UserName { get; set; }
+    public string UserName { get; set; } = string.Empty;
 
-    public string UserEmail { get; set; } = null!;
+    public string UserEmail { get; set; } = string.Empty;
 
-    public string UserPhone { get; set; } = null!;
+    public int UserPhone { get; set; }
 
-    public string UserAddress { get; set; } = null!;
+    public string UserAddress { get; set; } = string.Empty;
 
-    public UserInfo() { 
-        UserNumber = -1;
-        UserName = "";
-        UserEmail = ""; 
-        UserPhone = "";
-        UserAddress = "";
-    }
+    
 }

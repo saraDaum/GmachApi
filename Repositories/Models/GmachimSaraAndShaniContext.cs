@@ -17,7 +17,7 @@ public partial class GmachimSaraAndShaniContext : DbContext, IDbContext
     {
     }
 
-    public virtual DbSet<Account> Acounts { get; set; }
+    public virtual DbSet<Account> Accounts { get; set; }
 
     public virtual DbSet<Borrower> Borrowers { get; set; }
 
@@ -27,9 +27,9 @@ public partial class GmachimSaraAndShaniContext : DbContext, IDbContext
 
     public virtual DbSet<Guarantor> Guarantors { get; set; }
 
-    public virtual DbSet<LoanDetails> LoansDetails { get; set; }
-    public DbSet<User> User {get; set;}
-    public DbSet<LoanDetails> LoanDetails {get; set;}
+    public virtual DbSet<Users> Users {get; set;}
+
+    public virtual DbSet<LoanDetails> LoanDetails {get; set;}
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
@@ -57,7 +57,7 @@ public partial class GmachimSaraAndShaniContext : DbContext, IDbContext
         });
     
         // Configure User
-        modelBuilder.Entity<User>(entity =>
+        modelBuilder.Entity<Users>(entity =>
         {
             entity.HasKey(e => e.UserId);
 
@@ -76,7 +76,7 @@ public partial class GmachimSaraAndShaniContext : DbContext, IDbContext
         modelBuilder.Entity<Borrower>(entity =>
         {
             // Inherit properties from User
-            entity.HasBaseType<User>();
+            entity.HasBaseType<Users>();
 
             // Add specific configurations for Borrower
             // Example: Relationships
@@ -93,7 +93,7 @@ public partial class GmachimSaraAndShaniContext : DbContext, IDbContext
         modelBuilder.Entity<Depositor>(entity =>
         {
             // Inherit properties from User
-            entity.HasBaseType<User>();
+            entity.HasBaseType<Users>();
 
             // Add specific configurations for Depositor
             // Example: Relationships
@@ -106,7 +106,7 @@ public partial class GmachimSaraAndShaniContext : DbContext, IDbContext
         modelBuilder.Entity<Guarantor>(entity =>
         {
             // Inherit properties from User
-            entity.HasBaseType<User>();
+            entity.HasBaseType<Users>();
 
             entity.HasOne(g => g.Account)
             .WithOne()
@@ -139,7 +139,7 @@ public partial class GmachimSaraAndShaniContext : DbContext, IDbContext
             entity.Property(e => e.Sum).IsRequired();
             entity.Property(e => e.LoanFile).IsRequired().HasMaxLength(255);
 
-            entity.HasOne<User>()  // Assuming there is a DbSet<User> in your context
+            entity.HasOne<Users>()  // Assuming there is a DbSet<User> in your context
             .WithMany()
             .HasForeignKey(ld => ld.UserId)  // This sets up the foreign key relationship
             .IsRequired();
