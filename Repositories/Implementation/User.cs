@@ -90,8 +90,21 @@ public class User : Interfaces.IUser
 
     public Models.User? GetUser(Models.User? user)
     {
-
-        return dbContext.User.FirstOrDefault(u => user.UserId == u.UserId && user.UserName == u.UserName);
+        try
+        {
+            if (user == null)
+            {
+                throw new ArgumentNullException(nameof(user));
+            }
+            else
+            {
+                return dbContext.User.FirstOrDefault(u => user.UserId == u.UserId && user.UserName == u.UserName);
+            }
+        }
+        catch
+        {
+            return null;
+        }
     }
 
 

@@ -9,11 +9,11 @@ namespace Repositories.Implementation;
 public class Factory
 {
     //IDbContext dbContext = Models.GmachimSaraAndShaniContext;
-    static Account account { get; }
-    static Borrower borrower { get; }
-    static Deposit deposit { get; }
-    static Depositor depositor { get; }
-    static LoanDetails loanDetails { get; }
+    static Account account { get; } = null!;
+    static Borrower borrower { get; } = null!;
+    static Deposit deposit { get; } = null!;
+    static Depositor depositor { get; } = null!;
+    static LoanDetails loanDetails { get; } = null!;
     static User user { get; }
 
 

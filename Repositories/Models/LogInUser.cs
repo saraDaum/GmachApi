@@ -9,9 +9,9 @@ namespace Repositories.Models
 {
     public class LogInUser
     {
-        [Required]
-        public string UserName { get; set; }
-        [Required]
-        public string Password { get; set; }
+       
+        public string UserName { get; set; } = null!;
+
+        public string Password { get; set; } = null!;
     }
 }
