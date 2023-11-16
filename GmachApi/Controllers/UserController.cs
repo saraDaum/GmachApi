@@ -52,22 +52,31 @@ namespace GmachApi.Controllers
             LoginUser checkUser = new LoginUser { UserName = newUser.UserPassword, Password = newUser.UserPassword };
             try
             {
-                if (!user.IsUserExists(checkUser))
+                int ans = user.SignIn(newUser);
+                return new UserInfo
                 {
-                    //UserId will be returned. If something will run bad- ans will be equal to -1.
-                    int ans = user.SignIn(newUser);
-                    return new UserInfo
-                    {
-                        UserNumber = ans,
-                        UserName = newUser.UserName,
-                        UserEmail = newUser.UserEmail,
-                        UserAddress = newUser.UserAddress,
-                        UserPhone = newUser.UserPhone
-                    };
-                }
+                    UserNumber = ans,
+                    UserName = newUser.UserName,
+                    UserEmail = newUser.UserEmail,
+                    UserAddress = newUser.UserAddress,
+                    UserPhone = newUser.UserPhone
+                };
+                //if (!user.IsUserExists(checkUser))
+                //{
+                //    //UserId will be returned. If something will run bad- ans will be equal to -1.
+                //    int ans = user.SignIn(newUser);
+                //    return new UserInfo
+                //    {
+                //        UserNumber = ans,
+                //        UserName = newUser.UserName,
+                //        UserEmail = newUser.UserEmail,
+                //        UserAddress = newUser.UserAddress,
+                //        UserPhone = newUser.UserPhone
+                //    };
+                //}
 
-                else
-                    return new UserInfo();
+                //else
+                //    return new UserInfo();
             }
             catch
             {

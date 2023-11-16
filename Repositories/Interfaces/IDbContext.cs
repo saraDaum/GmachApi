@@ -5,9 +5,9 @@ namespace Repositories;
 
 public interface IDbContext
 {
-    DbSet<Account> Acounts { get; set; }
+    DbSet<Account> Accounts { get; set; }
     
-    DbSet<User> User { get; set; }
+    DbSet<Users> Users { get; set; }
 
     DbSet<Borrower> Borrowers { get; set; }
 

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Repositories.Models;
 
-public partial class Guarantor : User
+public partial class Guarantor : Users
 {
     public List<LoanDetails> LoanId { get; set; } = new List<LoanDetails>();
 
