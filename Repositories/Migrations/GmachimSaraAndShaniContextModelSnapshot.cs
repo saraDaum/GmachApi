@@ -53,7 +53,7 @@ namespace Repositories.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("BorrowerUserId")
+                    b.Property<int>("BorrowerUserId")
                         .HasColumnType("int");
 
                     b.Property<string>("Branch")
@@ -75,7 +75,7 @@ namespace Repositories.Migrations
                     b.HasIndex("UserId")
                         .IsUnique();
 
-                    b.ToTable("Acounts");
+                    b.ToTable("Accounts");
                 });
 
             modelBuilder.Entity("Repositories.Models.Deposit", b =>
@@ -113,6 +113,9 @@ namespace Repositories.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("LoanId"));
 
+                    b.Property<int?>("AccountAccontId")
+                        .HasColumnType("int");
+
                     b.Property<int?>("BorrowerUserId")
                         .HasColumnType("int");
 
@@ -132,6 +135,8 @@ namespace Repositories.Migrations
 
                     b.HasKey("LoanId");
 
+                    b.HasIndex("AccountAccontId");
+
                     b.HasIndex("BorrowerUserId");
 
                     b.HasIndex("UserId");
@@ -139,7 +144,7 @@ namespace Repositories.Migrations
                     b.ToTable("LoanDetails");
                 });
 
-            modelBuilder.Entity("Repositories.Models.User", b =>
+            modelBuilder.Entity("Repositories.Models.Users", b =>
                 {
                     b.Property<int>("UserId")
                         .ValueGeneratedOnAdd()
@@ -183,30 +188,30 @@ namespace Repositories.Migrations
                     b.HasIndex("UserIdentityNumber")
                         .IsUnique();
 
-                    b.ToTable("User");
+                    b.ToTable("Users");
 
-                    b.HasDiscriminator<string>("Discriminator").HasValue("User");
+                    b.HasDiscriminator<string>("Discriminator").HasValue("Users");
 
                     b.UseTphMappingStrategy();
                 });
 
             modelBuilder.Entity("Repositories.Models.Borrower", b =>
                 {
-                    b.HasBaseType("Repositories.Models.User");
+                    b.HasBaseType("Repositories.Models.Users");
 
                     b.HasDiscriminator().HasValue("Borrower");
                 });
 
             modelBuilder.Entity("Repositories.Models.Depositor", b =>
                 {
-                    b.HasBaseType("Repositories.Models.User");
+                    b.HasBaseType("Repositories.Models.Users");
 
                     b.HasDiscriminator().HasValue("Depositor");
                 });
 
             modelBuilder.Entity("Repositories.Models.Guarantor", b =>
                 {
-                    b.HasBaseType("Repositories.Models.User");
+                    b.HasBaseType("Repositories.Models.Users");
 
                     b.HasDiscriminator().HasValue("Guarantor");
                 });
@@ -228,15 +233,19 @@ namespace Repositories.Migrations
 
             modelBuilder.Entity("Repositories.Models.Account", b =>
                 {
-                    b.HasOne("Repositories.Models.Borrower", null)
+                    b.HasOne("Repositories.Models.Borrower", "Borrower")
                         .WithMany("Acounts")
-                        .HasForeignKey("BorrowerUserId");
+                        .HasForeignKey("BorrowerUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Repositories.Models.Guarantor", null)
                         .WithOne("Account")
                         .HasForeignKey("Repositories.Models.Account", "UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Borrower");
                 });
 
             modelBuilder.Entity("Repositories.Models.Deposit", b =>
@@ -248,15 +257,24 @@ namespace Repositories.Migrations
 
             modelBuilder.Entity("Repositories.Models.LoanDetails", b =>
                 {
+                    b.HasOne("Repositories.Models.Account", null)
+                        .WithMany("Loans")
+                        .HasForeignKey("AccountAccontId");
+
                     b.HasOne("Repositories.Models.Borrower", null)
                         .WithMany("Loans")
                         .HasForeignKey("BorrowerUserId");
 
-                    b.HasOne("Repositories.Models.User", null)
+                    b.HasOne("Repositories.Models.Users", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Repositories.Models.Account", b =>
+                {
+                    b.Navigation("Loans");
                 });
 
             modelBuilder.Entity("Repositories.Models.Borrower", b =>
