@@ -18,21 +18,17 @@ public class User : IServices.IUser
 {
     private readonly IUser userRepository;
 
+    // constructors
     public User(IUser userRepo)
     {
         userRepository = userRepo;
     }
-
     public User()
     {
         userRepository = new Repositories.Implementation.User();
     }
 
-
-   // internal Services.IServices.IUser user = new Services.Implemantation.User();
-    //I am tring to add this field, I think it will be help us. Please don't delete it. Sara.
-    internal Repositories.Interfaces.IUser RepoUser  = new Repositories.Implementation.User();
-
+    
     MapperConfig myMapper = MapperConfig.Instance;
 
     /// <summary>
@@ -42,26 +38,26 @@ public class User : IServices.IUser
     /// <returns></returns>
     public UserInfo? Login(LoginUser loginUser)
     {
-        if (loginUser.UserName != null && loginUser.Password != null)
+        try
         {
+            ArgumentNullException.ThrowIfNull(loginUser.UserName);// Continue just if it is not null
+            ArgumentNullException.ThrowIfNull(loginUser.Password);// Continue just if it is not null
             IMapper mapper = myMapper.UserMapper.CreateMapper();
-            //TODO: send to the reposetories to function that check if the user exist
+
+
             string name = loginUser.UserName;
             string password = loginUser.Password;
-            Repositories.Models.Users? u = userRepository.Login(name, password);
-            try
-            {
-                ArgumentNullException.ThrowIfNull(u);// continue just if u is not null
-                UserInfo uInfo = mapper.Map<Repositories.Models.Users, UserInfo>(u);
-                return uInfo;
+            Users? u = userRepository.Login(name, password);
 
-            }
-            catch (Exception e)
-            {
-                return null;
-            }
+            ArgumentNullException.ThrowIfNull(u);// continue just if u is not null
+            UserInfo uInfo = mapper.Map<Users, UserInfo>(u);
+            return uInfo;
+
         }
-        else { return null; }
+        catch (Exception e)
+        {
+            return null;
+        }
     }
 
 
@@ -74,13 +70,16 @@ public class User : IServices.IUser
     {
         try
         {
+            //checks that the user not exsist or null
             if (newUser == null) { return -1; }
-            else
-            {
-                IMapper mapper = myMapper.UserMapper.CreateMapper();
-                Repositories.Models.Users user = mapper.Map<DTO.Models.User, Repositories.Models.Users>(newUser);
-                return RepoUser.SignIn(user);
-            }
+            if (IsUserExists(new LoginUser(newUser.UserName, newUser.UserPassword))) { return -2; }
+
+            
+            //send it to the Repository Layer
+            IMapper mapper = myMapper.UserMapper.CreateMapper();
+            Users user = mapper.Map<DTO.Models.User, Users>(newUser);
+            return userRepository.SignIn(user);
+
         }
         catch (Exception e)
         {
@@ -91,6 +90,11 @@ public class User : IServices.IUser
 
     }
 
+    /// <summary>
+    /// Helping function that check if the user exist
+    /// </summary>
+    /// <param name="newUser">the user details</param>
+    /// <returns> true/ false</returns>
     public bool IsUserExists(LoginUser newUser)
     {
         try
@@ -98,7 +102,7 @@ public class User : IServices.IUser
             IMapper mapper = myMapper.UserMapper.CreateMapper();
             LogInUser isUserExist = mapper.Map<LoginUser, LogInUser>(newUser);
             ArgumentNullException.ThrowIfNull(newUser);// Continue just if newUser is not null
-            Repositories.Models.Users? isExist = RepoUser.GetUser(isUserExist);
+            Users? isExist = userRepository.GetUser(isUserExist);
             if (isExist == null) { return false; }
             else return true;
         }
@@ -107,7 +111,6 @@ public class User : IServices.IUser
             Console.WriteLine(e);
             return false;
         }
-        return false;
 
     }
 }
