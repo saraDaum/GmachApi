@@ -13,14 +13,16 @@ public class User : Interfaces.IUser
 {
 
     private readonly IDbContext dbContext;
+
+    //Constructors
     public User(IDbContext ctx)
     {
         dbContext = ctx;
     }
-
     public User() {
         dbContext = new GmachimSaraAndShaniContext();
     }
+
 
     /// <summary>
     /// This function gets userName and password and valid that this user already exists in system.
@@ -31,25 +33,16 @@ public class User : Interfaces.IUser
     /// <returns></returns>
     public Models.Users? Login(string userName, string Password)
     {
-        Console.WriteLine(userName+ " " + Password);   
-        return dbContext.Users.Where(a => a.UserName == userName && a.UserPassword == Password).FirstOrDefault();
- 
-    }
-
-    /*public int LogInUser(string userName, string Password)
-    {
         try
         {
-            var user = dbContext.User.Where(a => a.UserName == userName && a.UserPassword == Password).FirstOrDefault();
-            if (user != null)
-                return 1;
-            return -1;
+            Console.WriteLine(userName + " " + Password);
+            return dbContext.Users.Where(a => a.UserName == userName && a.UserPassword == Password).FirstOrDefault();
         }
-        catch {
-            return -1;
+        catch (Exception)
+        {
+            return null;
         }
-    }*/
-
+    }
 
 
     /// <summary>
@@ -60,13 +53,22 @@ public class User : Interfaces.IUser
     /// <returns></returns>
     public Models.Users? GetUser(LogInUser user)
     {
-        return dbContext.Users.FirstOrDefault(u => user.Password == u.UserPassword&& user.UserName == u.UserName);
+        try
+        {
+            return dbContext.Users.FirstOrDefault(u => user.Password == u.UserPassword && user.UserName == u.UserName);
+        }
+        catch (Exception)
+        {
+            return null;
+        }
 
     }
 
-
-
-
+    /// <summary>
+    /// Get user and add it to the database
+    /// </summary>
+    /// <param name="user"> the user </param>
+    /// <returns>the user id or -1 in case of error </returns>
     public int SignIn(Models.Users user)
     {
         try
@@ -82,25 +84,6 @@ public class User : Interfaces.IUser
         }
 
     }
-
-  
-    public int LogInUser(string userName, string Password)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Models.Users? GetUser(Models.Users? user)
-    {
-
-        return dbContext.Users.FirstOrDefault(u => user.UserId == u.UserId && user.UserName == u.UserName);
-    }
-
-
-
-    /* public Models.User? GetUser(Models.LogInUser? user)
-   {
-       return dbContext.User.Where(u => u.UserName == user.UserName && u.UserPassword == user.UserPassword).FirstOrDefault();
-   }*/
 
 }
 

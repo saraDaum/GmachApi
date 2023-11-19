@@ -5,115 +5,71 @@ using System.Data.Common;
 
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-namespace GmachApi.Controllers
+namespace GmachApi.Controllers;
+
+
+[Route("api/[controller]")]
+[ApiController]
+public class UserController : ControllerBase
 {
-    
-    [Route("api/[controller]")]
-    [ApiController]
-    public class UserController : ControllerBase
+
+
+    internal Services.IServices.IUser user = new Services.Implemantation.User();
+
+
+    // POST api/<SignIn>
+    /// <summary>
+    ///This function gets a new user and check if a user with these details
+    /// already exist in database before register him.
+    /// </summary>
+    /// <param name="newUser"></param>
+    /// <returns></returns>
+    [HttpPost("SignIn")]
+    public ActionResult<DTO.Models.UserInfo> SignIn([FromBody] User newUser)
     {
-        readonly DbContext db;
-
-        //Services.IServices.IUser userService;
-        internal Services.IServices.IUser user = new Services.Implemantation.User();
-        
-        //public UserController(Services.IServices.IUser _userService)
-        //{
-        //    userService = _userService;
-        //}
-
-        
-        // GET: api/<UserController>
-        [HttpGet("GetUserDetail")]
-        public IEnumerable<string> GetUserDetail()
+        try
         {
-            return new string[] { "value1", "value2" };
-        }
-
-        // GET api/<UserController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
-
-        // POST api/<sign in>
-        /// <summary>
-        ///This function gets a new user and check if a user with these details
-        /// already exist in database before register him.
-        /// </summary>
-        /// <param name="newUser"></param>
-        /// <returns></returns>
-        //[Route("api/User/SignIn"), HttpPost]
-        [HttpPost("SignIn")]
-        public UserInfo SignIn([FromBody] User newUser)
-        {
-
-            LoginUser checkUser = new LoginUser { UserName = newUser.UserPassword, Password = newUser.UserPassword };
-            try
+            int ans = user.SignIn(newUser);
+            if (ans == -1) { return BadRequest("couldn't add user to the database"); }
+            return new UserInfo
             {
-                int ans = user.SignIn(newUser);
-                return new UserInfo
-                {
-                    UserNumber = ans,
-                    UserName = newUser.UserName,
-                    UserEmail = newUser.UserEmail,
-                    UserAddress = newUser.UserAddress,
-                    UserPhone = newUser.UserPhone
-                };
-                //if (!user.IsUserExists(checkUser))
-                //{
-                //    //UserId will be returned. If something will run bad- ans will be equal to -1.
-                //    int ans = user.SignIn(newUser);
-                //    return new UserInfo
-                //    {
-                //        UserNumber = ans,
-                //        UserName = newUser.UserName,
-                //        UserEmail = newUser.UserEmail,
-                //        UserAddress = newUser.UserAddress,
-                //        UserPhone = newUser.UserPhone
-                //    };
-                //}
+                UserNumber = ans,
+                UserName = newUser.UserName,
+                UserEmail = newUser.UserEmail,
+                UserAddress = newUser.UserAddress,
+                UserPhone = newUser.UserPhone
+            };
 
-                //else
-                //    return new UserInfo();
-            }
-            catch
-            {
-                return new UserInfo();  
-            }
         }
-        //TOTO: Remember to check UserNumber of userInfo who returned...
+        catch
+        {
+            return BadRequest("error while singing in");
+        }
+    }
 
 
-        // POST api/<log in>
-        [HttpPost("LogIn")]
-        public ActionResult<DTO.Models.UserInfo> LogIn([FromBody] LoginUser loginUser)
+
+    // POST api/<LogIn>
+    /// <summary>
+    /// Login controller, check if the user exist in the system, by user name and password.
+    /// </summary>
+    /// <param name="loginUser">user name and password</param>
+    /// <returns>user info, or user not found</returns>
+    [HttpPost("LogIn")]
+    public ActionResult<DTO.Models.UserInfo> LogIn([FromBody] LoginUser loginUser)
+    {
+        try
         {
             DTO.Models.UserInfo? userInfo = user.Login(loginUser);
-            if (userInfo != null) { return NotFound(); }
+            if (userInfo == null) { return NotFound(); }
             Console.WriteLine(loginUser);
             return userInfo;
-
-            //return new LoginUser { UserName = "Connected", Password = "00" }; //To get this message.Sara.
-            //return new LoginUser();
-            //return NotFound();
-
-
+        }
+        catch (Exception)
+        {
+            return BadRequest("Error in the server");
         }
 
-        // PUT api/<UserController>/5
-        //[HttpPut("{id}")]
-        //public void Put(int id, [FromBody] string value)
-        //{
-        //    //What this function does?? Sara.
-        //}
 
-        // DELETE api/<UserController>/5
-        //[HttpDelete("{id}")]
-        //public void Delete(int id)
-        //{
-
-        //}
     }
 }
