@@ -30,7 +30,8 @@ public class UserController : ControllerBase
         try
         {
             int ans = user.SignIn(newUser);
-            if (ans == -1) { return BadRequest("couldn't add user to the database"); }
+            if (ans == -1) { return BadRequest("couldn't add the user to the database"); }
+            if (ans == -2) { return BadRequest("user already exist"); }
             return new UserInfo
             {
                 UserNumber = ans,
