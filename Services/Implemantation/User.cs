@@ -106,8 +106,9 @@ public class User : IServices.IUser
             if (isExist == null) { return false; }
             else return true;
         }
-        catch
+        catch(Exception e) 
         {
+            Console.WriteLine(e);
             return false;
         }
 

@@ -74,7 +74,11 @@ public class User : Interfaces.IUser
         try
         {
             dbContext.Users.Add(user);
-            dbContext.SaveChanges();
+            try
+            {
+                dbContext.SaveChanges();
+            }
+            catch { }
             return user.UserId;
             //TODO: check if method returns correct new userid
         }
