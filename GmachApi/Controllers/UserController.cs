@@ -30,8 +30,8 @@ public class UserController : ControllerBase
         try
         {
             int ans = user.SignIn(newUser);
-            if (ans == -1) { return BadRequest("couldn't add the user to the database"); }
-            if (ans == -2) { return BadRequest("user already exist"); }
+            if (ans == -1) { return BadRequest("Couldn't add the user to the database."); }
+            if (ans == -2) { return BadRequest("User already exist."); }
             return new UserInfo
             {
                 UserNumber = ans,
@@ -44,7 +44,7 @@ public class UserController : ControllerBase
         }
         catch
         {
-            return BadRequest("error while singing in");
+            return BadRequest("Error while singing in.");
         }
     }
 
