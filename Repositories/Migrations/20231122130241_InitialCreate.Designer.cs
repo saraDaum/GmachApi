@@ -12,7 +12,11 @@ using Repositories.Models;
 namespace Repositories.Migrations
 {
     [DbContext(typeof(GmachimSaraAndShaniContext))]
+<<<<<<<< HEAD:Repositories/Migrations/20231122130241_InitialCreate.Designer.cs
+    [Migration("20231122130241_InitialCreate")]
+========
     [Migration("20231116152725_InitialCreate")]
+>>>>>>>> 8bcfd72444922fd51986c48f0b205c5f90b189e2:Repositories/Migrations/20231116152725_InitialCreate.Designer.cs
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -24,21 +28,6 @@ namespace Repositories.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("GuarantorLoanDetails", b =>
-                {
-                    b.Property<int>("GuarantorsUserId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("LoanId")
-                        .HasColumnType("int");
-
-                    b.HasKey("GuarantorsUserId", "LoanId");
-
-                    b.HasIndex("LoanId");
-
-                    b.ToTable("GuarantorLoanDetails");
-                });
 
             modelBuilder.Entity("Repositories.Models.Account", b =>
                 {
@@ -56,9 +45,12 @@ namespace Repositories.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+<<<<<<<< HEAD:Repositories/Migrations/20231122130241_InitialCreate.Designer.cs
+========
                     b.Property<int>("BorrowerUserId")
                         .HasColumnType("int");
 
+>>>>>>>> 8bcfd72444922fd51986c48f0b205c5f90b189e2:Repositories/Migrations/20231116152725_InitialCreate.Designer.cs
                     b.Property<string>("Branch")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -68,16 +60,23 @@ namespace Repositories.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
+                    b.Property<string>("OwnerIdNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
                     b.HasKey("AccontId");
 
+<<<<<<<< HEAD:Repositories/Migrations/20231122130241_InitialCreate.Designer.cs
+========
                     b.HasIndex("BorrowerUserId");
 
                     b.HasIndex("UserId")
                         .IsUnique();
 
+>>>>>>>> 8bcfd72444922fd51986c48f0b205c5f90b189e2:Repositories/Migrations/20231116152725_InitialCreate.Designer.cs
                     b.ToTable("Accounts");
                 });
 
@@ -92,9 +91,6 @@ namespace Repositories.Migrations
                     b.Property<DateTime>("DateToPull")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("DepositorUserId")
-                        .HasColumnType("int");
-
                     b.Property<int>("Sum")
                         .HasColumnType("int");
 
@@ -103,9 +99,50 @@ namespace Repositories.Migrations
 
                     b.HasKey("DepositId");
 
-                    b.HasIndex("DepositorUserId");
-
                     b.ToTable("Deposits");
+                });
+
+            modelBuilder.Entity("Repositories.Models.Guarantor", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("AccountAccontId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("EmailAddress")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("IdentityNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("LoanDetailsLoanId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AccountAccontId");
+
+                    b.HasIndex("LoanDetailsLoanId");
+
+                    b.ToTable("Guarantors");
                 });
 
             modelBuilder.Entity("Repositories.Models.LoanDetails", b =>
@@ -116,19 +153,24 @@ namespace Repositories.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("LoanId"));
 
+<<<<<<<< HEAD:Repositories/Migrations/20231122130241_InitialCreate.Designer.cs
+========
                     b.Property<int?>("AccountAccontId")
                         .HasColumnType("int");
 
                     b.Property<int?>("BorrowerUserId")
                         .HasColumnType("int");
 
+>>>>>>>> 8bcfd72444922fd51986c48f0b205c5f90b189e2:Repositories/Migrations/20231116152725_InitialCreate.Designer.cs
                     b.Property<DateTime>("DateToGetBack")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("LoanFile")
                         .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("LoanerId")
+                        .HasColumnType("int");
 
                     b.Property<int>("Sum")
                         .HasColumnType("int");
@@ -138,12 +180,15 @@ namespace Repositories.Migrations
 
                     b.HasKey("LoanId");
 
+<<<<<<<< HEAD:Repositories/Migrations/20231122130241_InitialCreate.Designer.cs
+========
                     b.HasIndex("AccountAccontId");
 
                     b.HasIndex("BorrowerUserId");
 
                     b.HasIndex("UserId");
 
+>>>>>>>> 8bcfd72444922fd51986c48f0b205c5f90b189e2:Repositories/Migrations/20231116152725_InitialCreate.Designer.cs
                     b.ToTable("LoanDetails");
                 });
 
@@ -154,10 +199,6 @@ namespace Repositories.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserId"));
-
-                    b.Property<string>("Discriminator")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserAddress")
                         .IsRequired()
@@ -192,6 +233,8 @@ namespace Repositories.Migrations
                         .IsUnique();
 
                     b.ToTable("Users");
+<<<<<<<< HEAD:Repositories/Migrations/20231122130241_InitialCreate.Designer.cs
+========
 
                     b.HasDiscriminator<string>("Discriminator").HasValue("Users");
 
@@ -210,10 +253,14 @@ namespace Repositories.Migrations
                     b.HasBaseType("Repositories.Models.Users");
 
                     b.HasDiscriminator().HasValue("Depositor");
+>>>>>>>> 8bcfd72444922fd51986c48f0b205c5f90b189e2:Repositories/Migrations/20231116152725_InitialCreate.Designer.cs
                 });
 
             modelBuilder.Entity("Repositories.Models.Guarantor", b =>
                 {
+<<<<<<<< HEAD:Repositories/Migrations/20231122130241_InitialCreate.Designer.cs
+                    b.HasOne("Repositories.Models.Account", "Account")
+========
                     b.HasBaseType("Repositories.Models.Users");
 
                     b.HasDiscriminator().HasValue("Guarantor");
@@ -222,18 +269,19 @@ namespace Repositories.Migrations
             modelBuilder.Entity("GuarantorLoanDetails", b =>
                 {
                     b.HasOne("Repositories.Models.Guarantor", null)
+>>>>>>>> 8bcfd72444922fd51986c48f0b205c5f90b189e2:Repositories/Migrations/20231116152725_InitialCreate.Designer.cs
                         .WithMany()
-                        .HasForeignKey("GuarantorsUserId")
+                        .HasForeignKey("AccountAccontId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Repositories.Models.LoanDetails", null)
-                        .WithMany()
-                        .HasForeignKey("LoanId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
+                        .WithMany("Guarantors")
+                        .HasForeignKey("LoanDetailsLoanId");
 
+<<<<<<<< HEAD:Repositories/Migrations/20231122130241_InitialCreate.Designer.cs
+                    b.Navigation("Account");
+========
             modelBuilder.Entity("Repositories.Models.Account", b =>
                 {
                     b.HasOne("Repositories.Models.Borrower", "Borrower")
@@ -256,10 +304,14 @@ namespace Repositories.Migrations
                     b.HasOne("Repositories.Models.Depositor", null)
                         .WithMany("Deposits")
                         .HasForeignKey("DepositorUserId");
+>>>>>>>> 8bcfd72444922fd51986c48f0b205c5f90b189e2:Repositories/Migrations/20231116152725_InitialCreate.Designer.cs
                 });
 
             modelBuilder.Entity("Repositories.Models.LoanDetails", b =>
                 {
+<<<<<<<< HEAD:Repositories/Migrations/20231122130241_InitialCreate.Designer.cs
+                    b.Navigation("Guarantors");
+========
                     b.HasOne("Repositories.Models.Account", null)
                         .WithMany("Loans")
                         .HasForeignKey("AccountAccontId");
@@ -296,6 +348,7 @@ namespace Repositories.Migrations
                 {
                     b.Navigation("Account")
                         .IsRequired();
+>>>>>>>> 8bcfd72444922fd51986c48f0b205c5f90b189e2:Repositories/Migrations/20231116152725_InitialCreate.Designer.cs
                 });
 #pragma warning restore 612, 618
         }

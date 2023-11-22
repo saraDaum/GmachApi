@@ -9,11 +9,7 @@ public interface IDbContext
     
     DbSet<Users> Users { get; set; }
 
-    DbSet<Borrower> Borrowers { get; set; }
-
     DbSet<Deposit> Deposits { get; set; }
-
-    DbSet<Depositor> Depositors { get; set; }
 
     DbSet<Guarantor> Guarantors { get; set; }
 

@@ -23,11 +23,11 @@ namespace GmachApi.Controllers
         }
 
         // POST api/<DepositorController>
-        [HttpPost]
-        public void Post([FromBody] string value)
+        [HttpPost("AddNewDepositor")]
+        public ActionResult<List<DTO.Models.Deposit>> AddNewDepositor([FromBody] string userId)
         {
 
-
+            return BadRequest();
         }
 
         // PUT api/<DepositorController>/5
@@ -41,5 +41,8 @@ namespace GmachApi.Controllers
         public void Delete(int id)
         {
         }
+
+        
+        
     }
 }

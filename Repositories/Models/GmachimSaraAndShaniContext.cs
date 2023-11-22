@@ -19,11 +19,7 @@ public partial class GmachimSaraAndShaniContext : DbContext, IDbContext
 
     public virtual DbSet<Account> Accounts { get; set; }
 
-    public virtual DbSet<Borrower> Borrowers { get; set; }
-
     public virtual DbSet<Deposit> Deposits { get; set; }
-
-    public virtual DbSet<Depositor> Depositors { get; set; }
 
     public virtual DbSet<Guarantor> Guarantors { get; set; }
 
@@ -45,17 +41,20 @@ public partial class GmachimSaraAndShaniContext : DbContext, IDbContext
             entity.HasKey(e => e.AccontId);
 
             // Set other configurations if needed
+            entity.Property(e => e.UserId).IsRequired();
             entity.Property(e => e.AccountsNumber).IsRequired();
             entity.Property(e => e.BankNumber).IsRequired();
             entity.Property(e => e.Branch).IsRequired();
+            entity.Property(e => e.OwnerIdNumber).IsRequired();
             entity.Property(e => e.ConfirmAcountFile).IsRequired().HasMaxLength(255);
 
-            // Example: Relationships
-            //entity.HasOne(a => a.Borrower)
-            //    .WithMany(b => b.Acounts)
-            //    .HasForeignKey(a => a.UserId);
+
+            //entity.HasOne<Users>()  // Specify Users as the type here
+            //.WithMany()
+            //.HasForeignKey(d => d.UserId)
+            //.OnDelete(DeleteBehavior.Cascade);
         });
-    
+
         // Configure User
         modelBuilder.Entity<Users>(entity =>
         {
@@ -72,81 +71,68 @@ public partial class GmachimSaraAndShaniContext : DbContext, IDbContext
             entity.HasIndex(e => e.UserIdentityNumber).IsUnique();
         });
 
-        // Configure Borrower
-        modelBuilder.Entity<Borrower>(entity =>
-        {
-            // Inherit properties from User
-            entity.HasBaseType<Users>();
-
-            // Add specific configurations for Borrower
-            // Example: Relationships
-            //entity.HasMany(b => b.Acounts)
-            //    .WithOne(a => a.Borrower)
-            //    .HasForeignKey(a => a.BorrowerID);
-
-            //entity.HasMany(b => b.Loans)
-            //    .WithOne(ld => ld.)
-            //    .HasForeignKey(ld => ld.BorrowerNumber);
-        });
-
-        // Configure Depositor
-        modelBuilder.Entity<Depositor>(entity =>
-        {
-            // Inherit properties from User
-            entity.HasBaseType<Users>();
-
-            // Add specific configurations for Depositor
-            // Example: Relationships
-            //entity.HasMany(d => d.Deposits)
-            //    .WithOne(de => de.Depositor)
-            //    .HasForeignKey(de => de.DepositorID);
-        });
-
-        // Configure Guarantor
+        // Configure Guarantor entity
         modelBuilder.Entity<Guarantor>(entity =>
         {
-            // Inherit properties from User
-            entity.HasBaseType<Users>();
+            entity.HasKey(g => g.Id);  // Assuming Id is the primary key
 
-            entity.HasOne(g => g.Account)
-            .WithOne()
-            .HasForeignKey<Account>(a => a.UserId)
-            .IsRequired();
+            entity.Property(g => g.IdentityNumber)
+                .IsRequired();
+
+            entity.Property(g => g.Name)
+                .IsRequired();
+
+            entity.Property(g => g.PhoneNumber)
+                .IsRequired();
+
+            entity.Property(g => g.EmailAddress)
+                .IsRequired();
+
+            entity.Property(g => g.Address)
+                .IsRequired();
+
+            //// Define the relationship between Guarantor and Account
+            //entity.HasOne(g => g.Account)
+            //    .WithOne()
+            //    .HasForeignKey<Account>(a => a.AccontId);  // Assuming GuarantorId is the foreign key in the Account table
         });
 
-        // Configure Deposit
+
+        // Configure Deposit entity
         modelBuilder.Entity<Deposit>(entity =>
         {
-            entity.HasKey(e => e.DepositId);
+            entity.HasKey(d => d.DepositId);
 
-            // Set other configurations if needed
-            entity.Property(e => e.Sum).IsRequired();
-            entity.Property(e => e.DateToPull).IsRequired();
+            entity.Property(d => d.Sum).IsRequired();
 
-            // Example: Relationships
-            //entity.HasOne(d => d.Depositor)
-            //    .WithMany(de => de.Deposits)
-            //    .HasForeignKey(d => d.UserId);
+            entity.Property(d => d.DateToPull).IsRequired();
+
+            //// Define the relationship between Deposit and Users
+            //entity.HasOne<Users>()  // Specify Users as the type here
+            //.WithMany()
+            //.HasForeignKey(d => d.UserId)
+            //.OnDelete(DeleteBehavior.Cascade);
         });
 
-        // Configure LoanDetails
+        // Configure LoanDetails entity
         modelBuilder.Entity<LoanDetails>(entity =>
         {
-            entity.HasKey(e => e.LoanId);
+            entity.HasKey(ld => ld.LoanId);
 
-            // Set other configurations if needed
-            entity.Property(e => e.DateToGetBack).IsRequired();
-            entity.Property(e => e.Sum).IsRequired();
-            entity.Property(e => e.LoanFile).IsRequired().HasMaxLength(255);
+            entity.Property(ld => ld.DateToGetBack)
+                .IsRequired();
 
-            entity.HasOne<Users>()  // Assuming there is a DbSet<User> in your context
-            .WithMany()
-            .HasForeignKey(ld => ld.UserId)  // This sets up the foreign key relationship
-            .IsRequired();
-        });
+            entity.Property(ld => ld.Sum)
+                .IsRequired();
 
-            OnModelCreatingPartial(modelBuilder);
-    }
+            entity.Property(ld => ld.UserId)
+                .IsRequired();
+
+            entity.Property(ld => ld.LoanFile)
+                .IsRequired();
+        
+    }); }
+        
 
     partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
 }
