@@ -1,14 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Repositories.Models;
 
 
-public partial class Guarantor : Users
+public partial class Guarantor
 {
-    public List<LoanDetails> LoanId { get; set; } = new List<LoanDetails>();
+    [Key]
+    public int Id { get; set; }
 
+    public string IdentityNumber { get; set; } = string.Empty;
+    public string Name { get; set; } = string.Empty;
+    public string PhoneNumber { get; set; } = string.Empty;
+    public string EmailAddress {  get; set; } = string.Empty;
+    public string Address { get; set; } = string.Empty;
     public Account Account { get; set; }
 
 }

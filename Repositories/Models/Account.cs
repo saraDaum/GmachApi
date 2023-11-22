@@ -10,18 +10,18 @@ public partial class Account
     [Key]
     public int AccontId { get; set; }
 
+    [ForeignKey(nameof(Users.UserId))]
     public int UserId { get; set; }
 
-    
-    public string AccountsNumber { get; set; }
 
-    public string BankNumber { get; set; }
+    public string AccountsNumber { get; set; } = string.Empty;
 
-    public string Branch { get; set; }
+    public string BankNumber { get; set; } = string.Empty;
 
-    public string ConfirmAcountFile { get; set; } = null!;
+    public string Branch { get; set; } = string.Empty;
 
-    public virtual Borrower Borrower { get; set; } = null!;
+    public string OwnerIdNumber { get; set; } = string.Empty;
 
-    public virtual ICollection<LoanDetails> Loans { get; set; } = new List<LoanDetails>();
+    public string ConfirmAcountFile { get; set; } = string.Empty;
+
 }
