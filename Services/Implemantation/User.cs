@@ -99,8 +99,8 @@ public class User : IServices.IUser
     {
         try
         {
-            IMapper mapper = myMapper.UserMapper.CreateMapper();
-            LogInUser isUserExist = mapper.Map<DTO.Models.LoginUser, Repositories.Models.LogInUser>(newUser);
+            IMapper mapper = myMapper.LoginUserMapper.CreateMapper();
+            LogInUser isUserExist = mapper.Map<LoginUser, LogInUser>(newUser);
             ArgumentNullException.ThrowIfNull(newUser);// Continue just if newUser is not null
             Users? isExist = userRepository.GetUser(isUserExist);
             if (isExist == null) { return false; }
