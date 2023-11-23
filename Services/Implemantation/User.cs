@@ -99,7 +99,7 @@ public class User : IServices.IUser
     {
         try
         {
-            IMapper mapper = myMapper.UserMapper.CreateMapper();
+            IMapper mapper = myMapper.LoginUserMapper.CreateMapper();
             LogInUser isUserExist = mapper.Map<LoginUser, LogInUser>(newUser);
             ArgumentNullException.ThrowIfNull(newUser);// Continue just if newUser is not null
             Users? isExist = userRepository.GetUser(isUserExist);

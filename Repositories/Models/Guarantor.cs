@@ -9,7 +9,7 @@ namespace Repositories.Models;
 public partial class Guarantor
 {
     [Key]
-    public int Id { get; set; }
+    public int Id { get; set; } = IdMaker.getNextId();
 
     public string IdentityNumber { get; set; } = string.Empty;
     public string Name { get; set; } = string.Empty;
