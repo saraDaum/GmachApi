@@ -34,7 +34,8 @@ public class UserController : ControllerBase
             if (ans == -2) { return BadRequest("User already exist."); }
             return new UserInfo
             {
-                UserNumber = ans,
+                UserId = ans,
+                UserIdentityNumber = newUser.UserIdentityNumber,
                 UserName = newUser.UserName,
                 UserEmail = newUser.UserEmail,
                 UserAddress = newUser.UserAddress,

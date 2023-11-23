@@ -13,15 +13,13 @@ namespace DTO.Models;
 /// </summary>
 public class UserInfo
 {
-    public int UserNumber { get; set; }
+    public int UserId {  get; set; }
 
+    public string UserIdentityNumber { get; set; } = string.Empty;
     public string UserName { get; set; } = string.Empty;
-
     public string UserEmail { get; set; } = string.Empty;
-
+    public string UserAddress { get; set; } = string.Empty;
     public int UserPhone { get; set; }
 
-    public string UserAddress { get; set; } = string.Empty;
 
-    
 }
