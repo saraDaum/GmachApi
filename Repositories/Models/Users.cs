@@ -11,7 +11,7 @@ public partial class Users
 {
 
     [Key]
-    public int UserId { get; } = 
+    public int UserId { get; set; }
 
     public string UserIdentityNumber { get; set; } = string.Empty;
     public string UserName { get; set; } = string.Empty;
