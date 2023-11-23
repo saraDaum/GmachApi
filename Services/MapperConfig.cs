@@ -23,6 +23,10 @@ public class MapperConfig : Profile
         .ReverseMap()
     );
 
+    public MapperConfiguration UserInfoMapper = new MapperConfiguration(cnf =>
+        cnf.CreateMap<Users, UserInfo>()
+        .ReverseMap()
+    );
 
     public MapperConfiguration UserMapper => new MapperConfiguration(cfg =>
     {
