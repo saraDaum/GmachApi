@@ -55,6 +55,7 @@ public class User : Interfaces.IUser
     {
         try
         {
+
             return dbContext.Users.FirstOrDefault(u => user.Password == u.UserPassword && user.UserName == u.UserName);
         }
         catch (Exception)
