@@ -15,7 +15,7 @@ public static class IdMaker
         int i = int.Parse(id.Value);
         i++;
         id.Value = i.ToString();
-        id.Save("ID");
+        id.Save("ID.xml");
 
         return i;
       
