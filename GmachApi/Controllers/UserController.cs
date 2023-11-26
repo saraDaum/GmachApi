@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Data.Common;
+using System.Xml.Linq;
 
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -29,6 +30,7 @@ public class UserController : ControllerBase
     {
         try
         {
+            
             int ans = user.SignIn(newUser);
            // if (ans == -1) { return BadRequest("Couldn't add the user to the database."); }
            // if (ans == -2) { return BadRequest("User already exist."); }

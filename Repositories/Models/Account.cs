@@ -8,7 +8,8 @@ namespace Repositories.Models;
 public partial class Account
 {
     [Key]
-    public int AccontId { get; set; } = IdMaker.getNextId();
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    public int AccontId { get; set; } 
 
     [ForeignKey(nameof(Users.UserId))]
     public int UserId { get; set; }
