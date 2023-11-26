@@ -8,7 +8,8 @@ namespace Repositories.Models;
 public partial class LoanDetails
 {
     [Key]
-    public int LoanId { get; set; } = IdMaker.getNextId();
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    public int LoanId { get; set; }
 
     [ForeignKey(nameof(Users.UserId))]
     public int LoanerId { get; set; }

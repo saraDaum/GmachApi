@@ -78,7 +78,9 @@ public class User : Interfaces.IUser
             {
                 dbContext.SaveChanges();
             }
-            catch { }
+            catch {
+                return -6;
+            }
             return user.UserId;
             //TODO: check if method returns correct new userid
         }

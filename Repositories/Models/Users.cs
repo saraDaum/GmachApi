@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,7 +12,8 @@ public partial class Users
 {
 
     [Key]
-    public int UserId { get; set; } = IdMaker.getNextId();
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    public int UserId { get; set; }// = IdMaker.getNextId();
 
     public string UserIdentityNumber { get; set; } = string.Empty;
     public string UserName { get; set; } = string.Empty;
