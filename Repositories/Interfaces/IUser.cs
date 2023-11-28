@@ -16,4 +16,6 @@ public interface IUser
 
     public Models.Users? GetUser(Models.LogInUser? user);
 
+    public List<Models.Users> GetAll();
+
 }

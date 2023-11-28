@@ -93,5 +93,10 @@ public class User : Interfaces.IUser
 
     }
 
+
+    public List<Models.Users> GetAll()
+    {
+        return dbContext.Users.ToList();    
+    }
 }
 

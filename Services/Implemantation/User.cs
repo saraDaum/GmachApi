@@ -2,6 +2,7 @@
 using DTO.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Identity.Client;
 using Repositories.Interfaces;
 using Repositories.Models;
 using System;
@@ -9,8 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
-
+using IUser = Repositories.Interfaces.IUser;
 
 namespace Services.Implemantation;
 
@@ -112,6 +112,20 @@ public class User : IServices.IUser
             return false;
         }
 
+    }
+
+    public List<DTO.Models.User> GetAllUsers() {
+        try
+        {
+            IMapper mapper = myMapper.LoginUserMapper.CreateMapper();
+            List<Repositories.Models.Users> allUsers = userRepository.GetAll();
+            List<DTO.Models.User> users = allUsers.ConvertAll<DTO.Models.User>(user => mapper.Map<Repositories.Models.Users, DTO.Models.User>(user));
+            return users;
+        }
+        catch
+        {
+            return new List<DTO.Models.User>();
+        }
     }
 }
 
