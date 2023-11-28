@@ -9,17 +9,17 @@ namespace Repositories.Implementation;
 
 public class LoanDetails : Interfaces.ILoanDetails
 {
-    public LoanDetails()
-    {
-        //LoanId = 0;
-        //Sum = 0;
-
-    }
 
     private readonly IDbContext dbContext;
+
+    //Constructors
     public LoanDetails(IDbContext ctx)
     {
         dbContext = ctx;
+    }
+    public LoanDetails()
+    {
+        dbContext = new GmachimSaraAndShaniContext();
     }
 
     public int AddLoan(Models.LoanDetails loansDetail)
@@ -30,7 +30,19 @@ public class LoanDetails : Interfaces.ILoanDetails
     }
     public Models.LoanDetails GetLoanDetails(int userId)
     {
-        return (Models.LoanDetails)dbContext.LoanDetails.Where(loan => loan.UserId == userId);
-        return new Models.LoanDetails();
+        try
+        {
+
+            if ((Models.LoanDetails)dbContext.LoanDetails.Where(loan => loan.UserId == userId) == null)
+            {
+                return new Models.LoanDetails();
+
+            }
+            else return (Models.LoanDetails)dbContext.LoanDetails.Where(loan => loan.UserId == userId);
+        }
+        catch
+        {
+            return new Models.LoanDetails();    
+        }
     }
 }

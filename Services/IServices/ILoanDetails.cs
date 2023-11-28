@@ -9,5 +9,5 @@ namespace Services.IServices;
 public interface ILoanDetails
 {
     public int AddLoan(DTO.Models.LoanDetails loan);
-    public DTO.Models.LoanDetails GetLoanDetails(int userId);
+    public DTO.Models.LoanDetails GetLoan(int userId);
 }

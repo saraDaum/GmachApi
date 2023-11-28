@@ -26,15 +26,15 @@ public class UserController : ControllerBase
     /// <param name="newUser"></param>
     /// <returns></returns>
     [HttpPost("SignIn")]
-    public ActionResult<DTO.Models.UserInfo> SignIn([FromBody] User newUser)
-    {
+    public int SignIn([FromBody] User newUser)
+    {//  ActionResult<DTO.Models.UserInfo>
         try
         {
             
-            int ans = user.SignIn(newUser);
+            return( user.SignIn(newUser));
            // if (ans == -1) { return BadRequest("Couldn't add the user to the database."); }
            // if (ans == -2) { return BadRequest("User already exist."); }
-            return new UserInfo
+           /* return new UserInfo
             {
                 UserId = ans,
                 UserIdentityNumber = newUser.UserIdentityNumber,
@@ -42,13 +42,14 @@ public class UserController : ControllerBase
                 UserEmail = newUser.UserEmail,
                 UserAddress = newUser.UserAddress,
                 UserPhone = newUser.UserPhone
-            };
+            };*/
 
         }
         catch
         {
+            return -1;
             //return BadRequest("Error while singing in.");
-            return new UserInfo
+            /*return new UserInfo
             {
                 UserId = -1,
                 UserIdentityNumber = newUser.UserIdentityNumber,
@@ -56,7 +57,7 @@ public class UserController : ControllerBase
                 UserEmail = newUser.UserEmail,
                 UserAddress = newUser.UserAddress,
                 UserPhone = newUser.UserPhone
-            };
+            };*/
         }
     }
 

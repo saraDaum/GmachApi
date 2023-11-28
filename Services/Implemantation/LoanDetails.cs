@@ -11,7 +11,7 @@ namespace Services.Implemantation;
 public class LoanDetails : IServices.ILoanDetails
 {
     MapperConfig LoanAutoMapper = MapperConfig.Instance;
-    Repositories.Interfaces.ILoanDetails loanDetail = new Repositories.Implementation.LoanDetails();
+    Repositories.Implementation.LoanDetails loanDetail = new Repositories.Implementation.LoanDetails();
     public int AddLoan(DTO.Models.LoanDetails loan)
     {
         IMapper mapper = LoanAutoMapper.LoanDetailsMapper.CreateMapper();
@@ -24,10 +24,18 @@ public class LoanDetails : IServices.ILoanDetails
         //throw new NotImplementedException();
     }
 
-    public DTO.Models.LoanDetails GetLoanDetails(int userId)
+    public DTO.Models.LoanDetails GetLoan(int userId)
     {
-        IMapper mapper = LoanAutoMapper.LoanDetailsMapper.CreateMapper();
-        return new DTO.Models.LoanDetails();//to change it!!
-       // Repositories.Models.LoansDetail loan = mapper.Map<>
+        try
+        {
+            IMapper mapper = LoanAutoMapper.LoanDetailsMapper.CreateMapper();
+            Repositories.Models.LoanDetails loan = loanDetail.GetLoanDetails(userId);
+            DTO.Models.LoanDetails loanDetails = mapper.Map<Repositories.Models.LoanDetails, DTO.Models.LoanDetails>(loan);
+            return loanDetails;
+        }
+        catch (Exception ex) {
+            Console.WriteLine(ex.Message);
+            return new DTO.Models.LoanDetails();//TODO: Consider return object with paramameter to check if everything okey (an empty object).Sara.
+        };
     }
 }

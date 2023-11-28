@@ -7,6 +7,17 @@ namespace Repositories.Models;
 
 public partial class LoanDetails
 {
+    private int v;
+
+    public LoanDetails()
+    {
+        LoanId= -1;
+        LoanerId = -1;
+        DateToGetBack = new DateTime();
+        Sum = 0;
+        UserId = -1;
+      }
+
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int LoanId { get; set; }
