@@ -117,7 +117,7 @@ public class User : IServices.IUser
     public List<DTO.Models.User> GetAllUsers() {
         try
         {
-            IMapper mapper = myMapper.LoginUserMapper.CreateMapper();
+            IMapper mapper = myMapper.UserMapper.CreateMapper();
             List<Repositories.Models.Users> allUsers = userRepository.GetAll();
             List<DTO.Models.User> users = allUsers.ConvertAll<DTO.Models.User>(user => mapper.Map<Repositories.Models.Users, DTO.Models.User>(user));
             return users;
