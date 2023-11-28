@@ -20,7 +20,7 @@ namespace GmachApi.Controllers
 
         // GET api/<LoansDetailController>/5
         [HttpGet("{id}")]
-        public LoanDetails Get(int id)
+        public IEnumerable<LoanDetails> Get(int id)
         {
             return loanDetail.GetLoan(id);
         }

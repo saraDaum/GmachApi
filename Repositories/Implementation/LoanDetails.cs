@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace Repositories.Implementation;
 
 public class LoanDetails : Interfaces.ILoanDetails
@@ -28,21 +29,21 @@ public class LoanDetails : Interfaces.ILoanDetails
 
         return 133;
     }
-    public Models.LoanDetails GetLoanDetails(int userId)
+    public List<Models.LoanDetails> GetLoanDetails(int userId)
     {
         try
         {
 
             if ((Models.LoanDetails)dbContext.LoanDetails.Where(loan => loan.UserId == userId) == null)
             {
-                return new Models.LoanDetails();
-
+                return new List<Models.LoanDetails>();
             }
-            else return (Models.LoanDetails)dbContext.LoanDetails.Where(loan => loan.UserId == userId);
+            else return dbContext.LoanDetails.Where(loan => loan.UserId!= userId).ToList();
+            
         }
         catch
         {
-            return new Models.LoanDetails();    
+            return new List< Models.LoanDetails>();    
         }
     }
 }

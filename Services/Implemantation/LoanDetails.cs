@@ -24,18 +24,18 @@ public class LoanDetails : IServices.ILoanDetails
         //throw new NotImplementedException();
     }
 
-    public DTO.Models.LoanDetails GetLoan(int userId)
+    public List<DTO.Models.LoanDetails> GetLoan(int userId)
     {
         try
         {
             IMapper mapper = LoanAutoMapper.LoanDetailsMapper.CreateMapper();
-            Repositories.Models.LoanDetails loan = loanDetail.GetLoanDetails(userId);
-            DTO.Models.LoanDetails loanDetails = mapper.Map<Repositories.Models.LoanDetails, DTO.Models.LoanDetails>(loan);
+            List<Repositories.Models.LoanDetails> loans = loanDetail.GetLoanDetails(userId);
+            List<DTO.Models.LoanDetails> loanDetails = loans.ConvertAll<DTO.Models.LoanDetails>(loan=> mapper.Map<Repositories.Models.LoanDetails, DTO.Models.LoanDetails>(loan) ) ;
             return loanDetails;
         }
         catch (Exception ex) {
             Console.WriteLine(ex.Message);
-            return new DTO.Models.LoanDetails();//TODO: Consider return object with paramameter to check if everything okey (an empty object).Sara.
+            return new List< DTO.Models.LoanDetails>();//TODO: Consider return object with paramameter to check if everything okey (an empty object).Sara.
         };
     }
 }
