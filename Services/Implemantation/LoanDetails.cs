@@ -12,6 +12,8 @@ public class LoanDetails : IServices.ILoanDetails
 {
     MapperConfig LoanAutoMapper = MapperConfig.Instance;
     Repositories.Implementation.LoanDetails loanDetail = new Repositories.Implementation.LoanDetails();
+
+
     public int AddLoan(DTO.Models.LoanDetails loan)
     {
         IMapper mapper = LoanAutoMapper.LoanDetailsMapper.CreateMapper();
@@ -38,4 +40,14 @@ public class LoanDetails : IServices.ILoanDetails
             return new List< DTO.Models.LoanDetails>();//TODO: Consider return object with paramameter to check if everything okey (an empty object).Sara.
         };
     }
+
+
+    public List<DTO.Models.LoanDetails> GetAllLoans() {
+        IMapper mapper = LoanAutoMapper.LoanDetailsMapper.CreateMapper();
+        List<Repositories.Models.LoanDetails> AllLoans = loanDetail.GeAlltLoans();
+        List<DTO.Models.LoanDetails> AllLoansDetails = AllLoans.ConvertAll<DTO.Models.LoanDetails>(loan => mapper.Map<Repositories.Models.LoanDetails, DTO.Models.LoanDetails>(loan));
+        return AllLoansDetails;
+    }
+
 }
+

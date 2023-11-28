@@ -10,4 +10,5 @@ public interface ILoanDetails
 {
     public int AddLoan(DTO.Models.LoanDetails loan);
     public List< DTO.Models.LoanDetails> GetLoan(int userId);
+    public List<DTO.Models.LoanDetails> GetAllLoans();
 }

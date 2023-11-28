@@ -1,4 +1,5 @@
-﻿using Repositories.Models;
+﻿using Microsoft.EntityFrameworkCore.Query.Internal;
+using Repositories.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -45,5 +46,10 @@ public class LoanDetails : Interfaces.ILoanDetails
         {
             return new List< Models.LoanDetails>();    
         }
+    }
+
+   public List<Models.LoanDetails> GeAlltLoans()
+    {
+        return dbContext.LoanDetails.ToList();
     }
 }
