@@ -6,7 +6,7 @@ namespace GmachApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AcountController : ControllerBase
+    public class AccountController : ControllerBase
     {
         // GET: api/<AcountController>
         [HttpGet]
