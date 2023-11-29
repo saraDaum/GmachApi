@@ -30,7 +30,7 @@ public class LoanDetails : Interfaces.ILoanDetails
 
         return 133;
     }
-    public List<Models.LoanDetails> GetLoanDetails(int userId)
+    public List<Models.LoanDetails> GetUserLoans (int userId)
     {
         try
         {
