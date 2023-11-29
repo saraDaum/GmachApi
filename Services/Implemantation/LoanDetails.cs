@@ -26,12 +26,12 @@ public class LoanDetails : IServices.ILoanDetails
         //throw new NotImplementedException();
     }
 
-    public List<DTO.Models.LoanDetails> GetLoan(int userId)
+    public List<DTO.Models.LoanDetails> GetUserLoans(int userId)
     {
         try
         {
             IMapper mapper = LoanAutoMapper.LoanDetailsMapper.CreateMapper();
-            List<Repositories.Models.LoanDetails> loans = loanDetail.GetLoanDetails(userId);
+            List<Repositories.Models.LoanDetails> loans = loanDetail.GetUserLoans(userId);
             List<DTO.Models.LoanDetails> loanDetails = loans.ConvertAll<DTO.Models.LoanDetails>(loan=> mapper.Map<Repositories.Models.LoanDetails, DTO.Models.LoanDetails>(loan) ) ;
             return loanDetails;
         }

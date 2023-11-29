@@ -18,11 +18,11 @@ namespace GmachApi.Controllers
             return new string[] { "value1", "value2" };
         }
 
-        // GET api/<LoansDetailController>/5
-        [HttpGet("{id}")]
-        public List<LoanDetails> Get(int id)
+        // GET api/<LoansDetailController>/GetUserLoans/userId
+        [HttpGet("GetUserLoans/{id}")]
+        public List<LoanDetails> GetUserLoans(int id)
         {
-            return loanDetail.GetLoan(id);
+            return loanDetail.GetUserLoans(id);
         }
 
         //GET api/<LoansDetailController>
