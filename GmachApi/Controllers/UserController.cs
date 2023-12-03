@@ -30,9 +30,7 @@ public class UserController : ControllerBase
     {//  ActionResult<DTO.Models.UserInfo>
         try
         {
-
             return (user.SignIn(newUser));
-
         }
         catch
         {

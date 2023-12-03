@@ -34,12 +34,13 @@ public class LoanDetails : Interfaces.ILoanDetails
     {
         try
         {
-
-            if ((Models.LoanDetails)dbContext.LoanDetails.Where(loan => loan.UserId == userId) == null)
+            IEnumerable<Models.LoanDetails> allUserLoans = (IEnumerable<Models.LoanDetails>)dbContext.LoanDetails.Where(loan=> loan.UserId == userId);
+            List<Models.LoanDetails> AllUserLoans = allUserLoans.ToList();
+            if (AllUserLoans == null)
             {
                 return new List<Models.LoanDetails>();
             }
-            else return dbContext.LoanDetails.Where(loan => loan.UserId!= userId).ToList();
+            else return AllUserLoans;
             
         }
         catch
