@@ -17,8 +17,8 @@ public class Deposit : IServices.IDeposit
     {
         try
         {
-
             IEnumerable<Repositories.Models.Deposit> allDeposits = reposDeposit.AllUserDeposits(userId);
+            ArgumentNullException.ThrowIfNull(allDeposits);// Continue just if it is not null.
             IMapper mapper = myMapper.DepositsMapper.CreateMapper();
             return  allDeposits.Select(deposit => mapper.Map<Repositories.Models.Deposit, DTO.Models.Deposit>(deposit));
         }
@@ -28,5 +28,20 @@ public class Deposit : IServices.IDeposit
             throw new Exception(ex.Message);
         }
 
+    }
+
+    public int AddADeposit(DTO.Models.Deposit newDeposit)
+    {
+        try
+        {
+            IMapper mapper = myMapper.DepositsMapper.CreateMapper();
+            Repositories.Models.Deposit newRepoDeposit = mapper.Map<DTO.Models.Deposit, Repositories.Models.Deposit>(newDeposit);
+            ArgumentNullException.ThrowIfNull(newRepoDeposit);// Continue just if it is not null.
+            return reposDeposit.AddADeposit(newRepoDeposit);
+        }
+        catch
+        {
+            return -1;
+        }
     }
 }

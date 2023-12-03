@@ -37,4 +37,19 @@ public class Deposit : Interfaces.IDeposit
         return Enumerable.Empty<Repositories.Models.Deposit>();
         }
     }
+
+    public int AddADeposit(Models.Deposit newDeposit)
+    {
+        try
+        {
+            dbContext.Deposits.Add(newDeposit); 
+            return dbContext.SaveChanges();
+             
+
+        }
+        catch
+        {
+            return -1;
+        }
+    }
 }

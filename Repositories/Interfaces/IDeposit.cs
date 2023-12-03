@@ -9,6 +9,9 @@ namespace Repositories.Interfaces;
 public interface IDeposit
 {
     public IEnumerable<Repositories.Models.Deposit> AllUserDeposits(int userId);
-   
+
+    public int AddADeposit(Repositories.Models.Deposit aDeposit);
+
+
 
 }

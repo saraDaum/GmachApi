@@ -35,13 +35,29 @@ namespace GmachApi.Controllers
         [HttpGet("AllUserDeposits/{id}")]
         public IEnumerable<Deposit> GetUserDeposits([FromRoute]int id)
         {
-            return deposit.AllUserDeposits(id);
+            try
+            {
+                return deposit.AllUserDeposits(id);
+            }
+            catch{ 
+                return new List<Deposit>();
+            }
         }
 
         // POST api/<DepositController>
-        [HttpPost]
-        public void Post([FromBody] string value)
+        [HttpPut("AddADeposit")]
+        public int AddDeposit([FromBody] Deposit newDeposit)
         {
+            try
+            {
+                return deposit.AddADeposit(newDeposit);
+            }
+            catch(Exception ex)
+            {
+                return 1;
+
+            }
+            
         }
 
         // PUT api/<DepositController>/5
