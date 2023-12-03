@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using DTO.Models;
+using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -8,6 +9,9 @@ namespace GmachApi.Controllers
     [ApiController]
     public class DepositController : ControllerBase
     {
+
+        internal Services.IServices.IDeposit deposit = new Services.Implemantation.Deposit();
+
         // GET: api/<DepositController>
         [HttpGet]
         public IEnumerable<string> Get()
@@ -20,6 +24,18 @@ namespace GmachApi.Controllers
         public string Get(int id)
         {
             return "value";
+        }
+
+        [HttpGet("/GetAll")]
+        public IEnumerable<Deposit> AllDeposits()
+        {
+            return new List<Deposit>();
+        }
+
+        [HttpGet("AllUserDeposits/{id}")]
+        public IEnumerable<Deposit> GetUserDeposits([FromRoute]int id)
+        {
+            return deposit.AllUserDeposits(id);
         }
 
         // POST api/<DepositController>

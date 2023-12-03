@@ -8,4 +8,5 @@ namespace Services.IServices;
 
 public interface IDeposit
 {
+    public IEnumerable<DTO.Models.Deposit> AllUserDeposits(int userId);
 }

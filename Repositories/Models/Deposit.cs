@@ -14,9 +14,10 @@ public partial class Deposit
     [ForeignKey(nameof(Users.UserId))]
     public int UserId { get; set; }
 
-
     public int Sum { get; set; }
 
     public DateTime DateToPull { get; set; }
+
+   
 
 }

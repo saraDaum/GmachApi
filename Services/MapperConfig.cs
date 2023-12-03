@@ -40,4 +40,10 @@ public class MapperConfig : Profile
         cfg.CreateMap<LoginUser, LogInUser>()
          .ReverseMap();
     });
+
+    public MapperConfiguration DepositsMapper => new MapperConfiguration(cnf =>
+    {
+        cnf.CreateMap<Repositories.Models.Deposit,DTO.Models.Deposit>()
+        .ReverseMap();
+    });
 }

@@ -36,7 +36,7 @@ public class LoanDetails : Interfaces.ILoanDetails
         {
             IEnumerable<Models.LoanDetails> allUserLoans = (IEnumerable<Models.LoanDetails>)dbContext.LoanDetails.Where(loan=> loan.UserId == userId);
             List<Models.LoanDetails> AllUserLoans = allUserLoans.ToList();
-            if (AllUserLoans == null)
+            if (AllUserLoans.Count == 0)
             {
                 return new List<Models.LoanDetails>();
             }
