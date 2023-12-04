@@ -1,5 +1,6 @@
 ﻿using Azure.Identity;
 using Repositories.Implementation;
+using Repositories.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +16,6 @@ public interface IUser
     public int SignIn(Models.Users? user);
 
     public Models.Users? GetUser(Models.LogInUser? user);
-
-    public List<Models.Users> GetAll();
-
+    List<Users> GetAll();
+    bool IsUserExist(int userId);
 }

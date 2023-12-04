@@ -127,5 +127,10 @@ public class User : IServices.IUser
             return new List<DTO.Models.User>();
         }
     }
+
+    public bool IsUserExist(int userId)
+    {
+        return userRepository.IsUserExist(userId);
+    }
 }
 

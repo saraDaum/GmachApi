@@ -9,11 +9,11 @@ public partial class Deposit
     //TODO: יומיים לפני המשיכה נשאל במייל האם הוא למשוך או להשאיר כהשקעה ולתת דד ליין חדש
     public int DepositId { get; set; }
 
-    public int DepositorsId { get; set; }
+    public int UserId { get; set; }
 
     public int Sum { get; set; }
 
     public DateTime DateToPull { get; set; }
 
-    public virtual Depositor Depositors { get; set; } = null!;
+    //public virtual Depositor Depositors { get; set; } = null!;
 }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore.Query.Internal;
+using Repositories.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,12 +19,7 @@ public class Deposit : Interfaces.IDeposit
 
     public Deposit()
     {
-       /**
-        * 
-        Sum = 0;
-        DateToPull = DateTime.Now;
-        UserId = -1;
-        DepositId = -1;*/
+        dbContext = new GmachimSaraAndShaniContext();
     }
 
     public IEnumerable<Repositories.Models.Deposit> AllUserDeposits(int userId)

@@ -45,16 +45,26 @@ namespace GmachApi.Controllers
         }
 
         // POST api/<DepositController>
-        [HttpPut("AddADeposit")]
-        public int AddDeposit([FromBody] Deposit newDeposit)
+        [HttpPost("AddADeposit")]
+        public ActionResult<int> AddDeposit([FromBody] Deposit newDeposit)
         {
             try
             {
-                return deposit.AddADeposit(newDeposit);
+
+                int response = deposit.AddADeposit(newDeposit);
+                if(response == -2)
+                {
+                    return BadRequest("user not exist");
+                }
+                if(response == -1)
+                {
+                    return BadRequest("Error in the server");
+                }
+                return response;
             }
             catch(Exception ex)
             {
-                return 1;
+                return BadRequest(ex.Message);
 
             }
             

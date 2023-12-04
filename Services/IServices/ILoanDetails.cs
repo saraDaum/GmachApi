@@ -9,6 +9,7 @@ namespace Services.IServices;
 public interface ILoanDetails
 {
     public int AddLoan(DTO.Models.LoanDetails loan);
-    public List< DTO.Models.LoanDetails> GetUserLoans(int userId);
-    public List<DTO.Models.LoanDetails> GetAllLoans();
+    List<LoanDetails> GetAllLoans();
+    public DTO.Models.LoanDetails GetLoanDetails(int userId);
+    List<LoanDetails> GetUserLoans(int id);
 }

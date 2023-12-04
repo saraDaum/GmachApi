@@ -21,6 +21,7 @@ public interface IUser
     public int SignIn(User newUser);
 
     bool IsUserExists(LoginUser newUser);
+    List<User> GetAllUsers();
 
-    public List<User> GetAllUsers();
+    bool IsUserExist(int  userId);
 }

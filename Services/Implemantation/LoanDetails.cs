@@ -49,5 +49,9 @@ public class LoanDetails : IServices.ILoanDetails
         return AllLoansDetails;
     }
 
+    public DTO.Models.LoanDetails GetLoanDetails(int userId)
+    {
+        throw new NotImplementedException();
+    }
 }
 

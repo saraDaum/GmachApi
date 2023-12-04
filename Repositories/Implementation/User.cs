@@ -98,5 +98,10 @@ public class User : Interfaces.IUser
     {
         return dbContext.Users.ToList();    
     }
+
+    public bool IsUserExist(int userId)
+    {
+        return dbContext.Users.FirstOrDefault(u => u.UserId == userId) != null;
+    }
 }
 

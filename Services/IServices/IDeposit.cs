@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DTO.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +9,6 @@ namespace Services.IServices;
 
 public interface IDeposit
 {
-    public IEnumerable<DTO.Models.Deposit> AllUserDeposits(int userId);
-
-    public int AddADeposit(DTO.Models.Deposit newDeposit);
+    int AddADeposit(Deposit newDeposit);
+    IEnumerable<Deposit> AllUserDeposits(int id);
 }
