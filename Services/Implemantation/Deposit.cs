@@ -31,6 +31,12 @@ public class Deposit : IServices.IDeposit
 
     }
 
+
+    /// <summary>
+    /// Handling the deposit procces
+    /// </summary>
+    /// <param name="newDeposit">deposit details</param>
+    /// <returns></returns>
     public int AddADeposit(DTO.Models.Deposit newDeposit)
     {
         try

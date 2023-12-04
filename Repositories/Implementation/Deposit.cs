@@ -34,14 +34,18 @@ public class Deposit : Interfaces.IDeposit
         }
     }
 
+
+    /// <summary>
+    /// Add deposit to the data-base
+    /// </summary>
+    /// <param name="newDeposit">deposit details</param>
+    /// <returns>1 or 0</returns>
     public int AddADeposit(Models.Deposit newDeposit)
     {
         try
         {
             dbContext.Deposits.Add(newDeposit); 
             return dbContext.SaveChanges();
-             
-
         }
         catch
         {

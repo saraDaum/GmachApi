@@ -44,6 +44,12 @@ namespace GmachApi.Controllers
             }
         }
 
+
+        /// <summary>
+        /// Add a new deposit
+        /// </summary>
+        /// <param name="newDeposit">deposit details</param>
+        /// <returns>the deposit id, or error</returns>
         // POST api/<DepositController>
         [HttpPost("AddADeposit")]
         public ActionResult<int> AddDeposit([FromBody] Deposit newDeposit)
@@ -52,15 +58,15 @@ namespace GmachApi.Controllers
             {
 
                 int response = deposit.AddADeposit(newDeposit);
-                if(response == -2)
+                if(response == -2) //in case that the provided userId is not an id of any user.
                 {
                     return BadRequest("user not exist");
                 }
-                if(response == -1)
+                if(response == -1) //in case it an add to data-base error. 
                 {
                     return BadRequest("Error in the server");
                 }
-                return response;
+                return response; //the deposit Id
             }
             catch(Exception ex)
             {
