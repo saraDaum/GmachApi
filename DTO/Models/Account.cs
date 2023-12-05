@@ -1,23 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 
 namespace DTO.Models;
 
 public partial class Account
 {
-    public int BorrowerId { get; set; }
-
-    public int AcountsNumber { get; set; }
-
-    public int BankNumber { get; set; }
-
-    public int Branch { get; set; }
-
-    public string ConfirmAcountFile { get; set; } = null!;//File TODO: Check if it's necessary
-
+    
     public int AccontId { get; set; }
 
-    public virtual Borrower Borrower { get; set; } = null!;
 
-    public virtual ICollection<LoanDetails> Loans { get; set; } = new List<LoanDetails>();
+    public int UserId { get; set; }
+
+
+    public string AccountsNumber { get; set; } = string.Empty;
+
+    public string BankNumber { get; set; } = string.Empty;
+
+    public string Branch { get; set; } = string.Empty;
+
+    public string OwnerIdNumber { get; set; } = string.Empty;
+
+    public string ConfirmAcountFile { get; set; } = string.Empty;
 }

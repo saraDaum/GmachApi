@@ -43,7 +43,13 @@ public class MapperConfig : Profile
 
     public MapperConfiguration DepositsMapper => new MapperConfiguration(cnf =>
     {
-        cnf.CreateMap<Repositories.Models.Deposit,DTO.Models.Deposit>()
+        cnf.CreateMap<Repositories.Models.Deposit, DTO.Models.Deposit>()
+        .ReverseMap();
+    });
+
+    public MapperConfiguration AccountMapper => new MapperConfiguration(cnf =>
+    {
+        cnf.CreateMap<Repositories.Models.Account, DTO.Models.Account>()
         .ReverseMap();
     });
 }

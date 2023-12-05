@@ -58,6 +58,10 @@ namespace GmachApi.Controllers
             {
 
                 int response = deposit.AddADeposit(newDeposit);
+                if (response == -3) // When user doesn't have a bank account in the system.
+                {
+                    return BadRequest("User does not have a bank account yet!");
+                }
                 if(response == -2) //in case that the provided userId is not an id of any user.
                 {
                     return BadRequest("user not exist");

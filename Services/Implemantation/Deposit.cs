@@ -48,6 +48,13 @@ public class Deposit : IServices.IDeposit
                 return -2;
             }
 
+            //make sure that the user has a bank account in the system.
+            Account account = new Account();
+            if(!account.IsAccountExistByUserId(newDeposit.UserId))
+            {
+                return -3;
+            }
+
             //add the deposit
             IMapper mapper = myMapper.DepositsMapper.CreateMapper();
             Repositories.Models.Deposit newRepoDeposit = mapper.Map<DTO.Models.Deposit, Repositories.Models.Deposit>(newDeposit);

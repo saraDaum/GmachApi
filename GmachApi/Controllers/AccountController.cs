@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using DTO.Models;
+using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -8,6 +9,8 @@ namespace GmachApi.Controllers
     [ApiController]
     public class AccountController : ControllerBase
     {
+        Services.IServices.IAccount Account = new Services.Implemantation.Account();
+
         // GET: api/<AcountController>
         [HttpGet]
         public IEnumerable<string> Get()
@@ -23,9 +26,30 @@ namespace GmachApi.Controllers
         }
 
         // POST api/<AcountController>
-        [HttpPost]
-        public void Post([FromBody] string value)
+        [HttpPost("AddNewAccount")]
+        public ActionResult<int> AddNewAccount([FromBody] Account account)
         {
+            try
+            {
+                int response = Account.AddNewAccount(account);
+                if (response == -3)
+                {
+                    return BadRequest("User not exist");
+                }
+                if(response == -2)
+                {
+                    return BadRequest("User Already has a bank Account.");
+                }
+                if(response == -1)
+                {
+                    return BadRequest("Error in the server");
+                }
+                return response;
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         // PUT api/<AcountController>/5
@@ -38,6 +62,22 @@ namespace GmachApi.Controllers
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+        }
+
+        // GET api/<AcountController>/5
+        [HttpGet("IsAccountExistByUserId")]
+        public bool IsAccountExistByUserId(int UserId)
+        {
+            try
+            {
+                return Account.IsAccountExistByUserId(UserId);
+            }
+            catch (Exception ex)
+            {
+                // Handle exceptions if needed
+                Console.WriteLine($"Error checking account existence: {ex.Message}");
+                return false; // or throw an exception based on your error handling strategy
+            }
         }
     }
 }

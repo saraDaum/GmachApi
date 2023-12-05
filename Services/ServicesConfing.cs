@@ -11,7 +11,7 @@ public static class ServicesConfig
 {
     public static void AddBLServices(this IServiceCollection collection)
     {
-        collection.AddScoped(typeof(Repositories.Interfaces.IAcount), typeof(Repositories.Implementation.Account));
+        collection.AddScoped(typeof(Repositories.Interfaces.IAccount), typeof(Repositories.Implementation.Account));
         collection.AddScoped(typeof(Repositories.Interfaces.IBorrower), typeof(Repositories.Implementation.Borrower));
         collection.AddScoped(typeof(Repositories.Interfaces.ILoanDetails), typeof(Repositories.Implementation.LoanDetails));
         collection.AddScoped(typeof(Repositories.Interfaces.IGuarantor), typeof(Repositories.Implementation.Guarantor));
