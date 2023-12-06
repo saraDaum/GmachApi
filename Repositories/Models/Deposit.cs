@@ -19,5 +19,4 @@ public partial class Deposit
     public DateOnly DateToPull { get; set; }
 
    
-
 }
