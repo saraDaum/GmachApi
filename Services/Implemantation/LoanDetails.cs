@@ -16,14 +16,33 @@ public class LoanDetails : IServices.ILoanDetails
 
     public int AddLoan(DTO.Models.LoanDetails loan)
     {
-        IMapper mapper = LoanAutoMapper.LoanDetailsMapper.CreateMapper();
-        //todo: the logic is here!
-        //check if the loan is possible
-        //if yes send the loan detail to the data base
-        Repositories.Models.LoanDetails DALLoanDetail = mapper.Map<DTO.Models.LoanDetails, Repositories.Models.LoanDetails>(loan);
-        //Enter to DB
-        return loanDetail.AddLoan(DALLoanDetail);
-        //throw new NotImplementedException();
+        try
+        {
+            //check if user exist
+            User u = new User();
+            if (!u.IsUserExist(loan.UserId)) 
+            { 
+                return -1;
+            }
+
+
+            IMapper mapper = LoanAutoMapper.LoanDetailsMapper.CreateMapper();
+            Repositories.Models.LoanDetails DALLoanDetail = mapper.Map<Repositories.Models.LoanDetails>(loan);
+
+            //save the guanarators
+
+            
+
+            int res = loanDetail.AddLoan(DALLoanDetail);
+
+            return res;
+
+        }
+        catch (Exception)
+        {
+
+            throw;
+        }
     }
 
     public List<DTO.Models.LoanDetails> GetUserLoans(int userId)

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DTO.Models;
 
@@ -7,18 +8,15 @@ public partial class LoanDetails
 {
     public int LoanId { get; set; }
 
-    public DateOnly dateOfTakeLoan { get; set; } 
+    public int UserId { get; set; }
 
-    public DateOnly DateToGetBack { get; set; }  // I change it to be DateOnly type instead of 'DataTime'. Sara.
+    public DateTime DateToGetBack { get; set; }
+
     public int Sum { get; set; }
 
-    public int BorrowerNumber { get; set; }
-
-    public string LoanFile { get; set; } = null!;//? Mabey it could be a link to a file in drive. Sara.
+    public string LoanFile { get; set; } = null!;
 
     public virtual ICollection<Guarantor> Guarantors { get; set; } = new List<Guarantor>();
 
-    public virtual ICollection<Account> AcountsNumbers { get; set; } = new List<Account>();
-
-    public virtual ICollection<Borrower> Borrowers { get; set; } = new List<Borrower>();
+    public bool IsAprovied { get; set; } = false;
 }

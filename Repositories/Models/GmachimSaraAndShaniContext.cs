@@ -130,6 +130,9 @@ public partial class GmachimSaraAndShaniContext : DbContext, IDbContext
 
             entity.Property(ld => ld.LoanFile)
                 .IsRequired();
+
+            entity.Property(ld=> ld.IsAprovied)
+                .IsRequired();
         
     }); }
         

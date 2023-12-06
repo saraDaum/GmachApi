@@ -26,9 +26,18 @@ public class LoanDetails : Interfaces.ILoanDetails
 
     public int AddLoan(Models.LoanDetails loansDetail)
     {
-        //todo: add to the data base the loan object
+        try
+        {
+            dbContext.LoanDetails.Add(loansDetail);
+            dbContext.SaveChanges();
 
-        return 133;
+            return loansDetail.LoanId;
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+            return -2;
+        }
     }
     public List<Models.LoanDetails> GetUserLoans (int userId)
     {

@@ -17,10 +17,22 @@ public class MapperConfig : Profile
     private MapperConfig() { }
     public static MapperConfig Instance { get; } = new MapperConfig();
 
+    public MapperConfiguration GuarantorMapper = new MapperConfiguration(cnf =>
+        cnf.CreateMap<DTO.Models.Guarantor, Repositories.Models.Guarantor>()
+        .ForMember(dest => dest.Account, opt => opt.MapFrom(src =>
+            MapperConfig.Instance.AccountMapper.CreateMapper()
+            .Map<Repositories.Models.Account>(src.Account)))
+    );
+
 
     public MapperConfiguration LoanDetailsMapper = new MapperConfiguration(cnf =>
-        cnf.CreateMap<Repositories.Models.LoanDetails, DTO.Models.LoanDetails>()
-        .ReverseMap()
+        cnf.CreateMap<DTO.Models.LoanDetails, Repositories.Models.LoanDetails>()
+            .ForMember(dest => dest.Guarantors, opt => opt.MapFrom(src => 
+                src.Guarantors.Select(g =>
+                   MapperConfig.Instance.GuarantorMapper.CreateMapper()
+                   .Map<Repositories.Models.Guarantor>(g)
+                ).ToList()))
+            
     );
 
     public MapperConfiguration UserInfoMapper = new MapperConfiguration(cnf =>
