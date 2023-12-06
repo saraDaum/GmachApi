@@ -13,7 +13,7 @@ public partial class Deposit
 
     public int Sum { get; set; }
 
-    public DateTime DateToPull { get; set; }
+    public DateOnly DateToPull { get; set; }
 
     //public virtual Depositor Depositors { get; set; } = null!;
 }
