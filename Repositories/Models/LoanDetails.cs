@@ -20,9 +20,7 @@ public partial class LoanDetails
 
     public int Sum { get; set; }
 
-    public string LoanFile { get; set; } = null!;
-
-    public virtual ICollection<Guarantor> Guarantors { get; set; } = new List<Guarantor>();
+    public string LoanFile { get; set; } = string.Empty;
 
     public bool IsAprovied { get; set; }
 

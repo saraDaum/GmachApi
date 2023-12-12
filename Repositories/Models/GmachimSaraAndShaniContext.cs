@@ -42,18 +42,20 @@ public partial class GmachimSaraAndShaniContext : DbContext, IDbContext
 
             // Set other configurations if needed
             entity.Property(e => e.UserId).IsRequired();
-            entity.Property(e => e.AccountsNumber).IsRequired();
-            entity.Property(e => e.BankNumber).IsRequired();
-            entity.Property(e => e.Branch).IsRequired();
-            entity.Property(e => e.OwnerIdNumber).IsRequired();
-            entity.Property(e => e.ConfirmAcountFile).IsRequired().HasMaxLength(255);
-
-
-            //entity.HasOne<Users>()  // Specify Users as the type here
-            //.WithMany()
-            //.HasForeignKey(d => d.UserId)
-            //.OnDelete(DeleteBehavior.Cascade);
+            entity.Property(e => e.CreditCardNumber).IsRequired().HasMaxLength(16);
+            entity.Property(e => e.CVV).IsRequired().HasMaxLength(3);
+            entity.Property(e => e.Validity).IsRequired();
+            entity.Property(e => e.OwnersName).IsRequired();
+            
         });
+
+        // Configure UserUnderWarning
+        modelBuilder.Entity<UsersUnderWarning>(entity =>
+        {
+            entity.HasNoKey(); // Specify that it's a keyless entity
+            entity.Property(u => u.UserId).IsRequired();
+        });
+
 
         // Configure User
         modelBuilder.Entity<Users>(entity =>
@@ -76,25 +78,17 @@ public partial class GmachimSaraAndShaniContext : DbContext, IDbContext
         {
             entity.HasKey(g => g.Id);  // Assuming Id is the primary key
 
-            entity.Property(g => g.IdentityNumber)
-                .IsRequired();
+            entity.Property(g => g.IdentityNumber).IsRequired();
 
-            entity.Property(g => g.Name)
-                .IsRequired();
+            entity.Property(g => g.Name).IsRequired();
 
-            entity.Property(g => g.PhoneNumber)
-                .IsRequired();
+            entity.Property(g => g.PhoneNumber).IsRequired();
 
-            entity.Property(g => g.EmailAddress)
-                .IsRequired();
+            entity.Property(g => g.EmailAddress).IsRequired();
 
-            entity.Property(g => g.Address)
-                .IsRequired();
+            entity.Property(g => g.Address).IsRequired();
 
-            //// Define the relationship between Guarantor and Account
-            //entity.HasOne(g => g.Account)
-            //    .WithOne()
-            //    .HasForeignKey<Account>(a => a.AccontId);  // Assuming GuarantorId is the foreign key in the Account table
+            entity.Property(g => g.Check).IsRequired();
         });
 
 
@@ -119,20 +113,15 @@ public partial class GmachimSaraAndShaniContext : DbContext, IDbContext
         {
             entity.HasKey(ld => ld.LoanId);
 
-            entity.Property(ld => ld.DateToGetBack)
-                .IsRequired();
+            entity.Property(ld => ld.DateToGetBack).IsRequired();
 
-            entity.Property(ld => ld.Sum)
-                .IsRequired();
+            entity.Property(ld => ld.Sum).IsRequired();
 
-            entity.Property(ld => ld.UserId)
-                .IsRequired();
+            entity.Property(ld => ld.UserId).IsRequired();
 
-            entity.Property(ld => ld.LoanFile)
-                .IsRequired();
+            entity.Property(ld => ld.LoanFile).IsRequired();
 
-            entity.Property(ld=> ld.IsAprovied)
-                .IsRequired();
+            entity.Property(ld=> ld.IsAprovied).IsRequired();
         
     }); }
         

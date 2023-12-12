@@ -12,11 +12,11 @@ public partial class Guarantor
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int Id { get; set; }
 
+    public string LoanId {  get; set; } = string.Empty;
     public string IdentityNumber { get; set; } = string.Empty;
     public string Name { get; set; } = string.Empty;
     public string PhoneNumber { get; set; } = string.Empty;
     public string EmailAddress {  get; set; } = string.Empty;
     public string Address { get; set; } = string.Empty;
-    public Account Account { get; set; }
-
+    public string Check {  get; set; } = string.Empty; //path to image of the check
 }
