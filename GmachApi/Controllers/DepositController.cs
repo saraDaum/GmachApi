@@ -52,13 +52,13 @@ namespace GmachApi.Controllers
         /// <returns>the deposit id, or error</returns>
         // POST api/<DepositController>
         [HttpPost("AddADeposit")]
-        public ActionResult<int> AddDeposit([FromBody] Deposit newDeposit)
+        public int AddDeposit([FromBody] Deposit newDeposit)
         {
             try
             {
 
-                int response = deposit.AddADeposit(newDeposit);
-                if (response == -3) // When user doesn't have a bank account in the system.
+                return deposit.AddADeposit(newDeposit);
+                /*if (response == -3) // When user doesn't have a bank account in the system.
                 {
                   return BadRequest("User does not have a bank account yet!");
                     
@@ -71,11 +71,11 @@ namespace GmachApi.Controllers
                 {
                     return BadRequest("Error in the server");
                 }
-                return response; //the deposit Id
+                return response; //the deposit Id*/
             }
             catch(Exception ex)
             {
-                return BadRequest(ex.Message);
+                return -1;
 
             }
             

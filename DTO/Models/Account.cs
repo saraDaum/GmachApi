@@ -10,9 +10,7 @@ public partial class Account
     
     public int AccontId { get; set; }
 
-
-    public int UserId { get; set; }
-
+     public int UserId { get; set; }
 
     public string AccountsNumber { get; set; } = string.Empty;
 
