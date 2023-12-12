@@ -7,16 +7,16 @@ namespace DTO.Models;
 public partial class LoanDetails
 {
     public int LoanId { get; set; }
-
     public int UserId { get; set; }
+
 
     public DateTime DateToGetBack { get; set; }
 
     public int Sum { get; set; }
 
-    public string LoanFile { get; set; } = null!;//
+    public string LoanFile { get; set; } = string.Empty;
 
-    public virtual ICollection<Guarantor> Guarantors { get; set; } = new List<Guarantor>();
+    public bool IsAprovied { get; set; }
 
-    public bool IsAprovied { get; set; } = false;
+    public List<Guarantor>? guarantors { get; set; } = null;
 }

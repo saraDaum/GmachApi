@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Repositories.Interfaces;
+namespace Repositories.Models;
 
-public interface IGuarantor
+public partial class UsersUnderWarning
 {
-    int Add(Models.Guarantor item);
+    public int UserId { get; set; }
 }

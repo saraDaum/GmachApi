@@ -15,14 +15,12 @@ public partial class Account
     public int UserId { get; set; }
 
 
-    public string AccountsNumber { get; set; } = string.Empty;
+    public string CreditCardNumber { get; set; } = string.Empty;
 
-    public string BankNumber { get; set; } = string.Empty;
+    public string OwnersName { get; set; } = string.Empty;
 
-    public string Branch { get; set; } = string.Empty;
+    public string CVV { get; set; } = string.Empty;
 
-    public string OwnerIdNumber { get; set; } = string.Empty;
-
-    public string ConfirmAcountFile { get; set; } = string.Empty;
+    public DateTime Validity { get; set; } = DateTime.MinValue;
 
 }

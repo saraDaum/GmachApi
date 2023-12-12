@@ -14,7 +14,7 @@ public class LoanDetails : IServices.ILoanDetails
     Repositories.Implementation.LoanDetails loanDetail = new Repositories.Implementation.LoanDetails();
 
 
-    public int AddLoan(DTO.Models.LoanDetails loan)
+    public int AddLoan(DTO.Models.Loan loan, List<DTO.Models.Guarantor>? guarantors = null)
     {
         try
         {
@@ -29,11 +29,18 @@ public class LoanDetails : IServices.ILoanDetails
             IMapper mapper = LoanAutoMapper.LoanDetailsMapper.CreateMapper();
             Repositories.Models.LoanDetails DALLoanDetail = mapper.Map<Repositories.Models.LoanDetails>(loan);
 
-            //save the guanarators
 
-            
+            int res = loanDetail.AddLoan(DALLoanDetail); // the loan id
 
-            int res = loanDetail.AddLoan(DALLoanDetail);
+            if(guarantors != null)
+            {
+                Guarantor guarantor = new Guarantor();
+                foreach(DTO.Models.Guarantor g in guarantors)
+                {
+                    g.LoanId = res;
+                    guarantor.AddNewGuarantor(g);
+                }
+            }
 
             return res;
 
@@ -41,7 +48,7 @@ public class LoanDetails : IServices.ILoanDetails
         catch (Exception)
         {
 
-            throw;
+            return -3;
         }
     }
 
@@ -71,6 +78,19 @@ public class LoanDetails : IServices.ILoanDetails
     public DTO.Models.LoanDetails GetLoanDetails(int userId)
     {
         throw new NotImplementedException();
+    }
+
+    public bool IsLoanExist(int id)
+    {
+        try
+        {
+            return loanDetail.IsLoanExist(id);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+            return false;
+        }
     }
 }
 
