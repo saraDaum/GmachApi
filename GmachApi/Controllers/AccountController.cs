@@ -22,7 +22,14 @@ namespace GmachApi.Controllers
         [HttpGet("GetAllCards/{id}")]
         public List<DTO.Models.Account> GetAllCards([FromRoute]int id)
         {
-            return Account.GetAllCards(id);
+            try
+            {
+                return Account.GetAllCards(id);
+            }
+            catch (Exception ex)
+            {
+                return new List<DTO.Models.Account>();
+            }
         }
 
         // POST api/<AcountController>
