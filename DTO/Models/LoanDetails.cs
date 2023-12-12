@@ -14,7 +14,7 @@ public partial class LoanDetails
 
     public int Sum { get; set; }
 
-    public string LoanFile { get; set; } = null!;
+    public string LoanFile { get; set; } = null!;//
 
     public virtual ICollection<Guarantor> Guarantors { get; set; } = new List<Guarantor>();
 

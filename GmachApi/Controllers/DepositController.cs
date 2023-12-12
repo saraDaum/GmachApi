@@ -58,6 +58,7 @@ namespace GmachApi.Controllers
             {
 
                 return deposit.AddADeposit(newDeposit);
+                //I didn't delete it yet because I want to see what each response say. Sara.
                 /*if (response == -3) // When user doesn't have a bank account in the system.
                 {
                   return BadRequest("User does not have a bank account yet!");
