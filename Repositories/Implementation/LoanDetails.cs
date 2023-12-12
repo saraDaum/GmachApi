@@ -62,4 +62,17 @@ public class LoanDetails : Interfaces.ILoanDetails
     {
         return dbContext.LoanDetails.ToList();
     }
+
+    public bool IsLoanExist(int loanId)
+    {
+        try
+        {
+            return dbContext.LoanDetails.FirstOrDefault(l => l.LoanId == loanId) != null;
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex);
+            return false;
+        }
+    }
 }

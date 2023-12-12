@@ -15,7 +15,8 @@ public interface IDbContext
 
     DbSet<LoanDetails> LoanDetails { get; set; }
 
-    
+    DbSet<UsersUnderWarning> UsersUnderWarning { get; set; }
+
     int SaveChanges();
     Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
     //Task<int> SaveChangesAsync(CancellationToken cancellationToken = default(CancellationToken));

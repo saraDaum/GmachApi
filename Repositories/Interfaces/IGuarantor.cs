@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Repositories.Interfaces
+namespace Repositories.Interfaces;
+
+public interface IGuarantor
 {
-    public interface IGuarantor
-    {
-    }
+    int Add(Models.Guarantor item);
 }

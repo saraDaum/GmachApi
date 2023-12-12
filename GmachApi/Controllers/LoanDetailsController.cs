@@ -40,7 +40,8 @@ namespace GmachApi.Controllers
         {
             try
             {
-                int res = loanDetail.AddLoan(loan);
+                DTO.Models.Loan l = new DTO.Models.Loan(loan.LoanId, loan.UserId, loan.DateToGetBack, loan.Sum, loan.LoanFile, false);
+                int res = loanDetail.AddLoan(l, loan.guarantors);
                 if (res < 0)
                 {
                     return BadRequest(res);

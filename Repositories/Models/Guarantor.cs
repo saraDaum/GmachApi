@@ -12,7 +12,7 @@ public partial class Guarantor
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int Id { get; set; }
 
-    public string LoanId {  get; set; } = string.Empty;
+    public int LoanId {  get; set; }
     public string IdentityNumber { get; set; } = string.Empty;
     public string Name { get; set; } = string.Empty;
     public string PhoneNumber { get; set; } = string.Empty;
