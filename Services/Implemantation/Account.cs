@@ -57,4 +57,20 @@ public class Account : IServices.IAccount
             return false; // or throw an exception based on your error handling strategy
         }
     }
+
+    public List<DTO.Models.Account> GetAllCards(int id)
+    {
+        try
+        {
+           List<Repositories.Models.Account> allUserCards =  RepoAccount.GetAllUserCards(id);
+            IMapper mapper = myMapper.AccountMapper.CreateMapper();
+            List<DTO.Models.Account> allCards = allUserCards.ConvertAll<DTO.Models.Account>(card=> mapper.Map<Repositories.Models.Account, DTO.Models.Account>(card));
+            return allCards;
+
+        }
+        catch
+        {
+            return new List<DTO.Models.Account>();
+        }
+    }
 }

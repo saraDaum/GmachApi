@@ -14,8 +14,7 @@ public partial class Account
     [ForeignKey(nameof(Users.UserId))]
     public int UserId { get; set; }
 
-
-    public string CreditCardNumber { get; set; } = string.Empty;
+        public string CreditCardNumber { get; set; } = string.Empty;
 
     public string OwnersName { get; set; } = string.Empty;
 

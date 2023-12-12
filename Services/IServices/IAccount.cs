@@ -30,5 +30,13 @@ public interface IAccount
     /// <param name="account">The account details</param>
     /// <returns>the account id or -1</returns>
     int AddNewAccount(DTO.Models.Account account);
+
+
+    /// <summary>
+    /// Returns all user credit cards that existing in database
+    /// </summary>
+    /// <param name="userId"></param>
+    /// <returns></returns>
+    List<DTO.Models.Account> GetAllCards(int userId);
     
 }

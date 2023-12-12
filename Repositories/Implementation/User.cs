@@ -35,7 +35,7 @@ public class User : Interfaces.IUser
     {
         try
         {
-            Console.WriteLine(userName + " " + Password);
+            //Console.WriteLine(userName + " " + Password);
             return dbContext.Users.Where(a => a.UserName == userName && a.UserPassword == Password).FirstOrDefault();
         }
         catch (Exception)

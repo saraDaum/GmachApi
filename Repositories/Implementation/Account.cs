@@ -1,4 +1,5 @@
-﻿using Repositories.Models;
+﻿using Repositories.Interfaces;
+using Repositories.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -58,4 +59,35 @@ public class Account : Interfaces.IAccount
             return -1; // or throw an exception based on your error handling strategy
         }
     }
+
+    List<Models.Account> IAccount.GetAllUserCards(int id)
+    {
+        try
+        {
+            List<Models.Account> allUSerCards = dbContext.Accounts.Where(card=> card.UserId == id).ToList();   
+            if(allUSerCards.Count> 0)
+            {
+                return allUSerCards;
+            }
+            return new List<Models.Account>();
+
+        }
+        catch
+        {
+            return new List<Models.Account>();
+
+        }
+    }
+
+    bool IAccount.checkIfUserHasAccount(int UserId)
+    {
+        throw new NotImplementedException();
+    }
+
+    int IAccount.AddNewAccount(Models.Account account)
+    {
+        throw new NotImplementedException();
+    }
+
+
 }

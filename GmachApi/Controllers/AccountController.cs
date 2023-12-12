@@ -19,10 +19,10 @@ namespace GmachApi.Controllers
         }
 
         // GET api/<AcountController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        [HttpGet("GetAllCards/{id}")]
+        public List<DTO.Models.Account> GetAllCards([FromRoute]int id)
         {
-            return "value";
+            return Account.GetAllCards(id);
         }
 
         // POST api/<AcountController>
