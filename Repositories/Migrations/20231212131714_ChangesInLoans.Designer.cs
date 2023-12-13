@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Repositories.Models;
 
@@ -11,9 +12,11 @@ using Repositories.Models;
 namespace Repositories.Migrations
 {
     [DbContext(typeof(GmachimSaraAndShaniContext))]
-    partial class GmachimSaraAndShaniContextModelSnapshot : ModelSnapshot
+    [Migration("20231212131714_ChangesInLoans")]
+    partial class ChangesInLoans
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -30,69 +33,30 @@ namespace Repositories.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AccontId"));
 
-                    b.Property<string>("AccountsNumber")
+                    b.Property<string>("CVV")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(3)
+                        .HasColumnType("nvarchar(3)");
 
-                    b.Property<string>("BankNumber")
+                    b.Property<string>("CreditCardNumber")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(16)
+                        .HasColumnType("nvarchar(16)");
 
-                    b.Property<string>("Branch")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ConfirmAcountFile")
-                        .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
-
-                    b.Property<string>("OwnerIdNumber")
+                    b.Property<string>("OwnersName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("Validity")
+                        .HasColumnType("datetime2");
+
                     b.HasKey("AccontId");
 
                     b.ToTable("Accounts");
                 });
-
-            modelBuilder.Entity("Repositories.Models.Card", b =>
-            {
-                b.Property<int>("CardId")
-                    .ValueGeneratedOnAdd()
-                    .HasColumnType("int");
-
-                SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CardId"));
-
-                b.Property<int>("UserId")
-                    .IsRequired();
-
-                b.Property<string>("CreditCardNumber")
-                    .IsRequired()
-                    .HasMaxLength(16)
-                    .HasColumnType("nvarchar(16)");
-
-                b.Property<string>("OwnersName")
-                    .IsRequired()
-                    .HasColumnType("nvarchar(max)");
-
-                b.Property<string>("CVV")
-                    .IsRequired()
-                    .HasMaxLength(3)
-                    .HasColumnType("nvarchar(3)");
-
-                b.Property<string>("Validity")
-                    .IsRequired()
-                    .HasMaxLength(7)
-                    .HasColumnType("nvarchar(7)");
-
-                b.HasKey("CardId");
-
-                b.ToTable("Cards");
-            });
 
             modelBuilder.Entity("Repositories.Models.Deposit", b =>
                 {
@@ -124,10 +88,11 @@ namespace Repositories.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("AccountAccontId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Check")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -139,8 +104,9 @@ namespace Repositories.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("LoanDetailsLoanId")
-                        .HasColumnType("int");
+                    b.Property<string>("LoanId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -151,10 +117,6 @@ namespace Repositories.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("AccountAccontId");
-
-                    b.HasIndex("LoanDetailsLoanId");
 
                     b.ToTable("Guarantors");
                 });
@@ -176,9 +138,6 @@ namespace Repositories.Migrations
                     b.Property<string>("LoanFile")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("LoanerId")
-                        .HasColumnType("int");
 
                     b.Property<int>("Sum")
                         .HasColumnType("int");
@@ -234,24 +193,12 @@ namespace Repositories.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("Repositories.Models.Guarantor", b =>
+            modelBuilder.Entity("Repositories.Models.UsersUnderWarning", b =>
                 {
-                    b.HasOne("Repositories.Models.Account", "Account")
-                        .WithMany()
-                        .HasForeignKey("AccountAccontId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
 
-                    b.HasOne("Repositories.Models.LoanDetails", null)
-                        .WithMany("Guarantors")
-                        .HasForeignKey("LoanDetailsLoanId");
-
-                    b.Navigation("Account");
-                });
-
-            modelBuilder.Entity("Repositories.Models.LoanDetails", b =>
-                {
-                    b.Navigation("Guarantors");
+                    b.ToTable("UsersUnderWarning");
                 });
 #pragma warning restore 612, 618
         }
