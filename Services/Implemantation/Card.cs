@@ -27,7 +27,7 @@ public class Card : IServices.ICard
             {
                 return -2;
             }
-            IMapper mapper = myMapper.CardMapper.CreateMapper();
+            IMapper mapper = myMapper.AccountMapper.CreateMapper();
             Repositories.Models.Card a = mapper.Map<Repositories.Models.Card>(card);
             return RepoAccount.AddNewAccount(a);
         }
@@ -63,7 +63,7 @@ public class Card : IServices.ICard
         try
         {
            List<Repositories.Models.Card> allUserCards =  RepoAccount.GetAllUserCards(id);
-            IMapper mapper = myMapper.CardMapper.CreateMapper();
+            IMapper mapper = myMapper.AccountMapper.CreateMapper();
             List<DTO.Models.Card> allCards = allUserCards.ConvertAll<DTO.Models.Card>(card=> mapper.Map<Repositories.Models.Card, DTO.Models.Card>(card));
             return allCards;
 

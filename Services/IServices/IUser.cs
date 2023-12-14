@@ -24,4 +24,8 @@ public interface IUser
     List<User> GetAllUsers();
 
     bool IsUserExist(int  userId);
+
+    bool DeleteUser(int userId);
+
+    bool AdminLogIn(LoginUser isAdmin);
 }

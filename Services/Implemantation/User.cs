@@ -3,6 +3,7 @@ using DTO.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Identity.Client;
+using Repositories.Implementation;
 using Repositories.Interfaces;
 using Repositories.Models;
 using System;
@@ -128,6 +129,41 @@ public class User : IServices.IUser
         }
     }
 
+
+    public bool DeleteUser(int userId)
+    {
+        try
+        {
+            Repositories.Models.Users? deleteUser = userRepository.GetUser(userId);
+            if (deleteUser != null)
+                return userRepository.DeleteUser(deleteUser);
+            else return false;
+        }
+        catch
+        {
+            return false;
+        }
+
+    }
+
+    public bool AdminLogIn(LoginUser isAdmin)
+    {
+        try
+        {
+            int isEmailAdmin = userRepository.isAdmin(isAdmin.UserName);//check if userName(email) is equal to admin email. And if password is match.
+            if (isEmailAdmin > 0)
+            {
+                if (isAdmin.Password == "23578951")
+                    return true;
+                return false;
+            }
+            return false;
+        }
+        catch
+        {
+            return false;
+        }
+    }
     public bool IsUserExist(int userId)
     {
         return userRepository.IsUserExist(userId);

@@ -104,6 +104,9 @@ namespace Repositories.Migrations
 
                     b.Property<DateTime>("DateToPull")
                         .HasColumnType("datetime2");
+                            
+           
+
 
                     b.Property<int>("Sum")
                         .HasColumnType("int");

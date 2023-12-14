@@ -10,8 +10,14 @@ namespace Repositories.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-
-            migrationBuilder.Sql("ALTER TABLE Guarantors ADD LoanId int NOT NULL");
+            migrationBuilder.AlterColumn<DateTime>(
+                name: "DateToPull",
+    table: "Deposits",
+    type: "datetime",
+    nullable: false,
+    oldClrType: typeof(DateOnly),
+    oldType: "date");
+            //migrationBuilder.Sql("ALTER TABLE Guarantors ADD LoanId int NOT NULL");
 
             /*migrationBuilder.DropColumn(
              name: "LoanDetaiksLoanId",

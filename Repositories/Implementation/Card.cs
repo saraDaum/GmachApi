@@ -11,12 +11,13 @@ namespace Repositories.Implementation;
 public class Card : Interfaces.ICard
 {
 
-    private IDbContext dbContext;
+    private readonly IDbContext dbContext;
 
-    public Card(IDbContext dbContext)
+    public Card(IDbContext _dbContext)
     {
-        this.dbContext = dbContext;
+        dbContext = _dbContext;
     }
+  
 
     public Card()
     { 
@@ -26,12 +27,12 @@ public class Card : Interfaces.ICard
 
 
 
-    public bool checkIfUserHasAccount(int UserId)
+  /*  public bool checkIfUserHasAccount(int UserId)
     {
         try
         {
             // Check if any account with the specified UserId exists
-            bool accountExists = dbContext.Card.Any(a => a.UserId == UserId);
+            bool accountExists = dbContext.Cards.Any(a => a.UserId == UserId);
 
             // Return the result
             return accountExists;
@@ -43,28 +44,13 @@ public class Card : Interfaces.ICard
             return false; // or throw an exception based on your error handling strategy
         }
     }
-
-    public int AddNewAccount(Models.Card account)
-    {
-        try
-        {
-            dbContext.Card.Add(account);
-            dbContext.SaveChanges();
-            return account.CardId;
-        }
-        catch (Exception ex)
-        {
-            // Handle exceptions if needed
-            Console.WriteLine($"Error checking account existence: {ex.Message}");
-            return -1; // or throw an exception based on your error handling strategy
-        }
-    }
+  */
 
     List<Models.Card> ICard.GetAllUserCards(int id)
     {
         try
         {
-            List<Models.Card> allUSerCards = dbContext.Card.Where(card=> card.UserId == id).ToList();   
+            List<Models.Card> allUSerCards = dbContext.Cards.Where(card=> card.UserId == id).ToList();   
             if(allUSerCards.Count> 0)
             {
                 return allUSerCards;

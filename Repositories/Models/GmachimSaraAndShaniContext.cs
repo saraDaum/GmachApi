@@ -57,6 +57,21 @@ public partial class GmachimSaraAndShaniContext : DbContext, IDbContext
             //.OnDelete(DeleteBehavior.Cascade);
         });
 
+        // Configure Card
+        modelBuilder.Entity<Card>(entity =>
+        {
+            entity.HasKey(e => e.CardId);
+
+            // Set other configurations if needed
+            entity.Property(e => e.UserId).IsRequired();
+            entity.Property(e => e.CreditCardNumber).IsRequired().HasMaxLength(16);
+            entity.Property(e => e.OwnersName).IsRequired();
+            entity.Property(e => e.CVV).IsRequired().HasMaxLength(3);
+            entity.Property(e => e.Validity).IsRequired().HasMaxLength(7);
+
+
+        });
+
         // Configure User
         modelBuilder.Entity<Users>(entity =>
         {
