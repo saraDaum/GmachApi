@@ -11,4 +11,5 @@ public interface IDeposit
 {
     int AddADeposit(Deposit newDeposit);
     IEnumerable<Deposit> AllUserDeposits(int id);
+    List<Deposit> GetAll();
 }

@@ -62,7 +62,7 @@ public class UserController : ControllerBase
         }
     }
 
-    [HttpPost("Admin/LogIn/{email}/{password}")]
+    [HttpPost("Admin/LogIn")]
     public bool AdminLogIn([FromRoute] string email, [FromRoute] string password)
     {
         try

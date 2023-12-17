@@ -11,9 +11,9 @@ namespace Repositories.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
+           /* migrationBuilder.DropTable(
                 name: "Accounts");
-
+           */
             migrationBuilder.CreateTable(
                 name: "Card",
                 columns: table => new
@@ -34,10 +34,10 @@ namespace Repositories.Migrations
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
-        {
+        { 
             migrationBuilder.DropTable(
                 name: "Card");
-
+/*
             migrationBuilder.CreateTable(
                 name: "Accounts",
                 columns: table => new
@@ -54,6 +54,7 @@ namespace Repositories.Migrations
                 {
                     table.PrimaryKey("PK_Accounts", x => x.AccontId);
                 });
+            */
         }
     }
 }

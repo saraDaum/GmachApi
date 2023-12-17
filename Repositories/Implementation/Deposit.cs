@@ -52,4 +52,16 @@ public class Deposit : Interfaces.IDeposit
             return -1;
         }
     }
+
+    public IEnumerable<Models.Deposit> GetAll()
+    {
+        try
+        {
+            return dbContext.Deposits;
+        }
+        catch
+        {
+            return new List<Models.Deposit>();
+        }
+    }
 }

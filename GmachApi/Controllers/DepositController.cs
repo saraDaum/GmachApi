@@ -26,10 +26,17 @@ namespace GmachApi.Controllers
             return "value";
         }
 
-        [HttpGet("/GetAll")]
-        public IEnumerable<Deposit> AllDeposits()
+        [HttpGet("GetAll")]
+        public List<Deposit> AllDeposits()
         {
-            return new List<Deposit>();
+            try
+            {
+                return deposit.GetAll();
+            }
+            catch
+            {
+                return new List<Deposit>();
+            }
         }
 
         [HttpGet("AllUserDeposits/{id}")]
