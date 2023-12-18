@@ -8,7 +8,7 @@ public partial class Borrower: Guarantor
 
     public string CopyId { get; set; } = null!;//File 
 
-    public virtual ICollection<Account> Acounts { get; set; } = new List<Account>();
+    public virtual ICollection<Card> Acounts { get; set; } = new List<Card>();
 
     public virtual ICollection<LoanDetails> Loans { get; set; } = new List<LoanDetails>();
 }

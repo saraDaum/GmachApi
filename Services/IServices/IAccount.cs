@@ -29,7 +29,7 @@ public interface IAccount
     /// </summary>
     /// <param name="account">The account details</param>
     /// <returns>the account id or -1</returns>
-    int AddNewAccount(DTO.Models.Account account);
+    int AddNewAccount(DTO.Models.Card account);
 
 
     /// <summary>
@@ -37,6 +37,6 @@ public interface IAccount
     /// </summary>
     /// <param name="userId"></param>
     /// <returns></returns>
-    List<DTO.Models.Account> GetAllCards(int userId);
+    List<DTO.Models.Card> GetAllCards(int userId);
     
 }

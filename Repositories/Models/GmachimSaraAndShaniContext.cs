@@ -17,7 +17,7 @@ public partial class GmachimSaraAndShaniContext : DbContext, IDbContext
     {
     }
 
-    public virtual DbSet<Account> Accounts { get; set; }
+    public virtual DbSet<Card> Cards { get; set; }
 
     public virtual DbSet<Deposit> Deposits { get; set; }
 
@@ -37,7 +37,7 @@ public partial class GmachimSaraAndShaniContext : DbContext, IDbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         // Configure Account
-        modelBuilder.Entity<Account>(entity =>
+        modelBuilder.Entity<Card>(entity =>
         {
             entity.HasKey(e => e.AccontId);
 
@@ -48,6 +48,34 @@ public partial class GmachimSaraAndShaniContext : DbContext, IDbContext
             entity.Property(e => e.Validity).IsRequired();
             entity.Property(e => e.OwnersName).IsRequired();
             
+        });
+
+        modelBuilder.Entity<Account>(entity =>
+        {
+            // Configure primary key
+            entity.HasKey(e => e.Id);
+
+            // Configure auto-generated value for Id
+            entity.Property(e => e.Id)
+                .ValueGeneratedOnAdd();
+
+            // Configure UserId as a foreign key if needed
+            // entity.HasOne(e => e.User)
+            //     .WithMany()
+            //     .HasForeignKey(e => e.UserId);
+
+            // Configure other properties
+            entity.Property(e => e.OwnerFullName)
+                .HasMaxLength(255); // Adjust the length as needed
+
+            entity.Property(e => e.AccountNunber)
+                .HasMaxLength(50); // Adjust the length as needed
+
+            entity.Property(e => e.BankNumber)
+                .HasMaxLength(50); // Adjust the length as needed
+
+            entity.Property(e => e.BranchNumber)
+                .HasMaxLength(50); // Adjust the length as needed
         });
 
         // Configure UserUnderWarning

@@ -12,7 +12,7 @@ public class Account : IServices.IAccount
     Repositories.Interfaces.IAccount RepoAccount = new Repositories.Implementation.Account();
     MapperConfig myMapper = MapperConfig.Instance;
 
-    public int AddNewAccount(DTO.Models.Account account)
+    public int AddNewAccount(DTO.Models.Card account)
     {
         try
         {
@@ -28,7 +28,7 @@ public class Account : IServices.IAccount
                 return -2;
             }
             IMapper mapper = myMapper.AccountMapper.CreateMapper();
-            Repositories.Models.Account a = mapper.Map<Repositories.Models.Account>(account);
+            Repositories.Models.Card a = mapper.Map<Repositories.Models.Card>(account);
             return RepoAccount.AddNewAccount(a);
         }
         catch (Exception ex)
@@ -58,19 +58,19 @@ public class Account : IServices.IAccount
         }
     }
 
-    public List<DTO.Models.Account> GetAllCards(int id)
+    public List<DTO.Models.Card> GetAllCards(int id)
     {
         try
         {
-           List<Repositories.Models.Account> allUserCards =  RepoAccount.GetAllUserCards(id);
+           List<Repositories.Models.Card> allUserCards =  RepoAccount.GetAllUserCards(id);
             IMapper mapper = myMapper.AccountMapper.CreateMapper();
-            List<DTO.Models.Account> allCards = allUserCards.ConvertAll<DTO.Models.Account>(card=> mapper.Map<Repositories.Models.Account, DTO.Models.Account>(card));
+            List<DTO.Models.Card> allCards = allUserCards.ConvertAll<DTO.Models.Card>(card=> mapper.Map<Repositories.Models.Card, DTO.Models.Card>(card));
             return allCards;
 
         }
         catch
         {
-            return new List<DTO.Models.Account>();
+            return new List<DTO.Models.Card>();
         }
     }
 }
