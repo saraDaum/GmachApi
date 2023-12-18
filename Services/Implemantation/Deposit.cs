@@ -3,6 +3,7 @@ using Services.IServices;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -48,12 +49,13 @@ public class Deposit : IServices.IDeposit
                 return -2;
             }
 
+            //TODO: Uncomment this lines.
             //make sure that the user has a bank account in the system.
-            Account account = new Account();
-            if(!account.IsAccountExistByUserId(newDeposit.UserId))
-            {
-                return -3;
-            }
+           // Account account = new Account();
+            //if(!account.IsAccountExistByUserId(newDeposit.UserId))
+            //{
+              //  return -3;
+           // }
 
             //add the deposit
             IMapper mapper = myMapper.DepositsMapper.CreateMapper();
@@ -72,5 +74,22 @@ public class Deposit : IServices.IDeposit
         }
     }
 
-
+    /// <summary>
+    /// Returns all users deposits in data base.
+    /// </summary>
+    /// <returns></returns>
+    public List<DTO.Models.Deposit> GetAll()
+    {
+        try
+        {
+            IEnumerable<Repositories.Models.Deposit> allUsersDeposits = reposDeposit.GetAll();
+            ArgumentNullException.ThrowIfNull(allUsersDeposits);// Continue just if it is not null.
+            IMapper mapper = myMapper.DepositsMapper.CreateMapper();
+            return allUsersDeposits.Select(deposit => mapper.Map<Repositories.Models.Deposit, DTO.Models.Deposit>(deposit)).ToList();
+        }
+        catch
+        {
+            return new List<DTO.Models.Deposit>();
+        }
+    }
 }

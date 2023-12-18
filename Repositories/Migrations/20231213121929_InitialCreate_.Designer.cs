@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Repositories.Models;
 
@@ -11,9 +12,11 @@ using Repositories.Models;
 namespace Repositories.Migrations
 {
     [DbContext(typeof(GmachimSaraAndShaniContext))]
-    partial class GmachimSaraAndShaniContextModelSnapshot : ModelSnapshot
+    [Migration("20231213121929_InitialCreate_")]
+    partial class InitialCreate_
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -24,47 +27,11 @@ namespace Repositories.Migrations
 
             modelBuilder.Entity("Repositories.Models.Card", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("CardId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("AccountNunber")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("CreditCardNumber")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("BranchNumber")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("OwnerFullName")
-                        .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Account");
-                });
-
-            modelBuilder.Entity("Repositories.Models.Card", b =>
-                {
-                    b.Property<int>("AccontId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AccontId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CardId"));
 
                     b.Property<string>("CVV")
                         .IsRequired()
@@ -86,9 +53,9 @@ namespace Repositories.Migrations
                     b.Property<DateTime>("Validity")
                         .HasColumnType("datetime2");
 
-                    b.HasKey("AccontId");
+                    b.HasKey("CardId");
 
-                    b.ToTable("Cards");
+                    b.ToTable("Card");
                 });
 
             modelBuilder.Entity("Repositories.Models.Deposit", b =>
@@ -110,7 +77,7 @@ namespace Repositories.Migrations
 
                     b.HasKey("DepositId");
 
-                    b.ToTable("Deposits", (string)null);
+                    b.ToTable("Deposits");
                 });
 
             modelBuilder.Entity("Repositories.Models.Guarantor", b =>
@@ -179,7 +146,7 @@ namespace Repositories.Migrations
 
                     b.HasKey("LoanId");
 
-                    b.ToTable("LoanDetails", (string)null);
+                    b.ToTable("LoanDetails");
                 });
 
             modelBuilder.Entity("Repositories.Models.Users", b =>
@@ -222,7 +189,7 @@ namespace Repositories.Migrations
                     b.HasIndex("UserIdentityNumber")
                         .IsUnique();
 
-                    b.ToTable("Users", (string)null);
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("Repositories.Models.UsersUnderWarning", b =>

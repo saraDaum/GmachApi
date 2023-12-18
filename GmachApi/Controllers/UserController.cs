@@ -62,9 +62,30 @@ public class UserController : ControllerBase
         }
     }
 
+    [HttpPost("Admin/LogIn")]
+    public bool AdminLogIn([FromRoute] string email, [FromRoute] string password)
+    {
+        try
+        {
+            LoginUser isAdmin = new LoginUser(email, password);
+            return user.AdminLogIn(isAdmin);
+        }
+        catch
+        {
+            return false;
+        }
+    }
+
     [HttpGet("GetAllUsers")]
     public List<User> GetUsers()
     {
         return user.GetAllUsers();
+    }
+
+    [HttpDelete("{id}")]
+    public bool DeleteUser([FromBody] int id)
+    {
+        return user.DeleteUser(id);
+        return false;
     }
 }

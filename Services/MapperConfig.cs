@@ -57,4 +57,10 @@ public class MapperConfig : Profile
         cnf.CreateMap<Repositories.Models.Card, DTO.Models.Card>()
         .ReverseMap();
     });
+
+    public MapperConfiguration CardMapper => new MapperConfiguration(cnf =>
+    {
+        cnf.CreateMap<DTO.Models.Card, Repositories.Models.Card>()
+        .ReverseMap();
+    });
 }

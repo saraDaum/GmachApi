@@ -8,29 +8,26 @@ using System.Threading.Tasks;
 
 namespace Repositories.Implementation;
 
-public class Account : Interfaces.IAccount
+public class Card : Interfaces.ICard
 {
 
-    private IDbContext dbContext;
+    private readonly IDbContext dbContext;
 
-    public Account(IDbContext dbContext)
+    public Card(IDbContext _dbContext)
     {
-        this.dbContext = dbContext;
+        dbContext = _dbContext;
     }
+  
 
-    public Account()
+    public Card()
     { 
         dbContext = new GmachimSaraAndShaniContext();
     }
 
 
 
-    /// <summary>
-    /// Gets user id and return a bollean value if user has a bank account in system or not.
-    /// </summary>
-    /// <param name="UserId"></param>
-    /// <returns></returns>
-    public bool checkIfUserHasAccount(int UserId)
+
+  /*  public bool checkIfUserHasAccount(int UserId)
     {
         try
         {
@@ -47,29 +44,9 @@ public class Account : Interfaces.IAccount
             return false; // or throw an exception based on your error handling strategy
         }
     }
-    /// <summary>
-    /// Addes a new user bank account to database.
-    /// Gets a bank account entity and return the AccountId.
-    /// </summary>
-    /// <param name="account"></param>
-    /// <returns></returns>
-    public int AddNewAccount(Models.Account account)
-    {
-        try
-        {
-            dbContext.Cards.Add(account);
-            dbContext.SaveChanges();
-            return account.AccontId;
-        }
-        catch (Exception ex)
-        {
-            // Handle exceptions if needed
-            Console.WriteLine($"Error checking account existence: {ex.Message}");
-            return -1; // or throw an exception based on your error handling strategy
-        }
-    }
+  */
 
-    List<Models.Card> IAccount.GetAllUserCards(int id)
+    List<Models.Card> ICard.GetAllUserCards(int id)
     {
         try
         {
@@ -88,12 +65,12 @@ public class Account : Interfaces.IAccount
         }
     }
 
-    bool IAccount.checkIfUserHasAccount(int UserId)
+    bool ICard.checkIfUserHasAccount(int UserId)
     {
         throw new NotImplementedException();
     }
 
-    int IAccount.AddNewAccount(Models.Card account)
+    int ICard.AddNewAccount(Models.Card account)
     {
         throw new NotImplementedException();
     }

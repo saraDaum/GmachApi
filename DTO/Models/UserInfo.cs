@@ -14,7 +14,6 @@ namespace DTO.Models;
 public class UserInfo
 {
     public int UserId {  get; set; }
-
     public string UserIdentityNumber { get; set; } = string.Empty;
     public string UserName { get; set; } = string.Empty;
     public string UserEmail { get; set; } = string.Empty;

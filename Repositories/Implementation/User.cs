@@ -46,7 +46,7 @@ public class User : Interfaces.IUser
 
 
     /// <summary>
-    ///This function accepts a user object and returns the first element found.
+    ///This function gets an user object and returns the first element found.
     /// If there is no matching element, returns the default value.
     /// </summary>
     /// <param name="user"></param>
@@ -63,6 +63,18 @@ public class User : Interfaces.IUser
             return null;
         }
 
+    }
+
+    public Users? GetUser(int userID)
+    {
+        try
+        {
+            return dbContext.Users.FirstOrDefault(user => user.UserId == userID);
+        }
+        catch
+        {
+            return null;
+        }
     }
 
     /// <summary>
@@ -91,6 +103,37 @@ public class User : Interfaces.IUser
         }
 
 
+    }
+
+    public bool DeleteUser(Users deleteUser)
+    {
+        try
+        {
+            dbContext.Users.Remove(deleteUser);
+            dbContext.SaveChanges();
+            return true;
+        }
+        catch
+        {
+            return false;
+        }
+    }
+
+    public int isAdmin(string email)
+    {
+        try
+        {
+            Users? admin = dbContext.Users.FirstOrDefault(user => user.UserEmail == email && user.UserId == 20);
+            if(admin != null)
+            {
+                return 1;
+            }
+            return -1;
+        }
+        catch
+        {
+            return - 1;
+        }
     }
 
 

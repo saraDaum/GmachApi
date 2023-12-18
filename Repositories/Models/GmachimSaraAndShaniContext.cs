@@ -19,6 +19,8 @@ public partial class GmachimSaraAndShaniContext : DbContext, IDbContext
 
     public virtual DbSet<Card> Cards { get; set; }
 
+    public virtual DbSet<Card> Cards { get; set; }
+
     public virtual DbSet<Deposit> Deposits { get; set; }
 
     public virtual DbSet<Guarantor> Guarantors { get; set; }
