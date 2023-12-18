@@ -57,9 +57,9 @@ public class Account : Interfaces.IAccount
     {
         try
         {
-            dbContext.Cards.Add(account);
+            dbContext.Accounts.Add(account);
             dbContext.SaveChanges();
-            return account.AccontId;
+            return account.Id;
         }
         catch (Exception ex)
         {

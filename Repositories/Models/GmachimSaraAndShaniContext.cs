@@ -19,8 +19,6 @@ public partial class GmachimSaraAndShaniContext : DbContext, IDbContext
 
     public virtual DbSet<Card> Cards { get; set; }
 
-    public virtual DbSet<Card> Cards { get; set; }
-
     public virtual DbSet<Deposit> Deposits { get; set; }
 
     public virtual DbSet<Guarantor> Guarantors { get; set; }
@@ -29,6 +27,7 @@ public partial class GmachimSaraAndShaniContext : DbContext, IDbContext
 
     public virtual DbSet<LoanDetails> LoanDetails {get; set;}
     public virtual DbSet<UsersUnderWarning> UsersUnderWarning { get; set; }
+    public virtual DbSet<Account> Accounts { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
@@ -41,7 +40,7 @@ public partial class GmachimSaraAndShaniContext : DbContext, IDbContext
         // Configure Account
         modelBuilder.Entity<Card>(entity =>
         {
-            entity.HasKey(e => e.AccontId);
+            entity.HasKey(e => e.CardId);
 
             // Set other configurations if needed
             entity.Property(e => e.UserId).IsRequired();

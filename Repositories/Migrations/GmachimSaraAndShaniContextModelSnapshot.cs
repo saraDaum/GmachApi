@@ -22,7 +22,7 @@ namespace Repositories.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("Repositories.Models.Card", b =>
+            modelBuilder.Entity("Repositories.Models.Account", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -35,7 +35,7 @@ namespace Repositories.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<string>("CreditCardNumber")
+                    b.Property<string>("BankNumber")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
@@ -55,16 +55,16 @@ namespace Repositories.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Account");
+                    b.ToTable("Accounts");
                 });
 
             modelBuilder.Entity("Repositories.Models.Card", b =>
                 {
-                    b.Property<int>("AccontId")
+                    b.Property<int>("CardId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AccontId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CardId"));
 
                     b.Property<string>("CVV")
                         .IsRequired()
@@ -86,7 +86,7 @@ namespace Repositories.Migrations
                     b.Property<DateTime>("Validity")
                         .HasColumnType("datetime2");
 
-                    b.HasKey("AccontId");
+                    b.HasKey("CardId");
 
                     b.ToTable("Cards");
                 });
@@ -110,7 +110,7 @@ namespace Repositories.Migrations
 
                     b.HasKey("DepositId");
 
-                    b.ToTable("Deposits", (string)null);
+                    b.ToTable("Deposits");
                 });
 
             modelBuilder.Entity("Repositories.Models.Guarantor", b =>
@@ -179,7 +179,7 @@ namespace Repositories.Migrations
 
                     b.HasKey("LoanId");
 
-                    b.ToTable("LoanDetails", (string)null);
+                    b.ToTable("LoanDetails");
                 });
 
             modelBuilder.Entity("Repositories.Models.Users", b =>
@@ -222,7 +222,7 @@ namespace Repositories.Migrations
                     b.HasIndex("UserIdentityNumber")
                         .IsUnique();
 
-                    b.ToTable("Users", (string)null);
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("Repositories.Models.UsersUnderWarning", b =>
