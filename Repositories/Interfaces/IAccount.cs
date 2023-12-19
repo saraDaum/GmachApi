@@ -21,7 +21,12 @@ public interface IAccount
     /// </summary>
     /// <param name="account">Account to add</param>
     /// <returns>Account Id</returns>
-    int AddNewAccount(Models.Card account);
+    int AddNewAccount(Models.Account account);
 
-    List<Repositories.Models.Card> GetAllUserCards(int id);
+
+    /// <summary>
+    /// Returns a List with all users accounts in database
+    /// </summary>
+    /// <returns></returns>
+    List<Models.Account> GetAllAccounts();
 }
