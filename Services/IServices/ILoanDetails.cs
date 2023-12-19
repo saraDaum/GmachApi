@@ -14,4 +14,5 @@ public interface ILoanDetails
     List<LoanDetails> GetUserLoans(int id);
 
     bool IsLoanExist(int id);
+    bool LoanApproval(int loanID);
 }

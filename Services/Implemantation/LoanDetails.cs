@@ -92,5 +92,18 @@ public class LoanDetails : IServices.ILoanDetails
             return false;
         }
     }
+
+    public bool LoanApproval(int loanID)
+    {
+        try
+        {
+            return loanDetail.LoanApproval(loanID);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+            return false;
+        }
+    }
 }
 
