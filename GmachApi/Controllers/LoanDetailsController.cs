@@ -1,4 +1,5 @@
 ﻿using DTO.Models;
+using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -66,5 +67,32 @@ namespace GmachApi.Controllers
         public void Delete(int id)
         {
         }
+
+
+        /// <summary>
+        /// When the admin decided to approve a loan
+        /// </summary>
+        /// <param name="loanID">the id of the loan</param>
+        /// <param name="confirmation">a string to ensure is the admin</param>
+        /// <returns>success</returns>
+        [HttpPost("LoanApproval")]
+        public bool LoanApproval([FromBody] int loanID, [FromHeader]string confirmation)
+        {
+            try
+            {
+                if (confirmation == "15987532")
+                {
+                    return loanDetail.LoanApproval(loanID);
+                }
+                return false;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+
+
+        }
+
     }
 }

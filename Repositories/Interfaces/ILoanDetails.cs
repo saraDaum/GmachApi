@@ -14,5 +14,7 @@ public interface ILoanDetails
     public List<Models.LoanDetails> GeAlltLoans();
 
     bool IsLoanExist(int loanId);
+
+    bool LoanApproval(int id);
     
 }

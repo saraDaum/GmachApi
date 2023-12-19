@@ -11,6 +11,7 @@
     <PackageReference Include="Arch.EntityFrameworkCore.Proxies" Version="2.1.15" />
     <PackageReference Include="Microsoft.AspNet.WebApi.Cors" Version="5.3.0" />
     <PackageReference Include="Microsoft.AspNetCore.Cors" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.DataProtection" Version="8.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.sqlserver" Version="7.0.5" />
 	  
 

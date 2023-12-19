@@ -75,4 +75,22 @@ public class LoanDetails : Interfaces.ILoanDetails
             return false;
         }
     }
+
+    public bool LoanApproval(int loanID)
+    {
+        try
+        {
+            Models.LoanDetails? l = dbContext.LoanDetails.Where(l => l.LoanId == loanID).FirstOrDefault();
+            if (l == null)
+                return false;
+            l.IsAprovied = true;
+            dbContext.SaveChanges();
+            return true;
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex);
+            return false;
+        }
+    }
 }
