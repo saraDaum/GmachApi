@@ -66,16 +66,16 @@ public partial class GmachimSaraAndShaniContext : DbContext, IDbContext
             //     .HasForeignKey(e => e.UserId);
 
             // Configure other properties
-            entity.Property(e => e.OwnerFullName)
+            entity.Property(e => e.AccountOwnerName)
                 .HasMaxLength(255); // Adjust the length as needed
 
-            entity.Property(e => e.AccountsNunber)
+            entity.Property(e => e.AccountNunber)
                 .HasMaxLength(50); // Adjust the length as needed
 
             entity.Property(e => e.BankNumber)
                 .HasMaxLength(50); // Adjust the length as needed
 
-            entity.Property(e => e.Branch)
+            entity.Property(e => e.BranchNumber)
                 .HasMaxLength(50); // Adjust the length as needed
         });
 
