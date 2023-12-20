@@ -47,6 +47,7 @@ public class Account : Interfaces.IAccount
             return false; // or throw an exception based on your error handling strategy
         }
     }
+
     /// <summary>
     /// Addes a new user bank account to database.
     /// Gets a bank account entity and return the AccountId.
@@ -82,12 +83,9 @@ public class Account : Interfaces.IAccount
         }
     }
 
-    bool IAccount.checkIfUserHasAccount(int UserId)
+
+    public int AddNewAccount(Models.Card account)
     {
         throw new NotImplementedException();
     }
-
-    
-
-
 }
