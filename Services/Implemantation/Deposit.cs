@@ -92,4 +92,46 @@ public class Deposit : IServices.IDeposit
             return new List<DTO.Models.Deposit>();
         }
     }
+
+    public IEnumerable<DTO.Models.Deposit>? GetAllTheDepositsByDate(DateTime date)
+    {
+        try
+        {
+            // get all the dposit according to specific day
+            List<Repositories.Models.Deposit>? deposits = reposDeposit.GetAllTheDepositsByDate(date);
+            ArgumentNullException.ThrowIfNull(deposits);
+
+            //convert the deposits type.
+            IMapper mapper = myMapper.DepositsMapper.CreateMapper();
+            List<DTO.Models.Deposit> ans = new List<DTO.Models.Deposit>();
+            foreach(Repositories.Models.Deposit d in deposits)
+            {
+                 ans.Add(mapper.Map<DTO.Models.Deposit>(d));
+            }
+            return ans;
+        }
+        catch(Exception ex) 
+        {
+            Console.WriteLine(ex.ToString());
+            return null;
+        }
+    }
+
+    public double getTheBalanceByDate(DateTime date)
+    {
+        try
+        {
+            double balance = 0;
+            foreach(DTO.Models.Deposit d in GetAllTheDepositsByDate(date))
+            {
+                balance += d.Sum;
+            }
+            return balance;
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.ToString());
+            throw new Exception("Error: in get balance of deposit by date function", ex);
+        }
+    }
 }
