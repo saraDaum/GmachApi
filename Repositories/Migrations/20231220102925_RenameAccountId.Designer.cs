@@ -12,8 +12,8 @@ using Repositories.Models;
 namespace Repositories.Migrations
 {
     [DbContext(typeof(GmachimSaraAndShaniContext))]
-    [Migration("20231218183344_AfterBranchMerge")]
-    partial class AfterBranchMerge
+    [Migration("20231220102925_RenameAccountId")]
+    partial class RenameAccountId
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,11 +27,11 @@ namespace Repositories.Migrations
 
             modelBuilder.Entity("Repositories.Models.Account", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("AccountId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AccountId"));
 
                     b.Property<string>("AccountNunber")
                         .IsRequired()
@@ -56,7 +56,7 @@ namespace Repositories.Migrations
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.HasKey("AccountId");
 
                     b.ToTable("Accounts");
                 });

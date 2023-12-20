@@ -59,7 +59,7 @@ public class Account : Interfaces.IAccount
         {
             dbContext.Accounts.Add(account);
             dbContext.SaveChanges();
-            return account.Id;
+            return account.AccountId;
         }
         catch (Exception ex)
         {

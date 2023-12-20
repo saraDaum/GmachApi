@@ -54,10 +54,10 @@ public partial class GmachimSaraAndShaniContext : DbContext, IDbContext
         modelBuilder.Entity<Account>(entity =>
         {
             // Configure primary key
-            entity.HasKey(e => e.Id);
+            entity.HasKey(e => e.AccountId);
 
             // Configure auto-generated value for Id
-            entity.Property(e => e.Id)
+            entity.Property(e => e.AccountId)
                 .ValueGeneratedOnAdd();
 
             // Configure UserId as a foreign key if needed

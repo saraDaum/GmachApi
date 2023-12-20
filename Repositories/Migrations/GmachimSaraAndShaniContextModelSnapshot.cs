@@ -24,11 +24,11 @@ namespace Repositories.Migrations
 
             modelBuilder.Entity("Repositories.Models.Account", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("AccountId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AccountId"));
 
                     b.Property<string>("AccountNunber")
                         .IsRequired()
@@ -53,9 +53,9 @@ namespace Repositories.Migrations
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.HasKey("AccountId");
 
-                    b.ToTable("Accounts");
+                    b.ToTable("Account");
                 });
 
             modelBuilder.Entity("Repositories.Models.Card", b =>
@@ -88,7 +88,7 @@ namespace Repositories.Migrations
 
                     b.HasKey("CardId");
 
-                    b.ToTable("Cards");
+                    b.ToTable("Card");
                 });
 
             modelBuilder.Entity("Repositories.Models.Deposit", b =>

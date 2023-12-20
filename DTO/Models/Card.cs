@@ -8,7 +8,7 @@ namespace DTO.Models;
 public partial class Card
 {
 
-    public int AccontId { get; set; }
+    public int CardId { get; set; }
     public int UserId { get; set; }
     public string CreditCardNumber { get; set; } = string.Empty;
     public string OwnersName { get; set; } = string.Empty;
