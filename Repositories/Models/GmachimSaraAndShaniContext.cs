@@ -64,19 +64,24 @@ public partial class GmachimSaraAndShaniContext : DbContext, IDbContext
             // entity.HasOne(e => e.User)
             //     .WithMany()
             //     .HasForeignKey(e => e.UserId);
+            entity.Property(entity => entity.UserId)
+                .IsRequired();
 
             // Configure other properties
-            entity.Property(e => e.OwnerFullName)
+            entity.Property(e => e.AccountOwnerName)
                 .HasMaxLength(255); // Adjust the length as needed
 
-            entity.Property(e => e.AccountsNunber)
+            entity.Property(e => e.AccountNunber)
                 .HasMaxLength(50); // Adjust the length as needed
 
             entity.Property(e => e.BankNumber)
                 .HasMaxLength(50); // Adjust the length as needed
 
-            entity.Property(e => e.Branch)
+            entity.Property(e => e.BranchNumber)
                 .HasMaxLength(50); // Adjust the length as needed
+            
+            entity.Property(e => e.ConfirmAccountFile) 
+                .HasMaxLength(255);
         });
 
         // Configure UserUnderWarning

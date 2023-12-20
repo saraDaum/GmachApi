@@ -105,5 +105,10 @@ public class LoanDetails : IServices.ILoanDetails
             return false;
         }
     }
+
+    public IEnumerable<int>? GetLoansToApproval()
+    {
+        throw new NotImplementedException();
+    }
 }
 
