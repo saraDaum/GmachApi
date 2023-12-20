@@ -108,6 +108,37 @@ public class LoanDetails : IServices.ILoanDetails
 
     public IEnumerable<int>? GetLoansToApproval()
     {
+        // 1. Receive the balance of the association
+
+        //1.1  Resive the Deposits today balance
+        Deposit deposit = new Deposit();
+        double todayDepositsBalance = deposit.getTheBalanceByDate(DateTime.Today);
+        //1.2  Recive the loans today balance
+        double todayLoansBalance = getTheBalanceByDate(DateTime.Today);
+
+
+
+
+
+
+        throw new NotImplementedException();
+    }
+
+    public IEnumerable<DTO.Models.LoanDetails>? GetAllTheLoansByDate(DateTime date)
+    {
+        try
+        {
+            List<Repositories.Models.LoanDetails> repoLoans = 
+        }
+        catch(Exception ex) { }
+
+
+
+        throw new NotImplementedException();
+    }
+
+    public double getTheBalanceByDate(DateTime date)
+    {
         throw new NotImplementedException();
     }
 }

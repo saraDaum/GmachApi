@@ -16,4 +16,19 @@ public interface ILoanDetails
 
     bool IsLoanExist(int id);
     bool LoanApproval(int loanID);
+
+
+    /// <summary>
+    /// Get all the Loans that exist and active in a specipic date.
+    /// </summary>
+    /// <param name="date">the date</param>
+    /// <returns>list of the loans.</returns>
+    IEnumerable<DTO.Models.LoanDetails>? GetAllTheLoansByDate(DateTime date);
+
+    /// <summary>
+    /// return the balance of specific date (the loans only)
+    /// </summary>
+    /// <param name="date">the date</param>
+    /// <returns>the balance</returns>
+    double getTheBalanceByDate(DateTime date);
 }

@@ -64,4 +64,17 @@ public class Deposit : Interfaces.IDeposit
             return new List<Models.Deposit>();
         }
     }
+
+    public List<Models.Deposit>? GetAllTheDepositsByDate(DateTime date)
+    {
+        try
+        {
+            return dbContext.Deposits.Where(d => d.DateToPull > date).ToList();
+        }
+        catch(Exception ex) 
+        {
+            Console.WriteLine(ex.Message);
+            return null;
+        }
+    }
 }

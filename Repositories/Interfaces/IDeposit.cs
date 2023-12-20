@@ -14,7 +14,7 @@ public interface IDeposit
 
     IEnumerable<Repositories.Models.Deposit> GetAll();
 
-    
+    List<Models.Deposit>? GetAllTheDepositsByDate(DateTime date);
 
 
 
