@@ -94,5 +94,28 @@ namespace GmachApi.Controllers
 
         }
 
+
+        /// <summary>
+        /// Controller that give the admin list of loans that he should approve.
+        /// </summary>
+        /// <param name="confirmation">identetiy of admin</param>
+        /// <returns>the loan list</returns>
+        [HttpPost("AdminGetLoanForApproval")]
+        public IEnumerable<int>? AdminGetLoanForApproval([FromHeader] string confirmation)
+        {
+            try
+            {
+                if(confirmation == "15987532")
+                {
+                    return loanDetail.GetLoansToApproval();
+                }
+                return null;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
     }
 }
