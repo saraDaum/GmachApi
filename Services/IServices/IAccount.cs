@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DTO.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -38,5 +39,8 @@ public interface IAccount
     /// <param name="userId"></param>
     /// <returns></returns>
     List<DTO.Models.Account> GetAllAccounts();
+
     
+
+
 }

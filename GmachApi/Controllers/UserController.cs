@@ -15,7 +15,7 @@ public class UserController : ControllerBase
 {
 
 
-    internal Services.IServices.IUser user = new Services.Implemantation.User();
+    internal Services.IServices.IUser _user = new Services.Implemantation.User();
 
 
     // POST api/<SignIn>
@@ -30,7 +30,7 @@ public class UserController : ControllerBase
     {//  ActionResult<DTO.Models.UserInfo>
         try
         {
-            return (user.SignIn(newUser));
+            return (_user.SignIn(newUser));
         }
         catch
         {
@@ -51,7 +51,7 @@ public class UserController : ControllerBase
     {
         try
         {
-            DTO.Models.UserInfo? userInfo = user.Login(loginUser);
+            DTO.Models.UserInfo? userInfo = _user.Login(loginUser);
             if (userInfo == null) { return NotFound(); }
             Console.WriteLine(loginUser);
             return userInfo;
@@ -68,7 +68,7 @@ public class UserController : ControllerBase
         try
         {
             LoginUser isAdmin = new LoginUser(email, password);
-            return user.AdminLogIn(isAdmin);
+            return _user.AdminLogIn(isAdmin);
         }
         catch
         {
@@ -79,13 +79,35 @@ public class UserController : ControllerBase
     [HttpGet("GetAllUsers")]
     public List<User> GetUsers()
     {
-        return user.GetAllUsers();
+        return _user.GetAllUsers();
+    }
+
+    [HttpGet("GetUser/{id}")]
+    public User? GetUser([FromRoute] int id)
+    {
+        try
+        {
+            bool exist = _user.IsUserExist(id);//Use IsUserExist() function to save unnecessary access to the database.
+            if (exist)
+            {
+                User user = _user.GetUser(id);
+                return user;
+            }
+            else
+            {
+                return null;
+            }
+        }
+        catch
+        {
+            return null;
+        }
     }
 
     [HttpDelete("{id}")]
     public bool DeleteUser([FromBody] int id)
     {
-        return user.DeleteUser(id);
+        return _user.DeleteUser(id);
         return false;
     }
 }

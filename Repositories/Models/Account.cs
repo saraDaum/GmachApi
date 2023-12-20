@@ -14,6 +14,7 @@ public partial class Account
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int AccountId { get; set; }
+    [ForeignKey(nameof(Users.UserId))]
     public int UserId { get; set; }
     public string AccountOwnerName { get; set; } = string.Empty;
     public string AccountNumber { get; set; } = string.Empty;
