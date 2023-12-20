@@ -35,7 +35,7 @@ public class Account : Interfaces.IAccount
         try
         {
             // Check if any account with the specified UserId exists
-            bool accountExists = dbContext.Cards.Any(a => a.UserId == UserId);
+            bool accountExists = dbContext.Card.Any(a => a.UserId == UserId);
 
             // Return the result
             return accountExists;
@@ -57,7 +57,7 @@ public class Account : Interfaces.IAccount
     {
         try
         {
-            dbContext.Accounts.Add(account);
+            dbContext.Account.Add(account);
             dbContext.SaveChanges();
             return account.AccountId;
         }
@@ -73,7 +73,7 @@ public class Account : Interfaces.IAccount
     {
         try
         {
-            List<Models.Account> allAccounts =  dbContext.Accounts.ToList();
+            List<Models.Account> allAccounts =  dbContext.Account.ToList();
             return allAccounts;
         }
         catch (Exception ex)

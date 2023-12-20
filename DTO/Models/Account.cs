@@ -10,8 +10,9 @@ public partial class Account
 {
     public int AccountId { get; set; }
     public int UserId { get; set; }
-    public string OwnerFullName { get; set; } = string.Empty;
+    public string AccountOwnerName { get; set; } = string.Empty;
     public string AccountNunber { get; set; } = string.Empty;
     public string BankNumber { get; set; } = string.Empty;
     public string BranchNumber { get; set; } = string.Empty;
+    public string ConfirmAccountFile { get; set; } = string.Empty;
 }
