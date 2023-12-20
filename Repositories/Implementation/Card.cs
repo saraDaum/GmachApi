@@ -50,7 +50,7 @@ public class Card : Interfaces.ICard
     {
         try
         {
-            List<Models.Card> allUSerCards = dbContext.Cards.Where(card=> card.UserId == id).ToList();   
+            List<Models.Card> allUSerCards = dbContext.Card.Where(card=> card.UserId == id).ToList();   
             if(allUSerCards.Count> 0)
             {
                 return allUSerCards;

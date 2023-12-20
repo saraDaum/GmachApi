@@ -15,10 +15,10 @@ namespace Repositories.Migrations
                 name: "Accounts");
 
             migrationBuilder.CreateTable(
-                name: "Cards",
+                name: "Card",
                 columns: table => new
                 {
-                    AccontId = table.Column<int>(type: "int", nullable: false)
+                    CardId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     UserId = table.Column<int>(type: "int", nullable: false),
                     CreditCardNumber = table.Column<string>(type: "nvarchar(16)", maxLength: 16, nullable: false),
@@ -28,7 +28,7 @@ namespace Repositories.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Cards", x => x.AccontId);
+                    table.PrimaryKey("PK_Cards", x => x.CardId);
                 });
         }
 

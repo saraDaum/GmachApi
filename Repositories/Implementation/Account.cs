@@ -11,7 +11,7 @@ namespace Repositories.Implementation;
 public class Account : Interfaces.IAccount
 {
 
-    private IDbContext dbContext;
+    private readonly IDbContext dbContext;
 
     public Account(IDbContext dbContext)
     {
@@ -35,7 +35,7 @@ public class Account : Interfaces.IAccount
         try
         {
             // Check if any account with the specified UserId exists
-            bool accountExists = dbContext.Cards.Any(a => a.UserId == UserId);
+            bool accountExists = dbContext.Card.Any(a => a.UserId == UserId);
 
             // Return the result
             return accountExists;
@@ -57,9 +57,9 @@ public class Account : Interfaces.IAccount
     {
         try
         {
-            dbContext.Accounts.Add(account);
+            dbContext.Account.Add(account);
             dbContext.SaveChanges();
-            return account.Id;
+            return account.AccountId;
         }
         catch (Exception ex)
         {
@@ -69,22 +69,16 @@ public class Account : Interfaces.IAccount
         }
     }
 
-    List<Models.Card> IAccount.GetAllUserCards(int id)
+    public List<Models.Account> GetAllAccounts()
     {
         try
         {
-            List<Models.Card> allUSerCards = dbContext.Cards.Where(card=> card.UserId == id).ToList();   
-            if(allUSerCards.Count> 0)
-            {
-                return allUSerCards;
-            }
-            return new List<Models.Card>();
-
+            List<Models.Account> allAccounts =  dbContext.Account.ToList();
+            return allAccounts;
         }
-        catch
+        catch (Exception ex)
         {
-            return new List<Models.Card>();
-
+            return new List<Models.Account>();
         }
     }
 
@@ -93,10 +87,7 @@ public class Account : Interfaces.IAccount
         throw new NotImplementedException();
     }
 
-    int IAccount.AddNewAccount(Models.Card account)
-    {
-        throw new NotImplementedException();
-    }
+    
 
 
 }

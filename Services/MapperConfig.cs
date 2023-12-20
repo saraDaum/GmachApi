@@ -54,7 +54,7 @@ public class MapperConfig : Profile
 
     public MapperConfiguration AccountMapper => new MapperConfiguration(cnf =>
     {
-        cnf.CreateMap<Repositories.Models.Card, DTO.Models.Card>()
+        cnf.CreateMap<Repositories.Models.Account, DTO.Models.Account>()
         .ReverseMap();
     });
 

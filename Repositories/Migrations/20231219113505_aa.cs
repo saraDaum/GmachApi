@@ -10,15 +10,15 @@ namespace Repositories.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "Cards");
+            /*migrationBuilder.DropTable(
+                name: "Cards");*/
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "Cards");
+         /*   migrationBuilder.DropTable(
+                name: "Cards");*/
         }
     }
 }

@@ -17,7 +17,7 @@ public partial class GmachimSaraAndShaniContext : DbContext, IDbContext
     {
     }
 
-    public virtual DbSet<Card> Cards { get; set; }
+    public virtual DbSet<Card> Card { get; set; }
 
     public virtual DbSet<Deposit> Deposits { get; set; }
 
@@ -27,7 +27,7 @@ public partial class GmachimSaraAndShaniContext : DbContext, IDbContext
 
     public virtual DbSet<LoanDetails> LoanDetails {get; set;}
     public virtual DbSet<UsersUnderWarning> UsersUnderWarning { get; set; }
-    public virtual DbSet<Account> Accounts { get; set; }
+    public virtual DbSet<Account> Account { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
@@ -54,10 +54,10 @@ public partial class GmachimSaraAndShaniContext : DbContext, IDbContext
         modelBuilder.Entity<Account>(entity =>
         {
             // Configure primary key
-            entity.HasKey(e => e.Id);
+            entity.HasKey(e => e.AccountId);
 
             // Configure auto-generated value for Id
-            entity.Property(e => e.Id)
+            entity.Property(e => e.AccountId)
                 .ValueGeneratedOnAdd();
 
             // Configure UserId as a foreign key if needed
@@ -69,13 +69,13 @@ public partial class GmachimSaraAndShaniContext : DbContext, IDbContext
             entity.Property(e => e.OwnerFullName)
                 .HasMaxLength(255); // Adjust the length as needed
 
-            entity.Property(e => e.AccountNunber)
+            entity.Property(e => e.AccountsNunber)
                 .HasMaxLength(50); // Adjust the length as needed
 
             entity.Property(e => e.BankNumber)
                 .HasMaxLength(50); // Adjust the length as needed
 
-            entity.Property(e => e.BranchNumber)
+            entity.Property(e => e.Branch)
                 .HasMaxLength(50); // Adjust the length as needed
         });
 

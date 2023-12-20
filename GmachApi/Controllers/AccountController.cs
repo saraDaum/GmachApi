@@ -19,22 +19,22 @@ namespace GmachApi.Controllers
         }
 
         // GET api/<AcountController>/5
-        [HttpGet("GetAllCards/{id}")]
-        public List<DTO.Models.Card> GetAllCards([FromRoute]int id)
+        [HttpGet("GetAllAcconts")]
+        public List<Account> GetAllCards()
         {
             try
             {
-                return Account.GetAllCards(id);
+                return Account.GetAllAccounts();
             }
             catch (Exception ex)
             {
-                return new List<DTO.Models.Card>();
+                return new List<Account>();
             }
         }
 
         // POST api/<AcountController>
         [HttpPost("AddNewAccount")]
-        public ActionResult<int> AddNewAccount([FromBody] Card account)
+        public ActionResult<int> AddNewAccount([FromBody] Account account)
         {
             try
             {
