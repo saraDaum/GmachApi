@@ -128,7 +128,7 @@ public class LoanDetails : IServices.ILoanDetails
     {
         try
         {
-            List<Repositories.Models.LoanDetails> repoLoans = 
+            List<Repositories.Models.LoanDetails> repoLoans = loanDetail.GetAllTheLoansByDate(date);
         }
         catch(Exception ex) { }
 

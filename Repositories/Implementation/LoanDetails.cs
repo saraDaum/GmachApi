@@ -93,4 +93,9 @@ public class LoanDetails : Interfaces.ILoanDetails
             return false;
         }
     }
+
+    public List<Models.LoanDetails> GetAllTheLoansByDate(DateTime date)
+    {
+        throw new NotImplementedException();
+    }
 }
