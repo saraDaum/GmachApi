@@ -71,7 +71,7 @@ public partial class GmachimSaraAndShaniContext : DbContext, IDbContext
             entity.Property(e => e.AccountOwnerName)
                 .HasMaxLength(255); // Adjust the length as needed
 
-            entity.Property(e => e.AccountNunber)
+            entity.Property(e => e.AccountNumber)
                 .HasMaxLength(50); // Adjust the length as needed
 
             entity.Property(e => e.BankNumber)
