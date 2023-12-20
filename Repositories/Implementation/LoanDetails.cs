@@ -39,29 +39,6 @@ public class LoanDetails : Interfaces.ILoanDetails
             return -2;
         }
     }
-    public List<Models.LoanDetails> GetUserLoans (int userId)
-    {
-        try
-        {
-            IEnumerable<Models.LoanDetails> allUserLoans = (IEnumerable<Models.LoanDetails>)dbContext.LoanDetails.Where(loan=> loan.UserId == userId);
-            List<Models.LoanDetails> AllUserLoans = allUserLoans.ToList();
-            if (AllUserLoans.Count == 0)
-            {
-                return new List<Models.LoanDetails>();
-            }
-            else return AllUserLoans;
-            
-        }
-        catch
-        {
-            return new List< Models.LoanDetails>();    
-        }
-    }
-
-   public List<Models.LoanDetails> GeAlltLoans()
-    {
-        return dbContext.LoanDetails.ToList();
-    }
 
     public bool IsLoanExist(int loanId)
     {
@@ -94,8 +71,25 @@ public class LoanDetails : Interfaces.ILoanDetails
         }
     }
 
-    public List<Models.LoanDetails> GetAllTheLoansByDate(DateTime date)
+
+    public List<Models.LoanDetails>? GetWaitingList()
     {
-        throw new NotImplementedException();
+        try
+        {
+            return dbContext.LoanDetails.Where(l => !l.IsAprovied).ToList();
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex);
+            throw new Exception("Error: catch an ecxeption in GetWaitingList function", ex);
+        }
+    }
+
+    public List<Models.LoanDetails>? getLoans(Func<Models.LoanDetails, bool>? predicate = null)
+    {
+        if (predicate == null) 
+            return dbContext.LoanDetails.ToList();
+        else
+            return dbContext.LoanDetails.Where(predicate).ToList();
     }
 }
