@@ -96,7 +96,7 @@ public class LoanDetails : IServices.ILoanDetails
             throw new Exception("Error: Catch exception in GetLoanDetails function", ex);
         }
     }
-
+   
     public bool IsLoanExist(int id)
     {
         try

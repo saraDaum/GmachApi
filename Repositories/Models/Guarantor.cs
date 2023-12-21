@@ -11,7 +11,6 @@ public partial class Guarantor
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int Id { get; set; }
-
     public int LoanId {  get; set; }
     public string IdentityNumber { get; set; } = string.Empty;
     public string Name { get; set; } = string.Empty;
