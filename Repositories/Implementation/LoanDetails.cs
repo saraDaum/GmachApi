@@ -92,4 +92,5 @@ public class LoanDetails : Interfaces.ILoanDetails
         else
             return dbContext.LoanDetails.Where(predicate).ToList();
     }
+
 }

@@ -146,5 +146,19 @@ public class User : Interfaces.IUser
     {
         return dbContext.Users.FirstOrDefault(u => u.UserId == userId) != null;
     }
+
+    public bool IsUserUnderWarning(int userId)
+    {
+        try
+        {
+            var user = dbContext.UsersUnderWarning.Where(u => u.UserId == userId).FirstOrDefault();
+            return user != null;
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+            return false;
+        }
+    }
 }
 

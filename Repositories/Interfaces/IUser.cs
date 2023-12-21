@@ -19,4 +19,6 @@ public interface IUser
     List<Users> GetAll();
     bool IsUserExist(int userId);
     bool DeleteUser(Users deleteUser);    
+
+    bool IsUserUnderWarning(int userId);
 }

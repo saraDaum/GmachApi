@@ -27,7 +27,7 @@ public interface IDeposit
     /// </summary>
     /// <param name="date">the date</param>
     /// <returns>the balance</returns>
-    double getTheBalanceByDate(DateTime date);
+    double GetTheBalanceByDate(DateTime date);
 
-
+    double GetBalanceDifferenceByTwoDates(DateTime date1, DateTime date2);
 }

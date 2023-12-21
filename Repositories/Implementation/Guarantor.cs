@@ -38,4 +38,21 @@ public class Guarantor : Interfaces.IGuarantor
             return -1;
         }
     }
+
+    public IEnumerable<Models.Guarantor> Get(Func<Models.Guarantor, bool>? func = null)
+    {
+        try
+        {
+            if (func == null)
+                return dbContext.Guarantors.ToList();
+            return dbContext.Guarantors.Where(func).ToList();
+
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+            throw new Exception(ex.Message, ex);
+        }
+            
+    }
 }

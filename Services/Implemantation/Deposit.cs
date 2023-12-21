@@ -117,7 +117,7 @@ public class Deposit : IServices.IDeposit
         }
     }
 
-    public double getTheBalanceByDate(DateTime date)
+    public double GetTheBalanceByDate(DateTime date)
     {
         try
         {
@@ -132,6 +132,19 @@ public class Deposit : IServices.IDeposit
         {
             Console.WriteLine(ex.ToString());
             throw new Exception("Error: in get balance of deposit by date function", ex);
+        }
+    }
+
+    public double GetBalanceDifferenceByTwoDates(DateTime date1, DateTime date2)
+    {
+        try
+        {
+            return GetTheBalanceByDate(date1) - GetTheBalanceByDate(date2);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.ToString());
+            throw new Exception("Error: Catch an exception in GetBalanceByTwoDates function.", ex);
         }
     }
 }
