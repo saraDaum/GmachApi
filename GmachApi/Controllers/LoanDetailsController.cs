@@ -11,7 +11,7 @@ namespace GmachApi.Controllers
     [ApiController]
     public class LoanDetailsController : ControllerBase
     {
-        internal Services.IServices.ILoanDetails loanDetail = new Services.Implemantation.LoanDetails();
+        internal Services.IServices.ILoanDetails loanDetail = new Repositories.Implementation.LoanDetails();
         
         
         
