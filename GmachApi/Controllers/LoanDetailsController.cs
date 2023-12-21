@@ -24,15 +24,21 @@ namespace GmachApi.Controllers
 
         // GET api/<LoansDetailController>/GetUserLoans/userId
         [HttpGet("GetUserLoans/{id}")]
-        public List<LoanDetails> GetUserLoans(int id)
+        public List<Loan> GetUserLoans(int id)
         {
             return loanDetail.GetUserLoans(id);
         }
 
         //GET api/<LoansDetailController>
         [HttpGet("GetAll")]
-        public List<LoanDetails> GetAll() {
-            return loanDetail.GetAllLoans();
+        public ActionResult<List<Loan>> GetAll() {
+            try {
+                return loanDetail.GetAllLoans();
+            }
+            catch (Exception ex)
+            {
+                return Conflict(ex);
+            }
         }
 
         // POST api/<LoansDetailController>
