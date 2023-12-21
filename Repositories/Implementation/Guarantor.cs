@@ -55,4 +55,16 @@ public class Guarantor : Interfaces.IGuarantor
         }
             
     }
+
+    public List<Models.Guarantor> GetAll()
+    {
+        try
+        {
+            return dbContext.Guarantors.ToList();
+        }
+        catch
+        {
+            return new List<Models.Guarantor>();
+        }
+    }
 }

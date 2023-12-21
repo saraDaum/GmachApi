@@ -11,4 +11,6 @@ public interface IGuarantor
     int Add(Models.Guarantor item);
 
     IEnumerable<Models.Guarantor> Get(Func<Models.Guarantor, bool>? func = null);
+
+    List<Models.Guarantor> GetAll();
 }

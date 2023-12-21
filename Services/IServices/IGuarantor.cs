@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DTO.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,5 +16,11 @@ public interface IGuarantor
     int GetLoanByGuarantorId(int guarantorId);
 
     IEnumerable<DTO.Models.Guarantor> GetGuarantorsByLoadId(int loanId);
+
+    /// <summary>
+    /// Returns all guarantors that exist in database.
+    /// </summary>
+    /// <returns></returns>
+    List<Guarantor> GetAll();
 }
 

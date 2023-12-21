@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using DTO.Models;
+using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -7,12 +8,15 @@ namespace GmachApi.Controllers
     [Route("api/[controller]")]
     [ApiController]
     public class GuarantorController : ControllerBase
-    {
+   {
+        internal Services.IServices.IGuarantor servGuarantor = new Services.Implemantation.Guarantor();
+
+
         // GET: api/<GuarantorController>
-        [HttpGet]
-        public IEnumerable<string> Get()
+        [HttpGet("GelAll")]
+        public List<Guarantor> GetAll()
         {
-            return new string[] { "value1", "value2" };
+            return servGuarantor.GetAll();
         }
 
         // GET api/<GuarantorController>/5

@@ -3,6 +3,7 @@ using DTO.Models;
 using Repositories.Models;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -17,10 +18,11 @@ public class MapperConfig : Profile
     private MapperConfig() { }
     public static MapperConfig Instance { get; } = new MapperConfig();
 
-    public MapperConfiguration GuarantorMapper = new MapperConfiguration(cnf =>
-        cnf.CreateMap<DTO.Models.Guarantor, Repositories.Models.Guarantor>()
-
+    public MapperConfiguration GuarantorMapper = new MapperConfiguration(cfg =>
+        cfg.CreateMap<DTO.Models.Guarantor, Repositories.Models.Guarantor>()
+        .ReverseMap()
     );
+   
 
 
     public MapperConfiguration LoanDetailsMapper = new MapperConfiguration(cnf =>

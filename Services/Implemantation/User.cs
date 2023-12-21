@@ -44,12 +44,9 @@ public class User : IServices.IUser
             ArgumentNullException.ThrowIfNull(loginUser.UserName);// Continue just if it is not null
             ArgumentNullException.ThrowIfNull(loginUser.Password);// Continue just if it is not null
             IMapper mapper = myMapper.UserInfoMapper.CreateMapper();
-
-
             string name = loginUser.UserName;
             string password = loginUser.Password;
             Users? u = userRepository.Login(name, password);
-
             ArgumentNullException.ThrowIfNull(u);// continue just if u is not null
             UserInfo uInfo = mapper.Map<Users, UserInfo>(u);
             return uInfo;
@@ -73,9 +70,7 @@ public class User : IServices.IUser
         {
             //checks that the user not exsist or null
             if (newUser == null) { return -1; }
-            if (IsUserExists(new LoginUser(newUser.UserName, newUser.UserPassword))) { return -2; }
-
-            
+            if (IsUserExists(new LoginUser(newUser.UserName, newUser.UserPassword))) { return -2; }            
             //send it to the Repository Layer
             IMapper mapper = myMapper.UserMapper.CreateMapper();
             Users user = mapper.Map<DTO.Models.User, Users>(newUser);

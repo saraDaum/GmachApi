@@ -51,4 +51,24 @@ public class Guarantor : IServices.IGuarantor
     {
         throw new NotImplementedException();
     }
+
+    public List<DTO.Models.Guarantor> GetAll()
+    {
+        try
+        {
+            List<Repositories.Models.Guarantor> allGuarantors = RepoGuarantor.GetAll();
+            if( allGuarantors.Count > 0 )
+            {
+                IMapper mapper = GuarantorAutoMapper.GuarantorMapper.CreateMapper();
+                List<DTO.Models.Guarantor> allDtoGuarantors  = allGuarantors.ConvertAll<DTO.Models.Guarantor>(guarantor=> mapper.Map<Repositories.Models.Guarantor, DTO.Models.Guarantor >(guarantor));
+                return allDtoGuarantors;
+
+            }
+            return new List<DTO.Models.Guarantor>();
+        }
+        catch (Exception ex)
+        {
+            return new List<DTO.Models.Guarantor>();
+        }
+    }
 }
