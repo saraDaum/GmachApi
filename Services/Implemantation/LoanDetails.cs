@@ -117,7 +117,7 @@ public class LoanDetails : IServices.ILoanDetails
             Loan loan = GetLoanDetails(loanID);
             IServices.IDeposit deposit = new Implemantation.Deposit();
             //check if there is enough money even during the loan time
-            if (GetTheFinalBalanceByDate(DateTime.Today)- deposit.GetBalanceDifferenceByTwoDates(DateTime.Today, loan.DateToGetBack) < loan.Sum)
+            if (GetTheFinalBalanceByDate(DateTime.Today)- deposit.GetBalanceDifferenceByTwoDates(DateTime.Today, loan.DateToGetBack) < loan.Sum || IsBorrowerBlacklisted(loan))
                 return false;
             return loanDetail.LoanApproval(loanID);
         }
