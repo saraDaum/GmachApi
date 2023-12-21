@@ -10,19 +10,19 @@ namespace Repositories.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.RenameColumn(
+            /*migrationBuilder.RenameColumn(
                 name: "AccountNunber",
                 table: "Account",
-                newName: "AccountNumber");
+                newName: "AccountNumber");*/
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.RenameColumn(
+            /*migrationBuilder.RenameColumn(
                 name: "AccountNumber",
                 table: "Account",
-                newName: "AccountNunber");
+                newName: "AccountNunber");*/
         }
     }
 }
