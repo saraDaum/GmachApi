@@ -168,5 +168,24 @@ public class User : IServices.IUser
     {
         return userRepository.IsUserExist(userId);
     }
+
+    public DTO.Models.User? GetUser(int UserId)
+    {
+        try
+        {
+            Repositories.Models.Users User = userRepository.GetUser(UserId);
+            if (User != null) {
+                IMapper mapper  = myMapper.UserMapper.CreateMapper();
+                DTO.Models.User user = mapper.Map<Repositories.Models.Users, DTO.Models.User>(User);
+                return user;    
+            }
+            return null;
+            
+        }
+        catch
+        {
+            return null;
+        }
+    }
 }
 

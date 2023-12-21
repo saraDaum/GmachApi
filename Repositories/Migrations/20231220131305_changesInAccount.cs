@@ -11,19 +11,19 @@ namespace Repositories.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             /*migrationBuilder.RenameColumn(
-                name: "OwnerIdNumber",
+                name: "AccontId",
                 table: "Account",
-                newName: "AccountOwnerName");
+                newName: "AccountId");*/
 
             migrationBuilder.RenameColumn(
-                name: "Branch",
+                name: "ConfirmAcountFile",
                 table: "Account",
-                newName: "BranchNumber");
+                newName: "ConfirmAccountfile");
 
-            migrationBuilder.RenameColumn(
+            /*migrationBuilder.RenameColumn(
                name: "AccountsNumber",
                table: "Account",
-               newName: "AccountNumber");*/
+               newName: "AccountNumber");
 
             migrationBuilder.AddColumn<string>(
                 name: "AccountOwnerName",
@@ -44,7 +44,7 @@ namespace Repositories.Migrations
             migrationBuilder.RenameColumn(
                name: "AccountsNumber",
                table: "Account",
-               newName: "AccountNumber");
+               newName: "AccountNumber");*/
 
 
         }
@@ -54,16 +54,17 @@ namespace Repositories.Migrations
         {
 
             /*migrationBuilder.RenameColumn(
-        name: "AccountOwnerName",
-        table: "Account",
-        newName: "OwnerIdNumber");
+               name: "AccountId",
+               table: "Account",
+               newName: "AccontId");*/
+
 
             migrationBuilder.RenameColumn(
-                name: "BranchNumber",
+                name: "ConfirmAccountfile",
                 table: "Account",
-                newName: "Branch");*/
+                newName: "ConfirmAcountFile");
 
-            migrationBuilder.DropColumn(
+            /*migrationBuilder.DropColumn(
                 name: "AccountOwnerName",
                 table: "Account");
 
