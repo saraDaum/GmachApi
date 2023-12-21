@@ -6,7 +6,6 @@ namespace DTO.Models;
 public partial class Guarantor 
 {
     public int Id { get; set; }
-
     public int LoanId { get; set; }
     public string IdentityNumber { get; set; } = string.Empty;
     public string Name { get; set; } = string.Empty;
