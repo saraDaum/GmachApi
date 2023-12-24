@@ -154,7 +154,7 @@ public partial class GmachimSaraAndShaniContext : DbContext, IDbContext
 
             entity.Property(ld => ld.Sum).IsRequired();
 
-            entity.Property(ld => ld.UserId).IsRequired();
+            entity.Property(ld => ld.LoanerId).IsRequired();
 
             entity.Property(ld => ld.LoanFile).IsRequired();
 

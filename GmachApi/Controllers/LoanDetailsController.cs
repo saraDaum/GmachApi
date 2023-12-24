@@ -47,7 +47,7 @@ namespace GmachApi.Controllers
         {
             try
             {
-                Loan l = new Loan(loan.LoanId, loan.UserId, loan.DateToGetBack, loan.Sum, loan.LoanFile, false);
+                Loan l = new Loan(loan.LoanId, loan.LoanerId, loan.DateToGetBack, loan.Sum, loan.LoanFile, false);
                 int res = loanDetail.AddLoan(l, loan.guarantors);
                 if (res < 0)
                 {

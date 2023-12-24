@@ -22,7 +22,7 @@ public class LoanDetails : IServices.ILoanDetails
         {
             //check if user exist
             User u = new User();
-            if (!u.IsUserExist(loan.UserId)) 
+            if (!u.IsUserExist(loan.LoanerId)) 
             { 
                 return -1;
             }
@@ -59,7 +59,7 @@ public class LoanDetails : IServices.ILoanDetails
         try
         {
             IMapper mapper = LoanAutoMapper.LoanDetailsMapper.CreateMapper();
-            List<Repositories.Models.LoanDetails>? loans = loanDetail.getLoans(l=> l.UserId == userId);
+            List<Repositories.Models.LoanDetails>? loans = loanDetail.getLoans(l=> l.LoanerId == userId);
             if (loans == null)
                 return null;
             List<Loan> loanDetails = loans.ConvertAll<Loan>(loan=> mapper.Map<Repositories.Models.LoanDetails, Loan>(loan) ) ;
@@ -156,7 +156,7 @@ public class LoanDetails : IServices.ILoanDetails
                 continue;
 
             // Check if the loan amount exceeds the maximum per request or per borrower
-            if (loanRequest.Sum > maxAmountPerRequest || loanRequest.Sum + GetUserLoans(loanRequest.UserId)?.Sum(l => l.Sum) > maxAmountPerBorrower)
+            if (loanRequest.Sum > maxAmountPerRequest || loanRequest.Sum + GetUserLoans(loanRequest.LoanerId)?.Sum(l => l.Sum) > maxAmountPerBorrower)
                 continue;
 
             // Check if the association has enough balance to approve the loan and it doesn't impact future investments
@@ -182,7 +182,7 @@ public class LoanDetails : IServices.ILoanDetails
         try
         {
             Repositories.Interfaces.IUser user = new Repositories.Implementation.User();
-            if (user.IsUserUnderWarning(loan.UserId))
+            if (user.IsUserUnderWarning(loan.LoanerId))
                 return true;
             // every loan should have at least 2 guanarators
             Repositories.Interfaces.IGuarantor guarantor = new Repositories.Implementation.Guarantor();

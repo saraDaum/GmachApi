@@ -9,7 +9,7 @@ namespace DTO.Models;
 public class Loan
 {
     public int LoanId { get; set; }
-    public int UserId { get; set; }
+    public int LoanerId { get; set; }
 
 
     public DateTime DateToGetBack { get; set; }
@@ -26,7 +26,7 @@ public class Loan
     public Loan(int loanId, int userId, DateTime dateToGetBack, int sum, string loanFile, bool isAprovied)
     {
         LoanId=loanId;
-        UserId=userId;
+        LoanerId=userId;
         DateToGetBack=dateToGetBack;
         Sum=sum;
         LoanFile=loanFile;

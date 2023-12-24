@@ -13,8 +13,7 @@ public partial class LoanDetails
     public int LoanId { get; set; }
 
     [ForeignKey(nameof(Users.UserId))]
-    public int UserId { get; set; }
-    
+    public int LoanerId { get; set; } 
     
     public DateTime DateToGetBack { get; set; }
 
