@@ -10,19 +10,19 @@ namespace Repositories.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-          migrationBuilder.AddColumn<string>(
-          name: "Check",
-          table: "Guarantors",
-          nullable: false);
+          //migrationBuilder.AddColumn<string>(
+          //name: "Check",
+          //table: "Guarantors",
+          //nullable: false);
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropColumn(
-                name: "Check",
-                table: "Guarantors"
-                );
+            //migrationBuilder.DropColumn(
+            //    name: "Check",
+            //    table: "Guarantors"
+            //    );
         }
     }
 }

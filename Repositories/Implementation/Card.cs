@@ -12,13 +12,10 @@ public class Card : Interfaces.ICard
 {
 
     private readonly IDbContext dbContext;
-
     public Card(IDbContext _dbContext)
     {
         dbContext = _dbContext;
     }
-  
-
     public Card()
     { 
         dbContext = new GmachimSaraAndShaniContext();
@@ -27,24 +24,7 @@ public class Card : Interfaces.ICard
 
 
 
-  /*  public bool checkIfUserHasAccount(int UserId)
-    {
-        try
-        {
-            // Check if any account with the specified UserId exists
-            bool accountExists = dbContext.Cards.Any(a => a.UserId == UserId);
-
-            // Return the result
-            return accountExists;
-        }
-        catch (Exception ex)
-        {
-            // Handle exceptions if needed
-            Console.WriteLine($"Error checking account existence: {ex.Message}");
-            return false; // or throw an exception based on your error handling strategy
-        }
-    }
-  */
+  
 
     List<Models.Card> ICard.GetAllUserCards(int id)
     {
@@ -65,14 +45,32 @@ public class Card : Interfaces.ICard
         }
     }
 
-    bool ICard.checkIfUserHasAccount(int UserId)
+    public bool checkIfUserHasCard(int UserId)
     {
-        throw new NotImplementedException();
+        try
+        {
+            return dbContext.Card.Any(card => card.UserId == UserId);
+        }
+        catch(Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+            throw new Exception("We catch an exception", ex);
+        }
     }
 
-    int ICard.AddNewAccount(Models.Card account)
+    public int AddNewCard(Models.Card card)
     {
-        throw new NotImplementedException();
+        try
+        {
+            dbContext.Card.Add(card);
+            dbContext.SaveChanges();
+            return card.CardId;
+        }
+        catch(Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+            throw new Exception("Catch an exception", ex);
+        }
     }
 
 

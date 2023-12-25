@@ -43,6 +43,8 @@ public class User : IServices.IUser
         {
             ArgumentNullException.ThrowIfNull(loginUser.UserName);// Continue just if it is not null
             ArgumentNullException.ThrowIfNull(loginUser.Password);// Continue just if it is not null
+
+            
             IMapper mapper = myMapper.UserInfoMapper.CreateMapper();
             string name = loginUser.UserName;
             string password = loginUser.Password;

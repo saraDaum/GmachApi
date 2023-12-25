@@ -9,10 +9,10 @@ namespace Services.Implemantation;
 
 public class Card : IServices.ICard
 {
-    Repositories.Interfaces.ICard RepoAccount = new Repositories.Implementation.Card();
+    Repositories.Interfaces.ICard RepoCard = new Repositories.Implementation.Card();
     MapperConfig myMapper = MapperConfig.Instance;
 
-    public int AddNewAccount(DTO.Models.Card card)
+    public int AddNewCard(DTO.Models.Card card)
     {
         try
         {
@@ -23,13 +23,13 @@ public class Card : IServices.ICard
                 return -3;
             }
             //Check if the user already has an account
-            if (IsAccountExistByUserId(card.UserId))
-            {
-                return -2;
-            }
-            IMapper mapper = myMapper.AccountMapper.CreateMapper();
+            //if (IsCardExistByUserId(card.UserId))
+            //{
+            //    return -2;
+            //}
+            IMapper mapper = myMapper.CardMapper.CreateMapper();
             Repositories.Models.Card a = mapper.Map<Repositories.Models.Card>(card);
-            return RepoAccount.AddNewAccount(a);
+            return RepoCard.AddNewCard(a);
         }
         catch (Exception ex)
         {
@@ -39,16 +39,13 @@ public class Card : IServices.ICard
         }
     }
 
-    public bool IsAccountExistByAccountId(int AccountId)
-    {
-        throw new NotImplementedException();
-    }
 
-    public bool IsAccountExistByUserId(int UserId)
+
+    public bool IsCardExistByUserId(int UserId)
     {
         try
         {
-            return RepoAccount.checkIfUserHasAccount(UserId);
+            return RepoCard.checkIfUserHasCard(UserId);
         }
         catch (Exception ex)
         {
@@ -62,9 +59,9 @@ public class Card : IServices.ICard
     {
         try
         {
-           List<Repositories.Models.Card> allUserCards =  RepoAccount.GetAllUserCards(id);
-            IMapper mapper = myMapper.AccountMapper.CreateMapper();
-            List<DTO.Models.Card> allCards = allUserCards.ConvertAll<DTO.Models.Card>(card=> mapper.Map<Repositories.Models.Card, DTO.Models.Card>(card));
+           List<Repositories.Models.Card> allUserCards =  RepoCard.GetAllUserCards(id);
+            IMapper mapper = myMapper.CardMapper.CreateMapper();
+            List<DTO.Models.Card> allCards = allUserCards.Select(card=> mapper.Map<DTO.Models.Card>(card)).ToList();
             return allCards;
 
         }

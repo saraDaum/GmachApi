@@ -13,15 +13,10 @@ public interface ICard
     /// </summary>
     /// <param name="UserId">the user id</param>
     /// <returns>true/ false</returns>
-    bool IsAccountExistByUserId(int UserId);
+    bool IsCardExistByUserId(int UserId);
 
 
-    /// <summary>
-    /// check if account exist by it's id
-    /// </summary>
-    /// <param name="AccountId">the account Id</param>
-    /// <returns>true/ false</returns>
-    bool IsAccountExistByAccountId(int AccountId);
+
 
 
     /// <summary>
@@ -29,7 +24,7 @@ public interface ICard
     /// </summary>
     /// <param name="account">The account details</param>
     /// <returns>the account id or -1</returns>
-    int AddNewAccount(DTO.Models.Card account);
+    int AddNewCard(DTO.Models.Card account);
 
 
     /// <summary>

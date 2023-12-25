@@ -9,19 +9,19 @@ namespace Repositories.Interfaces;
 public interface ICard
 {
     /// <summary>
-    /// Check if the user already has a bank account in the system
+    /// Check if the user already has a credit card in the system
     /// </summary>
     /// <param name="UserId">The user id</param>
     /// <returns>true/ false</returns>
-    bool checkIfUserHasAccount(int UserId);
+    bool checkIfUserHasCard(int UserId);
 
 
     /// <summary>
-    /// Add new account
+    /// Add new card
     /// </summary>
-    /// <param name="account">Account to add</param>
-    /// <returns>Account Id</returns>
-    int AddNewAccount(Models.Card account);
+    /// <param name="account">card to add</param>
+    /// <returns>card Id</returns>
+    int AddNewCard(Models.Card card);
 
     List<Repositories.Models.Card> GetAllUserCards(int id);
 }

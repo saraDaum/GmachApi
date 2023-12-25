@@ -44,6 +44,8 @@ public class User : Interfaces.IUser
         }
     }
 
+    
+
 
     /// <summary>
     ///This function gets an user object and returns the first element found.

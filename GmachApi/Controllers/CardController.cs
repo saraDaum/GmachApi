@@ -9,7 +9,7 @@ namespace GmachApi.Controllers
     [ApiController]
     public class CardController : ControllerBase
     {
-        Services.IServices.ICard Account = new Services.Implemantation.Card();
+        Services.IServices.ICard Card = new Services.Implemantation.Card();
 
         // GET: api/<AcountController>
         [HttpGet]
@@ -18,13 +18,13 @@ namespace GmachApi.Controllers
             return new string[] { "value1", "value2" };
         }
 
-        // GET api/<AcountController>/5
+        // GET api/<CardController>/5
         [HttpGet("GetAllCards/{id}")]
         public List<Card> GetAllCards([FromRoute]int id)
         {
             try
             {
-                return Account.GetAllCards(id);
+                return Card.GetAllCards(id);
             }
             catch (Exception ex)
             {
@@ -33,12 +33,12 @@ namespace GmachApi.Controllers
         }
 
         // POST api/<AcountController>
-        [HttpPost("AddNewAccount")]
-        public ActionResult<int> AddNewAccount([FromBody] Card card)
+        [HttpPost("AddNewCard")]
+        public ActionResult<int> AddNewCard([FromBody] Card card)
         {
             try
             {
-                int response = Account.AddNewAccount(card);
+                int response = Card.AddNewCard(card);
                 if (response == -3)
                 {
                     return BadRequest("User not exist");
@@ -72,12 +72,12 @@ namespace GmachApi.Controllers
         }
 
         // GET api/<AcountController>/5
-        [HttpGet("IsAccountExistByUserId")]
-        public bool IsAccountExistByUserId(int UserId)
+        [HttpGet("IsCardExistByUserId")]
+        public bool IsCardExistByUserId(int UserId)
         {
             try
             {
-                return Account.IsAccountExistByUserId(UserId);
+                return Card.IsCardExistByUserId(UserId);
             }
             catch (Exception ex)
             {
