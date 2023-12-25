@@ -45,7 +45,7 @@ public class Card : Interfaces.ICard
         }
     }
 
-    public bool checkIfUserHasCard(int UserId)
+    public bool CheckIfUserHasCard(int UserId)
     {
         try
         {

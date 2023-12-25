@@ -17,7 +17,7 @@ public class Account : IServices.IAccount
         try
         {
             // Check if the user exist
-            User user = new User();
+            IServices.IUser user = new User();
             if(! user.IsUserExist(account.UserId))
             {
                 return -3;

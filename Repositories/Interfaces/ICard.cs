@@ -13,7 +13,7 @@ public interface ICard
     /// </summary>
     /// <param name="UserId">The user id</param>
     /// <returns>true/ false</returns>
-    bool checkIfUserHasCard(int UserId);
+    bool CheckIfUserHasCard(int UserId);
 
 
     /// <summary>

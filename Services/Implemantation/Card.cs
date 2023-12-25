@@ -45,7 +45,7 @@ public class Card : IServices.ICard
     {
         try
         {
-            return RepoCard.checkIfUserHasCard(UserId);
+            return RepoCard.CheckIfUserHasCard(UserId);
         }
         catch (Exception ex)
         {
