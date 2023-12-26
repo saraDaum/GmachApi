@@ -31,13 +31,13 @@ namespace GmachApi.Controllers
 
         //GET api/<LoansDetailController>
         [HttpGet("GetAll")]
-        public ActionResult<List<Loan>> GetAll() {
+        public List<Loan> GetAll() {
             try {
                 return loanDetail.GetAllLoans();
             }
             catch (Exception ex)
             {
-                return Conflict(ex);
+                return new List<Loan>();
             }
         }
 
