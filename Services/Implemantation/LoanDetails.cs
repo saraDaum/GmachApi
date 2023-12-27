@@ -346,14 +346,7 @@ public class LoanDetails : IServices.ILoanDetails
         }
     }
 
-    public bool DoesLoanImpactFutureInvestments(Loan newLoan, List<Loan> approvedLoans)
-    {
-        throw new NotImplementedException();
-    }
 
-    public bool CheckFutureInvestmentsImpact(Loan newLoan, IEnumerable<Loan> loansBeforeNewLoan, double currentBalance)
-    {
-        throw new NotImplementedException();
-    }
+   
 }
 

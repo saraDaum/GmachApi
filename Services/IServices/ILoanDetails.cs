@@ -85,7 +85,7 @@ public interface ILoanDetails
     /// <param name="newLoan">the wanted loan</param>
     /// <param name="approvedLoans">wanted to approve loans</param>
     /// <returns>if there is an impact</returns>
-    bool DoesLoanImpactFutureInvestments(Loan newLoan, List<Loan> approvedLoans);
+    bool DoesLoanImpactFutureInvestments(Loan newLoan, List<Loan> approvedLoans, double todayBalance);
 
     /// <summary>
     /// Check the Future Investments Impact
