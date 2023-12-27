@@ -322,7 +322,7 @@ public class LoanDetails : IServices.ILoanDetails
     {
         try
         {
-            return loanDetail.IsLoanExist(id);
+            return loanDetail.Delete(id);
         }
         catch
         {
