@@ -319,8 +319,8 @@ public class LoanDetails : IServices.ILoanDetails
         double totalDepositsBeforeLoan = loanDetail.GetDepositsSumByDate(newLoan.DateToGetBack);
 
 
-        //מחזיר אמת אם אישור ההלוואה הנוכחית לא מסכן את שחרור ההשקעות שצריכות להשתחרר בטווח הזמן הזה.
-        return ((currentBalance - totalDepositsBeforeLoan + totalLoansBeforeNewLoan) - newLoanAmount > Safety);
+        //מחזיר אמת אם אישור ההלוואה הנוכחית  מסכן את שחרור ההשקעות שצריכות להשתחרר בטווח הזמן הזה.
+        return !((currentBalance - totalDepositsBeforeLoan + totalLoansBeforeNewLoan) - newLoanAmount > Safety);
 
         // סכום ההלוואות המופקעות שיש להן החזר בתאריכים עתידיים כולל ההלוואה החדשה
         // decimal totalLoansAfterNewLoan = loansAfterNewLoan.Sum(loan => loan.Sum) + newLoanAmount;
