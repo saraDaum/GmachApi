@@ -41,7 +41,7 @@ namespace GmachApi.Controllers
             }
         }
 
-        // POST api/<LoansDetailController>
+        // POST api/<AddNewLoan>
         [HttpPost("AddNewLoan")]
         public ActionResult<int> AddNewLoan([FromBody] DTO.Models.LoanDetails loan)
         {
