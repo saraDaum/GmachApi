@@ -70,8 +70,16 @@ namespace GmachApi.Controllers
 
         // DELETE api/<LoansDetailController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public bool Delete(int id)
         {
+            try
+            {
+                return loanDetail.Delete(id); 
+            }
+            catch
+            {
+                return false;
+            }
         }
 
 

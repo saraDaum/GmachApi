@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using Arch.EntityFrameworkCore.Query.Internal;
+using AutoMapper;
 using DTO.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -182,6 +183,19 @@ public class User : IServices.IUser
         catch
         {
             return null;
+        }
+    }
+
+
+    public string GetUserPassword(int id)
+    {
+        try
+        {
+            return userRepository.GetUserPassword(id);
+        }
+        catch
+        {
+            return "";
         }
     }
 }

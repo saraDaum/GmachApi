@@ -84,6 +84,19 @@ public class UserController : ControllerBase
         return _user.GetAllUsers();
     }
 
+    [HttpGet("GetUserPassword/{id}")]
+    public string GetUserPassword([FromRoute] int id)
+    {
+        try
+        {
+            return _user.GetUserPassword(id);
+        }
+        catch
+        {
+            return "";
+        }
+    }
+
     [HttpGet("GetUser/{id}")]
     public User? GetUser([FromRoute] int id)
     {

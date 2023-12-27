@@ -43,5 +43,11 @@ public interface ILoanDetails
     /// <returns>filter list of loan or all loans</returns>
     List<Models.LoanDetails>? getLoans(Func<Models.LoanDetails, bool>? predicate = null);
 
+    /// <summary>
+    /// Gets LoanId and delete the match loan from database.
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    bool Delete(int id);
 
 }

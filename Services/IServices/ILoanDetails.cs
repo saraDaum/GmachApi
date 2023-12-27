@@ -95,5 +95,11 @@ public interface ILoanDetails
     /// <param name="loansAfterNewLoan">all the approved loans that returns after the loan return date</param>
     /// <returns>Is it any impact</returns>
     bool CheckFutureInvestmentsImpact(Loan newLoan, IEnumerable<Loan> loansBeforeNewLoan, IEnumerable<Loan> loansAfterNewLoan);
-
+   
+    /// <summary>
+    /// Gets loan id and delete the match loan  from data base.
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    bool Delete(int id);
 }

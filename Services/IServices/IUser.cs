@@ -61,4 +61,11 @@ public interface IUser
     /// <param name="UserId"></param>
     /// <returns></returns>
     User? GetUser(int UserId);
+
+    /// <summary>
+    /// Gets a user id and returns his password.
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    string GetUserPassword(int id);
 }

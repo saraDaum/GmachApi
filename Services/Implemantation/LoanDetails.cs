@@ -143,7 +143,7 @@ public class LoanDetails : IServices.ILoanDetails
         waitingList.Sort((a, b) => a.DateToGetBack.CompareTo(b.DateToGetBack));
 
         // Set the maximum loan amount per borrower and per request
-        var maxAmountPerBorrower = 5000m; // Example value, adjust as needed
+        var maxAmountPerBorrower = 6000m; // Example value, adjust as needed
         var maxAmountPerRequest = 2000m;  // Example value, adjust as needed
 
         // Create the result list for approved loans

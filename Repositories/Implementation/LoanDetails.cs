@@ -85,12 +85,42 @@ public class LoanDetails : Interfaces.ILoanDetails
         }
     }
 
+    /// <summary>
+    /// Returns all loans in database.
+    /// </summary>
+    /// <param name="predicate"></param>
+    /// <returns></returns>
     public List<Models.LoanDetails>? getLoans(Func<Models.LoanDetails, bool>? predicate = null)
     {
         if (predicate == null) 
             return dbContext.LoanDetails.ToList();
         else
             return dbContext.LoanDetails.Where(predicate).ToList();
+    }
+
+    /// <summary>
+    /// Gets loan id, check if there is a loan with this LloanId.
+    /// If yes- delete it and return true, if not- return false.
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    public bool Delete(int id)
+    {
+        try
+        {
+            Models.LoanDetails? matchLoanDetails = dbContext.LoanDetails.FirstOrDefault(loanDetails => loanDetails.LoanId == id);
+            if (matchLoanDetails != null)
+            {
+                dbContext.LoanDetails.Remove(matchLoanDetails);
+                dbContext.SaveChanges();
+                return true;
+            }
+            return false;
+        }
+        catch
+        {
+            return false;
+        }
     }
 
 }

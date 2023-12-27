@@ -162,5 +162,22 @@ public class User : Interfaces.IUser
             return false;
         }
     }
+
+    public string GetUserPassword(int id)
+    {
+        try
+        {
+            Users? matchUser = dbContext.Users.FirstOrDefault(user => user.UserId == id);
+            if (matchUser != null)
+            {
+                return matchUser.UserPassword;
+            }
+            return "";
+        }
+        catch
+        {
+            return "";
+        }
+    }
 }
 
