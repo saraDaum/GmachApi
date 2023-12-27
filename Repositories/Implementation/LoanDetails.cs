@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Query.Internal;
+﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Microsoft.EntityFrameworkCore.Query.Internal;
 using Repositories.Models;
 using System;
 using System.Collections.Generic;
@@ -122,5 +123,24 @@ public class LoanDetails : Interfaces.ILoanDetails
             return false;
         }
     }
+
+
+    /// <summary>
+    /// Returns all investments that are redeemed before the given date.
+    /// </summary>
+    /// <param name="date"></param>
+    /// <returns></returns>
+    public int GetDepositsSumByDate(DateTime date)
+    {       
+        var deposits = dbContext.Deposits.Where(d => d.DateToPull < date);
+        int sumOfAllDeposits = 0;
+        foreach (var deposit in deposits)
+        {
+            sumOfAllDeposits += deposit.Sum;
+        }
+        return sumOfAllDeposits;
+    }
+
+   
 
 }

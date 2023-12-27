@@ -121,7 +121,9 @@ namespace GmachApi.Controllers
             {
                 if(confirmation == "15987532")
                 {
-                    return loanDetail.GetLoansToApproval();
+                    var ans = loanDetail.GetLoansToApproval();
+                    Console.WriteLine(ans);
+                    return ans;
                 }
                 return null;
             }

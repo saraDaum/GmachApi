@@ -50,4 +50,6 @@ public interface ILoanDetails
     /// <returns></returns>
     bool Delete(int id);
 
+    int GetDepositsSumByDate(DateTime date);
+
 }

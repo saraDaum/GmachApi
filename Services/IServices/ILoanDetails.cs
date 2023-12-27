@@ -94,8 +94,9 @@ public interface ILoanDetails
     /// <param name="loansBeforeNewLoan">all the approved loans that returns before the loan return date</param>
     /// <param name="loansAfterNewLoan">all the approved loans that returns after the loan return date</param>
     /// <returns>Is it any impact</returns>
-    bool CheckFutureInvestmentsImpact(Loan newLoan, IEnumerable<Loan> loansBeforeNewLoan, IEnumerable<Loan> loansAfterNewLoan);
-   
+    bool CheckFutureInvestmentsImpact(Loan newLoan, IEnumerable<Loan> loansBeforeNewLoan, double currentBalance);
+
+
     /// <summary>
     /// Gets loan id and delete the match loan  from data base.
     /// </summary>

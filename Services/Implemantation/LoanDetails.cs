@@ -160,7 +160,7 @@ public class LoanDetails : IServices.ILoanDetails
                 continue;
 
             // Check if the association has enough balance to approve the loan and it doesn't impact future investments
-            if (loanRequest.Sum <= todayBalance && !DoesLoanImpactFutureInvestments(loanRequest, approvedLoans))//TODO: Remember to minus a amount of SUM OF BITACHON
+            if (loanRequest.Sum <= todayBalance && !DoesLoanImpactFutureInvestments(loanRequest, approvedLoans, todayBalance))//TODO: Remember to minus a amount of SUM OF BITACHON
             {
                 IServices.IDeposit deposit = new Implemantation.Deposit();
                 if (todayBalance - deposit.GetBalanceDifferenceByTwoDates(DateTime.Today, loanRequest.DateToGetBack) < loanRequest.Sum)
@@ -269,7 +269,7 @@ public class LoanDetails : IServices.ILoanDetails
     }
 
     // Function to check if a new loan impacts future investments (recursive)
-    public bool DoesLoanImpactFutureInvestments(Loan newLoan, List<Loan> approvedLoans)
+    public bool DoesLoanImpactFutureInvestments(Loan newLoan, List<Loan> approvedLoans, double todayBalance)
     {
         try
         {
@@ -285,7 +285,7 @@ public class LoanDetails : IServices.ILoanDetails
             var loansAfterNewLoan = approvedLoans.Where(loan => loan.DateToGetBack >= newLoanReturnDate);
 
             // Check whether the new loan affects investment returns at future dates
-            bool doesImpact = CheckFutureInvestmentsImpact(newLoan, loansBeforeNewLoan, loansAfterNewLoan);
+            bool doesImpact = CheckFutureInvestmentsImpact(newLoan, loansBeforeNewLoan, todayBalance);
 
             return doesImpact;
         }
@@ -297,20 +297,36 @@ public class LoanDetails : IServices.ILoanDetails
     }
 
 
-    // Check whether the new loan affects investment returns at future dates
-    public bool CheckFutureInvestmentsImpact(Loan newLoan, IEnumerable<Loan> loansBeforeNewLoan, IEnumerable<Loan> loansAfterNewLoan)
+    // 
+    /// <summary>
+    /// Check whether the new loan affects investment returns at future dates
+    /// </summary>
+    /// <param name="newLoan"></param>
+    /// <param name="loansBeforeNewLoan"></param>
+    /// <param name="loansAfterNewLoan"></param>
+    /// <returns></returns>
+   
+    public bool CheckFutureInvestmentsImpact(Loan newLoan, IEnumerable<Loan> loansBeforeNewLoan, double currentBalance)
     {
+
+        const int Safety = 30000;
         // סכום ההלוואה החדשה
-        decimal newLoanAmount = newLoan.Sum;
+        double newLoanAmount = newLoan.Sum;
 
         // סכום ההלוואות המופקעות שיש להן החזר בתאריכים עתידיים
-        decimal totalLoansBeforeNewLoan = loansBeforeNewLoan.Sum(loan => loan.Sum);
+        double totalLoansBeforeNewLoan = loansBeforeNewLoan.Sum(loan => loan.Sum);
+
+        double totalDepositsBeforeLoan = loanDetail.GetDepositsSumByDate(newLoan.DateToGetBack);
+
+
+        //מחזיר אמת אם אישור ההלוואה הנוכחית לא מסכן את שחרור ההשקעות שצריכות להשתחרר בטווח הזמן הזה.
+        return ((currentBalance - totalDepositsBeforeLoan + totalLoansBeforeNewLoan) - newLoanAmount > Safety);
 
         // סכום ההלוואות המופקעות שיש להן החזר בתאריכים עתידיים כולל ההלוואה החדשה
-        decimal totalLoansAfterNewLoan = loansAfterNewLoan.Sum(loan => loan.Sum) + newLoanAmount;
+        // decimal totalLoansAfterNewLoan = loansAfterNewLoan.Sum(loan => loan.Sum) + newLoanAmount;
 
         // בדוק האם הסכום הכולל של ההלוואות המופקעות גדול מההחזר הצפוי
-        return totalLoansAfterNewLoan > totalLoansBeforeNewLoan;
+        //return totalLoansAfterNewLoan > totalLoansBeforeNewLoan;
     }
 
     /// <summary>
@@ -328,6 +344,16 @@ public class LoanDetails : IServices.ILoanDetails
         {
             return false;
         }
+    }
+
+    public bool DoesLoanImpactFutureInvestments(Loan newLoan, List<Loan> approvedLoans)
+    {
+        throw new NotImplementedException();
+    }
+
+    public bool CheckFutureInvestmentsImpact(Loan newLoan, IEnumerable<Loan> loansBeforeNewLoan, double currentBalance)
+    {
+        throw new NotImplementedException();
     }
 }
 
