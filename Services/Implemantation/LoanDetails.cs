@@ -143,8 +143,8 @@ public class LoanDetails : IServices.ILoanDetails
         waitingList.Sort((a, b) => a.DateToGetBack.CompareTo(b.DateToGetBack));
 
         // Set the maximum loan amount per borrower and per request
-        var maxAmountPerBorrower = 6000m; // Example value, adjust as needed
-        var maxAmountPerRequest = 2000m;  // Example value, adjust as needed
+        var maxAmountPerBorrower = 10000m; // Example value, adjust as needed
+        var maxAmountPerRequest = 5000m;  // Example value, adjust as needed
 
         // Create the result list for approved loans
         var approvedLoans = new List<DTO.Models.Loan>();
@@ -160,7 +160,7 @@ public class LoanDetails : IServices.ILoanDetails
                 continue;
 
             // Check if the association has enough balance to approve the loan and it doesn't impact future investments
-            if (loanRequest.Sum <= todayBalance && !DoesLoanImpactFutureInvestments(loanRequest, approvedLoans))
+            if (loanRequest.Sum <= todayBalance && !DoesLoanImpactFutureInvestments(loanRequest, approvedLoans))//TODO: Remember to minus a amount of SUM OF BITACHON
             {
                 IServices.IDeposit deposit = new Implemantation.Deposit();
                 if (todayBalance - deposit.GetBalanceDifferenceByTwoDates(DateTime.Today, loanRequest.DateToGetBack) < loanRequest.Sum)
@@ -268,7 +268,7 @@ public class LoanDetails : IServices.ILoanDetails
 
     }
 
-    // Function to check if a new loan impacts future investments
+    // Function to check if a new loan impacts future investments (recursive)
     public bool DoesLoanImpactFutureInvestments(Loan newLoan, List<Loan> approvedLoans)
     {
         try
@@ -313,8 +313,21 @@ public class LoanDetails : IServices.ILoanDetails
         return totalLoansAfterNewLoan > totalLoansBeforeNewLoan;
     }
 
-
-
-
+    /// <summary>
+    /// Delete a loan according to loan id that sent
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    public bool Delete(int id)
+    {
+        try
+        {
+            return loanDetail.IsLoanExist(id);
+        }
+        catch
+        {
+            return false;
+        }
+    }
 }
 

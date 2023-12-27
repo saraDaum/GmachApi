@@ -163,6 +163,11 @@ public class User : Interfaces.IUser
         }
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
     public string GetUserPassword(int id)
     {
         try
@@ -179,5 +184,7 @@ public class User : Interfaces.IUser
             return "";
         }
     }
+
+
 }
 
