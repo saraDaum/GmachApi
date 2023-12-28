@@ -41,6 +41,20 @@ namespace GmachApi.Controllers
             }
         }
 
+        [HttpGet("GetAllApprovaledLoans")]
+        public IEnumerable<Loan> GetAllApprovalLoans()
+        {
+            try
+            {
+                List<Loan> allLoans =GetAll();
+                return allLoans.Select(loan => loan.IsAprovied) ;
+            }
+            catch
+            {
+                return new List<Loan>();
+            }
+        }
+
         // POST api/<AddNewLoan>
         [HttpPost("AddNewLoan")]
         public ActionResult<int> AddNewLoan([FromBody] DTO.Models.LoanDetails loan)
