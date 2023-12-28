@@ -26,7 +26,7 @@ namespace GmachApi.Controllers
             {
                 return Account.GetAllAccounts();
             }
-            catch (Exception ex)
+            catch
             {
                 return new List<Account>();
             }

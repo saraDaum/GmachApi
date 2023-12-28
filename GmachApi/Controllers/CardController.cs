@@ -26,7 +26,7 @@ namespace GmachApi.Controllers
             {
                 return Card.GetAllCards(id);
             }
-            catch (Exception ex)
+            catch 
             {
                 return new List<Card>();
             }

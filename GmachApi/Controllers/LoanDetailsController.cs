@@ -1,4 +1,5 @@
-﻿using DTO.Models;
+﻿using Castle.DynamicProxy.Generators.Emitters.SimpleAST;
+using DTO.Models;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Mvc;
 
@@ -35,19 +36,19 @@ namespace GmachApi.Controllers
             try {
                 return loanDetail.GetAllLoans();
             }
-            catch (Exception ex)
-            {
+            catch {
                 return new List<Loan>();
             }
         }
 
         [HttpGet("GetAllApprovaledLoans")]
-        public IEnumerable<Loan> GetAllApprovalLoans()
+        public List<Loan> GetAllApprovalLoans()
         {
             try
             {
-                List<Loan> allLoans =GetAll();
-                return allLoans.Select(loan => loan.IsAprovied) ;
+                List<Loan> allLoans = GetAll();
+                List<Loan> approvedLoans = allLoans.Where(loan => loan.IsAprovied).ToList();
+                return approvedLoans;
             }
             catch
             {
@@ -80,6 +81,7 @@ namespace GmachApi.Controllers
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] string value)
         {
+
         }
 
         // DELETE api/<LoansDetailController>/5

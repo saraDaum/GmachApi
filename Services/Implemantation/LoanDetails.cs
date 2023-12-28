@@ -216,7 +216,7 @@ public class LoanDetails : IServices.ILoanDetails
         {
             IMapper mapper = LoanAutoMapper.LoanDetailsMapper.CreateMapper();
             List<DTO.Models.Loan> ans = new List<DTO.Models.Loan>();
-            foreach(Repositories.Models.LoanDetails l in loanDetail.getLoans(l => l.IsAprovied == true && l.DateToGetBack > date)){
+            foreach(Repositories.Models.LoanDetails? l in loanDetail.getLoans(l => l.IsAprovied == true && l.DateToGetBack > date)){
                 ans.Add(mapper.Map<DTO.Models.Loan>(l));
             }
             return ans;
@@ -234,7 +234,7 @@ public class LoanDetails : IServices.ILoanDetails
         try
         {
             double balance = 0;
-            foreach (DTO.Models.Loan l in GetAllTheLoansByDate(date))
+            foreach (DTO.Models.Loan? l in GetAllTheLoansByDate(date))
             {
                 balance += l.Sum;
             }
@@ -272,8 +272,7 @@ public class LoanDetails : IServices.ILoanDetails
     public bool DoesLoanImpactFutureInvestments(Loan newLoan, List<Loan> approvedLoans, double todayBalance)
     {
         try
-        {
-            
+        {  
             approvedLoans.InsertRange(0, GetAllLoans().Where(l => l.IsAprovied));
             // Get the return date of the new loan
             DateTime newLoanReturnDate = newLoan.DateToGetBack;

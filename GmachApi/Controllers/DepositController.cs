@@ -81,7 +81,7 @@ namespace GmachApi.Controllers
                 }
                 return response; //the deposit Id*/
             }
-            catch(Exception ex)
+            catch
             {
                 return -1;
 
