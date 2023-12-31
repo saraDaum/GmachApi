@@ -174,7 +174,7 @@ public class LoanDetails : IServices.ILoanDetails
         }
 
         // Return the list of approved loans
-        return approvedLoans.Any() ? approvedLoans.Select(l=>l.LoanId).ToList() : null;
+        return approvedLoans.Any() ? approvedLoans.Where(l=> l.IsAprovied == false).Select(l=>l.LoanId).ToList() : null;
     }
 
     private bool IsBorrowerBlacklisted(Loan loan)
