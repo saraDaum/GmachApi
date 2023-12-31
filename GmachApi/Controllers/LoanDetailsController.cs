@@ -31,6 +31,11 @@ namespace GmachApi.Controllers
         }
 
         //GET api/<LoansDetailController>
+        /// <summary>
+        /// This function returns all loans.
+        /// The loans requests and approvaled loans.
+        /// </summary>
+        /// <returns></returns>
         [HttpGet("GetAll")]
         public List<Loan> GetAll() {
             try {
@@ -41,6 +46,10 @@ namespace GmachApi.Controllers
             }
         }
 
+        /// <summary>
+        /// This function returns all approval loans
+        /// </summary>
+        /// <returns></returns>
         [HttpGet("GetAllApprovaledLoans")]
         public List<Loan> GetAllApprovalLoans()
         {
@@ -49,6 +58,25 @@ namespace GmachApi.Controllers
                 List<Loan> allLoans = GetAll();
                 List<Loan> approvedLoans = allLoans.Where(loan => loan.IsAprovied).ToList();
                 return approvedLoans;
+            }
+            catch
+            {
+                return new List<Loan>();
+            }
+        }
+
+        /// <summary>
+        /// This function returns all loan requests.
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("GetAllNotApprovaledLoans")]
+        public List<Loan> GetAllNotApprovalLoans()
+        {
+            try
+            {
+                List<Loan> allLoans = GetAll();
+                List<Loan> notApprovedLoans = allLoans.Where(loan => loan.IsAprovied==false).ToList();
+                return notApprovedLoans;
             }
             catch
             {
