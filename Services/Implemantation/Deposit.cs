@@ -97,7 +97,7 @@ public class Deposit : IServices.IDeposit
     {
         try
         {
-            // get all the dposit according to specific day
+            // get all the dposit according to specific day (All deposits that dateToPull bigger than today)
             List<Repositories.Models.Deposit>? deposits = reposDeposit.GetAllTheDepositsByDate(date);
             ArgumentNullException.ThrowIfNull(deposits);
 

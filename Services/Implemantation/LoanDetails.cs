@@ -22,8 +22,8 @@ public class LoanDetails : IServices.ILoanDetails
         {
             //check if user exist
             User u = new User();
-            if (!u.IsUserExist(loan.LoanerId)) 
-            { 
+            if (!u.IsUserExist(loan.LoanerId))
+            {
                 return -1;
             }
 
@@ -34,10 +34,10 @@ public class LoanDetails : IServices.ILoanDetails
 
             int res = loanDetail.AddLoan(DALLoanDetail); // the loan id
 
-            if(guarantors != null)
+            if (guarantors != null)
             {
                 Guarantor guarantor = new Guarantor();
-                foreach(DTO.Models.Guarantor g in guarantors)
+                foreach (DTO.Models.Guarantor g in guarantors)
                 {
                     g.LoanId = res;
                     guarantor.AddNewGuarantor(g);
@@ -59,19 +59,21 @@ public class LoanDetails : IServices.ILoanDetails
         try
         {
             IMapper mapper = LoanAutoMapper.LoanDetailsMapper.CreateMapper();
-            List<Repositories.Models.LoanDetails>? loans = loanDetail.getLoans(l=> l.LoanerId == userId);
+            List<Repositories.Models.LoanDetails>? loans = loanDetail.getLoans(l => l.LoanerId == userId);
             if (loans == null)
                 return null;
-            List<Loan> loanDetails = loans.ConvertAll<Loan>(loan=> mapper.Map<Repositories.Models.LoanDetails, Loan>(loan) ) ;
+            List<Loan> loanDetails = loans.ConvertAll<Loan>(loan => mapper.Map<Repositories.Models.LoanDetails, Loan>(loan));
             return loanDetails;
         }
-        catch (Exception ex) {
+        catch (Exception ex)
+        {
             Console.WriteLine(ex.Message);
-            return new List< Loan>();//TODO: Consider return object with paramameter to check if everything okey (an empty object).Sara.
+            return new List<Loan>();//TODO: Consider return object with paramameter to check if everything okey (an empty object).Sara.
         };
     }
 
-    public List<Loan>? GetAllLoans() {
+    public List<Loan>? GetAllLoans()
+    {
         IMapper mapper = LoanAutoMapper.LoanDetailsMapper.CreateMapper();
         List<Repositories.Models.LoanDetails>? AllLoans = loanDetail.getLoans();
         if (AllLoans == null)
@@ -79,6 +81,61 @@ public class LoanDetails : IServices.ILoanDetails
         List<Loan> AllLoansDetails = AllLoans.ConvertAll<DTO.Models.Loan>(loan => mapper.Map<Repositories.Models.LoanDetails, DTO.Models.Loan>(loan));
         return AllLoansDetails;
     }
+
+    public List<DTO.Models.LoanDetails>? GetAllLoansDetails()
+    {
+        /* IMapper mapper = LoanAutoMapper.LoanDetailsMapper.CreateMapper();
+         List<Repositories.Models.LoanDetails>? AllLoans = loanDetail.getLoans();
+         if (AllLoans == null)
+             return null;
+         List<LoanDetails> AllLoansDetails = AllLoans.ConvertAll<DTO.Models.LoanDetails>(loan => mapper.Map<Repositories.Models.LoanDetails, DTO.Models.LoanDetails>(loan));
+         return AllLoansDetails;*/
+
+
+        IMapper mapper = LoanAutoMapper.LoanDetailsMapper.CreateMapper();
+        //All loans without the guarantors.
+        List<Repositories.Models.LoanDetails>? AllLoans = loanDetail.getLoans();
+        if (AllLoans == null)
+            return null;
+        //Map all loans to be DTO type
+        List<DTO.Models.LoanDetails> allLoansDetails = new List<DTO.Models.LoanDetails>();
+        foreach (var loan in AllLoans)
+        {
+
+            DTO.Models.LoanDetails loanDetails = new DTO.Models.LoanDetails
+            {
+                LoanId = loan.LoanId,
+                LoanerId = loan.LoanerId,
+                DateToGetBack = loan.DateToGetBack,
+                Sum = loan.Sum,
+                LoanFile = loan.LoanFile,
+                IsAprovied = loan.IsAprovied,
+                guarantors = GetLoanGuarantor(loan.LoanId)//Add guarantors to entity.
+
+            };
+            allLoansDetails.Add(loanDetails);
+        }
+        if (allLoansDetails.Count> 0)
+        return allLoansDetails;
+        return null;
+    }
+
+    public List<DTO.Models.Guarantor>? GetLoanGuarantor(int loanId)
+    {
+        Services.Implemantation.Guarantor GuarantorHelpVar = new Services.Implemantation.Guarantor();
+        List<DTO.Models.Guarantor> allGuarantors = GuarantorHelpVar.GetAll();
+        List<DTO.Models.Guarantor> Guarantors = new List<DTO.Models.Guarantor>();//An empty list. If there are guarantors for this loan- we will add them in.
+        foreach (var g in allGuarantors)
+        {
+            if (g.LoanId == loanId)
+                Guarantors.Add(g);
+        }
+        if (Guarantors != null && Guarantors.Count != 0)
+            return Guarantors;
+        return null;
+
+    }
+
 
     public Loan GetLoanDetails(int Id)
     {
@@ -96,7 +153,10 @@ public class LoanDetails : IServices.ILoanDetails
             throw new Exception("Error: Catch exception in GetLoanDetails function", ex);
         }
     }
-   
+
+
+
+
     public bool IsLoanExist(int id)
     {
         try
@@ -117,7 +177,7 @@ public class LoanDetails : IServices.ILoanDetails
             Loan loan = GetLoanDetails(loanID);
             IServices.IDeposit deposit = new Implemantation.Deposit();
             //check if there is enough money even during the loan time
-            if (GetTheFinalBalanceByDate(DateTime.Today)- deposit.GetBalanceDifferenceByTwoDates(DateTime.Today, loan.DateToGetBack) < loan.Sum || IsBorrowerBlacklisted(loan))
+            if (GetTheFinalBalanceByDate(DateTime.Today) - deposit.GetBalanceDifferenceByTwoDates(DateTime.Today, loan.DateToGetBack) < loan.Sum || IsBorrowerBlacklisted(loan))
                 return false;
             return loanDetail.LoanApproval(loanID);
         }
@@ -174,7 +234,7 @@ public class LoanDetails : IServices.ILoanDetails
         }
 
         // Return the list of approved loans
-        return approvedLoans.Any() ? approvedLoans.Where(l=> l.IsAprovied == false).Select(l=>l.LoanId).ToList() : null;
+        return approvedLoans.Any() ? approvedLoans.Where(l => l.IsAprovied == false).Select(l => l.LoanId).ToList() : null;
     }
 
     private bool IsBorrowerBlacklisted(Loan loan)
@@ -197,7 +257,7 @@ public class LoanDetails : IServices.ILoanDetails
             Console.WriteLine(ex.Message);
             throw new Exception("Error: IsBorrowerBlacklisted function catch an error", ex);
         }
-        
+
     }
 
     private List<Loan>? GetWaitingList()
@@ -216,13 +276,14 @@ public class LoanDetails : IServices.ILoanDetails
         {
             IMapper mapper = LoanAutoMapper.LoanDetailsMapper.CreateMapper();
             List<DTO.Models.Loan> ans = new List<DTO.Models.Loan>();
-            foreach(Repositories.Models.LoanDetails? l in loanDetail.getLoans(l => l.IsAprovied == true && l.DateToGetBack > date)){
+            foreach (Repositories.Models.LoanDetails? l in loanDetail.getLoans(l => l.IsAprovied == true && l.DateToGetBack > date))
+            {
                 ans.Add(mapper.Map<DTO.Models.Loan>(l));
             }
             return ans;
 
         }
-        catch(Exception ex) 
+        catch (Exception ex)
         {
             Console.WriteLine(ex.Message);
             throw new Exception("Error: Catch an exception in GetAllTheLoansByDate function", ex);
@@ -248,7 +309,7 @@ public class LoanDetails : IServices.ILoanDetails
     }
 
     // Helping function 
-    public double GetTheFinalBalanceByDate (DateTime date)
+    public double GetTheFinalBalanceByDate(DateTime date)
     {
         try
         {
@@ -272,7 +333,7 @@ public class LoanDetails : IServices.ILoanDetails
     public bool DoesLoanImpactFutureInvestments(Loan newLoan, List<Loan> approvedLoans, double todayBalance)
     {
         try
-        {  
+        {
             approvedLoans.InsertRange(0, GetAllLoans().Where(l => l.IsAprovied));
             // Get the return date of the new loan
             DateTime newLoanReturnDate = newLoan.DateToGetBack;
@@ -304,7 +365,7 @@ public class LoanDetails : IServices.ILoanDetails
     /// <param name="loansBeforeNewLoan"></param>
     /// <param name="loansAfterNewLoan"></param>
     /// <returns></returns>
-   
+
     public bool CheckFutureInvestmentsImpact(Loan newLoan, IEnumerable<Loan> loansBeforeNewLoan, double currentBalance)
     {
 
@@ -344,7 +405,9 @@ public class LoanDetails : IServices.ILoanDetails
         }
     }
 
-
-   
+ 
 }
+
+
+    
 

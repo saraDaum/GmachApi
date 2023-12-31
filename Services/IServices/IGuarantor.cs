@@ -17,5 +17,7 @@ public interface IGuarantor
 
     IEnumerable<DTO.Models.Guarantor> GetGuarantorsByLoadId(int loanId);
     List<Guarantor> GetAll();
+
+
 }
 

@@ -52,6 +52,12 @@ public class Guarantor : IServices.IGuarantor
         throw new NotImplementedException();
     }
 
+
+    /// <summary>
+    /// This function returns a list with all Guarantor that in database.
+    /// Type: List<DTO.Models.Guarantor>.
+    /// </summary>
+    /// <returns></returns>
     public List<DTO.Models.Guarantor> GetAll()
     {
         try

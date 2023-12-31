@@ -11,7 +11,6 @@ public class Loan
     public int LoanId { get; set; }
     public int LoanerId { get; set; }
 
-
     public DateTime DateToGetBack { get; set; }
 
     public int Sum { get; set; }

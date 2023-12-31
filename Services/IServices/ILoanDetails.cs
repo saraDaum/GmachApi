@@ -22,6 +22,17 @@ public interface ILoanDetails
     /// <returns>all the existing loan</returns>
     List<Loan>? GetAllLoans();
 
+    List<LoanDetails>? GetAllLoansDetails();
+
+    /// <summary>
+    /// Gets a loanId and returns a list of guarantors of this loan.
+    /// </summary>
+    /// <param name="loanId"></param>
+    /// <returns></returns>
+    List<DTO.Models.Guarantor>? GetLoanGuarantor(int loanId);
+
+
+
     /// <summary>
     /// Get the loan details
     /// </summary>
