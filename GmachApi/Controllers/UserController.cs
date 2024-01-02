@@ -13,10 +13,7 @@ namespace GmachApi.Controllers;
 [ApiController]
 public class UserController : ControllerBase
 {
-
-
     internal Services.IServices.IUser _user = new Services.Implemantation.User();
-
 
     // POST api/<SignIn>
     /// <summary>
@@ -37,8 +34,6 @@ public class UserController : ControllerBase
             return -1;
         }
     }
-
-
 
     // POST api/<LogIn>
     /// <summary>
@@ -61,8 +56,6 @@ public class UserController : ControllerBase
             return BadRequest("Error in the server");
         }
     }
-
-
 
     [HttpPost("Admin/LogIn")]
     public bool AdminLogIn([FromRoute] string email, [FromRoute] string password)

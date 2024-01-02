@@ -3,46 +3,40 @@ using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
-namespace GmachApi.Controllers
+namespace GmachApi.Controllers;
+
+[Route("api/[controller]")]
+[ApiController]
+public class GuarantorController : ControllerBase
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class GuarantorController : ControllerBase
-   {
-        internal Services.IServices.IGuarantor servGuarantor = new Services.Implemantation.Guarantor();
+    internal Services.IServices.IGuarantor servGuarantor = new Services.Implemantation.Guarantor();
 
-
-        // GET: api/<GuarantorController>
-        [HttpGet("GelAll")]
-        public List<Guarantor> GetAll()
+    // GET: api/<GuarantorController>
+    [HttpGet("GelAll")]
+    public List<Guarantor> GetAll()
+    {
+        try
         {
             return servGuarantor.GetAll();
         }
-
-        // GET api/<GuarantorController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        catch (Exception ex)
         {
-            return "value";
-        }
-
-        // POST api/<GuarantorController>
-        [HttpPost]
-        public void Post([FromBody] string value)
-        {
-
-        }
-
-        // PUT api/<GuarantorController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/<GuarantorController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
+            return new List<Guarantor>();
         }
     }
+
+    // GET: api/<GuarantorController>
+    [HttpGet("GetLoanGuarantors")]
+    public IEnumerable<Guarantor> GetLoanGuarantors(int loanId) 
+    {
+        try
+        {
+            return servGuarantor.GetGuarantorsByLoadId(loanId);
+        }
+        catch (Exception ex)
+        {
+            return new List<Guarantor>();
+        }
+    }
+
 }
