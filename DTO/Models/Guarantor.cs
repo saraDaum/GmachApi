@@ -12,7 +12,6 @@ public partial class Guarantor
     public string PhoneNumber { get; set; } = string.Empty;
     public string EmailAddress { get; set; } = string.Empty;
     public string Address { get; set; } = string.Empty;
-    public string Check { get; set; } = string.Empty; //path to image of the check
-
+    public string Check { get; set; } = string.Empty; //Link of the check image
 
 }

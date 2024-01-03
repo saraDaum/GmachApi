@@ -1,0 +1,165 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Repositories.Models.Account">
+    <Position X="2.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAgAAAAgAAAgAAAAAgAAECABAAAA=</HashCode>
+      <FileName>Models\Account.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Repositories.Models.Card">
+    <Position X="4" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAAAAAAAAAAAAAAAAAAgAAAAAAIAAIAAgAAgAAAA=</HashCode>
+      <FileName>Models\Card.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Repositories.Models.Deposit">
+    <Position X="5.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAIAAEAAAAAQ=</HashCode>
+      <FileName>Models\Deposit.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Repositories.Models.GmachimSaraAndShaniContext">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAACAACQQQAAAAAAAAAAAAEAAACAAgAAAAAAAAAEA=</HashCode>
+      <FileName>Models\GmachimSaraAndShaniContext.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Repositories.Models.Guarantor">
+    <Position X="7.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACACgAAAAAAAAAAAAAQAQAAAAAAAACAABAAgAAAAA=</HashCode>
+      <FileName>Models\Guarantor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Repositories.Models.LoanDetails">
+    <Position X="9.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAABAAAAAAAAAAAAAAAAAgAAAAAAAEBAAAAAAAw=</HashCode>
+      <FileName>Models\LoanDetails.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Repositories.Models.LogInUser">
+    <Position X="11" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAQAAAAAAAAA=</HashCode>
+      <FileName>Models\LogInUser.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Repositories.Models.Users">
+    <Position X="11" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAgAAAgAAAAAAAAAAQgACAIAAAA=</HashCode>
+      <FileName>Models\Users.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Repositories.Implementation.Account">
+    <Position X="2.25" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAAAAAAAAQAAAAAQAAAAAAAAAAQAAAAAAAA=</HashCode>
+      <FileName>Implementation\Account.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Repositories.Implementation.Card">
+    <Position X="4" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAQAAAAABAAAAAAAAQAAAAAAAAAQ=</HashCode>
+      <FileName>Implementation\Card.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Repositories.Implementation.Deposit">
+    <Position X="5.75" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAAAAAAAAQAAAAAAAAAAAAAIAgAIAAAAAAA=</HashCode>
+      <FileName>Implementation\Deposit.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Repositories.Implementation.RepoFactory">
+    <Position X="0.5" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAQAAAAAAAAQAAAAAAAAAAAAAAAAgAQgAAAAA=</HashCode>
+      <FileName>Implementation\Factory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Repositories.Implementation.Guarantor">
+    <Position X="7.5" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAAAABAAQAAAAAAAAAAAAAAAgAAAAAAAAA=</HashCode>
+      <FileName>Implementation\Guarantor.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Repositories.Implementation.LoanDetails">
+    <Position X="9.25" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEAAAAAAAEQAAAAAABAGAABAAAAAACAAAAAA=</HashCode>
+      <FileName>Implementation\LoanDetails.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Repositories.Implementation.User">
+    <Position X="11" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAABCAAAAAAAAEAQAABAAAAAAAAAgAEgAQAAAAAAA=</HashCode>
+      <FileName>Implementation\User.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Interface Name="Repositories.Interfaces.IAccount">
+    <Position X="2.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAAAAAAAAAAAAAAQAAAAAAAAAAQAAAAAAAA=</HashCode>
+      <FileName>Interfaces\IAccount.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Repositories.Interfaces.ICard">
+    <Position X="4" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAQ=</HashCode>
+      <FileName>Interfaces\ICard.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Repositories.IDbContext">
+    <Position X="0.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gABAACAACAQAAEAAAAAAAAAAAAAACAAgAAAAAAAAAEA=</HashCode>
+      <FileName>Interfaces\IDbContext.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Repositories.Interfaces.IDeposit">
+    <Position X="5.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAIAgAIAAAAAAA=</HashCode>
+      <FileName>Interfaces\IDeposit.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Repositories.Interfaces.IGuarantor">
+    <Position X="7.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAAAABAAAAAAAAAAAAAAAAAAgAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\IGuarantor.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Repositories.Interfaces.ILoanDetails">
+    <Position X="9.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEAAAAAAAEAAAAAAABAGAABAAAAAACAAAAAA=</HashCode>
+      <FileName>Interfaces\ILoanDetails.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Repositories.Interfaces.IUser">
+    <Position X="11" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAABCAAAAAAAAEAAAABAAAAAAAAAgAEgAQAAAAAAA=</HashCode>
+      <FileName>Interfaces\IUser.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
