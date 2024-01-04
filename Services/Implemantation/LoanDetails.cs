@@ -188,6 +188,16 @@ public class LoanDetails : IServices.ILoanDetails
         }
     }
 
+
+    /// <summary>
+    /// This function is an algorithm that calculates for each loan request
+    /// whether its approval endangers the stability of the association. 
+    /// The algorithm checks whether the approval of this loan will mean that the association 
+    /// will not be able to return their money to the donors? 
+    /// If there is a risk, the algorithm will advise the director of the associations to refrain from approving the request. 
+    /// If there is no risk, the algorithm will recommend the director of the association to approve the request.
+    /// </summary>
+    /// <returns></returns>
     public IEnumerable<int>? GetLoansToApproval()
     {
         // Get the balance of the association for today
@@ -203,11 +213,11 @@ public class LoanDetails : IServices.ILoanDetails
         waitingList.Sort((a, b) => a.DateToGetBack.CompareTo(b.DateToGetBack));
 
         // Set the maximum loan amount per borrower and per request
-        var maxAmountPerBorrower = 1000000m; // Example value, adjust as needed
-        var maxAmountPerRequest = 200000m;  // Example value, adjust as needed
+        var maxAmountPerBorrower = 50000m; // Per user
+        var maxAmountPerRequest = 200000m;  // Per loan
 
         // Create the result list for approved loans
-        var approvedLoans = new List<DTO.Models.Loan>();
+        List<DTO.Models.Loan> approvedLoans = new List<DTO.Models.Loan>();
 
         foreach (var loanRequest in waitingList)
         {
@@ -220,10 +230,10 @@ public class LoanDetails : IServices.ILoanDetails
                 continue;
 
             // Check if the association has enough balance to approve the loan and it doesn't impact future investments
-            if (loanRequest.Sum <= todayBalance && !DoesLoanImpactFutureInvestments(loanRequest, approvedLoans, todayBalance))//TODO: Remember to minus a amount of SUM OF BITACHON
+            if (loanRequest.Sum <= todayBalance && !DoesLoanImpactFutureInvestments(loanRequest, approvedLoans, todayBalance))
             {
                 IServices.IDeposit deposit = new Implemantation.Deposit();
-                if (todayBalance - deposit.GetBalanceDifferenceByTwoDates(DateTime.Today, loanRequest.DateToGetBack) < loanRequest.Sum)
+                if (todayBalance - deposit.GetBalanceDifferenceByTwoDates(DateTime.Today, loanRequest.DateToGetBack) < loanRequest.Sum+30000)
                     continue;
                 // Approve the loan
                 approvedLoans.Add(loanRequest);
@@ -260,6 +270,11 @@ public class LoanDetails : IServices.ILoanDetails
 
     }
 
+
+    /// <summary>
+    /// This function returns all loans requests that in database.
+    /// </summary>
+    /// <returns></returns>
     private List<Loan>? GetWaitingList()
     {
         IMapper mapper = LoanAutoMapper.LoanDetailsMapper.CreateMapper();
@@ -309,17 +324,20 @@ public class LoanDetails : IServices.ILoanDetails
     }
 
     // Helping function 
+    /// <summary>
+    /// This function returns the balance of the association for a specific date.  
+    /// </summary>
     public double GetTheFinalBalanceByDate(DateTime date)
     {
         try
         {
-            // Receive the Deposits today balance
+            // Calculates the Deposits today balance
             Deposit deposit = new Deposit();
             double todayDepositsBalance = deposit.GetTheBalanceByDate(date);
-            // Receive the loans today balance
+            // Calculates the loans today balance
             double todayLoansBalance = getTheBalanceByDate(date);
 
-            return todayDepositsBalance - todayLoansBalance;
+            return todayDepositsBalance - todayLoansBalance;// The amount in the association's account that is available for granting loans
         }
         catch (Exception ex)
         {
@@ -368,24 +386,17 @@ public class LoanDetails : IServices.ILoanDetails
 
     public bool CheckFutureInvestmentsImpact(Loan newLoan, IEnumerable<Loan> loansBeforeNewLoan, double currentBalance)
     {
-
+        //Safety is equal to thee sum that assigned for each user.
         const int Safety = 30000;
-        // סכום ההלוואה החדשה
+        // Sum of new loan request
         double newLoanAmount = newLoan.Sum;
-
-        // סכום הלוואות שיוחזרו עד לתאריך החזר ההלוואה הזו
+        // Sum of loans to be repaid by this loan repayment date
         double totalLoansBeforeNewLoan = loansBeforeNewLoan.Sum(loan => loan.Sum);
-
+        // Sum of deposits that should be returned in this time frame
         double totalDepositsBeforeLoan = loanDetail.GetDepositsSumByDate(newLoan.DateToGetBack);
-
-        //מחזיר אמת אם אישור ההלוואה הנוכחית  מסכן את שחרור ההשקעות שצריכות להשתחרר בטווח הזמן הזה.
+        //Returns true if the approval of the current loan jeopardizes the release of the deposits that should be released within this time frame.
         return !((currentBalance - totalDepositsBeforeLoan + totalLoansBeforeNewLoan) - newLoanAmount > Safety);
 
-        // סכום ההלוואות המופקעות שיש להן החזר בתאריכים עתידיים כולל ההלוואה החדשה
-        // decimal totalLoansAfterNewLoan = loansAfterNewLoan.Sum(loan => loan.Sum) + newLoanAmount;
-
-        // בדוק האם הסכום הכולל של ההלוואות המופקעות גדול מההחזר הצפוי
-        //return totalLoansAfterNewLoan > totalLoansBeforeNewLoan;
     }
 
     /// <summary>
