@@ -73,5 +73,15 @@ public class Card : Interfaces.ICard
         }
     }
 
-
+    public List<Models.Card> GetAllCards()
+    {
+        try
+        {
+            return dbContext.Card.ToList();
+        }
+        catch
+        {
+            return new List<Models.Card>();
+        }
+    }
 }

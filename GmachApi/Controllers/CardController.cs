@@ -25,14 +25,29 @@ public class CardController : ControllerBase
         }
     }
 
-    // POST api/<AcountController>
-    [HttpPost("AddNewCard")]
-    public ActionResult<int> AddNewCard([FromBody] Card card)
+
+    [HttpGet("GetAllCards")]
+    public List<Card> GetAllCards()
     {
         try
         {
-            int response = Card.AddNewCard(card);
-            if (response == -3)
+            return Card.GetAllCards();
+        }
+        catch
+        {
+            return new List<Card>();
+        }
+    }
+
+    // POST api/<AcountController>
+    [HttpPost("AddNewCard")]
+    public int AddNewCard([FromBody] Card card)
+    {
+        try
+        {
+            return Card.AddNewCard(card);
+
+            /*if (response == -3)
             {
                 return BadRequest("User not exist");
             }
@@ -44,10 +59,11 @@ public class CardController : ControllerBase
             {
                 return BadRequest("Error in the server");
             }
-            return response;
+            return response;*/
         }
         catch (Exception ex)
         {
+            return -1;
             return BadRequest(ex.Message);
         }
     }

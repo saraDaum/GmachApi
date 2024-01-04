@@ -33,5 +33,12 @@ public interface ICard
     /// <param name="userId"></param>
     /// <returns></returns>
     List<DTO.Models.Card> GetAllCards(int userId);
-    
+
+    /// <summary>
+    /// Returns all cards that in database.
+    /// </summary>
+    /// <returns></returns>
+    List<DTO.Models.Card> GetAllCards();
+
+
 }

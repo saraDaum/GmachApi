@@ -22,11 +22,7 @@ public class Card : IServices.ICard
             {
                 return -3;
             }
-            //Check if the user already has an account
-            //if (IsCardExistByUserId(card.UserId))
-            //{
-            //    return -2;
-            //}
+           
             IMapper mapper = myMapper.CardMapper.CreateMapper();
             Repositories.Models.Card a = mapper.Map<Repositories.Models.Card>(card);
             return RepoCard.AddNewCard(a);
@@ -63,6 +59,22 @@ public class Card : IServices.ICard
             IMapper mapper = myMapper.CardMapper.CreateMapper();
             List<DTO.Models.Card> allCards = allUserCards.Select(card=> mapper.Map<DTO.Models.Card>(card)).ToList();
             return allCards;
+
+        }
+        catch
+        {
+            return new List<DTO.Models.Card>();
+        }
+    }
+
+    public List<DTO.Models.Card> GetAllCards()
+    {
+        try
+        {
+            List<Repositories.Models.Card> allCards = RepoCard.GetAllCards();
+            IMapper mapper = myMapper.CardMapper.CreateMapper();
+            List<DTO.Models.Card> AllCards = allCards.Select(card => mapper.Map<DTO.Models.Card>(card)).ToList();
+            return AllCards;
 
         }
         catch

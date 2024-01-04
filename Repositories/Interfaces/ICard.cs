@@ -24,4 +24,13 @@ public interface ICard
     int AddNewCard(Models.Card card);
 
     List<Repositories.Models.Card> GetAllUserCards(int id);
+
+    /// <summary>
+    /// Return all cards in database.
+    /// </summary>
+    /// <returns></returns>
+    List<Repositories.Models.Card> GetAllCards();
+
 }
+
+
