@@ -24,7 +24,7 @@ public class UserController : ControllerBase
     /// <returns></returns>
     [HttpPost("SignIn")]
     public int SignIn([FromBody] User newUser)
-    {//  ActionResult<DTO.Models.UserInfo>
+    {
         try
         {
             return (_user.SignIn(newUser));

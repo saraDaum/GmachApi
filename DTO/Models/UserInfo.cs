@@ -19,6 +19,4 @@ public class UserInfo
     public string UserEmail { get; set; } = string.Empty;
     public string UserAddress { get; set; } = string.Empty;
     public int UserPhone { get; set; }
-
-
 }

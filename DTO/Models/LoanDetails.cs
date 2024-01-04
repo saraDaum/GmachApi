@@ -14,3 +14,7 @@ public partial class LoanDetails
     public bool IsAprovied { get; set; }
     public List<Guarantor>? guarantors { get; set; } = null;
 }
+
+
+
+
