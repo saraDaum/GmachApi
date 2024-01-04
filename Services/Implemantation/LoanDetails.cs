@@ -272,6 +272,7 @@ public class LoanDetails : IServices.ILoanDetails
 
 
     /// <summary>
+    /// Helping Function
     /// This function returns all loans requests that in database.
     /// </summary>
     /// <returns></returns>
@@ -296,7 +297,6 @@ public class LoanDetails : IServices.ILoanDetails
                 ans.Add(mapper.Map<DTO.Models.Loan>(l));
             }
             return ans;
-
         }
         catch (Exception ex)
         {
@@ -323,10 +323,14 @@ public class LoanDetails : IServices.ILoanDetails
         }
     }
 
-    // Helping function 
+
     /// <summary>
+    /// Helping function.
     /// This function returns the balance of the association for a specific date.  
     /// </summary>
+    /// <param name="date"></param>
+    /// <returns></returns>
+    /// <exception cref="Exception"></exception>
     public double GetTheFinalBalanceByDate(DateTime date)
     {
         try
@@ -347,7 +351,15 @@ public class LoanDetails : IServices.ILoanDetails
 
     }
 
-    // Function to check if a new loan impacts future investments (recursive)
+
+    /// <summary>
+    /// This Function checks if the new loan impacts future investments (recursive)
+    /// </summary>
+    /// <param name="newLoan"></param>
+    /// <param name="approvedLoans"></param>
+    /// <param name="todayBalance"></param>
+    /// <returns></returns>
+    /// <exception cref="Exception"></exception>
     public bool DoesLoanImpactFutureInvestments(Loan newLoan, List<Loan> approvedLoans, double todayBalance)
     {
         try
@@ -386,7 +398,7 @@ public class LoanDetails : IServices.ILoanDetails
 
     public bool CheckFutureInvestmentsImpact(Loan newLoan, IEnumerable<Loan> loansBeforeNewLoan, double currentBalance)
     {
-        //Safety is equal to thee sum that assigned for each user.
+        //Safety is equal to the sum that is assigned for each user.
         const int Safety = 30000;
         // Sum of new loan request
         double newLoanAmount = newLoan.Sum;
