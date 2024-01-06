@@ -64,7 +64,7 @@ public class CardController : ControllerBase
         catch (Exception ex)
         {
             return -1;
-            return BadRequest(ex.Message);
+            //return BadRequest(ex.Message);
         }
     }
 
