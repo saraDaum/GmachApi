@@ -9,7 +9,6 @@ namespace Repositories.Models
 {
     public class LogInUser
     {
-       
         public string UserName { get; set; } = null!;
 
         public string Password { get; set; } = null!;

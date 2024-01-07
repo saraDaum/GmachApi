@@ -24,7 +24,6 @@ public class MapperConfig : Profile
     );
    
 
-
     public MapperConfiguration LoanDetailsMapper = new MapperConfiguration(cnf =>
         cnf.CreateMap<DTO.Models.Loan, Repositories.Models.LoanDetails>()
         .ReverseMap()
@@ -63,6 +62,12 @@ public class MapperConfig : Profile
     public MapperConfiguration CardMapper => new MapperConfiguration(cnf =>
     {
         cnf.CreateMap<DTO.Models.Card, Repositories.Models.Card>()
+        .ReverseMap();
+    });
+
+    public MapperConfiguration MessageMapper => new MapperConfiguration(cnf =>
+    {
+        cnf.CreateMap<DTO.Models.Message, Repositories.Models.Message>()
         .ReverseMap();
     });
 }

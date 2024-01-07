@@ -14,11 +14,12 @@ public static class ServicesConfig
         collection.AddScoped(typeof(Repositories.Interfaces.IAccount), typeof(Repositories.Implementation.Account));
         collection.AddScoped(typeof(Repositories.Interfaces.ICard),typeof(Repositories.Implementation.Card));
         //collection.AddScoped(typeof(Repositories.Interfaces.IBorrower), typeof(Repositories.Implementation.Borrower));
+        //collection.AddScoped(typeof(Repositories.Interfaces.IDepositor), typeof(Repositories.Implementation.Depositor));
         collection.AddScoped(typeof(Repositories.Interfaces.ILoanDetails), typeof(Repositories.Implementation.LoanDetails));
         collection.AddScoped(typeof(Repositories.Interfaces.IGuarantor), typeof(Repositories.Implementation.Guarantor));
-        //collection.AddScoped(typeof(Repositories.Interfaces.IDepositor), typeof(Repositories.Implementation.Depositor));
         collection.AddScoped(typeof(Repositories.Interfaces.IDeposit), typeof(Repositories.Implementation.Deposit));
         collection.AddScoped(typeof(Repositories.Interfaces.IUser), typeof(Repositories.Implementation.User));
+        collection.AddScoped(typeof(Repositories.Interfaces.IMessage), typeof(Repositories.Implementation.Message));
 
         collection.AddDbContext<Repositories.Models.GmachimSaraAndShaniContext>();
     }

@@ -11,12 +11,12 @@ public static class RepoFactory
     public static IDbContext dbContext;
     public static Account account { get; }
     public static Card card { get; }
+    //public static Depositor depositor { get; }
     //public static Borrower borrower { get; }
     public static Deposit deposit { get; }
-    //public static Depositor depositor { get; }
     public static LoanDetails loanDetails { get; }
     public static User User { get; }
-
+    public static Message Message { get; }
     static RepoFactory()
     {
         dbContext = new Models.GmachimSaraAndShaniContext();
@@ -27,6 +27,7 @@ public static class RepoFactory
         //depositor = new Depositor(dbContext);
         loanDetails = new LoanDetails(dbContext);
         User = new User(dbContext);
+        Message = new Message(dbContext);
 
     }
 
