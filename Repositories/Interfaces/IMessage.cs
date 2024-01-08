@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Repositories.Interfaces
+namespace Repositories.Interfaces;
+
+public interface IMessage
 {
-    public interface IMessage
-    {
-    }
+    IEnumerable<Models.Message> GetUserMessage(int id);
+
+    bool Add(Models.Message message);
 }

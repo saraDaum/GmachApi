@@ -29,6 +29,11 @@ public class MapperConfig : Profile
         .ReverseMap()
     );
 
+    public MapperConfiguration MessageMapper = new MapperConfiguration(cnf =>
+        cnf.CreateMap<DTO.Models.Message, Repositories.Models.Message>()
+        .ReverseMap()
+    );
+
     public MapperConfiguration UserInfoMapper = new MapperConfiguration(cnf =>
         cnf.CreateMap<Users, UserInfo>()
         .ReverseMap()
@@ -65,9 +70,4 @@ public class MapperConfig : Profile
         .ReverseMap();
     });
 
-    public MapperConfiguration MessageMapper => new MapperConfiguration(cnf =>
-    {
-        cnf.CreateMap<DTO.Models.Message, Repositories.Models.Message>()
-        .ReverseMap();
-    });
 }

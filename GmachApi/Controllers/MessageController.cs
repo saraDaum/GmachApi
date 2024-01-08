@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using DTO.Models;
+using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -8,36 +9,37 @@ namespace GmachApi.Controllers
     [ApiController]
     public class MessageController : ControllerBase
     {
-        // GET: api/<MessageController>
-        [HttpGet]
-        public IEnumerable<string> Get()
+        Services.IServices.IMessage _message = new Services.Implemantation.Message();
+
+        [HttpGet("GetMessagesByUserId")]
+        public IEnumerable<DTO.Models.Message> GetMessagesByUserId(int id)
         {
-            return new string[] { "value1", "value2" };
+            try
+            {
+                return _message.GetUserMessages(id);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return new List<Message>();
+            }
         }
 
-        // GET api/<MessageController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        
+        [HttpPost("SendNewMessage")]
+        public bool SendNewMessage(DTO.Models.Message message)
         {
-            return "value";
+            try
+            {
+                return _message.Add(message);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return false;
+            }
         }
 
-        // POST api/<MessageController>
-        [HttpPost]
-        public void Post([FromBody] string value)
-        {
-        }
 
-        // PUT api/<MessageController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/<MessageController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
     }
 }

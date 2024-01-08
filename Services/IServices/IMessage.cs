@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace Services.IServices
 {
-    public interface  IMessage
+    public interface IMessage
     {
+        IEnumerable<DTO.Models.Message> GetUserMessages(int id);
+
+        bool Add(DTO.Models.Message message);
     }
 }
