@@ -11,4 +11,6 @@ public interface IMessage
     IEnumerable<Models.Message> GetUserMessage(int id);
 
     bool Add(Models.Message message);
+
+    bool Update(Models.Message message);
 }

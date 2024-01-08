@@ -53,6 +53,27 @@ public class Message : IMessage
         try
         {
             dbContext.Message.Add(message);
+            dbContext.SaveChanges();
+            return true;
+        }
+        catch(Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+            return false;
+        }
+    }
+
+    /// <summary>
+    /// Update Message
+    /// </summary>
+    /// <param name="message">The message to update</param>
+    /// <returns>success</returns>
+    public bool Update(Models.Message message)
+    {
+        try
+        {
+            dbContext.Message.Update(message);
+            dbContext.SaveChanges();
             return true;
         }
         catch(Exception ex)

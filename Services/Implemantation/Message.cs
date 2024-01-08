@@ -4,6 +4,7 @@ using Repositories.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -56,8 +57,18 @@ public class Message : IServices.IMessage
         try
         {
             IMapper mapper = _mapperConfig.MessageMapper.CreateMapper();
-            return (from s in _message.GetUserMessage(id).ToList()
-                    select mapper.Map<DTO.Models.Message>(s)).ToList();
+
+            List<Repositories.Models.Message> userMessageList = _message.GetUserMessage(id).ToList();
+             
+            // Change the recived messages to be viewed
+            foreach(Repositories.Models.Message message in userMessageList.Where(m => m.ToUserId == id && !m.Viewed)) 
+            {
+                message.Viewed = true;
+                _message.Update(message);
+            }
+
+            return (from s in userMessageList
+                    select mapper.Map<DTO.Models.Message>(s)).ToList(); 
                    
         }
         catch (Exception ex)
