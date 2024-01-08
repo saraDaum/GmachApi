@@ -23,10 +23,10 @@ public class Account : IServices.IAccount
                 return -3;
             }
             //Check if the user already has an account
-            if (IsAccountExistByUserId(account.UserId))
-            {
-                return -2;
-            }
+            //if (IsAccountExistByUserId(account.UserId))
+            //{
+            //    return -2;
+            //}
             IMapper mapper = myMapper.AccountMapper.CreateMapper();
             Repositories.Models.Account a = mapper.Map<Repositories.Models.Account>(account);
             return RepoAccount.AddNewAccount(a);

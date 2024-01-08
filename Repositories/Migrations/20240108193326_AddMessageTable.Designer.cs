@@ -12,8 +12,8 @@ using Repositories.Models;
 namespace Repositories.Migrations
 {
     [DbContext(typeof(GmachimSaraAndShaniContext))]
-    [Migration("20240107130732_AddMessageEntity_")]
-    partial class AddMessageEntity_
+    [Migration("20240108193326_AddMessageTable")]
+    partial class AddMessageTable
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -188,6 +188,32 @@ namespace Repositories.Migrations
                     b.HasKey("LoanId");
 
                     b.ToTable("LoanDetails");
+                });
+
+            modelBuilder.Entity("Repositories.Models.Message", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("FromUserId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Text")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ToUserId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("Viewed")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Message");
                 });
 
             modelBuilder.Entity("Repositories.Models.Users", b =>

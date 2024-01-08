@@ -28,6 +28,7 @@ public partial class GmachimSaraAndShaniContext : DbContext, IDbContext
     public virtual DbSet<LoanDetails> LoanDetails {get; set;}
     public virtual DbSet<UsersUnderWarning> UsersUnderWarning { get; set; }
     public virtual DbSet<Account> Account { get; set; }
+    public virtual DbSet<Message> Message { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
@@ -49,6 +50,18 @@ public partial class GmachimSaraAndShaniContext : DbContext, IDbContext
             entity.Property(e => e.Validity).IsRequired();
             entity.Property(e => e.OwnersName).IsRequired();
             
+        });
+
+        // Configure Message
+        modelBuilder.Entity<Message>(entity =>
+        {
+            entity.HasKey(e => e.Id);
+
+            //set other configurations
+            entity.Property(e => e.FromUserId).IsRequired();
+            entity.Property(e => e.ToUserId).IsRequired();
+            entity.Property(e => e.Text).IsRequired();
+            entity.Property(e => e.Viewed);
         });
 
         modelBuilder.Entity<Account>(entity =>
