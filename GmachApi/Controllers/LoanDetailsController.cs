@@ -121,7 +121,7 @@ public class LoanDetailsController : ControllerBase
     }
 
     // DELETE api/<LoansDetailController>/5
-    [HttpDelete("{id}")]
+    [HttpDelete("Remove/{id}")]
     public bool Delete(int id)
     {
         try
