@@ -19,7 +19,11 @@ public interface IDbContext
 
     DbSet<UsersUnderWarning> UsersUnderWarning { get; set; }
 
+    DbSet<ContactRequest> ContactRequests { get; set; }
+
     DbSet<Message> Message { get; set; }
+
+ 
 
     int SaveChanges();
     Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
