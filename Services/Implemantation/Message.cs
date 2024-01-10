@@ -72,9 +72,88 @@ public class Message : IServices.IMessage
                    
         }
         catch (Exception ex)
-        {
+        { 
             Console.WriteLine(ex.Message);
             throw new Exception("Error in server logic in in the wanted request: " + ex.Message, ex);
+        }
+    }
+
+    // Contact area
+
+    /// <summary>
+    /// Get all contact request
+    /// </summary>
+    /// <returns>The contacts list</returns>
+    /// <exception cref="Exception">If catch an exception during the proccess</exception>
+    public IEnumerable<DTO.Models.ContactRequest> GetContacts(bool UnHandled = false)
+    {
+        try
+        {
+            List<Repositories.Models.ContactRequest> repoContacts;
+            if (UnHandled)
+                repoContacts = _message.GetAllContacts(c => !c.Handled);
+            else
+                repoContacts = _message.GetAllContacts();
+
+            
+            IMapper mapper = _mapperConfig.ContactRequestsMapper.CreateMapper();
+            return (from c in repoContacts
+                    select mapper.Map<DTO.Models.ContactRequest>(c)).ToList();
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+            throw new Exception("Catch an Exception in GetContact in Services: " + ex.Message, ex);
+        }
+        
+    }
+
+    public int AddContactRequest(DTO.Models.ContactRequest contact)
+    {
+        try
+        {
+            contact.Handled = false;
+            IMapper mapper = _mapperConfig.ContactRequestsMapper.CreateMapper();
+            return _message.AddContact(mapper.Map<Repositories.Models.ContactRequest>(contact));
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+            return -1;
+        }
+    }
+
+    public bool DeleteContact(int id)
+    {
+        try
+        {
+            if(_message.GetAllContacts(c => c.Id == id).Any())
+            {
+                return _message.DeleteContact(_message.GetAllContacts(c => c.Id == id).First());
+            }
+            return false;
+
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+            return false;
+        }
+        
+    }
+
+    public bool ChangeToHandled(int id)
+    {
+        try
+        {
+            if (_message.GetAllContacts(c => c.Id == id && !c.Handled).Any())
+                return _message.ChangeToHandled(id);
+            return false;
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+            return false;
         }
     }
 }

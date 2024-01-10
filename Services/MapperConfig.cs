@@ -70,4 +70,9 @@ public class MapperConfig : Profile
         .ReverseMap();
     });
 
+    public MapperConfiguration ContactRequestsMapper => new MapperConfiguration(cnf =>
+    {
+        cnf.CreateMap<DTO.Models.ContactRequest, Repositories.Models.ContactRequest>()
+        .ReverseMap();
+    });
 }

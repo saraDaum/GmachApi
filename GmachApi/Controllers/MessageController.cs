@@ -25,13 +25,86 @@ namespace GmachApi.Controllers
             }
         }
 
-        
+
         [HttpPost("SendNewMessage")]
         public bool SendNewMessage(DTO.Models.Message message)
         {
             try
             {
                 return _message.Add(message);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return false;
+            }
+        }
+
+
+        // Contact Requests area:
+
+        [HttpGet("GetAllContacts")]
+        public IEnumerable<ContactRequest> GetAllContacts()
+        {
+            try
+            {
+                return _message.GetContacts();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return new List<ContactRequest>();
+            }
+        }
+
+        [HttpGet("GetAllUnHandledContacts")]
+        public IEnumerable<ContactRequest> GetAllUnHandledContacts()
+        {
+            try
+            {
+                return _message.GetContacts(true);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return new List<ContactRequest>();
+            }
+        }
+
+        [HttpPost("AddNewContactRequest")]
+        public int AddNewContactRequest(ContactRequest contact)
+        {
+            try
+            {
+                return _message.AddContactRequest(contact);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return -1;
+            }
+        }
+
+        [HttpDelete("{id}")]
+        public bool DeleteContactRequest(int id)
+        {
+            try
+            {
+                return _message.DeleteContact(id);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return false;
+            }
+        }
+
+        [HttpGet("ChangeToHandled")]
+        public bool ChangeToHandled(int id)
+        {
+            try
+            {
+                return _message.ChangeToHandled(id);
             }
             catch (Exception e)
             {
