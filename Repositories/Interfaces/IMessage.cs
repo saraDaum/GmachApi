@@ -20,4 +20,6 @@ public interface IMessage
     int AddContact(ContactRequest contactRequest);
     bool DeleteContact(ContactRequest contactRequest);
     bool ChangeToHandled(int id);
+
+    List<Models.Message> GetAll();
 }

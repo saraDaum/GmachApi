@@ -30,8 +30,8 @@ public class Message : IServices.IMessage
                 return false;
 
             IServices.IUser _user = new User();
-            if (!_user.IsUserExist(message.ToUserId) || !_user.IsUserExist(message.FromUserId))
-                return false;
+                if (!_user.IsUserExist(message.ToUserId) || !_user.IsUserExist(message.FromUserId))
+                    return false;
 
             message.Viewed = false;
 
@@ -154,6 +154,24 @@ public class Message : IServices.IMessage
         {
             Console.WriteLine(ex.Message);
             return false;
+        }
+    }
+
+    public List<DTO.Models.Message> GetAll()
+    {
+        try
+        {
+            IMapper mapper = _mapperConfig.MessageMapper.CreateMapper();
+            List<Repositories.Models.Message> userMessageList = _message.GetAll().ToList();
+            if (userMessageList.Count > 0) {
+                return (from s in userMessageList
+                        select mapper.Map<DTO.Models.Message>(s)).ToList();
+            }
+            return new List<DTO.Models.Message>();
+        }
+        catch
+        {
+            return new List<DTO.Models.Message> ();
         }
     }
 }
