@@ -77,5 +77,23 @@ public class Message : IServices.IMessage
             throw new Exception("Error in server logic in in the wanted request: " + ex.Message, ex);
         }
     }
+
+    public List<DTO.Models.Message> GetAll()
+    {
+        try
+        {
+            IMapper mapper = _mapperConfig.MessageMapper.CreateMapper();
+            List<Repositories.Models.Message> userMessageList = _message.GetAll().ToList();
+            if (userMessageList.Count > 0) {
+                return (from s in userMessageList
+                        select mapper.Map<DTO.Models.Message>(s)).ToList();
+            }
+            return new List<DTO.Models.Message>();
+        }
+        catch
+        {
+            return new List<DTO.Models.Message> ();
+        }
+    }
 }
 

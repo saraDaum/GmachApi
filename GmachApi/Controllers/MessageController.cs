@@ -40,6 +40,18 @@ namespace GmachApi.Controllers
             }
         }
 
+        [HttpGet("GetAll")]
+        public List<DTO.Models.Message> GetAll()
+        {
+            try
+            {
+                return _message.GetAll();
+            }
+            catch
+            {
+                return new List<Message>();
+            }
+        }
 
     }
 }

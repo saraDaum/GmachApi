@@ -13,4 +13,6 @@ public interface IMessage
     bool Add(Models.Message message);
 
     bool Update(Models.Message message);
+
+    List<Models.Message> GetAll();
 }

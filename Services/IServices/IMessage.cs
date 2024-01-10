@@ -11,5 +11,8 @@ namespace Services.IServices
         IEnumerable<DTO.Models.Message> GetUserMessages(int id);
 
         bool Add(DTO.Models.Message message);
+
+        List<DTO.Models.Message> GetAll();
+
     }
 }

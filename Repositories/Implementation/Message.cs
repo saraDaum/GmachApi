@@ -82,4 +82,17 @@ public class Message : IMessage
             return false;
         }
     }
+
+    public List<Models.Message> GetAll()
+    {
+        try
+        {
+            return dbContext.Message.ToList();
+        }
+        catch(Exception ex) {
+          
+                Console.WriteLine(ex.Message);
+                return new List<Models.Message>();
+            }
+    }
 }
