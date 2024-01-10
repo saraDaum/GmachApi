@@ -30,8 +30,8 @@ public class Message : IServices.IMessage
                 return false;
 
             IServices.IUser _user = new User();
-            if (!_user.IsUserExist(message.ToUserId) || !_user.IsUserExist(message.FromUserId))
-                return false;
+                if (!_user.IsUserExist(message.ToUserId) || !_user.IsUserExist(message.FromUserId))
+                    return false;
 
             message.Viewed = false;
 
