@@ -120,6 +120,21 @@ public class LoanDetailsController : ControllerBase
         }
     }
 
+    //TODO: We need to implement it
+    [HttpPost("Return/{id}")]
+    public bool Return(int loanId)
+    {
+        try
+        {
+            return true;
+        }
+        catch
+        {
+            return false;
+        }
+    }
+
+
     // DELETE api/<LoansDetailController>/5
     [HttpDelete("{id}")]
     public bool Delete(int id)

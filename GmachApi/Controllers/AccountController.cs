@@ -10,6 +10,7 @@ public class AccountController : ControllerBase
 {
     Services.IServices.IAccount Account = new Services.Implemantation.Account();
 
+
     // GET api/<AcountController>/5
     [HttpGet("GetAllAcconts")]
     public List<Account> GetAllAccounts()

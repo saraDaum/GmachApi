@@ -75,4 +75,18 @@ public class DepositController : ControllerBase
         
     }
 
+
+    [HttpPost("Return/{id}")]
+    public bool Return(int depositID)
+    {
+        try
+        {
+            return true;
+        }
+        catch
+        {
+            return false;
+        }
+    }
+
 }
