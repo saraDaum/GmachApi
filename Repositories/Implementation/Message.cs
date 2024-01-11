@@ -84,7 +84,9 @@ public class Message : IMessage
         }
     }
 
+
     //------------------------------------------------------------------------------------------------//
+
 
     /// <summary>
     /// Return all the contact requests that stand in the condition, if there is.
@@ -108,6 +110,12 @@ public class Message : IMessage
         }
     }
 
+
+    /// <summary>
+    /// Add new contact request
+    /// </summary>
+    /// <param name="contactRequest">The contact request</param>
+    /// <returns>Contact id or -1 if it didn't worked out</returns>
     public int AddContact(ContactRequest contactRequest)
     {
         try

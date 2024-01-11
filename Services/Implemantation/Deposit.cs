@@ -13,7 +13,7 @@ namespace Services.Implemantation;
 public class Deposit : IServices.IDeposit
 {
     MapperConfig myMapper = MapperConfig.Instance;
-    Repositories.Implementation.Deposit reposDeposit = new Repositories.Implementation.Deposit();
+    Repositories.Interfaces.IDeposit reposDeposit = new Repositories.Implementation.Deposit();
 
     public IEnumerable<DTO.Models.Deposit> AllUserDeposits(int id)
     {
@@ -146,5 +146,28 @@ public class Deposit : IServices.IDeposit
             Console.WriteLine(ex.ToString());
             throw new Exception("Error: Catch an exception in GetBalanceByTwoDates function.", ex);
         }
+    }
+
+    public bool AddTimeToDeposit(int depositId, DateTime newReturningDay)
+    {
+        try
+        {
+            Repositories.Models.Deposit deposit = reposDeposit.Get(depositId);
+            if (deposit.DateToPull >= newReturningDay)
+                return false;
+            deposit.DateToPull = newReturningDay;
+            return reposDeposit.Update(deposit);
+        }
+        catch(ArgumentNullException e)
+        {
+            Console.WriteLine("No such deposit");
+            return false;
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+            return false;
+        }
+        throw new NotImplementedException();
     }
 }

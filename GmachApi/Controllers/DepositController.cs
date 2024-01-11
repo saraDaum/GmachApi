@@ -89,4 +89,19 @@ public class DepositController : ControllerBase
         }
     }
 
+
+    [HttpGet("AddTimeToDeposit")]
+    public bool AddTimeToDeposit(int depositId, DateTime newReturningDay)
+    {
+        try
+        {
+            return deposit.AddTimeToDeposit(depositId, newReturningDay);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+            return false; 
+        }
+    }
+
 }
