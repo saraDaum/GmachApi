@@ -19,5 +19,7 @@ public partial class LoanDetails
     public string LoanFile { get; set; } = string.Empty;
     public bool IsAprovied { get; set; }
 
+    public bool Safe { get; set; } = true;
+
 
 }

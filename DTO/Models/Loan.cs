@@ -15,6 +15,8 @@ public class Loan
     public string LoanFile { get; set; } = string.Empty;
     public bool IsAprovied { get; set; }
 
+    //public bool Safe { get; set; } = true;
+
     public Loan() { }
 
     public Loan(int loanId, int userId, DateTime dateToGetBack, int sum, string loanFile, bool isAprovied)
@@ -25,5 +27,6 @@ public class Loan
         Sum=sum;
         LoanFile=loanFile;
         IsAprovied=isAprovied;
+        //Safe = true;
     }
 }

@@ -141,6 +141,18 @@ public class LoanDetails : Interfaces.ILoanDetails
         return sumOfAllDeposits;
     }
 
-   
-
+    public bool Update(Models.LoanDetails loanDetails)
+    {
+        try
+        {
+            dbContext.LoanDetails.Update(loanDetails);
+            dbContext.SaveChanges();
+            return true;
+        }
+        catch(Exception ex) 
+        {
+            Console.WriteLine(ex.Message);
+            return false; 
+        }
+    }
 }

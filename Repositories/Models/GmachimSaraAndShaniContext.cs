@@ -39,7 +39,7 @@ public partial class GmachimSaraAndShaniContext : DbContext, IDbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        // Configure Account
+        // Configure Card
         modelBuilder.Entity<Card>(entity =>
         {
             entity.HasKey(e => e.CardId);
@@ -186,6 +186,8 @@ public partial class GmachimSaraAndShaniContext : DbContext, IDbContext
             entity.Property(ld => ld.LoanFile).IsRequired();
 
             entity.Property(ld=> ld.IsAprovied).IsRequired();
+
+            entity.Property(ld => ld.Safe);
         
     }); }
         

@@ -77,4 +77,37 @@ public class Deposit : Interfaces.IDeposit
             return null;
         }
     }
+
+    public Models.Deposit Get(int depositId)
+    {
+        try
+        {
+            Models.Deposit? deposit = dbContext.Deposits.Where(l => l.DepositId == depositId).FirstOrDefault();
+            if (deposit != null)
+            {
+                return deposit;
+            }
+            throw new ArgumentNullException("deposit");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+            throw new Exception(ex.Message);
+        }
+    }
+
+    public bool Update(Models.Deposit deposit)
+    {
+        try
+        {
+            dbContext.Deposits.Update(deposit);
+            dbContext.SaveChanges();
+            return true;
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+            return false;
+        }
+    }
 }

@@ -19,9 +19,8 @@ public interface IMessage
 
     bool DeleteContact(int id);
     bool ChangeToHandled(int id);
-  // bool Add(DTO.Models.Message message);
 
-        List<DTO.Models.Message> GetAll();
+    List<DTO.Models.Message> GetAll();
 
-    }
-
+    
+}

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Repositories.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,7 +16,6 @@ public interface IDeposit
     IEnumerable<Repositories.Models.Deposit> GetAll();
 
     List<Models.Deposit>? GetAllTheDepositsByDate(DateTime date);
-
-
-
+    Deposit Get(int depositId);
+    bool Update(Deposit deposit);
 }

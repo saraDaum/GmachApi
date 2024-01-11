@@ -52,4 +52,6 @@ public interface ILoanDetails
 
     int GetDepositsSumByDate(DateTime date);
 
+    bool Update(Models.LoanDetails loanDetails);
+
 }

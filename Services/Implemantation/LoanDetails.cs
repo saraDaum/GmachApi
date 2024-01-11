@@ -222,8 +222,9 @@ public class LoanDetails : IServices.ILoanDetails
         foreach (var loanRequest in waitingList)
         {
             // Check if the borrower is blacklisted
-            if (IsBorrowerBlacklisted(loanRequest))
+            if (IsBorrowerBlacklisted(loanRequest) || !IsLoanSafe(loanRequest.LoanId))
                 continue;
+
 
             // Check if the loan amount exceeds the maximum per request or per borrower
             if (loanRequest.Sum > maxAmountPerRequest || loanRequest.Sum + GetUserLoans(loanRequest.LoanerId)?.Sum(l => l.Sum) > maxAmountPerBorrower)
@@ -245,6 +246,19 @@ public class LoanDetails : IServices.ILoanDetails
 
         // Return the list of approved loans
         return approvedLoans.Any() ? approvedLoans.Where(l => l.IsAprovied == false).Select(l => l.LoanId).ToList() : null;
+    }
+
+    public bool IsLoanSafe(int loanId)
+    {
+        try
+        {
+            return (bool)(loanDetail.getLoans(l => l.LoanId == loanId).FirstOrDefault()?.Safe);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+            return false;
+        }
     }
 
     private bool IsBorrowerBlacklisted(Loan loan)
@@ -428,7 +442,25 @@ public class LoanDetails : IServices.ILoanDetails
         }
     }
 
- 
+    public bool ReportALoan(int id, bool safe)
+    {
+        try
+        {
+            Repositories.Models.LoanDetails? loanDetails = loanDetail.getLoans(l => l.LoanId == id)?.FirstOrDefault();
+            if (loanDetails == null)
+            {
+                Console.WriteLine("User not exist");
+                return false;
+            }
+            loanDetails.Safe = safe;
+            return loanDetail.Update(loanDetails);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+            return false;
+        }
+    }
 }
 
 

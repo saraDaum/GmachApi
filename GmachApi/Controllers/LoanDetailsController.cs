@@ -200,4 +200,22 @@ public class LoanDetailsController : ControllerBase
         }
     }
 
+
+    [HttpGet("ReportALoan")]
+    public bool ReportALoan(int id, bool safe)
+    {
+        try
+        {
+            return loanDetail.ReportALoan(id, safe);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.Message);
+            return false; 
+        }
+
+    }
+
+    
+
 }
