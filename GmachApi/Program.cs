@@ -6,6 +6,12 @@ using Microsoft.EntityFrameworkCore;
 using Repositories;
 using Repositories.Models;
 using Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -30,6 +36,11 @@ builder.Services.AddCors(options =>
 });
 
 
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("AdminOnly", policy => policy.RequireClaim(ClaimTypes.Role, "Admin"));
+});
+
 builder.Services.AddDbContext<GmachimSaraAndShaniContext>();
 
 var mapperConfig = new MapperConfiguration(mc =>
@@ -56,6 +67,10 @@ if (app.Environment.IsDevelopment())
 }
 
 //app.UseHttpsRedirection();
+
+// Enable JWT authentication
+app.UseAuthentication();
+
 
 app.UseAuthorization();
 
@@ -68,89 +83,90 @@ app.UseCors();
 
 app.UseStaticFiles();
 
+app.MapPost("/login", async (HttpContext context) =>
+{
+    var username = context.Request.Form["username"];
+    var password = context.Request.Form["password"];
+
+ 
+
+    // if user exist, create a taoken
+    if (IsValidUser(username, password))
+    {
+        var token = GenerateJwtToken(username, IsAdmin(username, password));
+
+        context.Response.Headers.Add("Content-Type", "application/json");
+        await context.Response.WriteAsync("{\"token\": \"" + token + "\"}");
+    }
+    else
+    {
+        context.Response.StatusCode = 401;
+        await context.Response.WriteAsync("Invalid username or password");
+    }
+});
+
+
+
 app.MapControllers();
 
 app.Run();
 
-
-/*using AutoMapper;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.EntityFrameworkCore;
-using Repositories;
-using Repositories.Models;
-using Services;
-
-var builder = WebApplication.CreateBuilder(args);
-
-// Add services to the container.
-builder.Services.AddControllers();
-
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-
-builder.Services.AddTransient<IDbContext, GmachimSaraAndShaniContext>();
-
-// Configure CORS
-builder.Services.AddCors(options =>
+bool IsAdmin(string username, string password)
 {
-    options.AddDefaultPolicy(builder =>
-    {
-        builder.WithOrigins("http://localhost:3000")
-               .AllowAnyMethod()
-               .AllowAnyHeader();
-    });
-});
-
-
-builder.Services.AddDbContext<GmachimSaraAndShaniContext>();
-
-var mapperConfig = new MapperConfiguration(mc =>
+    return username == "adPlusadMinus" && password == "15987532";
+}
+bool IsValidUser(string username, string password)
 {
-    mc.AddProfile(MapperConfig.Instance);
-});
-
-
-builder.Services.AddSingleton(mapperConfig);
-
-var app = builder.Build();
-
-// Add services to the container.
-//ConfigurationManager configuration = builder.Configuration; // allows both to access and to set up the config
-
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger(c =>
+    Services.IServices.IUser user = new Services.Implemantation.User();
+    if (username == password && username == "temp")
     {
-        c.RouteTemplate = "docs/{documentName}/swagger.json";
-    });
-
-    app.UseSwaggerUI(c =>
+        return true;
+    }
+    try
     {
-        c.SwaggerEndpoint("/docs/v1/swagger.json", "My API V1");
-    });
+        return user.Login(new DTO.Models.LoginUser() { UserName = username, Password = password}) != null;
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine(ex.Message);
+        return false;
+    }
 }
 
-//app.UseHttpsRedirection();
+string GenerateJwtToken(string username, bool Admin)
+{
+    IConfigurationRoot configuration = new ConfigurationBuilder()
+            .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
+            .AddJsonFile("appsettings.json")
+            .Build();
 
-app.UseAuthorization();
 
-app.UseRouting();
+    string issuer = configuration["JwtSettings:Issuer"];
+    string audience = configuration["JwtSettings:Audience"];
+    string symmetricKey = configuration["JwtSettings:SymmetricKey"];
 
-//app.UseCors("AllowSpecificOrigin"); // השתמש ב-CORS Policy שיצרנו
+    var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(symmetricKey));
+    var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
 
-// global cors policy
-app.UseCors(x => x
-     .AllowAnyMethod()
-     .AllowAnyHeader()
-     .SetIsOriginAllowed(origin => true) // allow any origin 
-     .AllowCredentials());
+    
 
-app.UseStaticFiles();
+    var claims = new List<Claim>
+    {
+        new Claim(ClaimTypes.Name, username),
 
-app.MapControllers();
+        Admin ?
+        new Claim(ClaimTypes.Role, "Admin"):
+        new Claim(ClaimTypes.Role, "User"),
 
-app.Run();
-*/
+    };
+
+    var token = new JwtSecurityToken(
+        issuer: issuer,
+        audience: audience,
+        claims: claims,
+        expires: DateTime.Now.AddMinutes(30),
+        signingCredentials: credentials
+    );
+
+    return new JwtSecurityTokenHandler().WriteToken(token);
+}

@@ -1,4 +1,5 @@
 ﻿using DTO.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=39786
@@ -13,6 +14,7 @@ public class AccountController : ControllerBase
 
     // GET api/<AcountController>/5
     [HttpGet("GetAllAcconts")]
+    [Authorize(Policy = "AdminOnly")]
     public List<Account> GetAllAccounts()
     {
         try

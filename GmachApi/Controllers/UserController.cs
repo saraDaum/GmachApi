@@ -1,4 +1,5 @@
 ﻿using DTO.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Data.Common;
@@ -72,6 +73,7 @@ public class UserController : ControllerBase
     }
 
     [HttpGet("GetAllUsers")]
+    [Authorize(Policy = "AdminOnly")]
     public List<User> GetUsers()
     {
         return _user.GetAllUsers();

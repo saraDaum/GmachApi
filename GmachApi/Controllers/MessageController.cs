@@ -1,4 +1,5 @@
 ﻿using DTO.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -56,6 +57,7 @@ namespace GmachApi.Controllers
         // Contact Requests area:
 
         [HttpGet("GetAllContacts")]
+        [Authorize(Policy = "AdminOnly")]
         public IEnumerable<ContactRequest> GetAllContacts()
         {
             try
@@ -70,6 +72,7 @@ namespace GmachApi.Controllers
         }
 
         [HttpGet("GetAllUnHandledContacts")]
+        [Authorize(Policy = "AdminOnly")]
         public IEnumerable<ContactRequest> GetAllUnHandledContacts()
         {
             try

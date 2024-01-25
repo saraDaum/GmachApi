@@ -1,5 +1,6 @@
 ﻿using Castle.DynamicProxy.Generators.Emitters.SimpleAST;
 using DTO.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Mvc;
 
@@ -37,6 +38,7 @@ public class LoanDetailsController : ControllerBase
     /// </summary>
     /// <returns></returns>
     [HttpGet("GetAll")]
+    [Authorize(Policy = "AdminOnly")]
     public List<Loan> GetAll() {
         try 
         {
@@ -66,6 +68,7 @@ public class LoanDetailsController : ControllerBase
     /// </summary>
     /// <returns></returns>
     [HttpGet("GetAllApprovaledLoans")]
+    [Authorize(Policy = "AdminOnly")]
     public List<Loan> GetAllApprovalLoans()
     {
         try
@@ -85,6 +88,7 @@ public class LoanDetailsController : ControllerBase
     /// </summary>
     /// <returns></returns>
     [HttpGet("GetAllNotApprovaledLoans")]
+    [Authorize(Policy = "AdminOnly")]
     public List<LoanDetails> GetAllNotApprovalLoans()
     {
         try
@@ -157,14 +161,11 @@ public class LoanDetailsController : ControllerBase
     /// <param name="confirmation">a string to ensure is the admin</param>
     /// <returns>success</returns>
     [HttpPost("LoanApproval")]
-    public bool LoanApproval([FromBody] int loanID, [FromHeader]string confirmation)
+    [Authorize(Policy = "AdminOnly")]
+    public bool LoanApproval([FromBody] int loanID)
     {
         try
         {
-            if (confirmation == "15987532")
-            {
-                return loanDetail.LoanApproval(loanID);
-            }
             return false;
         }
         catch (Exception ex)
@@ -182,17 +183,14 @@ public class LoanDetailsController : ControllerBase
     /// <param name="confirmation">identetiy of admin</param>
     /// <returns>the loan list</returns>
     [HttpPost("AdminGetLoanForApproval")]
-    public IEnumerable<int>? AdminGetLoanForApproval([FromHeader] string confirmation)
+    [Authorize(Policy = "AdminOnly")]
+    public IEnumerable<int>? AdminGetLoanForApproval()
     {
         try
         {
-            if(confirmation == "15987532")
-            {
-                var ans = loanDetail.GetLoansToApproval();
-                Console.WriteLine(ans);
-                return ans;
-            }
-            return null;
+            var ans = loanDetail.GetLoansToApproval();
+            Console.WriteLine(ans);
+            return ans;
         }
         catch (Exception ex)
         {
@@ -202,6 +200,7 @@ public class LoanDetailsController : ControllerBase
 
 
     [HttpGet("ReportALoan")]
+    [Authorize(Policy = "AdminOnly")]
     public bool ReportALoan(int id, bool safe)
     {
         try
