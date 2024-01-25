@@ -13,10 +13,6 @@ public interface IMessage
 
     bool Add(DTO.Models.Message message);
 
-
-
-    //--------------------------------------------------------------//
-
     IEnumerable<ContactRequest> GetContacts(bool UnHandled = false);
 
     int AddContactRequest(ContactRequest contact);
