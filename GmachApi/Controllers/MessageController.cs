@@ -1,6 +1,8 @@
 ﻿using DTO.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Services.IServices;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -11,6 +13,9 @@ namespace GmachApi.Controllers
     public class MessageController : ControllerBase
     {
         Services.IServices.IMessage _message = new Services.Implemantation.Message();
+        Services.IServices.IEmailService _emailSender = new Services.Implemantation.EmailService();
+
+
 
         [HttpGet("GetMessagesByUserId")]
         public IEnumerable<DTO.Models.Message> GetMessagesByUserId(int id)
@@ -127,6 +132,23 @@ namespace GmachApi.Controllers
                 return false;
             }
         }
+
+        [HttpPost("SendEmailToUser")]
+        [Authorize(Policy = "AdminOnly")]
+        public async void SendEmailToUser(Email email)
+        {
+            try
+            {
+                await _emailSender.SendEmailAsync(email);
+                
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+               
+            }
+        }
+        
 
 
     }

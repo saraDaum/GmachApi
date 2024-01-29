@@ -12,6 +12,7 @@ using System.Text;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Data;
+using Services.IServices;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,8 +22,9 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddTransient<IDbContext, GmachimSaraAndShaniContext>(); 
+builder.Services.AddTransient<IDbContext, GmachimSaraAndShaniContext>();
 
+builder.Services.AddTransient<IEmailService, Services.Implemantation.EmailService>();
 
 // Configure CORS
 builder.Services.AddCors(options =>
@@ -118,6 +120,7 @@ bool IsAdmin(string username, string password)
 bool IsValidUser(string username, string password)
 {
     Services.IServices.IUser user = new Services.Implemantation.User();
+    //in case of not register user
     if (username == password && username == "temp")
     {
         return true;
@@ -133,6 +136,7 @@ bool IsValidUser(string username, string password)
     }
 }
 
+//create the token
 string GenerateJwtToken(string username, bool Admin)
 {
     IConfigurationRoot configuration = new ConfigurationBuilder()
