@@ -1,4 +1,5 @@
 ﻿using DTO.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -13,6 +14,7 @@ public class DepositController : ControllerBase
     internal Services.IServices.IDeposit deposit = new Services.Implemantation.Deposit();
 
     [HttpGet("GetAll")]
+    [Authorize(Policy = "AdminOnly")]
     public List<Deposit> AllDeposits()
     {
         try

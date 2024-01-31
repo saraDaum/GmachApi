@@ -14,6 +14,8 @@ using System.Security.Claims;
 using System.Data;
 using Services.IServices;
 
+
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -38,10 +40,7 @@ builder.Services.AddCors(options =>
 });
 
 
-builder.Services.AddAuthorization(options =>
-{
-    options.AddPolicy("AdminOnly", policy => policy.RequireClaim(ClaimTypes.Role, "Admin"));
-});
+
 
 builder.Services.AddDbContext<GmachimSaraAndShaniContext>();
 
@@ -51,6 +50,42 @@ var mapperConfig = new MapperConfiguration(mc =>
 });
 
 builder.Services.AddSingleton(mapperConfig);
+
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme; // או כל שם אחר שאתה מעדיף
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+.AddJwtBearer(options =>
+{
+    IConfigurationRoot configuration = new ConfigurationBuilder()
+            .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
+            .AddJsonFile("appsettings.json")
+            .Build();
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true,
+        ValidIssuer = configuration["JwtSettings:Issuer"],
+        ValidAudience = configuration["JwtSettings:Audience"],
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JwtSettings:SymmetricKey"]))
+    };
+});
+
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("AdminOnly", policy => policy.RequireClaim(ClaimTypes.Role, "Admin"));
+});
+
+builder.Services.AddAuthorization(options =>
+{
+
+    options.AddPolicy("AdminOnly", policy => policy.RequireClaim(ClaimTypes.Role, "Admin"));
+    Console.WriteLine("hello");
+});
+
 
 var app = builder.Build();
 
@@ -68,20 +103,32 @@ if (app.Environment.IsDevelopment())
     });
 }
 
-//app.UseHttpsRedirection();
 
-// Enable JWT authentication
+
+
+
+
+
+
+app.UseRouting();
+
+// global cors policy
+app.UseCors();
+
 app.UseAuthentication();
+
 
 
 app.UseAuthorization();
 
-app.UseRouting();
 
 
-// global cors policy
-app.UseCors();
-     
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllers();
+});
+
+
 
 app.UseStaticFiles();
 
@@ -163,6 +210,9 @@ string GenerateJwtToken(string username, bool Admin)
         new Claim(ClaimTypes.Role, "User"),
 
     };
+    Console.WriteLine(claims);
+    foreach (var claim in claims)
+        Console.WriteLine(claim);
 
     var token = new JwtSecurityToken(
         issuer: issuer,
