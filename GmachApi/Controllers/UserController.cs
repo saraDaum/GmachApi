@@ -122,4 +122,26 @@ public class UserController : ControllerBase
     }
 
 
+    [HttpGet("GetUserName/{id}")]
+    public UserName? GetUserName([FromRoute] int id)
+    {
+        try
+        {
+            bool exist = _user.IsUserExist(id);//Use IsUserExist() function to save unnecessary access to the database.
+            if (exist)
+            {
+                return new UserName() { userName = _user.GetUser(id)?.UserName };
+            }
+            else
+            {
+                return null;
+            }
+        }
+        catch
+        {
+            return null;
+        }
+    }
+
+
 }
