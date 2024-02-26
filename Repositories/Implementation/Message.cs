@@ -116,6 +116,8 @@ public class Message : IMessage
     /// </summary>
     /// <param name="contactRequest">The contact request</param>
     /// <returns>Contact id or -1 if it didn't worked out</returns>
+    /// 050-4141-979הדר מורה בקרית שמואל 
+    /// אסתר כהן 05484-67997
     public int AddContact(ContactRequest contactRequest)
     {
         try

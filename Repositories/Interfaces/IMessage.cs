@@ -15,7 +15,6 @@ public interface IMessage
 
     bool Update(Models.Message message);
 
-    //------------------------------------------------------------// 
     List<ContactRequest> GetAllContacts(Func<ContactRequest, bool>? func = null);
     int AddContact(ContactRequest contactRequest);
     bool DeleteContact(ContactRequest contactRequest);

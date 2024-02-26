@@ -76,7 +76,7 @@ namespace GmachApi.Controllers
             }
         }
 
-        [HttpGet("GetAllUnHandledContacts")]
+        [HttpGet("GetAllUnHandledContacts")] 
         [Authorize(Policy = "AdminOnly")]
         public IEnumerable<ContactRequest> GetAllUnHandledContacts()
         {
