@@ -69,7 +69,7 @@ public class LoanDetailsController : ControllerBase
     /// </summary>
     /// <returns></returns>
     [HttpGet("GetAllApprovaledLoans")]
-    [Authorize(Policy = "AdminOnly")]
+    //[Authorize(Policy = "AdminOnly")]
     public List<Loan> GetAllApprovalLoans()
     {
         try

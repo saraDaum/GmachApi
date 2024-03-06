@@ -33,6 +33,10 @@ public class Message : IServices.IMessage
                 if (!_user.IsUserExist(message.ToUserId) || !_user.IsUserExist(message.FromUserId))
                     return false;
 
+            List<DTO.Models.Message> allMessages = GetAll();
+            DTO.Models.Message alreadyExist = allMessages.Find(msg => msg.FromUserId == message.FromUserId && msg.ToUserId == message.ToUserId && msg.Text == message.Text);
+            if(alreadyExist != null)
+                return false;
             message.Viewed = false;
 
 
@@ -75,6 +79,29 @@ public class Message : IServices.IMessage
         { 
             Console.WriteLine(ex.Message);
             throw new Exception("Error in server logic in in the wanted request: " + ex.Message, ex);
+        }
+    }
+
+    /// <summary>
+    /// This function returns all messages that are in the database
+    /// </summary>
+    /// <returns></returns>
+    public List<DTO.Models.Message> GetAll()
+    {
+        try
+        {
+            IMapper mapper = _mapperConfig.MessageMapper.CreateMapper();
+            List<Repositories.Models.Message> userMessageList = _message.GetAll().ToList();
+            if (userMessageList.Count > 0)
+            {
+                return (from s in userMessageList
+                        select mapper.Map<DTO.Models.Message>(s)).ToList();
+            }
+            return new List<DTO.Models.Message>();
+        }
+        catch
+        {
+            return new List<DTO.Models.Message>();
         }
     }
 
@@ -157,22 +184,6 @@ public class Message : IServices.IMessage
         }
     }
 
-    public List<DTO.Models.Message> GetAll()
-    {
-        try
-        {
-            IMapper mapper = _mapperConfig.MessageMapper.CreateMapper();
-            List<Repositories.Models.Message> userMessageList = _message.GetAll().ToList();
-            if (userMessageList.Count > 0) {
-                return (from s in userMessageList
-                        select mapper.Map<DTO.Models.Message>(s)).ToList();
-            }
-            return new List<DTO.Models.Message>();
-        }
-        catch
-        {
-            return new List<DTO.Models.Message> ();
-        }
-    }
+   
 }
 
