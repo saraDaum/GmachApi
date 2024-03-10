@@ -184,7 +184,7 @@ public class Message : IServices.IMessage
         }
     }
 
-    public List<DTO.Models.Message> GetAll()
+   /* public List<DTO.Models.Message> GetAll()
     {
         try
         {
@@ -200,7 +200,8 @@ public class Message : IServices.IMessage
         {
             return new List<DTO.Models.Message> ();
         }
-    }
+    }*/
+
 
     public DTO.Models.Email? ReportALoan(DTO.Models.ReportALoan report)
     {

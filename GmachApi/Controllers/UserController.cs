@@ -73,7 +73,7 @@ public class UserController : ControllerBase
     }
 
     [HttpGet("GetAllUsers")]
-    [Authorize(Policy = "AdminOnly")]
+   // [Authorize(Policy = "AdminOnly")]
     public List<User> GetUsers()
     {
         return _user.GetAllUsers();

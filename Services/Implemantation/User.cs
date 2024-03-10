@@ -55,7 +55,7 @@ public class User : IServices.IUser
             return uInfo;
 
         }
-        catch (Exception e)
+        catch (Exception ex)
         {
             return null;
         }
