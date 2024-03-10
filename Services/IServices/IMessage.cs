@@ -21,6 +21,5 @@ public interface IMessage
     bool ChangeToHandled(int id);
 
     List<DTO.Models.Message> GetAll();
-
-    
+    Email? ReportALoan(ReportALoan report);
 }

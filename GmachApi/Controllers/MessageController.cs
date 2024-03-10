@@ -148,7 +148,30 @@ namespace GmachApi.Controllers
                
             }
         }
-        
+
+
+        /// <summary>
+        /// send email and message in the user zone that tell the user about a problem in it's loan request
+        /// </summary>
+        /// <param name="report">the loan id and the message</param>
+        [HttpPost("ReportLoan")]
+        [Authorize(Policy = "AdminOnly")]
+        public async void ReportLoan(ReportALoan report)
+        {
+            try
+            {
+                Email? email = _message.ReportALoan(report);
+                if (email != null)
+                    await _emailSender.SendEmailAsync(email);
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+
+            }
+        }
+
 
 
     }

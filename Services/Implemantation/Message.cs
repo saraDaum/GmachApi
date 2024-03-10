@@ -174,5 +174,39 @@ public class Message : IServices.IMessage
             return new List<DTO.Models.Message> ();
         }
     }
+
+    public DTO.Models.Email? ReportALoan(DTO.Models.ReportALoan report)
+    {
+        //try to get the user email from the details
+        try
+        {
+            LoanDetails _loan = new();
+            DTO.Models.Loan? loan = _loan.GetLoanDetails(report.LoanID);
+            if (loan != null)
+            {
+                User _user = new();
+                DTO.Models.User? user = _user.GetUser(loan.LoanerId);
+                if (user != null)
+                {
+                    string message = $"Dear {user.UserName},\nYour Loan request number {report.LoanID} has a problem:\n{report.Problem}\n We recommend you to upade those details in your requst and try to apply it again.\nHave a good day,\nPlus Minus Admin";
+                    Add(new DTO.Models.Message() { FromUserId = 20, Text = message, ToUserId = user.UserId, Viewed = false });
+                    return new DTO.Models.Email()
+                    {
+                        email= user.UserEmail,
+                        message = message,
+                        subject = "Report a problem in your loan applicatin files"
+                    };
+
+                }
+            }
+            return null;
+        }
+        catch(Exception ex)
+        {
+            throw new Exception("error: "+ex.Message, ex);
+        }
+
+
+    }
 }
 
