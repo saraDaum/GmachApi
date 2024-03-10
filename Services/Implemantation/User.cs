@@ -198,5 +198,17 @@ public class User : IServices.IUser
             return "";
         }
     }
+
+    public string GetUserName(int id)
+    {
+        try
+        {
+            return userRepository.GetUserName(id);
+        }
+        catch
+        {
+            return "";
+        }
+    }
 }
 

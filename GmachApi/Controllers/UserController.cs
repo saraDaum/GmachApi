@@ -134,6 +134,10 @@ public class UserController : ControllerBase
             }
             else
             {
+                if(id == -2)
+                {
+                    return new UserName() { userName = "NotRegisterUser" };
+                }
                 return null;
             }
         }
@@ -143,5 +147,13 @@ public class UserController : ControllerBase
         }
     }
 
-
+    [HttpGet("GetName/{id}")]
+    public string GetName([FromRoute] int id)
+    {
+        try
+        {
+            return _user.GetUserName(id);
+        }
+        catch { return ""; }
+    }
 }

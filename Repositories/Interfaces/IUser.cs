@@ -21,4 +21,5 @@ public interface IUser
     bool DeleteUser(Users deleteUser);    
     bool IsUserUnderWarning(int userId);
     string GetUserPassword(int id);
+    string GetUserName(int id);
 }

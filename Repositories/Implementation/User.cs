@@ -185,6 +185,23 @@ public class User : Interfaces.IUser
         }
     }
 
+    public string GetUserName(int id)
+    {
+        try
+        {
+            if(id == -2)
+                return "UnknownUser";
 
+            Models.Users? matchUser = (Users)dbContext.Users.FirstOrDefault(user=> user.UserId == id);
+            Console.WriteLine("matchUser is: ", matchUser);
+            if(matchUser != null)
+                return matchUser.UserName;
+            return "";
+        }
+        catch
+        {
+            return "";
+        }
+    }
 }
 
