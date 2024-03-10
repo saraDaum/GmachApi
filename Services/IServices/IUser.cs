@@ -68,4 +68,18 @@ public interface IUser
     /// <param name="id"></param>
     /// <returns></returns>
     string GetUserPassword(int id);
+
+    /// <summary>
+    /// This function gets user id and returns his name.
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    string GetUserName(int id);
+
+    /// <summary>
+    /// This function gets user id and returns his email address.
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    string GetUserEmail(int id);
 }
