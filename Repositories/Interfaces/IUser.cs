@@ -22,4 +22,6 @@ public interface IUser
     bool IsUserUnderWarning(int userId);
     string GetUserPassword(int id);
     string GetUserName(int id);
+    string GetUserEmail(int id);
+
 }

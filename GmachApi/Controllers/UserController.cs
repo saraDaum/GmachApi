@@ -156,4 +156,18 @@ public class UserController : ControllerBase
         }
         catch { return ""; }
     }
+
+    [HttpGet("GetUserEmail/{id}")]
+    public string GetUserEmail([FromRoute]int id)
+    {
+        try
+        {
+            return _user.GetUserEmail(id);
+        }
+        catch
+        {
+            return string.Empty;
+        }
+    }
+
 }

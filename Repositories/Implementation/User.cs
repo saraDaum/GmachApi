@@ -203,5 +203,29 @@ public class User : Interfaces.IUser
             return "";
         }
     }
+
+    public string GetUserEmail(int id)
+    {
+        try
+        {
+            if (id > 0)
+            {
+                if (IsUserExist(id))
+                {
+                    Users user = dbContext.Users.FirstOrDefault(user => user.UserId == id);
+                    if (user != null)
+                        return user.UserEmail;
+                    return string.Empty;
+                        
+                }
+                return string.Empty;
+            }
+            return string.Empty;
+        }
+        catch { 
+            return string.Empty;
+        }
+    }
+
 }
 

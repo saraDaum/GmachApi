@@ -210,5 +210,17 @@ public class User : IServices.IUser
             return "";
         }
     }
+
+    public string GetUserEmail(int id)
+    {
+        try
+        {
+            return userRepository.GetUserEmail(id);
+        }
+        catch
+        {
+            return string.Empty;
+        }
+    }
 }
 
