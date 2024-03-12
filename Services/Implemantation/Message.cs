@@ -184,23 +184,24 @@ public class Message : IServices.IMessage
         }
     }
 
-    public List<DTO.Models.Message> GetAll()
-    {
-        try
-        {
-            IMapper mapper = _mapperConfig.MessageMapper.CreateMapper();
-            List<Repositories.Models.Message> userMessageList = _message.GetAll().ToList();
-            if (userMessageList.Count > 0) {
-                return (from s in userMessageList
-                        select mapper.Map<DTO.Models.Message>(s)).ToList();
-            }
-            return new List<DTO.Models.Message>();
-        }
-        catch
-        {
-            return new List<DTO.Models.Message> ();
-        }
-    }
+    //public List<DTO.Models.Message> GetAll()
+    //{
+    //    try
+    //    {
+    //        IMapper mapper = _mapperConfig.MessageMapper.CreateMapper();
+    //        List<Repositories.Models.Message> userMessageList = _message.GetAll().ToList();
+    //        if (userMessageList.Count > 0) {
+    //            return (from s in userMessageList
+    //                    select mapper.Map<DTO.Models.Message>(s)).ToList();
+    //        }
+    //        return new List<DTO.Models.Message>();
+    //    }
+    //    catch
+    //    {
+    //        return new List<DTO.Models.Message> ();
+    //    }
+    //}
+
 
     public DTO.Models.Email? ReportALoan(DTO.Models.ReportALoan report)
     {
