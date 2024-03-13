@@ -130,7 +130,7 @@ public class Deposit : Interfaces.IDeposit
     {
         try
         {
-            if (dbContext.CardAndDeposit.Where(x => x.DepositId == depositId) != null)
+            if (dbContext.CardAndDeposit.Where(x => x.DepositId == depositId ).Any())
                 return false;
 
             dbContext.CardAndDeposit.Add(new CardAndDeposit() { DepositId = depositId, CardId = CreditCardId });
