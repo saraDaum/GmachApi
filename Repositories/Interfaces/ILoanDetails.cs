@@ -54,4 +54,7 @@ public interface ILoanDetails
 
     bool Update(Models.LoanDetails loanDetails);
 
+    bool SetAccountToLoan(int loanId, int accountId);
+    int GetAccountToLoan(int loanId);
+
 }

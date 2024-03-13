@@ -31,6 +31,9 @@ public partial class GmachimSaraAndShaniContext : DbContext, IDbContext
     public virtual DbSet<Message> Message { get; set; }
     public virtual DbSet<ContactRequest> ContactRequests { get; set; }
 
+    public virtual DbSet<CardAndDeposit> CardAndDeposit { get; set; }
+    public virtual DbSet<AccountAndLoans> AccountAndLoans { get; set; }
+
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
         => optionsBuilder.UseSqlServer("Data Source=(localdb)\\mssqllocaldb;Initial Catalog=GmachimSaraAndShani;Integrated Security=True;");
@@ -39,6 +42,25 @@ public partial class GmachimSaraAndShaniContext : DbContext, IDbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        // Configure CardAndDeposit
+        modelBuilder.Entity<CardAndDeposit>(entity =>
+        {
+            entity.HasKey(e => e.Id);
+
+            entity.Property(e => e.CardId).IsRequired();
+            entity.Property(e => e.DepositId).IsRequired();
+        });
+
+
+        // Configure AccountAndLoans
+        modelBuilder.Entity<AccountAndLoans>(entity =>
+        {
+            entity.HasKey(e => e.Id);
+
+            entity.Property(e => e.AccountId).IsRequired();
+            entity.Property(e => e.LoanId).IsRequired();
+        });
+
         // Configure Card
         modelBuilder.Entity<Card>(entity =>
         {

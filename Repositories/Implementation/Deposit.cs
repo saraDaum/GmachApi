@@ -39,13 +39,14 @@ public class Deposit : Interfaces.IDeposit
     /// Add deposit to the data-base
     /// </summary>
     /// <param name="newDeposit">deposit details</param>
-    /// <returns>1 or -1, 0</returns>
+    /// <returns>depositId or -1, 0</returns>
     public int AddADeposit(Models.Deposit newDeposit)
     {
         try
         {
-            dbContext.Deposits.Add(newDeposit); 
-            return dbContext.SaveChanges();
+            dbContext.Deposits.Add(newDeposit);
+            dbContext.SaveChanges();
+            return newDeposit.DepositId;
         }
         catch
         {
@@ -101,6 +102,38 @@ public class Deposit : Interfaces.IDeposit
         try
         {
             dbContext.Deposits.Update(deposit);
+            dbContext.SaveChanges();
+            return true;
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+            return false;
+        }
+    }
+
+    public int GetDepositCreditCardId(int depositId)
+    {
+        try
+        {
+            int? ans = dbContext.CardAndDeposit.Where(x => x.DepositId == depositId).Select(x => x.CardId).FirstOrDefault();
+            return ans != null ? (int)ans : -1;
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+            return -2;
+        }
+    }
+
+    public bool SetCreditCardToDeposit(int depositId, int CreditCardId)
+    {
+        try
+        {
+            if (dbContext.CardAndDeposit.Where(x => x.DepositId == depositId) != null)
+                return false;
+
+            dbContext.CardAndDeposit.Add(new CardAndDeposit() { DepositId = depositId, CardId = CreditCardId });
             dbContext.SaveChanges();
             return true;
         }

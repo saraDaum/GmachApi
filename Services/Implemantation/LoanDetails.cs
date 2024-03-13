@@ -26,7 +26,10 @@ public class LoanDetails : IServices.ILoanDetails
             {
                 return -1;
             }
-
+            // Check if the user own the account
+            Account account = new Account();
+            if (!account.IsAccountExistByUserId(loan.LoanerId))
+                return -2;
 
             IMapper mapper = LoanAutoMapper.LoanDetailsMapper.CreateMapper();
             Repositories.Models.LoanDetails DALLoanDetail = mapper.Map<Repositories.Models.LoanDetails>(loan);
@@ -43,6 +46,8 @@ public class LoanDetails : IServices.ILoanDetails
                     guarantor.AddNewGuarantor(g);
                 }
             }
+
+            loanDetail.
 
             return res;
 

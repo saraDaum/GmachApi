@@ -155,4 +155,37 @@ public class LoanDetails : Interfaces.ILoanDetails
             return false; 
         }
     }
+
+    public bool SetAccountToLoan(int loanId, int accountId)
+    {
+        try
+        {
+            // If the loan already asociate wuth an account
+            if (dbContext.AccountAndLoans.Where(a => a.LoanId == loanId).Any())
+                return false;
+
+            dbContext.AccountAndLoans.Add(new AccountAndLoans()
+            {
+                LoanId = loanId,
+                AccountId = accountId
+            });
+            dbContext.SaveChanges();
+            return true;
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+            return false;
+        }
+    }
+
+    public int GetAccountToLoan(int loanId)
+    {
+        try
+        {
+            
+            return dbContext.AccountAndLoans.Where(a => a.LoanId == loanId).Select(a => a.AccountId).FirstOrDefault();
+        }
+        catch { return 0; }
+    }
 }

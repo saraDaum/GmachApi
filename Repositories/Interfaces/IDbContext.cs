@@ -23,6 +23,9 @@ public interface IDbContext
 
     DbSet<Message> Message { get; set; }
 
+    DbSet<CardAndDeposit> CardAndDeposit { get; set; }
+    DbSet<AccountAndLoans> AccountAndLoans { get; set; }
+
  
 
     int SaveChanges();

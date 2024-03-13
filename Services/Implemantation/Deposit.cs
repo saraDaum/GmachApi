@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using DTO.Models;
+using Repositories.Models;
 using Services.IServices;
 using System;
 using System.Collections.Generic;
@@ -21,8 +23,8 @@ public class Deposit : IServices.IDeposit
         {
             IEnumerable<Repositories.Models.Deposit> allDeposits = reposDeposit.AllUserDeposits(id);
             ArgumentNullException.ThrowIfNull(allDeposits);// Continue just if it is not null.
-            IMapper mapper = myMapper.DepositsMapper.CreateMapper();
-            return  allDeposits.Select(deposit => mapper.Map<Repositories.Models.Deposit, DTO.Models.Deposit>(deposit));
+       
+            return  allDeposits.Select(deposit => GetDepositWithCard(deposit));
         }
         catch (Exception ex)
         {
@@ -48,23 +50,21 @@ public class Deposit : IServices.IDeposit
             {
                 return -2;
             }
-
-            //TODO: Uncomment this lines.
-            //make sure that the user has a bank account in the system.
-           // Account account = new Account();
-            //if(!account.IsAccountExistByUserId(newDeposit.UserId))
-            //{
-              //  return -3;
-           // }
+            Card card = new Card();
+            if (!card.IsCardExistByUserId(newDeposit.UserId))
+                return -3;
 
             //add the deposit
             IMapper mapper = myMapper.DepositsMapper.CreateMapper();
             Repositories.Models.Deposit newRepoDeposit = mapper.Map<DTO.Models.Deposit, Repositories.Models.Deposit>(newDeposit);
             ArgumentNullException.ThrowIfNull(newRepoDeposit);// Continue just if it is not null.
             int res = reposDeposit.AddADeposit(newRepoDeposit);
-            if (res == 1)
+            if (res > 0)
             {
-                return newRepoDeposit.DepositId;
+                bool ans = reposDeposit.SetCreditCardToDeposit(res, newDeposit.CreditCardNumber);
+                if (ans) 
+                    return newRepoDeposit.DepositId;
+                return -4;
             }
             return -1;
         }
@@ -84,8 +84,8 @@ public class Deposit : IServices.IDeposit
         {
             IEnumerable<Repositories.Models.Deposit> allUsersDeposits = reposDeposit.GetAll();
             ArgumentNullException.ThrowIfNull(allUsersDeposits);// Continue just if it is not null.
-            IMapper mapper = myMapper.DepositsMapper.CreateMapper();
-            return allUsersDeposits.Select(deposit => mapper.Map<Repositories.Models.Deposit, DTO.Models.Deposit>(deposit)).ToList();
+   
+            return allUsersDeposits.Select(deposit => GetDepositWithCard(deposit)).ToList();
         }
         catch
         {
@@ -102,11 +102,10 @@ public class Deposit : IServices.IDeposit
             ArgumentNullException.ThrowIfNull(deposits);
 
             //convert the deposits type.
-            IMapper mapper = myMapper.DepositsMapper.CreateMapper();
             List<DTO.Models.Deposit> ans = new List<DTO.Models.Deposit>();
             foreach(Repositories.Models.Deposit d in deposits)
             {
-                 ans.Add(mapper.Map<DTO.Models.Deposit>(d));
+                 ans.Add(GetDepositWithCard(d));
             }
             return ans;
         }
@@ -170,4 +169,16 @@ public class Deposit : IServices.IDeposit
         }
         throw new NotImplementedException();
     }
+
+
+    // Helping Function 
+    private DTO.Models.Deposit GetDepositWithCard(Repositories.Models.Deposit d)
+    {
+        IMapper mapper = myMapper.DepositsMapper.CreateMapper();
+        DTO.Models.Deposit ans = mapper.Map<DTO.Models.Deposit>(d);
+        ans.CreditCardNumber = reposDeposit.GetDepositCreditCardId(d.DepositId);
+        return ans;
+    }
+
+
 }

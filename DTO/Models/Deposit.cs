@@ -13,6 +13,8 @@ public partial class Deposit
 
     public DateTime DateToPull { get; set; }
 
+    public int CreditCardNumber {  get; set; } = 0;
+
 }
 
     //TODO: להוסיף פרטי בנק

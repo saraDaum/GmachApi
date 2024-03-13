@@ -18,4 +18,7 @@ public interface IDeposit
     List<Models.Deposit>? GetAllTheDepositsByDate(DateTime date);
     Deposit Get(int depositId);
     bool Update(Deposit deposit);
+
+    int GetDepositCreditCardId(int depositId);
+    bool SetCreditCardToDeposit(int depositId, int CreditCardId);
 }

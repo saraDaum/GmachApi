@@ -13,6 +13,8 @@ public partial class LoanDetails
     public string LoanFile { get; set; } = string.Empty;
     public bool IsAprovied { get; set; }
     public List<Guarantor>? guarantors { get; set; } = null;
+
+    public int AccountId { get; set; } = 0;
 }
 
 
