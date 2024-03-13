@@ -230,7 +230,7 @@ public class User : IServices.IUser
             
             if (!IsUserExists(new LoginUser() { UserName = changPassword.UserName, Password = changPassword.OldPassword }))
                 return false;
-            if (!IsUserExists(new LoginUser() { UserName = changPassword.UserName, Password = changPassword.NewPassword }))
+            if (IsUserExists(new LoginUser() { UserName = changPassword.UserName, Password = changPassword.NewPassword }))
                 return false;
 
             return userRepository.ChangePassword(changPassword.UserName, changPassword.OldPassword, changPassword.NewPassword);
