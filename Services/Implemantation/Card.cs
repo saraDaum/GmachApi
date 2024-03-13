@@ -82,4 +82,16 @@ public class Card : IServices.ICard
             return new List<DTO.Models.Card>();
         }
     }
+
+    public void EncryptDataBase()
+    {
+        try
+        {
+            RepoCard.EncryptDataBase();
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+        }
+    }
 }

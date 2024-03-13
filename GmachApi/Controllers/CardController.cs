@@ -70,7 +70,7 @@ public class CardController : ControllerBase
         }
     }
 
-    // GET api/<AcountController>/5
+    
     [HttpGet("IsCardExistByUserId")]
     public bool IsCardExistByUserId(int UserId)
     {
@@ -83,6 +83,22 @@ public class CardController : ControllerBase
             // Handle exceptions if needed
             Console.WriteLine($"Error checking account existence: {ex.Message}");
             return false; // or throw an exception based on your error handling strategy
+        }
+    }
+
+
+
+
+    [HttpGet("EncryptDataBase")]
+    public void EncryptDataBase()
+    {
+        try
+        {
+            Card.EncryptDataBase();
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error: {ex.Message}");
         }
     }
 }

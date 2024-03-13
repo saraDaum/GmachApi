@@ -40,5 +40,7 @@ public interface ICard
     /// <returns></returns>
     List<DTO.Models.Card> GetAllCards();
 
+    public void EncryptDataBase();
+
 
 }
