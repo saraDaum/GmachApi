@@ -49,20 +49,7 @@ public class CardController : ControllerBase
         {
             return Card.AddNewCard(card);
 
-            /*if (response == -3)
-            {
-                return BadRequest("User not exist");
-            }
-            if(response == -2)
-            {
-                return BadRequest("User Already has a bank Account.");
-            }
-            if(response == -1)
-            {
-                return BadRequest("Error in the server");
-            }
-            return response;*/
-        }
+                    }
         catch (Exception ex)
         {
             return -1;
