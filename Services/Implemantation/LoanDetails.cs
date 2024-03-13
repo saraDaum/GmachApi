@@ -231,6 +231,10 @@ public class LoanDetails : IServices.ILoanDetails
 
         foreach (var loanRequest in waitingList)
         {
+            // Check if loan asociate with valid account
+            if (loanDetail.GetAccountToLoan(loanRequest.LoanerId) <= 0)
+                continue;
+
             // Check if the borrower is blacklisted
             if (IsBorrowerBlacklisted(loanRequest) || !IsLoanSafe(loanRequest.LoanId))
                 continue;

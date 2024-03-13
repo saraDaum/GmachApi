@@ -18,5 +18,7 @@ public partial class Deposit
 
     public DateTime DateToPull { get; set; }
 
+    public bool IsReturned {  get; set; } = false;
+
    
 }

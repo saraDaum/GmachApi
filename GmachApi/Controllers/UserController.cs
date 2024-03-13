@@ -170,4 +170,17 @@ public class UserController : ControllerBase
         }
     }
 
+    [HttpPost("ChangePassword")]
+    public bool ChangePassword(DTO.Models.ChangPassword changPassword)
+    {
+        try
+        {
+            return _user.ChangePassword(changPassword);
+        }
+        catch
+        {
+            return false;
+        }
+    }
+
 }

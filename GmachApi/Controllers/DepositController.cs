@@ -79,11 +79,11 @@ public class DepositController : ControllerBase
 
 
     [HttpPost("Return/{id}")]
-    public bool Return(int depositID)
+    public bool Return(int depositId)
     {
         try
         {
-            return true;
+            return deposit.Return(depositId);
         }
         catch
         {

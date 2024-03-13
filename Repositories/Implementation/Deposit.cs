@@ -143,4 +143,19 @@ public class Deposit : Interfaces.IDeposit
             return false;
         }
     }
+
+    public bool Return(int depositId)
+    {
+        try
+        {
+            dbContext.Deposits.Where(d => d.DepositId == depositId).FirstOrDefault().IsReturned = true;
+            dbContext.SaveChanges();
+            return true;
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+            return false;
+        }
+    }
 }
