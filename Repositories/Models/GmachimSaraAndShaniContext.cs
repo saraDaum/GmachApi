@@ -46,7 +46,7 @@ public partial class GmachimSaraAndShaniContext : DbContext, IDbContext
 
             // Set other configurations if needed
             entity.Property(e => e.UserId).IsRequired();
-            entity.Property(e => e.CreditCardNumber).IsRequired().HasMaxLength(16);
+            entity.Property(e => e.CreditCardNumber).IsRequired();
             entity.Property(e => e.CVV).IsRequired().HasMaxLength(3);
             entity.Property(e => e.Validity).IsRequired();
             entity.Property(e => e.OwnersName).IsRequired();

@@ -31,6 +31,8 @@ public interface ICard
     /// <returns></returns>
     List<Repositories.Models.Card> GetAllCards();
 
+    public void EncryptDataBase();
+
 }
 
 
