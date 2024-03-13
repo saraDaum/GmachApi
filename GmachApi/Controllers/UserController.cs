@@ -49,7 +49,7 @@ public class UserController : ControllerBase
         {
             DTO.Models.UserInfo? userInfo = _user.Login(loginUser);
             if (userInfo == null) { return NotFound(); }
-            Console.WriteLine(loginUser);
+            //Console.WriteLine(loginUser);
             return userInfo;
         }
         catch (Exception)
