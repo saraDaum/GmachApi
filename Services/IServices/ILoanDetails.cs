@@ -14,8 +14,7 @@ public interface ILoanDetails
     /// <param name="loan">the loan details</param>
     /// <param name="guarantors">the guarantors list, optional</param>
     /// <returns>the loan id</returns>
-    public int AddLoan(Loan loan, List<Guarantor>? guarantors);
-
+    public int AddLoan(DTO.Models.Loan loan, int BanckAccountId, List<DTO.Models.Guarantor>? guarantors = null);
     /// <summary>
     /// Get all the loans
     /// </summary>

@@ -111,7 +111,7 @@ public class LoanDetailsController : ControllerBase
         try
         {
             Loan l = new Loan(loan.LoanId, loan.LoanerId, loan.DateToGetBack, loan.Sum, loan.LoanFile, false);
-            int res = loanDetail.AddLoan(l, loan.guarantors);
+            int res = loanDetail.AddLoan(l, loan.AccountId,  loan.guarantors);
             if (res < 0)
             {
                 return BadRequest(res);

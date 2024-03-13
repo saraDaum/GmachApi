@@ -183,9 +183,13 @@ public class LoanDetails : Interfaces.ILoanDetails
     {
         try
         {
-            
-            return dbContext.AccountAndLoans.Where(a => a.LoanId == loanId).Select(a => a.AccountId).FirstOrDefault();
+            int? ans = dbContext.AccountAndLoans.Where(a => a.LoanId == loanId).Select(a => a.AccountId).FirstOrDefault();
+            return ans == null ? -1 : ans.Value;
         }
-        catch { return 0; }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.Message);
+            return 0;
+        }
     }
 }

@@ -16,7 +16,7 @@ public class LoanDetails : IServices.ILoanDetails
     Repositories.Implementation.LoanDetails loanDetail = new Repositories.Implementation.LoanDetails();
 
 
-    public int AddLoan(DTO.Models.Loan loan, List<DTO.Models.Guarantor>? guarantors = null)
+    public int AddLoan(DTO.Models.Loan loan, int BanckAccountId, List<DTO.Models.Guarantor>? guarantors = null)
     {
         try
         {
@@ -47,7 +47,9 @@ public class LoanDetails : IServices.ILoanDetails
                 }
             }
 
-            loanDetail.
+            bool ans = loanDetail.SetAccountToLoan(res, BanckAccountId);
+            if (!ans)
+                return -5;
 
             return res;
 
@@ -106,7 +108,9 @@ public class LoanDetails : IServices.ILoanDetails
         List<DTO.Models.LoanDetails> allLoansDetails = new List<DTO.Models.LoanDetails>();
         foreach (var loan in AllLoans)
         {
-
+            int accountId = loanDetail.GetAccountToLoan(loan.LoanId);
+            if (accountId < 0)
+                continue;
             DTO.Models.LoanDetails loanDetails = new DTO.Models.LoanDetails
             {
                 LoanId = loan.LoanId,
@@ -115,7 +119,8 @@ public class LoanDetails : IServices.ILoanDetails
                 Sum = loan.Sum,
                 LoanFile = loan.LoanFile,
                 IsAprovied = loan.IsAprovied,
-                guarantors = GetLoanGuarantor(loan.LoanId)//Add guarantors to entity.
+                guarantors = GetLoanGuarantor(loan.LoanId),//Add guarantors to entity.
+                AccountId =  accountId
 
             };
             allLoansDetails.Add(loanDetails);
