@@ -28,7 +28,7 @@ public class CardController : ControllerBase
 
 
     [HttpGet("GetAllCards")]
-    [Authorize(Policy = "AdminOnly")]
+  //  [Authorize(Policy = "AdminOnly")]
     public List<Card> GetAllCards()
     {
         try
