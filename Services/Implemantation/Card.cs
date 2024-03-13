@@ -58,6 +58,13 @@ public class Card : IServices.ICard
            List<Repositories.Models.Card> allUserCards =  RepoCard.GetAllUserCards(id);
             IMapper mapper = myMapper.CardMapper.CreateMapper();
             List<DTO.Models.Card> allCards = allUserCards.Select(card=> mapper.Map<DTO.Models.Card>(card)).ToList();
+
+            // For safty:
+            foreach (var card in allCards)
+            {
+                card.CreditCardNumber = @$"##########{card.CreditCardNumber.Substring(card.CreditCardNumber.Length - 4)}";
+            }
+
             return allCards;
 
         }
@@ -74,14 +81,21 @@ public class Card : IServices.ICard
             List<Repositories.Models.Card> allCards = RepoCard.GetAllCards();
             IMapper mapper = myMapper.CardMapper.CreateMapper();
             List<DTO.Models.Card> AllCards = allCards.Select(card => mapper.Map<DTO.Models.Card>(card)).ToList();
-            return AllCards;
 
+            // For safty:
+            foreach (var card in AllCards)
+            {
+                card.CreditCardNumber = @$"##########{card.CreditCardNumber.Substring(card.CreditCardNumber.Length - 4)}";
+            }
+
+            return AllCards;
         }
         catch
         {
             return new List<DTO.Models.Card>();
         }
     }
+
 
     public void EncryptDataBase()
     {
