@@ -97,7 +97,7 @@ public class Card : Interfaces.ICard
     {
         try
         {
-            dbContext.Card.Add(EncryptDecryptCard(card, false));
+            dbContext.Card.Add(EncryptDecryptCard(card, true));
             dbContext.SaveChanges();
             return card.CardId;
         }
