@@ -121,6 +121,8 @@ public class DepositController : ControllerBase
     /// <param name="depositId"></param>
     /// <returns></returns>
     [HttpPost("Return/{id}")]
+    [Authorize(Policy = "AdminOnly")]
+
     public bool Return([FromRoute]int id)
     {
         try
