@@ -99,20 +99,12 @@ public class DepositController : ControllerBase
 
             return deposit.AddADeposit(newDeposit);
             //I didn't delete it yet because I want to see what each response say. Sara.
-            /*if (response == -3) // When user doesn't have a bank account in the system.
-            {
-              return BadRequest("User does not have a bank account yet!");
-                
-            }
-            if(response == -2) //in case that the provided userId is not an id of any user.
-            {
-                return BadRequest("user not exist");
-            }
-            if(response == -1) //in case it an add to data-base error. 
-            {
-                return BadRequest("Error in the server");
-            }
-            return response; //the deposit Id*/
+            /*if response == -3 ::  When user doesn't have a bank account in the system.
+            
+            if   response == -2  :: in case that the provided userId is not an id of any user.
+            
+            if   response == -1  :: in case it an add to data-base error. */
+           
         }
         catch
         {
@@ -129,11 +121,11 @@ public class DepositController : ControllerBase
     /// <param name="depositId"></param>
     /// <returns></returns>
     [HttpPost("Return/{id}")]
-    public bool Return(int depositId)
+    public bool Return([FromRoute]int id)
     {
         try
         {
-            return deposit.Return(depositId);
+            return deposit.Return(id);
         }
         catch
         {
