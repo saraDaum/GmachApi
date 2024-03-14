@@ -227,5 +227,19 @@ public class User : Interfaces.IUser
         }
     }
 
+    public bool ChangePassword(string userName, string oldPassword, string newPassword)
+    {
+        try
+        {
+            dbContext.Users.Where(u => u.UserName == userName && u.UserPassword == oldPassword).FirstOrDefault().UserPassword = newPassword;
+            dbContext.SaveChanges();
+            return true;
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+            return false;
+        }
+    }
 }
 

@@ -180,5 +180,16 @@ public class Deposit : IServices.IDeposit
         return ans;
     }
 
-
+    public bool Return(int depositId)
+    {
+        try
+        {
+            return reposDeposit.Return(depositId);
+        }
+        catch(Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+            return false;
+        }
+    }
 }

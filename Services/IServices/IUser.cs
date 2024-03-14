@@ -82,4 +82,7 @@ public interface IUser
     /// <param name="id"></param>
     /// <returns></returns>
     string GetUserEmail(int id);
+
+
+    bool ChangePassword(ChangPassword changPassword);
 }

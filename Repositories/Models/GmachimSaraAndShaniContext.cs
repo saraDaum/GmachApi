@@ -186,6 +186,7 @@ public partial class GmachimSaraAndShaniContext : DbContext, IDbContext
             entity.Property(d => d.Sum).IsRequired();
 
             entity.Property(d => d.DateToPull).IsRequired();
+            entity.Property(d => d.IsReturned);
 
             //// Define the relationship between Deposit and Users
             //entity.HasOne<Users>()  // Specify Users as the type here

@@ -21,4 +21,6 @@ public interface IDeposit
 
     int GetDepositCreditCardId(int depositId);
     bool SetCreditCardToDeposit(int depositId, int CreditCardId);
+
+    bool Return(int  depositId);
 }

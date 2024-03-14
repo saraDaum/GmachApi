@@ -23,5 +23,5 @@ public interface IUser
     string GetUserPassword(int id);
     string GetUserName(int id);
     string GetUserEmail(int id);
-
+    bool ChangePassword(string userName, string oldPassword, string newPassword);
 }

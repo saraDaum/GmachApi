@@ -31,4 +31,6 @@ public interface IDeposit
 
     double GetBalanceDifferenceByTwoDates(DateTime date1, DateTime date2);
     bool AddTimeToDeposit(int depositId, DateTime newReturningDay);
+
+    bool Return(int depositId);
 }

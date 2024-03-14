@@ -170,4 +170,28 @@ public class UserController : ControllerBase
         }
     }
 
+    [HttpPost("ChangePassword")]
+    public async Task<bool> ChangePassword(DTO.Models.ChangPassword changPassword)
+    {
+        try
+        {
+            Services.IServices.IEmailService _emailSender = new Services.Implemantation.EmailService();
+
+            bool ans = _user.ChangePassword(changPassword);
+            if (!ans)
+                return false;
+            await _emailSender.SendEmailAsync(new Email()
+            {
+                email = _user.GetUserEmail(_user.Login(new LoginUser() { UserName = changPassword.UserName, Password = changPassword.NewPassword }).UserId),
+                subject = "Your Password has been chnged!",
+                message = "Your Password Has been changed successfully.\nPlus Minus"
+            });
+            return ans;
+        }
+        catch
+        {
+            return false;
+        }
+    }
+
 }

@@ -222,5 +222,24 @@ public class User : IServices.IUser
             return string.Empty;
         }
     }
+
+    public bool ChangePassword(ChangPassword changPassword)
+    {
+        try
+        {
+            
+            if (!IsUserExists(new LoginUser() { UserName = changPassword.UserName, Password = changPassword.OldPassword }))
+                return false;
+            if (IsUserExists(new LoginUser() { UserName = changPassword.UserName, Password = changPassword.NewPassword }))
+                return false;
+
+            return userRepository.ChangePassword(changPassword.UserName, changPassword.OldPassword, changPassword.NewPassword);
+        }
+        catch(Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+            return false;
+        }
+    }
 }
 

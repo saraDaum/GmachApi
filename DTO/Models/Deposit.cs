@@ -15,6 +15,7 @@ public partial class Deposit
 
     public int CreditCardNumber {  get; set; } = 0;
 
+    public bool IsReturned { get; set; } = false;
 }
 
     //TODO: להוסיף פרטי בנק
