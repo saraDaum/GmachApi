@@ -84,7 +84,42 @@ public class Deposit : IServices.IDeposit
         {
             IEnumerable<Repositories.Models.Deposit> allUsersDeposits = reposDeposit.GetAll();
             ArgumentNullException.ThrowIfNull(allUsersDeposits);// Continue just if it is not null.
-   
+               return allUsersDeposits.Select(deposit => GetDepositWithCard(deposit)).ToList();
+        }
+        catch
+        {
+            return new List<DTO.Models.Deposit>();
+        }
+    }
+
+    /// <summary>
+    /// Returns all deposits that not returned yet.
+    /// </summary>
+    /// <returns></returns>
+    public List<DTO.Models.Deposit> GetNotReturnedDeposits()
+    {
+        try
+        {
+            List<Repositories.Models.Deposit> allUsersDeposits = reposDeposit.GetNotReturnedDeposits();
+            ArgumentNullException.ThrowIfNull(allUsersDeposits);// Continue just if it is not null.
+            return allUsersDeposits.Select(deposit => GetDepositWithCard(deposit)).ToList();
+        }
+        catch
+        {
+            return new List<DTO.Models.Deposit>();
+        }
+    }
+
+    /// <summary>
+    /// Returns all deposits that already returned.
+    /// </summary>
+    /// <returns></returns>
+    public List<DTO.Models.Deposit> GetReturnedDeposits()
+    {
+        try
+        {
+            List<Repositories.Models.Deposit> allUsersDeposits = reposDeposit.GetReturnedDeposits();
+            ArgumentNullException.ThrowIfNull(allUsersDeposits);// Continue just if it is not null.
             return allUsersDeposits.Select(deposit => GetDepositWithCard(deposit)).ToList();
         }
         catch
