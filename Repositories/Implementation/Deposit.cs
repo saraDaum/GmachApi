@@ -54,11 +54,47 @@ public class Deposit : Interfaces.IDeposit
         }
     }
 
+    /// <summary>
+    /// Returns all deposit in database, returned and not.
+    /// </summary>
+    /// <returns></returns>
     public IEnumerable<Models.Deposit> GetAll()
     {
         try
         {
             return dbContext.Deposits;
+        }
+        catch
+        {
+            return new List<Models.Deposit>();
+        }
+    }
+
+    /// <summary>
+    /// Returns all deposits that not returned yet.
+    /// </summary>
+    /// <returns></returns>
+      public List<Models.Deposit> GetNotReturnedDeposits()
+    {
+        try
+        {
+            return dbContext.Deposits.Where(d=> d.IsReturned == false).ToList();
+        }
+        catch
+        {
+            return new List<Models.Deposit>();
+        }
+    }
+
+    /// <summary>
+    /// Returns all deposits that already returned.
+    /// </summary>
+    /// <returns></returns>
+    public List<Models.Deposit> GetReturnedDeposits()
+    {
+        try
+        {
+            return dbContext.Deposits.Where(d => d.IsReturned == true).ToList();
         }
         catch
         {

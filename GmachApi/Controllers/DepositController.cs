@@ -13,6 +13,10 @@ public class DepositController : ControllerBase
 
     internal Services.IServices.IDeposit deposit = new Services.Implemantation.Deposit();
 
+    /// <summary>
+    /// Returns all deposits in database, returned and not.
+    /// </summary>
+    /// <returns></returns>
     [HttpGet("GetAll")]
     [Authorize(Policy = "AdminOnly")]
     public List<Deposit> AllDeposits()
@@ -27,6 +31,47 @@ public class DepositController : ControllerBase
         }
     }
 
+
+    /// <summary>
+    /// Returns all deposits that not returned yet.
+    /// </summary>
+    /// <returns></returns>
+    [HttpGet("GetAllDepositsNotReturned")]
+    [Authorize(Policy = "AdminOnly")]
+    public List<Deposit> GetNotReturnedDeposits() {
+        try
+        {
+            return deposit.GetNotReturnedDeposits();
+        }
+        catch
+        {
+            return new List<Deposit>();
+        }
+    }
+
+    /// <summary>
+    /// Returns all deposits that already returned.
+    /// </summary>
+    /// <returns></returns>
+    [HttpGet("GetAllDepositsAlreadyReturned")]
+    [Authorize(Policy = "AdminOnly")]
+    public List<Deposit> GetReturnedDeposits()
+    {
+        try
+        {
+            return deposit.GetNotReturnedDeposits();
+        }
+        catch
+        {
+            return new List<Deposit>();
+        }
+    }
+
+    /// <summary>
+    /// Returns all user deposits.
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
     [HttpGet("AllUserDeposits/{id}")]
     public IEnumerable<Deposit> GetUserDeposits([FromRoute]int id)
     {
@@ -78,6 +123,11 @@ public class DepositController : ControllerBase
     }
 
 
+    /// <summary>
+    /// This function update deposit after it returned.
+    /// </summary>
+    /// <param name="depositId"></param>
+    /// <returns></returns>
     [HttpPost("Return/{id}")]
     public bool Return(int depositId)
     {
