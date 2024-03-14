@@ -232,7 +232,7 @@ public class LoanDetails : IServices.ILoanDetails
         foreach (var loanRequest in waitingList)
         {
             // Check if loan asociate with valid account
-            if (loanDetail.GetAccountToLoan(loanRequest.LoanerId) <= 0)
+            if (loanDetail.GetAccountToLoan(loanRequest.LoanId) <= 0)
                 continue;
 
             // Check if the borrower is blacklisted

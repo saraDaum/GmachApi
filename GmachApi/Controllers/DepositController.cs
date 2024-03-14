@@ -78,8 +78,9 @@ public class DepositController : ControllerBase
     }
 
 
-    [HttpPost("Return/{id}")]
-    public bool Return(int depositId)
+    [HttpGet("Return/{depositId}")]
+    [Authorize(Policy = "AdminOnly")]
+    public bool Return([FromRoute] int depositId)
     {
         try
         {
