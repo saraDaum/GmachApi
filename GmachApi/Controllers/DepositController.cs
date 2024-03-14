@@ -59,7 +59,7 @@ public class DepositController : ControllerBase
     {
         try
         {
-            return deposit.GetNotReturnedDeposits();
+            return deposit.GetReturnedDeposits();
         }
         catch
         {
