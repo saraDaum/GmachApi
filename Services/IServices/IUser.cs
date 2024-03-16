@@ -85,4 +85,7 @@ public interface IUser
 
 
     bool ChangePassword(ChangPassword changPassword);
+    bool AddToBlackList(int id);
+    bool IsUserOnBlackList(int id);
+    bool RmoveUserFromBlackList(int id);
 }

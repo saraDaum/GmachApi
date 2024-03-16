@@ -194,4 +194,55 @@ public class UserController : ControllerBase
         }
     }
 
+
+    // Black List functions:
+
+    [HttpGet("AddUserToBlackList/{id}")]
+    [Authorize(Policy = "AdminOnly")]
+    public bool AddUserToBlackList([FromRoute] int id)
+    {
+        try
+        {
+            return _user.AddToBlackList(id);
+
+        }
+        catch(Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+            return false;
+        }
+    }
+
+    [HttpGet("IsUserOnBlackList/{id}")]
+    [Authorize(Policy = "AdminOnly")]
+    public bool IsUserOnBlackList([FromRoute] int id)
+    {
+        try
+        {
+            return _user.IsUserOnBlackList(id);
+
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+            return false;
+        }
+    }
+
+    [HttpGet("RmoveUserFromBlackList/{id}")]
+    [Authorize(Policy = "AdminOnly")]
+    public bool RemoveUserFromBlackList([FromRoute] int id)
+    {
+        try
+        {
+            return _user.RmoveUserFromBlackList(id);
+
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+            return false;
+        }
+    }
+
 }

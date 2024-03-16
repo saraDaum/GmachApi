@@ -241,5 +241,59 @@ public class User : IServices.IUser
             return false;
         }
     }
+
+    public bool AddToBlackList(int id)
+    {
+        try
+        {
+            if (!IsUserExist(id))
+                return false;
+
+            if (IsUserOnBlackList(id))
+                return true;
+
+            return userRepository.AddToBlackList(id);
+        }
+        catch(Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+            return false;
+        }
+    }
+
+    public bool IsUserOnBlackList(int id)
+    {
+        try
+        {
+            if (!IsUserExist(id))
+                return false;
+
+            return userRepository.IsUserOnBlackList(id);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+            return false;
+        }
+    }
+
+    public bool RmoveUserFromBlackList(int id)
+    {
+        try
+        {
+            if (!IsUserExist(id))
+                return false;
+
+            if (!IsUserOnBlackList(id))
+                return true;
+
+            return userRepository.RmoveUserFromBlackList(id);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+            return false;
+        }
+    }
 }
 

@@ -167,7 +167,7 @@ public class LoanDetailsController : ControllerBase
     {
         try
         {
-            return false;
+            return loanDetail.LoanApproval(loanID);
         }
         catch (Exception ex)
         {

@@ -241,5 +241,48 @@ public class User : Interfaces.IUser
             return false;
         }
     }
+
+    public bool AddToBlackList(int id)
+    {
+        try
+        {
+            dbContext.UsersUnderWarning.Add(new UsersUnderWarning() { UserId = id });
+            dbContext.SaveChanges();
+            return true;
+        }
+        catch(Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+            return false;
+        }
+    }
+
+    public bool IsUserOnBlackList(int id)
+    {
+        try
+        {
+            return dbContext.UsersUnderWarning.Any(u => u.UserId == id);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+            return false;
+        }
+    }
+
+    public bool RmoveUserFromBlackList(int id)
+    {
+        try
+        {
+            dbContext.UsersUnderWarning.Remove(new UsersUnderWarning() { UserId = id });
+            dbContext.SaveChanges();
+            return true;
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+            return false;
+        }
+    }
 }
 

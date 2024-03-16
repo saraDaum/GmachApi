@@ -24,4 +24,7 @@ public interface IUser
     string GetUserName(int id);
     string GetUserEmail(int id);
     bool ChangePassword(string userName, string oldPassword, string newPassword);
+    bool AddToBlackList(int id);
+    bool IsUserOnBlackList(int id);
+    bool RmoveUserFromBlackList(int id);
 }

@@ -241,7 +241,7 @@ public class LoanDetails : IServices.ILoanDetails
 
 
             // Check if the loan amount exceeds the maximum per request or per borrower
-            if (loanRequest.Sum > maxAmountPerRequest || loanRequest.Sum + GetUserLoans(loanRequest.LoanerId)?.Sum(l => l.Sum) > maxAmountPerBorrower)
+            if (loanRequest.Sum > maxAmountPerRequest || loanRequest.Sum + GetUserLoans(loanRequest.LoanerId)?.Where(l=> l.IsAprovied && l.DateToGetBack > DateTime.Now)?.Sum(l => l.Sum) > maxAmountPerBorrower)
                 continue;
 
             // Check if the association has enough balance to approve the loan and it doesn't impact future investments
