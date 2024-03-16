@@ -160,7 +160,24 @@ namespace GmachApi.Controllers
         {
             try
             {
-                Email? email = _message.ReportALoan(report);
+                Email? email = _message.ReportALoan(report, true);
+                if (email != null)
+                    await _emailSender.SendEmailAsync(email);
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+
+            }
+        }
+
+        [HttpPost("DeleteLoneMessage")]
+        public async void DeleteLoneMessage(int loanId)
+        {
+            try
+            {
+                Email? email = _message.ReportALoan(new ReportALoan() { LoanID = loanId}, false);
                 if (email != null)
                     await _emailSender.SendEmailAsync(email);
 

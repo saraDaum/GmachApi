@@ -203,7 +203,7 @@ public class Message : IServices.IMessage
     //}
 
 
-    public DTO.Models.Email? ReportALoan(DTO.Models.ReportALoan report)
+    public DTO.Models.Email? ReportALoan(DTO.Models.ReportALoan report, bool isReport)
     {
         //try to get the user email from the details
         try
@@ -216,13 +216,16 @@ public class Message : IServices.IMessage
                 DTO.Models.User? user = _user.GetUser(loan.LoanerId);
                 if (user != null)
                 {
-                    string message = $"Dear {user.UserName},\nYour Loan request number {report.LoanID} has a problem:\n{report.Problem}\n We recommend you to upade those details in your requst and try to apply it again.\nHave a good day,\nPlus Minus Admin";
+                    string message = isReport ?
+                        $"Dear {user.UserName},\nYour Loan request number {report.LoanID} has a problem:\n{report.Problem}\n We recommend you to upade those details in your requst and try to apply it again.\nHave a good day,\nPlus Minus Admin"
+                        : $"Dear {user.UserName},\nYour Loan request number {report.LoanID} has been deleted.\nHave a good day,\nPlus Minus Admin";
+                    string subject = isReport ? "Report a problem in your loan applicatin files" : "Your loan request has been successfully deleted";
                     Add(new DTO.Models.Message() { FromUserId = 20, Text = message, ToUserId = user.UserId, Viewed = false });
                     return new DTO.Models.Email()
                     {
                         email= user.UserEmail,
                         message = message,
-                        subject = "Report a problem in your loan applicatin files"
+                        subject = subject
                     };
 
                 }
